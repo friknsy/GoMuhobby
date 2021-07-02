@@ -15,6 +15,7 @@
  	<insert id="add">
  		INSERT INTO TBL_MEMBERLIST(MID, NAME, TELEPHONE)
  		 VALUES(MEMBERLISTSEQ.NEXTVAL, #{name},#{telephone}) 
+ 		 
  	</insert>
  	<delete id="remove">
  		DELETE
