@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%-- 뮤하비 메인페이지.  --%>
 <!DOCTYPE html>
 <html lang="en">
     <head>

@@ -21,6 +21,7 @@
   		return str;
 	}
 %>
+<%-- 뮤하비 회원가입폼 페이지 --%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -103,21 +104,27 @@
                     	<div class="text-center">
 							<a href="#"><img src="images/muhobby3.png" width="160px" height="180px"></a>
 						</div>
-                        <div class="row justify-content-center">
                             <div class="col-lg-7">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header">
                                     	<h2 class="text-center font-weight-light my-4 text-muhobby fw-bold">뮤하비 <span class="text-dark">회원가입</span></h2>
                                     </div>
                                     <div class="card-body">
-                                        <form action="sign.do" method="post">
-                                        	<br>
+                                        <form action="register.action" method="post">   
+                                        <br>
                                             <div class="row mb-3">
                                             <span class="mb-2 text-center text-muhobby"><h4>필수 입력 정보</h4></span>
+                                            
+                                            <!--  -->
+                                            <!-- 데이터임의로 넘겨주려고 넣은 인풋태그 -->
+                                        	<input type="text" id="u_name" name="u_name" placeholder="이름입력">
+                                        	<input type="text" id="uniq_id_num" name="uniq_id_num" placeholder="고유번호입력">
+                                            <input type="text" id="town_code" name="town_code" placeholder="지역번호입력">
+                                            <!--  -->
                                             <span class="mb-2 fw-bold">아이디</span>
                                                 <div class="col-md-9">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="userId" name="userId"type="text" placeholder="ID 입력"/>
+                                                        <input class="form-control" id="u_id" name="u_id"type="text" placeholder="ID 입력"/>
                                                         <label for="inputFirstName">아이디 입력</label>
                                                     </div>
                                                 </div>
@@ -133,7 +140,7 @@
                                             <span class="mb-2 fw-bold">비밀번호</span>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="userPass" name="userPass" onkeyup="passwordCheckFunction();" type="password" placeholder="비밀번호" />
+                                                        <input class="form-control" id="u_pwd" name="u_pwd" onkeyup="passwordCheckFunction();" type="password" placeholder="비밀번호" />
                                                         <label for="inputPassword">비밀번호</label>
                                                     </div>
                                                 </div>
@@ -156,7 +163,7 @@
                                             <span class="mb-2 fw-bold">전화번호</span>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="userPhone" name="userPhone" type="text" placeholder="전화번호 입력"/>
+                                                        <input class="form-control" id="u_tel" name="u_tel" type="text" placeholder="전화번호 입력"/>
                                                         <label for="inputFirstName">전화번호 입력</label>
                                                     </div>
                                                 </div>
@@ -175,7 +182,7 @@
                                             <span class="mb-2 fw-bold">닉네임</span>
                                                 <div class="col-md-12">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="userName" name="userName"type="text" placeholder="아이디 검수"/>
+                                                        <input class="form-control" id="user_nickname" name="user_nickname" type="text" placeholder="아이디 검수"/>
                                                         <label for="inputFirstName">닉네임 입력</label>
                                                     </div>
                                                 </div>
@@ -190,7 +197,7 @@
                                             	<span class="mb-2 fw-bold">이메일</span>
                                                 <div class="col-md-12">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="userEmail" name="userEmail"type="text" placeholder="이메일 입력"/>
+                                                        <input class="form-control" id="u_email" name="u_email"type="text" placeholder="이메일 입력"/>
                                                         <label for="inputFirstName">E-MAIL을 입력해 주세요.</label>
                                                     </div>
                                                 </div>
@@ -386,7 +393,7 @@
                                                 	<input class="text-center btn1 btn-primary btn-block" type="submit" id="loadBtn" value="회원 가입" id="signup">
                                                 </div>
                                                 <div class="col-md-4 col-md-3 d-grid">
-                                                	<a class="text-center btn1 btn-primary btn-block">취소</a>
+                                                	<a class="text-center btn1 btn-primary btn-block" href="index.jsp">취소</a>
                                                 </div>
                                             </div>
                                         </form>
@@ -405,78 +412,7 @@
             <br><br>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
-        <%
-        	String messageContent = null;
-        
-        	if(session.getAttribute("messageContent") !=null)
-        	{
-        		messageContent = (String)session.getAttribute("messageContent");
-        	}
-        	
-        	String messageType = null;
-        	if(session.getAttribute("messageType") !=null )
-        	{
-        		messageType = (String) session.getAttribute("messageType");
-        	}
-        	
-        	if(messageContent != null)
-        	{
-        %>
-        	<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-hidden="true">
-        		<div class="vertical-alignment-helper">
-        			<div class="modal-dialog vertical-align-center">
-        				<div class="modal-content">
-        											
-        					<div class="modal-header panel-heading">
-        						<h4 class="modal-title">
-        							<%=messageType %>
-        						</h4>
-        					</div>
-        					<div class="modal-body">
-        						<%=messageContent %>
-        					</div>
-        					<div class="modal-footer">
-        						<button type="button" class="btn btn-primary" data-dismiss="modal">
-        							확인
-        						</button>
-        					</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-        	
-        	<script type="text/javascript">
-        		$('#messageModal').modal("show");
-        	</script>
-        	
-	        <%	
-	        	session.removeAttribute("messageContent");
-	        	session.removeAttribute("messageType");
-	        	}
-	        %>
-        
-       		<div class="modal fade" id="checkmodal" tabindex="-1" role="dialog" aria-hidden="true">
-        		<div class="vertical-alignment-helper">
-        			<div class="modal-dialog vertical-align-center">
-        				<div id="checkType " class="modal-content">
-        											
-        					<div class="modal-header panel-heading">
-        						<h4 class="modal-title">
-        							확인 메세지 
-        						</h4>
-        					</div>
-        					<div class="modal-body" id="checkMassage">
-        					</div>
-        					<div class="modal-footer">
-        						<button type="button" class="btn btn-primary" data-dismiss="modal">
-        							확인
-        						</button>
-        					</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
+        <script src="js/scripts.js"></script>      
         	
     </body>
 </html>

@@ -4,6 +4,7 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
+<%--실습했던 페이지. 코드보려고 그냥 둠. 최종에는 지워야함 어차피 지금 db 계정 바꿔놔서 안됨.--%>
 <!DOCTYPE html>
 <html>
 <head>
