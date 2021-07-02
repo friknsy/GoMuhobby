@@ -1,0 +1,91 @@
+@font-face {
+  /* font-family가 지정된 속성에 ttf 파일이 모두 적용됨. */
+  font-family: muhobbyfont;	
+  /* 나는 WebContent에 fonts 폴더 만들고 파일 넣어뒀음. */
+  src: url("../fonts/muhobby.ttf") format("truetype");
+}
+
+/* html 전체에 폰트 적용하는 코드 */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video{
+	font-family: muhobbyfont;
+}
+
+.container 
+{
+    width: 500px;
+    margin: 40px auto;
+    line-height: 16px;
+}
+h2
+{
+    text-align: center;
+}
+h2 span
+{
+    color: #ba84f3;
+}
+.n
+{
+    font-size: 13px;
+}
+#signup 
+{
+    background-color: #ba84f3;		/* 보라색  #ba84f3 */
+    color: white;
+    border: 0;
+    border-radius: 5px;
+    padding: 10px 224px;
+}
+.bottom input {
+    background-color: white;
+    border: 0;
+    color: teal;
+    font-size: 16px;
+}
+i {
+    color: #ba84f3;					/* 파란색  #4a8df4 */
+}
+#id1 {
+    position: absolute;
+    top: 339px;
+    margin: 0 470px;
+}
+#pw1 {
+    position: absolute;
+    top: 474px;
+    margin: 0 470px;
+}
+#email1 {
+    position: absolute;
+    top: 606px;
+    margin: 0 470px;
+}
+#name1 {
+    position: absolute;
+    top: 740px;
+    margin: 0 470px;
+}
+input {
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    font-size: 15px;
+    height:50px;
+    width: 495px;
+}
+
+#id2 {
+    position: absolute;
+    top: 368px;
+    margin: 0 470px;
+}
+#pw2 {
+    position: absolute;
+    top: 503px;
+    margin: 0 470px;
+}
+
+span#result
+{	
+	display: inline-block;
+	margin: 5px 5px 0 0;
+}
