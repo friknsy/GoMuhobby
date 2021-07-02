@@ -69,7 +69,7 @@ public class MemberMain
 	@RequestMapping(value = "/main.action", method = RequestMethod.GET)
 	public String main()
 	{
-		return "/WEB-INF/views/MainPage.jsp";
+		return "/WEB-INF/views/3mainpage.jsp";
 		
 	}
 }
