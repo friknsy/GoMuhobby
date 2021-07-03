@@ -114,7 +114,6 @@
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
-                	<div>야 : ${message }</div>
                     <div class="container">
                     	<br><br>
                     	<div class="text-center">
@@ -195,12 +194,23 @@
                                             <span class="mb-2 fw-bold">닉네임</span>
                                                 <div class="col-md-12">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="userName" name="userName"type="text" placeholder="아이디 검수"/>
+                                                        <input class="form-control" id="userName" name="userName"type="text" placeholder="닉네임"/>
                                                         <label for="inputFirstName">닉네임 입력</label>
                                                     </div>
                                                 </div>
                                             </div>
 
+                                        	<br>
+                                        	
+                                        	<div class="row mb-3">
+                                            	<span class="mb-2 fw-bold">이름</span>
+                                                <div class="col-md-12">
+                                                    <div class="form-floating mb-3 mb-md-0">
+                                                        <input class="form-control" id="userEmail" name="userEmail"type="text" placeholder="실명 입력"/>
+                                                        <label for="inputFirstName">실명 입력</label>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         	<br>
                                             <hr>
                                             <br>                                            
@@ -211,12 +221,14 @@
                                                 <div class="col-md-12">
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control" id="userEmail" name="userEmail"type="text" placeholder="이메일 입력"/>
-                                                        <label for="inputFirstName">E-MAIL을 입력해 주세요.</label>
+                                                        <label for="inputFirstName">E-MAIL 입력</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <br>
-
+                                            
+											
+                                            
                                             <div class="row mb-3">
                                             	<span class="mb-2 fw-bold">지역(도시)<span class="mb-2 ms-18 fw-bold">지역(구)</span></span>
                                                 <div class="col-md-6">
