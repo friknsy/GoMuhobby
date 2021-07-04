@@ -38,9 +38,9 @@
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="js/bootstrap.js"></script>
         <script type="text/javascript" src="<%=cp %>/js/ajax.js"></script>
+        
         <script type="text/javascript">
         	
-        	/* 빈칸 막기 */
 	        $(document).ready(function(){
 				$("#submit").on("click", function(){
 					// 아이디 입력 확인
@@ -48,6 +48,7 @@
 					{
 						alert("아이디를 입력해주세요.");
 						$("#userId").focus();
+						$('#submit').attr('disabled', true);
 						return false;
 					}
 					
@@ -103,7 +104,7 @@
         		}
         		else
         		{
-        			$('#passwordCheckMessage').html('');
+        			$('#passwordCheckMessage').html('비밀번호가 ');
         		}
         	};
 	        
@@ -126,13 +127,13 @@
                                     	<h2 class="text-center font-weight-light my-4 text-muhobby fw-bold">뮤하비 <span class="text-dark">회원가입</span></h2>
                                     </div>
                                     <div class="card-body">
-                                        <form action="memberinsert.action" method="post">
+                                        <form action="register.action" method="post">
                                         	<!-- 데이터임의로 넘겨주려고 넣은 인풋태그 -->
                                             
-                                        	<!--
-	                                        	<input type="text" id="uniq_id_num" name="uniq_id_num" placeholder="고유번호입력">
-	                                            <input type="text" id="town_code" name="town_code" placeholder="지역번호입력">
-                                            -->
+                                        	
+	                                        <input type="text" id="uniq_id_num" name="uniq_id_num" placeholder="고유번호입력">
+	                                        <input type="text" id="town_code" name="town_code" placeholder="지역번호입력">
+                                            
                                         	<br>
                                             <div class="row mb-3">
                                             <span class="mb-2 text-center text-muhobby"><h4>필수 입력 정보</h4></span>
@@ -415,7 +416,7 @@
                                                 </div>
                                                 <div class="col-md-4 d-grid">
                                                 	<!-- <a class="text-center btn1 btn-primary btn-block" href="/sign.do">회원 가입</a> -->
-                                                	<input class="text-center btn1 btn-primary btn-block" type="submit" id="submit" value="회원 가입">
+                                                	<input class="text-center btn1 btn-primary btn-block" type="submit" id="submit" name="submit" value="회원 가입" disabled>
                                                 </div>
                                                 <div class="col-md-4 col-md-3 d-grid">
                                                 	<a class="text-center btn1 btn-primary btn-block">취소</a>

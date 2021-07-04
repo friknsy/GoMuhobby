@@ -5,20 +5,43 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
  <mapper namespace="com.test.register.IUserDAO"> 
-
-  	<insert id="add1">  <!-- 회원가입 시 고유식별테이블에 닉네임과 고유식별번호 입력 -->
+	
+	<!-- 회원가입 시 고유식별테이블에 닉네임과 고유식별번호 입력 -->
+  	<insert id="add1">
  		INSERT INTO USER_UNIQUE_ID (UNIQ_ID_NUM,USER_NICKNAME) VALUES(#{uniq_id_num}, #{user_nickname})
- 		 
  	</insert>
-	<insert id="add2"> <!-- 회원가입 시 회원테이블에 고유식별벌호,지역번호,아이디,이름,비밀번호,전화번호,이메일,가입일 입력 -->
- 		INSERT INTO MEMBER(UNIQ_ID_NUM,TOWN_CODE,U_ID,U_NAME,U_PWD,U_TEL,U_EMAIL,U_JOIN_DATE) 
-		VALUES(#{uniq_id_num},#{town_code},#{u_id},#{u_name}
-		,CRYPTPACK.ENCRYPT(#{u_pwd},'superman'),#{u_tel},#{u_email},SYSDATE)
-
- 		 
- 	</insert> 
-
  	
- 
+ 	<!-- 회원가입 시 회원테이블에 고유식별벌호,지역번호,아이디,이름,비밀번호,전화번호,이메일,가입일 입력 -->
+	<insert id="add2"> 
+ 		INSERT INTO MEMBER(UNIQ_ID_NUM, TOWN_CODE, U_ID, U_NAME, U_PWD, U_TEL, U_EMAIL, U_JOIN_DATE) 
+		VALUES(#{uniq_id_num},#{town_code},#{u_id},#{u_name},CRYPTPACK.ENCRYPT(#{u_pwd},'superman'),#{u_tel},#{u_email},SYSDATE)
+ 	</insert> 
+	
+	<!-- 아이디 중복체크 확인 -->
+ 	<select id="idcheck" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM MEMBER
+		WHERE U_ID = #{u_id}
+	</select>
+	
+	<!-- 닉네임 중복체크 확인 -->
+	<select id="nickNameCheck" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM USER_UNIQUE_ID
+		WHERE USER_NICKNAME = #{user_nickname}
+	</select>
+	
+	<!-- 닉네임 중복체크 확인 -->
+	<select id="emailCheck" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM MEMBER
+		WHERE U_EMAIL = #{u_email}
+	</select>
+	
+	<!-- 고유식별번호 넘기기 -->
+	<select id="uniqIdget" resultType="String">
+		SELECT MAX(UNIQ_ID_NUM)
+		FROM USER_UNIQUE_ID
+	</select>
  
  </mapper>

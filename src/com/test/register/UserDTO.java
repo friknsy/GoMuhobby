@@ -2,7 +2,6 @@ package com.test.register;
 
 public class UserDTO
 {
-	
 	private String uniq_id_num, user_nickname
 	, town_code
 	, u_id
