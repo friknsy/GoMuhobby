@@ -303,7 +303,8 @@
 				else
 				{
 					$.post("idCheck.action", {userId : userId}, function(data)
-					{
+					{	
+						alert(data);
 						if(data=="fail")
 			            {
 			            	$('#idCheckMessage').html("멋진 아이디네요!");

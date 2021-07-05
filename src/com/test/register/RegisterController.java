@@ -43,7 +43,6 @@ public class RegisterController
 		dao.add1(u);
 		dao.add2(u);
 		
-		
 		return "/WEB-INF/views/welcome.jsp";
 	}
 	

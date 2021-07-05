@@ -24,32 +24,37 @@
     
     <script type="text/javascript">
     
-    	/* $(document).ready(function()
+    	$(document).ready(function()
         {
-			$("#submit").on("click", function()
+			$("#loginBtn").on("click", function()
 			{	
+				var userId = $('input[name=u_id]').val();
+				var userPw = $('input[name=u_pwd]').val();
 				
-				
-				
-				$.post("idCheck.action", {userId : userId}, function(data)
-				{
-					if(data=="fail")
+				$.post("loginIdCheck.action", {userId : userId, userPw : userPw}, function(data)
+				{	
+					$('#idCheckMessage').html("");
+					$('#pwCheckMessage').html("");
+					
+					if(data=="idfail")
 		            {
-		            	$('#idCheckMessage').html("멋진 아이디네요!");
-		            	$('#idCheckMessage').css("color", "#c79cf5");
-		            	$("#submit").attr("disabled", false);
-		            	// 회원가입 버튼 활성화
+		            	$('#idCheckMessage').html("존재하지 않는 아이디이거나 탈퇴한 아이디 입니다.");
+		            	$('#idCheckMessage').css("color", "#dc3545");
+		            }
+					
+		            else if (data=="pwfail")
+		            {
+		            	$('#pwCheckMessage').html("잘못된 비밀번호 입니다.");
+		            	$('#pwCheckMessage').css("color", "#dc3545");
 		            }
 					
 		            else
 		            {
-		            	$('#idCheckMessage').html("이미 사용중인 아이디입니다.");
-		            	$('#idCheckMessage').css("color", "#dc3545");
-		            	$("#submit").attr("disabled", true);
+		            	location.href = 'mainpage.action';
 		            }
 				});
 			});
-		}); */
+		});
     
     </script>
     
@@ -69,18 +74,18 @@
                                     	<h2 class="text-center font-weight-light my-4 text-muhobby fw-bold">뮤하비 <span class="text-dark">로그인</span></h2>
                                     </div>
                                     <div class="card-body">
-                                        <form action="nickNameCheck.action" method="post">
+                                        <!-- <form action="loginIdCheck.action" method="post"> -->
                                         	<br>
                                             <div class="row mb-3">
                                             <span class="mb-2 fw-bold">아이디</span>
-                                                <div class="col-md-12">
+                                                <div class="col-md-12 mb-2">
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control" id="userId" name="u_id" type="text" placeholder="ID 입력"/>
                                                         <label for="inputFirstName">아이디 입력</label>
                                                     </div>
                                                 </div>
                                                 <div>
-                                                	<h6 class="text-danger" id="idCheckMessage"></h6>
+                                                	<h6 id="idCheckMessage"></h6>
                                                 </div>
                                             </div>
                                             <br>
@@ -93,7 +98,7 @@
                                                     </div>
                                                 </div>
                                                 <div>
-                                                	<h6 id="idCheckMessage"></h6>
+                                                	<h6 id="pwCheckMessage"></h6>
                                                 </div>
                                             </div>
                                             <br>
@@ -108,7 +113,7 @@
                                                 	<a class="text-center btn1 btn-primary btn-block">취소</a>
                                                 </div>
                                             </div>
-                                        </form>
+                                        <!-- </form> -->
 			                        </div>
                                 </div>
                             </div>
