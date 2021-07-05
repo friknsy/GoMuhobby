@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.test.mybatis.IMemberDAO;
 import com.test.mybatis.MemberDTO;
@@ -28,9 +30,9 @@ public class RegisterController
 	// 회원가입 클릭 시 회원가입폼 반환
 	@RequestMapping(value = "/registerform.action", method = RequestMethod.GET)
 	public String main()
-	{	
+	{		
 		return "/WEB-INF/views/1register.jsp";
-	}	
+	}
 	
 	// 회원가입 폼 작성 후 SUBMIT 할 시 
 	@RequestMapping(value = "/register.action", method = RequestMethod.POST)
@@ -63,7 +65,7 @@ public class RegisterController
 	{	
 		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
 		
-		String nickName = request.getParameter("nickName");
+		String nickName = request.getParameter("nickName1");
 		
 		System.out.println(nickName);
 		
@@ -143,9 +145,47 @@ public class RegisterController
 	
 	// 인증번호 받기
 	@RequestMapping(value = "/numbercheck.action", method = RequestMethod.POST)
-	public String phonenumber()
-	{
-		return "/WEB-INF/views/1register.jsp";
+	public String phonenumber(HttpServletRequest request, ModelMap model)
+	{	
+		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
 		
+		/*
+		 *  String sphone1 =
+		 * request.getParameter("sphone1"); String sphone2 =
+		 * request.getParameter("sphone2"); String sphone3 =
+		 * request.getParameter("sphone3"); String msg = request.getParameter("msg");
+		 * 
+		 * 
+		 */
+		String actionval = request.getParameter("actionval");
+		String phonenumber = request.getParameter("phonenumber");
+		String sphone1 = request.getParameter("sphone1");
+		String sphone2 = request.getParameter("sphone2");
+		String sphone3 = request.getParameter("sphone3");
+		String msg = request.getParameter("msg");
+		
+		request.setAttribute("actionval", actionval);
+		request.setAttribute("phonenumber", phonenumber);
+		request.setAttribute("sphone1", sphone1);
+		request.setAttribute("sphone2", sphone2);
+		request.setAttribute("sphone3", sphone3);
+		request.setAttribute("msg", msg);
+		
+		/*{rphone=01040207429}
+		model.addAttribute("rphone", phonenumber);
+		model.addAttribute("sphone1", sphone1);
+		model.addAttribute("sphone2", sphone2);
+		model.addAttribute("sphone3", sphone3);
+		model.addAttribute("msg", msg);
+		*/
+		
+		/*
+		mav.addObject("sphone1", sphone1); mav.addObject("sphone2", sphone2);
+		mav.addObject("sphone3", sphone3); mav.addObject("msg", msg);
+		*/ 
+		
+		// System.out.println("난가" + (model.addAttribute("rphone", phonenumber)));
+		
+		return "/WEB-INF/views/1register.jsp";
 	}
 }

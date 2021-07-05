@@ -27,7 +27,9 @@
 
 	request.setCharacterEncoding(charsetType);
     response.setCharacterEncoding(charsetType);
-    String action = nullcheck(request.getParameter("action"), "");
+    
+    String action = nullcheck((String)request.getAttribute("actionval"), "");
+    
     if(action.equals("go"))
     {
         String sms_url = "";
@@ -35,17 +37,17 @@
         String user_id = base64Encode("wjdwns567"); // SMS아이디
         String secure = base64Encode("bd7001fd15dd45aea7957cca9320e8aa");//인증키
         
-        String msg = base64Encode(nullcheck(request.getParameter("msg"), ""));
-        String rphone = base64Encode(nullcheck(request.getParameter("rphone"), ""));
-        String sphone1 = base64Encode(nullcheck(request.getParameter("sphone1"), ""));
-        String sphone2 = base64Encode(nullcheck(request.getParameter("sphone2"), ""));
-        String sphone3 = base64Encode(nullcheck(request.getParameter("sphone3"), ""));
+        String msg = base64Encode(nullcheck((String)request.getAttribute("msg"), ""));
+        String rphone = base64Encode(nullcheck((String)request.getAttribute("phonenumber"), ""));
+        String sphone1 = base64Encode(nullcheck((String)request.getAttribute("sphone1"), ""));
+        String sphone2 = base64Encode(nullcheck((String)request.getAttribute("sphone2"), ""));
+        String sphone3 = base64Encode(nullcheck((String)request.getAttribute("sphone3"), ""));
         String mode = base64Encode("1");
         
         String subject = "";
 
-        String returnurl = nullcheck(request.getParameter("returnurl"), "");
-        String nointeractive = nullcheck(request.getParameter("nointeractive"), "");
+        /* String returnurl = nullcheck(request.getParameter("returnurl"), "");
+        String nointeractive = nullcheck(request.getParameter("nointeractive"), ""); */
         String smsType = base64Encode(nullcheck(request.getParameter("smsType"), ""));
 
         String[] host_info = sms_url.split("/");
@@ -100,69 +102,50 @@
             data +="--"+boundary+"\r\n";
         }
 		
-        // 입력한 전화번호 유효성 검사
-        if(request.getParameter("rphone").replaceAll("-","").length() < 8 ||
-           request.getParameter("rphone").replaceAll("-","").length() > 11 ||
-           request.getParameter("rphone").charAt(0) != '0')
+
+        //out.println(data);
+        InetAddress addr = InetAddress.getByName(host);
+        Socket socket = new Socket(host, port);
+        
+        // 헤더 전송
+        BufferedWriter wr = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), charsetType));
+        wr.write("POST "+path+" HTTP/1.0\r\n");
+        wr.write("Content-Length: "+data.length()+"\r\n");
+        wr.write("Content-type: multipart/form-data, boundary="+boundary+"\r\n");
+        wr.write("\r\n");
+
+        // 데이터 전송
+        wr.write(data);
+        wr.flush();
+
+        // 결과값 얻기
+        BufferedReader rd = new BufferedReader(new InputStreamReader(socket.getInputStream(),charsetType));
+        String line;
+        
+        String alert = "";
+        ArrayList tmpArr = new ArrayList();
+        
+        while ((line = rd.readLine()) != null)
         {
-        	out.println("<script>alert('핸드폰 번호를 바르게 입력 해 주세요.')</script>");
+            tmpArr.add(line);
         }
-        else 
+        
+        wr.close();
+        rd.close();
+
+        String tmpMsg = (String)tmpArr.get(tmpArr.size()-1);
+        String[] rMsg = tmpMsg.split(",");
+        
+        String Result= rMsg[0]; //발송결과
+
+        //발송결과 알림
+        if(Result.equals("success")) 
         {
-	        //out.println(data);
-	        InetAddress addr = InetAddress.getByName(host);
-	        Socket socket = new Socket(host, port);
-	        
-	        // 헤더 전송
-	        BufferedWriter wr = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), charsetType));
-	        wr.write("POST "+path+" HTTP/1.0\r\n");
-	        wr.write("Content-Length: "+data.length()+"\r\n");
-	        wr.write("Content-type: multipart/form-data, boundary="+boundary+"\r\n");
-	        wr.write("\r\n");
-	
-	        // 데이터 전송
-	        wr.write(data);
-	        wr.flush();
-	
-	        // 결과값 얻기
-	        BufferedReader rd = new BufferedReader(new InputStreamReader(socket.getInputStream(),charsetType));
-	        String line;
-	        
-	        String alert = "";
-	        ArrayList tmpArr = new ArrayList();
-	        
-	        while ((line = rd.readLine()) != null)
-	        {
-	            tmpArr.add(line);
-	        }
-	        
-	        wr.close();
-	        rd.close();
-	
-	        String tmpMsg = (String)tmpArr.get(tmpArr.size()-1);
-	        String[] rMsg = tmpMsg.split(",");
-	        
-	        String Result= rMsg[0]; //발송결과
-	
-	        //발송결과 알림
-	        if(Result.equals("success")) 
-	        {
-	            alert = "[알림] 성공적으로 발송하였습니다.";
-	        }
-	        else
-	        {
-	            alert = "[Error]"+Result;
-	        }
-	
-	        if(nointeractive.equals("1") && !(Result.equals("Test Success!")) && !(Result.equals("success")) && !(Result.equals("reserved")) )
-	        {
-	            out.println("<script>alert('" + alert + "')</script>");
-	        }
-	        
-	        else if(!(nointeractive.equals("1"))) {
-	            out.println("<script>alert('" + alert + "')</script>");
-	        }
-		
+            alert = "[알림] 성공적으로 발송하였습니다.";
+        }
+        else
+        {
+            alert = "[Error]"+Result;
         }
 
         /* out.println("<script>location.href='"+ returnurl +"';</script>"); */
@@ -227,6 +210,78 @@
         
         <script type="text/javascript">
         	
+	        $(document).ready(function()
+	        {
+				$("#submit").on("click", function()
+				{
+					// 이메일 입력 확인
+					if($("#userEmail").val()=="")
+					{
+						$('#EmailCheckMessage').html("이메일을 입력 해 주세요.").css("color", "#dc3545");
+						$("#submit").attr("disabled", true);
+					}
+					
+					// 이름 입력 확인
+					if($("#userNickName").val()=="")
+					{
+						$('#NickNameCheckMessage1').html("이름을 입력 해 주세요.");
+		            	$('#NickNameCheckMessage1').css("color", "#dc3545");
+		            	$('#submit').attr('disabled', true);
+		            	$("#userNickName").focus();
+					}
+					
+					// 닉네임 입력 확인
+					if($("#userName").val()=="")
+					{
+						$('#NickNameCheckMessage').html("닉네임을 입력 해 주세요.");
+		            	$('#NickNameCheckMessage').css("color", "#dc3545");
+		            	$('#submit').attr('disabled', true);
+		            	$("#userName").focus();
+					}
+					
+					// 인증번호 입력 확인
+					if($("#confirmNum").val()=="")
+					{
+						$('#numCheckMessage').html("인증번호를 입력 해 주세요.").css("color", "#dc3545");
+						$('#submit').attr('disabled', true);
+						$("#confirmNum").focus();
+					}
+					
+					// 전화번호 입력 확인
+					if($("#userPhone").val()=="")
+					{
+						$('#phoneCheckMessage').html("전화번호를 입력 해 주세요.").css("color", "#dc3545");
+						$('#submit').attr('disabled', true);
+						$("#userPhone").focus();
+					}
+					
+					// 비밀번호 재검사 입력 확인
+					if($("#userPassConfirm").val()=="")
+					{
+						$('#passwordCheckMessage').html("비밀번호를 입력 해 주세요.").css("color", "#dc3545");
+						$('#submit').attr('disabled', true);
+						$("#userPassConfirm").focus();
+					}
+					
+					// 비밀번호 입력 확인
+					if($("#userPass").val()=="")
+					{
+						$('#passwordCheckMessage').html("비밀번호를 입력 해 주세요.").css("color", "#dc3545");
+						$('#submit').attr('disabled', true);
+						$("#userPass").focus();
+					}
+					
+					// 아이디 입력 확인
+					if($("#userId").val()=="")
+					{	
+						$('#idCheckMessage').html("아이디를 입력 해 주세요.");
+		            	$('#idCheckMessage').css("color", "#dc3545");
+		            	$('#submit').attr('disabled', true);
+						$("#userId").focus();
+					}
+				});
+			});
+        
         	// 아이디 유효성 검사
 			function idCheckFuntion()
 			{	
@@ -306,25 +361,53 @@
 				}
 			}
         	
-        	// 인증번호 발송
-        	function numbersend()
+        	// 인증 번호 발송
+        	$(document).ready(function()
         	{
-        		var phonenumber = $('input[id=userPhone]').val();
-        		var sphone1 = $('input[id=sphone1]').val();
-        		var sphone2 = $('input[id=sphone2]').val();
-        		var sphone3 = $('input[id=sphone3]').val();
+				$("#numbersend").on("click", function()
+				{	
+					var actionval = $('input[id=action]').val();
+					var phonenumber = $('input[id=userPhone]').val();
+					var sphone1 = $('input[id=sphone1]').val();
+	        		var sphone2 = $('input[id=sphone2]').val();
+	        		var sphone3 = $('input[id=sphone3]').val();
+	        		var msg = $("#msg").val();
+	        		
+	        		$.post("numbercheck.action", {actionval: actionval, phonenumber : phonenumber, sphone1 : sphone1, sphone2 : sphone2, sphone3 : sphone3, msg : msg}, function(data)
+	        		{
+	        			
+	        		});
+				});
+			});
+        	
+        	// 인증번호 유효성 검사
+        	function authnumberCheck()
+			{	
+        		var confirmNum1 = $('input[id=confirmNum]').val();
+        		var msg = $("#msg").val();
         		
-        		var msg = $('input[id=msg]').text();
-        		
-				// 잠깐 보류	
-        	}
+        		var confirmNum2 = msg.replace(/[^0-9]/g,'');
+				
+        		if(confirmNum1!=confirmNum2)
+				{
+					$('#numCheckMessage').html("인증번호를 확인 해 주세요.").css("color", "#dc3545");
+					$("#submit").attr("disabled", true);
+				}
+				else
+				{
+					$('#numCheckMessage').html("");
+					$("#submit").attr("disabled", false);
+					$("#confirmNum").attr("disabled", true);
+					$("#numbersend").attr("disabled", true);
+				}
+			}
         	
         	// 닉네임 유효성 검사
         	function NickNameCheckFuntion()
 			{	
         		var nickName = $('input[id=userName]').val();
         		
-				$.post("nickNameCheck.action", {nickName : nickName}, function(data)
+				$.post("nickNameCheck.action", {nickName1 : nickName}, function(data)
 				{
 					if(data=="fail")
 		            {
@@ -341,6 +424,25 @@
 		            	$("#submit").attr("disabled", true);
 		            }
 				});
+			}
+        	
+        	// 이름 유효성 검사
+        	function NameCheckFuntion()
+			{
+        		var userNickName = $('input[id=userNickName]').val();
+        		var nameCheck = /^[가-힣]+$/;
+        		
+        		if(!nameCheck.test(userNickName))
+				{
+        			$('#NickNameCheckMessage1').html("올바른 이름 형식이 아닙니다.");
+	            	$('#NickNameCheckMessage1').css("color", "#dc3545");
+	            	$('#submit').attr('disabled', true);
+				}
+				else
+				{
+					$('#NickNameCheckMessage1').html("");
+					$("#submit").attr("disabled", false);
+				}
 			}
         	
         	// 이메일 유효성 검사
@@ -436,7 +538,7 @@
                                                 </div>
                                                 <div class="col-md-6 mb-2" >
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="userPassConfirm"onkeyup="passwordCheckFunction();" type="password" placeholder="비밀번호 재확인" maxlength="32"/>
+                                                        <input class="form-control" id="userPassConfirm" onkeyup="passwordCheckFunction();" type="password" placeholder="비밀번호 재확인" maxlength="32"/>
                                                         <label for="inputPasswordConfirm">비밀번호 재확인</label>
                                                     </div>
                                                 </div>
@@ -456,15 +558,18 @@
                                                 </div>
                                                 <div class="col-md-3 ">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="confirmNum" type="text" placeholder="전화번호 입력" maxlength="6"/>
+                                                        <input class="form-control" id="confirmNum" type="text" onkeyup="authnumberCheck();" placeholder="인증번호 입력" maxlength="6"/>
                                                         <label for="inputFirstName">인증번호 입력</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 d-grid mb-2">
-                                                	<button type="button" class="text-center btn1 btn-primary btn-block" onclick="numbersend();">인증번호 발송</button>
+                                                	<button type="button" class="text-center btn1 btn-primary btn-block" id="numbersend" name="numbersend">인증번호 발송</button>
                                                 </div>
                                                 <div>
                                                 	<h6 class="text-danger" id="phoneCheckMessage"></h6>
+                                                </div>
+                                                <div>
+                                                	<h6 class="text-danger" id="numCheckMessage"></h6>
                                                 </div>
                                             </div>
                                         	<br>
@@ -490,11 +595,14 @@
                                         	
                                         	<div class="row mb-3">
                                             	<span class="mb-2 fw-bold">이름</span>
-                                                <div class="col-md-12">
+                                                <div class="col-md-12 mb-2">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="userNickName" name="u_name"type="text" placeholder="실명 입력" maxlength="3"/>
+                                                        <input class="form-control" id="userNickName" name="u_name" type="text" onkeyup="NameCheckFuntion();" placeholder="실명 입력" maxlength="8"/>
                                                         <label for="inputFirstName">실명 입력</label>
                                                     </div>
+                                                </div>
+                                                <div>
+                                                	<h6 id="NickNameCheckMessage1"></h6>
                                                 </div>
                                             </div>
                                         	<br>
@@ -561,35 +669,7 @@
                                             
                                             <div class="row mb-3">
                                             	<span class="mb-2 fw-bold">관심사</span>
-                                                <div class="d-grid gap-3 d-sm-flex btn-group mb-2" data-toggle="buttons">
-                                                	<label class="btn btn-primary">
-                                                		<input type="checkbox" name="userHobby" autocomplete="off" id="userHobby" value="피아노/건반"> 피아노/건반
-                                                	</label>
-                                                	<label class="btn btn-primary">
-                                                		<input type="checkbox" name="hobby" autocomplete="off" value="보컬"> 보컬
-                                                	</label>
-                                                	<label class="btn btn-primary">
-                                                		<input type="checkbox" name="hobby" autocomplete="off" value="드럼"> 드럼
-                                                	</label>
-                                                	<label class="btn btn-primary">
-                                                		<input type="checkbox" name="hobby" autocomplete="off" value="작곡/미디"> 작곡/미디
-                                                	</label>
                                                 
-                                                
-                                                
-                                                	<label class="btn btn-primary">
-                                                		<input type="checkbox" name="hobby" autocomplete="off" value="기타"> 기타
-                                                	</label>
-                                                	<label class="btn btn-primary">
-                                                		<input type="checkbox" name="hobby" autocomplete="off" value="베이스"> 베이스
-                                                	</label>
-                                                	<label class="btn btn-primary">
-                                                		<input type="checkbox" name="hobby" autocomplete="off" value="현악기"> 현악기
-                                                	</label>
-                                                	<label class="btn btn-primary">
-                                                		<input type="checkbox" name="hobby" autocomplete="off" value="그 외"> 그 외
-                                                	</label>
-                                            	</div>
 											</div>
 											                                        
                                             <br>
@@ -619,22 +699,16 @@
                	Copyright &copy; Mr.HoJin
             </div>
             
-            <form  name="smsForm" action="numbercheck.action" method="post">
-				<input type="hidden" name="action" value="go"> 
-				<textarea name="msg" id="id" cols="30" rows="10" style="display:none;">
-					[뮤하비] 본인 확인 인증번호 [<%
-						String imsinum = getrndnum(6);	// 인증번호 자릿수 6자리
-						out.print(imsinum);				
-					%>]\n를 입력해 주세요.
-				</textarea>
+            <form method="post" name="smsForm" action="numbercheck.action">
+				<input type="hidden" id="action" name="action" value="go"> 
+				<textarea id="msg" name="msg" cols="30" rows="10" style="display:none;">[뮤하비] 본인 확인 인증번호 [<%String imsinum = getrndnum(6); out.print(imsinum);%>]\n를 입력해 주세요.</textarea>
 				<br>
-				<input type="text" name="rphone" value="" placeholder="전화번호 입력">
-				<input type="hidden" name="sphone1" id="sphone1" value="010"> 
-				<input type="hidden" name="sphone2" id="sphone2" value="4020">
-				<input type="hidden" name="sphone3" id="sphone1" value="7429">
-				<input type="submit" value="전송"> 
+				<input type="hidden" name="rphone" value="" placeholder="전화번호 입력" >
+				<input type="hidden" id="sphone1" name="sphone1" value="010"> 
+				<input type="hidden" id="sphone2" name="sphone2" value="4020">
+				<input type="hidden" id="sphone3" name="sphone3" value="7429">
+				<input type="submit" value="전송" style="display:none;"> 
 			</form>
-            
             <br><br>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
