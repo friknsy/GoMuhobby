@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="com.test.notice.INoticeBoardDAO"> 
+ 	
+ 	<select id="getNoticeCat" resultType="com.test.notice.NoticeBoardDTO"> <!-- id는 IDAO의 메소드이름과 일치해야 한다. result type 에 dto 를 설정하면 컬럼명과 dto 변수명이 일치하는 것을 저절로 set 해주게 된다. #{} 안의 값들은 dto 안의 변수명 또는 get 방식으로 받은 name속성이다-->
+ 		SELECT NTC_CAT_CODE,NTC_CAT_NAME FROM NOTICE_BOARD_CAT
+ 	</select>
+ 	
+ 	<select id="noticeList" resultType="com.test.notice.NoticeBoardDTO">
+ 		SELECT ROWNUM, A.NTC_NUM,A.NTC_CAT_CODE,A.NTC_CAT_NAME,A.A_NUM,A.UNIQ_ID_NUM,A.USER_NICKNAME,A.NTC_TITLE,A.NTC_CONTENT,A.NTC_HIT,A.NTC_WRT_DATE
+		FROM (SELECT NTC_NUM,NTC_CAT_CODE,NTC_CAT_NAME,A_NUM,UNIQ_ID_NUM,USER_NICKNAME,NTC_TITLE,NTC_CONTENT,NTC_HIT,NTC_WRT_DATE FROM NOTICEVIEW ORDER BY NTC_NUM) A ORDER BY ROWNUM DESC
+ 	</select>
+ 	
+ 	<insert id="addNotice">
+ 		INSERT INTO NOTICE_BOARD(NTC_NUM,NTC_CAT_CODE,A_NUM,NTC_TITLE,NTC_CONTENT,NTC_HIT,NTC_WRT_DATE) 
+ 		VALUES(NOTICE_BOARD_SEQ.NEXTVAL,#{ntc_cat_code},#{uniq_id_num},#{ntc_title},#{ntc_content},0,SYSDATE) 		 
+ 	</insert>
+ 
+	<select id="selectNotice" resultType="com.test.notice.NoticeBoardDTO">
+ 		SELECT ROWNUM, NTC_NUM,NTC_CAT_CODE,NTC_CAT_NAME,A_NUM,UNIQ_ID_NUM,USER_NICKNAME,NTC_TITLE,NTC_CONTENT,NTC_HIT,NTC_WRT_DATE FROM NOTICEVIEW 
+ 		WHERE NTC_NUM = #{ntc_num}
+ 	</select> 
+ 	
+ 	<delete id="deleteNotice">
+ 		DELETE 
+		FROM NOTICE_BOARD
+		WHERE NTC_NUM=#{ntc_num}
+ 	</delete>
+ 	
+ 	<update id="updateNotice">
+		UPDATE NOTICE_BOARD
+		SET NTC_CAT_CODE=#{ntc_cat_code}, NTC_TITLE=#{ntc_title}, NTC_CONTENT=#{ntc_content}
+		WHERE  NTC_NUM=#{ntc_num}
+ 	</update>
+ 	
+ 	<select id="selectNotice2" resultType="com.test.notice.NoticeBoardDTO">
+ 		SELECT ROWNUM, NTC_NUM,NTC_CAT_CODE,NTC_CAT_NAME,A_NUM,UNIQ_ID_NUM,USER_NICKNAME,NTC_TITLE,NTC_CONTENT,NTC_HIT,NTC_WRT_DATE FROM NOTICEVIEW 
+ 		WHERE NTC_NUM = #{ntc_num}
+ 	</select> 
+ 	
+ 	<update id="hitNotice">
+ 		UPDATE NOTICE_BOARD
+		SET NTC_HIT = NTC_HIT + 1
+		WHERE NTC_NUM =#{ntc_num}
+ 	</update>
+ 	
+ 	<select id="categorizedList" resultType="com.test.notice.NoticeBoardDTO">
+ 		SELECT ROWNUM, A.NTC_NUM,A.NTC_CAT_CODE,A.NTC_CAT_NAME,A.A_NUM,A.UNIQ_ID_NUM,A.USER_NICKNAME,A.NTC_TITLE,A.NTC_CONTENT,A.NTC_HIT,A.NTC_WRT_DATE
+		FROM (SELECT NTC_NUM,NTC_CAT_CODE,NTC_CAT_NAME,A_NUM,UNIQ_ID_NUM,USER_NICKNAME,NTC_TITLE,NTC_CONTENT,NTC_HIT,NTC_WRT_DATE FROM NOTICEVIEW ORDER BY NTC_NUM) A WHERE A.NTC_CAT_CODE=#{ntc_cat_code} ORDER BY ROWNUM DESC
+ 	</select>
+ 	
+ 	<select id="searchedList" resultType="com.test.notice.NoticeBoardDTO">
+		SELECT ROWNUM, A.NTC_NUM,A.NTC_CAT_CODE,A.NTC_CAT_NAME,A.A_NUM,A.UNIQ_ID_NUM,A.USER_NICKNAME,A.NTC_TITLE,A.NTC_CONTENT,A.NTC_HIT,A.NTC_WRT_DATE
+		FROM (SELECT NTC_NUM,NTC_CAT_CODE,NTC_CAT_NAME,A_NUM,UNIQ_ID_NUM,USER_NICKNAME,NTC_TITLE,NTC_CONTENT,NTC_HIT,NTC_WRT_DATE FROM NOTICEVIEW ORDER BY NTC_NUM) A 
+		WHERE A.NTC_TITLE LIKE '%' || #{searchKeyword}|| '%' OR A.NTC_CONTENT LIKE '%' || #{searchKeyword}|| '%' ORDER BY ROWNUM DESC		
+		
+		<!-- 여기서 주의할 것! LIKE '%이유림%' 이라고 해서 '%#{searchKeyword}%' 이렇게 하면 안되고 저렇게 || 로 연결해줘야 한다. -->
+ 	</select>
+ 
+ </mapper>
