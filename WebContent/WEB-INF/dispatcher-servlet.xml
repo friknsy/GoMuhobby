@@ -12,6 +12,7 @@
 	
 	<context:component-scan base-package="com.test.mybatis"/>
 	<context:component-scan base-package="com.test.register"/>
+	<context:component-scan base-package="com.test.notice"/>
 	
 	<bean id="localDataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver"></property>
