@@ -17,6 +17,13 @@
 		VALUES(#{uniq_id_num},#{town_code},#{u_id},#{u_name},CRYPTPACK.ENCRYPT(#{u_pwd},'superman'),#{u_tel},#{u_email},SYSDATE)
  	</insert>
 	
+	<!-- 고유식별 번호 반환 -->
+	<select id="uniqueId" resultType="String">
+		SELECT UNIQ_ID_NUM
+		FROM MEMBER
+		WHERE U_ID = #{u_id}
+	</select>
+	
 	<!-- 닉네임 반환 -->
 	<select id="logincheck" resultType="String">
 		SELECT USER_NICKNAME
@@ -54,7 +61,7 @@
 		WHERE U_EMAIL = #{u_email}
 	</select>
 	
-	<!-- 고유식별번호 넘기기 -->
+	<!-- 고유식별번호 최대값 넘기기 -->
 	<select id="uniqIdget" resultType="String">
 		SELECT MAX(UNIQ_ID_NUM)
 		FROM USER_UNIQUE_ID

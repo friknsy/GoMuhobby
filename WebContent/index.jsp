@@ -10,7 +10,6 @@
 <body>
 	<script>
 		location.href = 'main.action';
-	
 	</script>
 </body>
 </html>

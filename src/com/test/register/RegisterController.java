@@ -9,15 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.test.mybatis.IMemberDAO;
-import com.test.mybatis.MemberDTO;
 
 @Controller
 public class RegisterController
@@ -66,7 +61,7 @@ public class RegisterController
 		
 		String nickName = request.getParameter("nickName1");
 		
-		System.out.println(nickName);
+		/* System.out.println(nickName); */
 		
 		int result = dao.nickNameCheck(nickName);
 		
@@ -146,8 +141,6 @@ public class RegisterController
 	@RequestMapping(value = "/numbercheck.action", method = RequestMethod.POST)
 	public String phonenumber(HttpServletRequest request, ModelMap model)
 	{	
-		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
-		
 		/*
 		 *  String sphone1 =
 		 * request.getParameter("sphone1"); String sphone2 =

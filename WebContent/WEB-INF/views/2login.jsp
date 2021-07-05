@@ -1,5 +1,5 @@
 <%@page import="java.util.Random"%>
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -44,12 +44,12 @@
 					
 		            else if (data=="pwfail")
 		            {
-		            	$('#pwCheckMessage').html("잘못된 비밀번호 입니다.");
+		            	$('#pwCheckMessage').html("비밀번호가 일치하지 않습니다.");
 		            	$('#pwCheckMessage').css("color", "#dc3545");
 		            }
 					
 		            else
-		            {
+		            {	
 		            	location.href = 'mainpage.action';
 		            }
 				});
@@ -110,7 +110,7 @@
                                                 	<input class="text-center btn1 btn-primary btn-block" type="submit" id="loginBtn" name="loginBtn" value="로그인">
                                                 </div>
                                                 <div class="col-md-4 col-md-3 d-grid">
-                                                	<a class="text-center btn1 btn-primary btn-block">취소</a>
+                                                	<a class="text-center btn1 btn-primary btn-block" href="mainpage.action">취소</a>
                                                 </div>
                                             </div>
                                         <!-- </form> -->

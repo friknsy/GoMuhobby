@@ -304,7 +304,6 @@
 				{
 					$.post("idCheck.action", {userId : userId}, function(data)
 					{	
-						alert(data);
 						if(data=="fail")
 			            {
 			            	$('#idCheckMessage').html("멋진 아이디네요!");
@@ -682,7 +681,7 @@
                                                 	<input class="text-center btn1 btn-primary btn-block" type="submit" id="submit" value="회원 가입">
                                                 </div>
                                                 <div class="col-md-4 col-md-3 d-grid">
-                                                	<a class="text-center btn1 btn-primary btn-block">취소</a>
+                                                	<a class="text-center btn1 btn-primary btn-block" href="mainpage.action">취소</a>
                                                 </div>
                                             </div>
                                         </form>

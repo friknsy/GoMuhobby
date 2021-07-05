@@ -5,12 +5,12 @@
 package com.test.register;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,15 +36,26 @@ public class LoginController
 		return "/WEB-INF/views/3mainpage.jsp";
 	}
 	
+	// 로그아웃 후 메인페이지 반환.
+	@RequestMapping(value = "/logoutAction.action", method = RequestMethod.GET)
+	public String logout()
+	{	
+		return "/WEB-INF/views/2logoutAction.jsp";
+	} 
+	
 	// 로그인 시 정보 확인
 	// SELECT NAME FROM EMPLOYEE WHERE EMPLOYEEID=? AND SSN2 = CRYPTPACK.ENCRYPT(?,?) AND GRADE=0
 	@ResponseBody
 	@RequestMapping(value = "/loginIdCheck.action", method = RequestMethod.POST)
-	public String loginCheck(HttpServletRequest request)
+	public String loginCheck(HttpServletRequest request, HttpServletResponse response)
 	{
 		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
 		String u_id = request.getParameter("userId");
 		String u_pwd = request.getParameter("userPw");
+		
+		// 서버에 생성된 세션이 있으면 세션을 반환하고 없다면 새 세션을 생성. (인수 default true)
+		// 인수로 false 값을 주면 이미 생성된 세션이 있을 때 그 세션을 반환하고 없다면 
+		HttpSession session = request.getSession();
 		
 		UserDTO u = new UserDTO();
 		
@@ -57,8 +68,15 @@ public class LoginController
 		
 		int idcheck = dao.idcheck(u_id);
 		int pwcheck = dao.pwcheck(u);
+		response.setCharacterEncoding("UTF-8");
 		
 		String message = null;
+		String mynickName = dao.logincheck(u);
+		String uniqueId = dao.uniqueId(u_id);
+		
+		/* System.out.println(uniqueId); */
+		
+		/* System.out.println(mynickName); */
 		
 		// 존재하지 않는 아이디이거나 탈퇴한 아이디 입니다.
 	    if(idcheck < 1)
@@ -75,8 +93,10 @@ public class LoginController
 		}
 	    
 		else
-		{
-			return "/WEB-INF/views/3mainpage.jsp";
+		{	
+			session.setAttribute("uniqueId", uniqueId);
+			session.setAttribute("mynickName", mynickName);
+			return message;
 		}
 	}
 }
