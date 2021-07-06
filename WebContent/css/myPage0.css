@@ -187,6 +187,10 @@ small, .small {
   font-size: 0.875em;
 }
 
+normal, .normal {
+  font-size: 1.275em;
+}
+
 mark, .mark {
   padding: 0.2em;
   background-color: #fcf8e3;
@@ -748,7 +752,7 @@ progress {
 }
 
 .first {
-	/* border: 1px solid blue; */ 
+	/*  border: 1px solid blue; */ 
     float: left;
     text-align: center;
     width:20%;
@@ -756,7 +760,7 @@ progress {
 }
 
 .second{
-	/* border: 1px solid blue; */ 
+	/*  border: 1px solid blue; */ 
     float: left;
     margin-left: 5%;
     width:30%;
@@ -2664,10 +2668,7 @@ textarea.form-control-lg {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
 }
-.form-floating > .form-control:focus, .form-floating > .dataTable-input:focus, .form-floating > .form-control:not(:placeholder-shown), .form-floating > .dataTable-input:not(:placeholder-shown) {
-  padding-top: 1.625rem;
-  padding-bottom: 0.625rem;
-}
+
 .form-floating > .form-control:-webkit-autofill, .form-floating > .dataTable-input:-webkit-autofill {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
@@ -7053,10 +7054,6 @@ textarea.form-control-lg {
   margin-top: 3rem !important;
 }
 
-.mt-6 {
-  margin-top: 5rem !important;
-}
-
 .mt-auto {
   margin-top: auto !important;
 }
@@ -11125,6 +11122,7 @@ body {
 .nav .nav-link .sb-nav-link-icon,
 .sb-sidenav-menu .nav-link .sb-nav-link-icon {
   margin-right: 0.5rem;
+  margin-left: 2rem;
 }
 
 .sb-topnav {

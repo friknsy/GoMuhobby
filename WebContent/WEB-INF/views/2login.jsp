@@ -36,8 +36,6 @@
 					$('#idCheckMessage').html("");
 					$('#pwCheckMessage').html("");
 					
-					alert(data);
-					
 					if(data=="idfail")
 		            {
 		            	$('#idCheckMessage').html("존재하지 않는 아이디이거나 탈퇴한 아이디 입니다.");

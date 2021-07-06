@@ -62,9 +62,9 @@ public class LoginController
 		u.setU_id(u_id);
 		u.setU_pwd(u_pwd);
 		
-		System.out.println(dao.idcheck(u_id) + "아이디 확인");		// 아이디가 있는 지 없는 지 0 or 1 반환
-		System.out.println(dao.pwcheck(u) + "비밀번호 확인");			// 비밀번호가 맞는지 안 맞는지 0 or 1 반환
-		System.out.println(dao.logincheck(u) + "닉네임 확인");		// 문자열 반환
+		// System.out.println(dao.idcheck(u_id) + "아이디 확인");		// 아이디가 있는 지 없는 지 0 or 1 반환
+		// System.out.println(dao.pwcheck(u) + "비밀번호 확인");			// 비밀번호가 맞는지 안 맞는지 0 or 1 반환
+		// System.out.println(dao.logincheck(u) + "닉네임 확인");		// 문자열 반환
 		
 		int idcheck = dao.idcheck(u_id);
 		int pwcheck = dao.pwcheck(u);
@@ -85,7 +85,6 @@ public class LoginController
 		int admin = dao.admincheck(uniqueId);
 		String adminStr = admin + "";
 		
-		System.out.println(adminStr + "야 ,, ");
 		
 		/* System.out.println(uniqueId); */
 		
