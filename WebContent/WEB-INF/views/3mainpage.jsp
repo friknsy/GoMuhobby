@@ -1,9 +1,25 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page language="java" import="java.util.*, java.security.*, java.io.*, java.net.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String cp = request.getContextPath();
+%>
 
 <%  
-	String uniqueId = (String)session.getAttribute("uniqueId");
+	String adminStr = null;
+
+	if(session.getAttribute("adminStr")!=null)
+	{
+		adminStr = (String)session.getAttribute("adminStr");
+	}
+
+	String uniqueId = null;
+	
+	if(session.getAttribute("uniqueId")!=null)
+	{
+		uniqueId = (String)session.getAttribute("uniqueId");	
+	}
 
 	String mynickName = null;
 
@@ -11,7 +27,6 @@
 	{
 		mynickName = (String)session.getAttribute("mynickName");
 	}
-		
 %>
 
 <%-- 뮤하비 메인페이지.  --%>
@@ -34,81 +49,75 @@
         
         
             <!-- 맨 위 상단 바 -->
-            
-            <%
-            	if(mynickName == null){
-            %>
-            <nav class="navbar navbar-expand-lg navbar-dark">
-                <div class="container px-5 mt-2">
-                    <div>
-						<a href="SampleTest.jsp"><img src="images/muhobbytext3.png" width="200px" height="40px"></a>
-					</div>
-					<!-- <a class="navbar-brand" href="SampleTest.jsp">M U H O B B Y</a> -->
-					<div class="input-group ms-4">
-                    	<input class="form-control" type="text" placeholder="통합 검색"  aria-describedby="btnNavbarSearch" />
-                    	<button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="bi bi-search"></i></button>
-                	</div>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        	<li class="nav-item "><a class="nav-link" href="SampleTest.jsp" >ONEDAY클래스&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                        	<li class="nav-item "><a class="nav-link" href="noticeboardlist.action">공지사항&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                        	<li class="nav-item dropdown ">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                	<li><a class="dropdown-item " href="#">Q&A 게시판 </a></li>
-                                    <li><a class="dropdown-item " href="#">자유게시판</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="loginform.action" >&nbsp;&nbsp;&nbsp;&nbsp;로그인&nbsp;&nbsp;&nbsp;&nbsp;</a></li>	
-                            <li class="nav-item"><a class="nav-link" href="registerform.action" >회원가입&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            
-            <%
-            	}
-            
-            	else{
-            %>
-            <nav class="navbar navbar-expand-lg navbar-dark">
-                <div class="container px-5 mt-2">
-                    <div>
-						<a href="SampleTest.jsp"><img src="images/muhobbytext3.png" width="200px" height="40px"></a>
-					</div>
-					<!-- <a class="navbar-brand" href="SampleTest.jsp">M U H O B B Y</a> -->
-					<div class="input-group ms-4">
-                    	<input class="form-control" type="text" placeholder="통합 검색"  aria-describedby="btnNavbarSearch" />
-                    	<button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="bi bi-search"></i></button>
-                	</div>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        	<li class="nav-item "><a class="nav-link" href="SampleTest.jsp" >ONEDAY클래스&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                        	<li class="nav-item "><a class="nav-link" href="noticeboardlist.action">공지사항&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                        	<li class="nav-item dropdown ">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                	<li><a class="dropdown-item " href="#">Q&A 게시판 </a></li>
-                                    <li><a class="dropdown-item " href="#">자유게시판</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle " id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp; <%out.print(mynickName); %> 님</a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item " href="#">마이페이지</a></li>
-                                    <li><a class="dropdown-item " href="#">정보 수정</a></li>
-                                    <li><hr></li>
-                                    <li><a class="dropdown-item " href="logoutAction.action">로그아웃</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item "><a class="nav-link " href="SampleTest.jsp" >&nbsp;&nbsp;&nbsp;&nbsp;알림&nbsp;<i class="bi bi-bell-fill bold"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <%
-            	}
-            %>
+            <c:choose>
+            	<c:when test="${mynickName eq null}">
+		            <nav class="navbar navbar-expand-lg navbar-dark">
+		                <div class="container px-5 mt-2">
+		                    <div>
+								<a href="mainpage.action"><img src="images/muhobbytext3.png" width="200px" height="40px"></a>
+							</div>
+							<!-- <a class="navbar-brand" href="SampleTest.jsp">M U H O B B Y</a> -->
+							<div class="input-group ms-4">
+		                    	<input class="form-control" type="text" placeholder="통합 검색"  aria-describedby="btnNavbarSearch" />
+		                    	<button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="bi bi-search"></i></button>
+		                	</div>
+		                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+		                        	<li class="nav-item "><a class="nav-link" href="SampleTest.jsp" >ONEDAY클래스&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+		                        	<li class="nav-item "><a class="nav-link" href="noticeboardlist.action">공지사항&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+		                        	<li class="nav-item dropdown ">
+		                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>
+		                                <ul class="dropdown-menu dropdown-menu-end">
+		                                	<li><a class="dropdown-item " href="#">Q&A 게시판 </a></li>
+		                                    <li><a class="dropdown-item " href="#">자유게시판</a></li>
+		                                </ul>
+		                            </li>
+		                            <li class="nav-item"><a class="nav-link" href="loginform.action" >&nbsp;&nbsp;&nbsp;&nbsp;로그인&nbsp;&nbsp;&nbsp;&nbsp;</a></li>	
+		                            <li class="nav-item"><a class="nav-link" href="registerform.action" >회원가입&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+		                        </ul>
+		                    </div>
+		                </div>
+		            </nav>
+	            </c:when>
+	            
+	            <c:otherwise>
+		            <nav class="navbar navbar-expand-lg navbar-dark">
+		                <div class="container px-5 mt-2">
+		                    <div>
+								<a href="mainpage.action"><img src="images/muhobbytext3.png" width="200px" height="40px"></a>
+							</div>
+							<!-- <a class="navbar-brand" href="SampleTest.jsp">M U H O B B Y</a> -->
+							<div class="input-group ms-4">
+		                    	<input class="form-control" type="text" placeholder="통합 검색"  aria-describedby="btnNavbarSearch" />
+		                    	<button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="bi bi-search"></i></button>
+		                	</div>
+		                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+		                        	<li class="nav-item "><a class="nav-link" href="SampleTest.jsp" >ONEDAY클래스&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+		                        	<li class="nav-item "><a class="nav-link" href="noticeboardlist.action">공지사항&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+		                        	<li class="nav-item dropdown ">
+		                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>
+		                                <ul class="dropdown-menu dropdown-menu-end">
+		                                	<li><a class="dropdown-item " href="#">Q&A 게시판 </a></li>
+		                                    <li><a class="dropdown-item " href="#">자유게시판</a></li>
+		                                </ul>
+		                            </li>
+		                            <li class="nav-item dropdown">
+		                                <a class="nav-link dropdown-toggle " id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp; <%out.print(mynickName); %> 님</a>
+		                                <ul class="dropdown-menu dropdown-menu-end">
+		                                    <li><a class="dropdown-item " href="mypage.action">마이페이지</a></li>
+		                                    <li><a class="dropdown-item " href="#">정보 수정</a></li>
+		                                    <li><hr></li>
+		                                    <li><a class="dropdown-item " href="logoutAction.action">로그아웃</a></li>
+		                                </ul>
+		                            </li>
+		                            <li class="nav-item "><a class="nav-link " href="SampleTest.jsp" >&nbsp;&nbsp;&nbsp;&nbsp;알림&nbsp;<i class="bi bi-bell-fill bold"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+		                        </ul>
+		                    </div>
+		                </div>
+		            </nav>
+            	</c:otherwise>
+            </c:choose>
             
             <!-- 메인 페이지 -->
             <header class="bg-dark py-5" style="background-image: URL(images/guitar2.png); height: 820px;">

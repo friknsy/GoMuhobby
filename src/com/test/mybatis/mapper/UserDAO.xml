@@ -17,6 +17,12 @@
 		VALUES(#{uniq_id_num},#{town_code},#{u_id},#{u_name},CRYPTPACK.ENCRYPT(#{u_pwd},'superman'),#{u_tel},#{u_email},SYSDATE)
  	</insert>
 	
+	<select id="admincheck" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM ADMIN
+		WHERE UNIQ_ID_NUM = #{uniq_id_num}
+	</select>
+	
 	<!-- 고유식별 번호 반환 -->
 	<select id="uniqueId" resultType="String">
 		SELECT UNIQ_ID_NUM

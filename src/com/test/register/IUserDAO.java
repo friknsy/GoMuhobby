@@ -12,4 +12,5 @@ public interface IUserDAO
 	public String uniqIdget();
 	public String logincheck(UserDTO u);
 	public String uniqueId(String id);
+	public int admincheck(String ui);
 }

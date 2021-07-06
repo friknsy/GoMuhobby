@@ -3348,13 +3348,13 @@ textarea.form-control-lg {
 }
 
 .btn-outline-light {
-  color: #f8f9fa;
-  border-color: #f8f9fa;
+  color: #ffffff;
+  border-color: #ffffff;
 }
 .btn-outline-light:hover {
-  color: #000;
-  background-color: #f8f9fa;
-  border-color: #f8f9fa;
+  color: #fff;
+  background-color: #c79cf5;
+  border-color: #fff;
 }
 .btn-check:focus + .btn-outline-light, .btn-outline-light:focus {
   box-shadow: 0 0 0 0.25rem rgba(248, 249, 250, 0.5);
@@ -3364,6 +3364,25 @@ textarea.form-control-lg {
   background-color: #f8f9fa;
   border-color: #f8f9fa;
 }
+
+.btn-outline-light1 {
+  color: #c79cf5;
+  border-color: #c79cf5;
+}
+.btn-outline-light1:hover {
+  color: #c79cf5;
+  background-color: #f8f9fa;
+  border-color: #c79cf5;
+}
+.btn-check:focus + .btn-outline-light1, .btn-outline-light1:focus {
+  box-shadow: 0 0 0 0.25rem rgba(248, 249, 250, 0.5);
+}
+.btn-check:checked + .btn-outline-light1, .btn-check:active + .btn-outline-light1, .btn-outline-light1:active, .btn-outline-light1.active, .btn-outline-light1.dropdown-toggle.show {
+  color: #000;
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+}
+
 .btn-check:checked + .btn-outline-light:focus, .btn-check:active + .btn-outline-light:focus, .btn-outline-light:active:focus, .btn-outline-light.active:focus, .btn-outline-light.dropdown-toggle.show:focus {
   box-shadow: 0 0 0 0.25rem rgba(248, 249, 250, 0.5);
 }
