@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="com.test.admin.IAdminDAO"> <!-- 여기주의! implements 비슷하게 하는 DAO 를 설정해주어야 한다.  -->
+ 	
+ 	
+ 	<select id="getTodayVisit" resultType="java.lang.Integer">
+ 		select count(*) from (select distinct ldate,uniq_id_num from (select to_char(login_date,'yy/mm/dd') as ldate,uniq_id_num from login)) where ldate = #{todayDate}
+ 		<!--여기서 오늘날짜를 yy/mm/dd 형식으로 넘겨줘야 한다!
+ 		오늘 날짜 계산하는 법 : Date date = new Date();
+								SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH", Locale.KOREA);★ 주의 여기서 mm 으로 하면 현재 '분'이 나온다
+								String today = sdf.format(date);
+ 		  -->
+ 	</select>
+ 	
+ 	<select id="getTotalVisit" resultType="java.lang.Integer">
+ 		select count(*) from (select distinct ldate,uniq_id_num from (select to_char(login_date,'yy/mm/dd') as ldate,uniq_id_num from login)) <!-- 여기서 세미콜론 넣지 않기! 넣으면 DataIntegrityViolation예외발생 -->
+ 	</select>
+ 	
+ 	<select id="yetQna" resultType="com.test.admin.AdminDTO">
+		SELECT ROW_NUMBER() OVER(ORDER BY QNA_NUM) AS RNUM, A.QNA_NUM, A.QNA_CAT_NAME, A.QNA_TITLE, A.USER_NICKNAME, A.QNA_WRT_DATE, A.QNA_PROC
+		FROM (SELECT * 
+      	FROM QNAVIEW
+     	WHERE QNA_PROC ='답변대기중') A ORDER BY RNUM DESC
+ 	</select>
+ 	
+ 	<select id="qaReportList" resultType="com.test.admin.AdminDTO">
+ 		SELECT * FROM REPORTS_FOR_ADMIN WHERE PROC_CHECK='신고접수중'
+ 	</select>
+ 	
+ 	<select id="memberList" resultType="com.test.admin.AdminDTO">
+ 		SELECT * FROM MEMBER_LIST_VIEW
+ 		<!-- 테이블에 담긴 값이 null 인 경우 빈 문자열로 받아오는 듯 에러는 뜨지 않는다. -->
+ 	</select>
+ 	
+ 	<select id="quitList" resultType="com.test.admin.AdminDTO">
+ 		SELECT ROWNUM AS RNUM, UNIQ_ID_NUM,U_DROP_DATE,U_ID,U_NAME,U_EMAIL,U_TEL
+		FROM (SELECT UNIQ_ID_NUM,U_DROP_DATE,U_ID,U_NAME,U_EMAIL,U_TEL
+		FROM DROP_MEMBER ORDER BY U_DROP_DATE) ORDER BY RNUM DESC
+ 	</select>
+ 	
+ 	<insert id="memberRecovery">
+ 		INSERT INTO MEMBER(UNIQ_ID_NUM,U_ID,U_NAME, U_PWD, U_TEL, U_EMAIL,U_JOIN_DATE) VALUES(
+		(SELECT UNIQ_ID_NUM FROM DROP_MEMBER WHERE UNIQ_ID_NUM=#{uniq_id_num})
+		,(SELECT U_ID FROM DROP_MEMBER WHERE UNIQ_ID_NUM=#{uniq_id_num})
+		,(SELECT U_NAME FROM DROP_MEMBER WHERE UNIQ_ID_NUM=#{uniq_id_num})
+		,(SELECT U_PWD FROM DROP_MEMBER WHERE UNIQ_ID_NUM=#{uniq_id_num})
+		,(SELECT U_TEL FROM DROP_MEMBER WHERE UNIQ_ID_NUM=#{uniq_id_num})
+		,(SELECT U_EMAIL FROM DROP_MEMBER WHERE UNIQ_ID_NUM=#{uniq_id_num})
+		,(SELECT U_JOIN_DATE FROM DROP_MEMBER WHERE UNIQ_ID_NUM=#{uniq_id_num}))	
+ 	</insert>
+ 	
+ 	<delete id="dropMemberDelete">
+ 		DELETE FROM DROP_MEMBER WHERE UNIQ_ID_NUM=#{uniq_id_num}
+ 	</delete>
+ 	
+ 	<select id="searchName" resultType="com.test.admin.AdminDTO">
+ 		SELECT U_NAME FROM MEMBER WHERE UNIQ_ID_NUM=#{uniq_id_num}
+ 	</select>
+ 	
+ 	<insert id="modifyName">
+ 		UPDATE MEMBER
+		SET U_NAME = #{u_name}
+		WHERE UNIQ_ID_NUM = #{uniq_id_num}
+ 	</insert>
+ 	
+ 	<insert id="reportProcessing">
+ 		INSERT INTO QA_REPORT_PROCESSING VALUES(QA_REPORT_PROCESSING_SEQ.NEXTVAL,#{a_num},SYSDATE,#{report_proc_cat_code},#{qa_report_reg_code})
+ 	</insert>
+ 	
+
+ 
+ </mapper>
