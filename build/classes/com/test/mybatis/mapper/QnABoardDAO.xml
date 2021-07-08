@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="com.test.qnaBoard.IQnABoardDAO">
+ 	
+ 	<!-- 회원이 작성한 전체 게시물 불러오기 -->
+ 	<select id="list" resultType="com.test.qnaBoard.QnaBoardDTO">
+ 		SELECT ROWNUM RN, Q.QNA_NUM, Q.QNA_TITLE, Q.QNA_CONTENT
+		, Q.QNA_WRT_DATE, Q.UNIQ_ID_NUM, Q.USER_NICKNAME, Q.QNA_CAT_NAME, Q.QNA_PROC, Q.QNA_CAT_CODE
+		FROM
+		(
+		    SELECT QNA_NUM, QNA_TITLE, QNA_CONTENT, QNA_WRT_DATE
+		    , UNIQ_ID_NUM, USER_NICKNAME, QNA_CAT_NAME, QNA_PROC, QNA_CAT_CODE
+		    FROM QNAVIEW
+		    WHERE UNIQ_ID_NUM = #{uniq_id_num}
+		    ORDER BY QNA_WRT_DATE
+		)Q
+		ORDER BY RN DESC
+		
+		<!-- 세션 값을 컨트롤러로 받아야 하는 지 아니면 클라이언트 상에서 처리해야 되는지.... -->
+		
+		<!-- 해당 회원의 문의글만 보여야 한다. 
+		     → 회원의 고유번호가 session 값으로 넘어오면 설정할 예정 -->
+ 	</select>
+ 	
+ 	<!-- 특정 게시물 불러오기 -->
+ 	<select id="read" resultType="com.test.qnaBoard.QnaBoardDTO">
+ 		SELECT QNA_CAT_NAME, QNA_CAT_CODE, QNA_NUM, QNA_TITLE, QNA_CONTENT, QNA_WRT_DATE, USER_NICKNAME, QNA_PROC
+		FROM QNAVIEW
+		WHERE QNA_NUM=#{qna_num}
+ 	</select>
+ 	
+ 	<!-- 관리자 답변 -->
+ 	<select id="reply" resultType="com.test.qnaBoard.QnABoard_Reply_DTO">
+ 		SELECT QNA_ANSW_NUM, A_NUM, QNA_ANSW_TITLE, QNA_ANSW_CONTENT, QNA_ANSW_WRT_DATE, QNA_NUM
+		FROM QNA_BOARD_ANSWER
+		WHERE QNA_NUM = #{qna_num}
+ 	</select>
+ 	
+ 	<!-- 게시물 작성 -->
+ 	<insert id="add" >
+ 		INSERT INTO QNA_BOARD(QNA_NUM, QNA_CAT_CODE, UNIQ_ID_NUM, QNA_TITLE, QNA_CONTENT)
+		VALUES(QNA_BOARD_SEQ.NEXTVAL, #{qna_cat_code}, #{uniq_id_num}, #{qna_title}, #{qna_content})
+ 	</insert>
+ 	
+ 	<!-- 게시물 수정 -->
+ 	<update id="modify">
+ 		UPDATE QNA_BOARD
+		SET QNA_CAT_CODE=#{qna_cat_code}, QNA_TITLE=#{qna_title}, QNA_CONTENT=#{qna_content}
+		WHERE QNA_NUM=#{qna_num}
+ 	</update>
+ 	
+ 	<!-- 게시물 삭제 -->
+ 	<delete id="remove">
+ 		DELETE
+		FROM QNA_BOARD
+		WHERE QNA_NUM=#{qna_num}
+ 	</delete>
+ 	
+ 	<!-- 게시물 갯수 -->
+ 	<select id="count" resultType="java.lang.Integer">
+ 		SELECT COUNT(*) AS COUNT
+		FROM QNA_BOARD
+ 	</select>
+ 	
+ 	<!-- 문의 분류 리스트 -->
+ 	<select id="grouplist" resultType="com.test.qnaBoard.QnABoardGroupDTO">
+ 		SELECT QNA_CAT_CODE, QNA_CAT_NAME
+		FROM QNA_BOARD_GRP
+ 	</select>
+ 
+ 
+ </mapper>

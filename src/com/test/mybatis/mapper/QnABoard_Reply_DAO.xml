@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="com.test.qnaBoard.IQnABoard_Reply_DAO">
+ 
+ 	<!--전체 게시물 불러오기 -->
+ 	<select id="list" resultType="com.test.qnaBoard.QnaBoardDTO">
+ 		SELECT RN, QNA_NUM, QNA_TITLE, QNA_CONTENT, QNA_WRT_DATE
+ 		, UNIQ_ID_NUM, USER_NICKNAME, QNA_CAT_NAME, QNA_PROC
+		FROM QNAVIEW
+		ORDER BY RN DESC
+		
+		<!-- 모든 회원들이 작성한 문의글이 보임 -->
+ 	</select>
+ 	
+ 	<!-- 개별 게시물 불러오기 -->
+ 	<select id="read" resultType="com.test.qnaBoard.QnaBoardDTO">
+ 		SELECT QNA_CAT_NAME, QNA_NUM, QNA_TITLE, QNA_CONTENT, QNA_WRT_DATE, USER_NICKNAME, QNA_PROC
+		FROM QNAVIEW
+		WHERE QNA_NUM=#{qna_num}
+ 	</select>
+ 	
+ 	<!-- 관리자 답변 -->
+ 	<select id="reply" resultType="com.test.qnaBoard.QnABoard_Reply_DTO">
+ 		SELECT QNA_ANSW_NUM, A_NUM, QNA_ANSW_TITLE, QNA_ANSW_CONTENT, QNA_ANSW_WRT_DATE, QNA_NUM
+		FROM QNA_BOARD_ANSWER
+		WHERE QNA_NUM = #{qna_num}
+ 	</select>
+	
+	<!-- 답변 작성 -->
+	<insert id="add">
+		INSERT INTO QNA_BOARD_ANSWER(QNA_ANSW_NUM, A_NUM, QNA_NUM
+									, QNA_ANSW_TITLE, QNA_ANSW_CONTENT)
+		VALUES (QNA_BOARD_ANSWER_SEQ.NEXTVAL, #{uniq_id_num}, #{qna_num}
+				, #{qna_answ_title}, #{qna_answ_content})
+				
+		<!-- 관리자 번호 일단 -1로 고정...  session 값 넘어오면 수정할 예정 -->
+	</insert>
+	
+	<!-- 답변 수정 -->
+	<update id="modify">
+		UPDATE QNA_BOARD_ANSWER
+		SET QNA_ANSW_TITLE = #{qna_answ_title}, QNA_ANSW_CONTENT = #{qna_answ_content}
+		WHERE QNA_ANSW_NUM = #{qna_answ_num}
+	</update>
+	
+	<!-- 답변 삭제 -->
+	<delete id="remove">
+		DELETE
+		FROM QNA_BOARD_ANSWER
+		WHERE QNA_ANSW_NUM = #{qna_answ_num}
+	</delete> 
+ 
+ </mapper>

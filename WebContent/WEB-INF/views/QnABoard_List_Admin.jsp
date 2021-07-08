@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
-	String cp = request.getContextPath();
+	String cp = request.getContextPath(); 	
 %>
 
 <%  
@@ -12,7 +12,12 @@
 	{
 		adminStr = (String)session.getAttribute("adminStr");
 	}
-	
+	else
+	{	
+		// 로그인 정보가 없을 때 메인 페이지로 이동!
+		out.println("<script>location.href=" + "'main.action'" + ";</script>");
+	}
+
 	String uniqueId = null;
 	
 	if(session.getAttribute("uniqueId")!=null)
@@ -32,57 +37,51 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>뮤하비 공지사항</title>
+<title>QnABoard_List_Admin.jsp</title>
 
-	<style type="text/css">
-		a, a:hover {
-			color: #000000;
-			text-decoration: none;	
-		}
-	</style>
-		<title>뮤하비 - 타성에 젖은 당신의 변화</title>
-		<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-		<meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <link href="css/mainpage.css" rel="stylesheet" />
-</head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>Blog Post - Start Bootstrap Template</title>
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="<%=cp %>/assets/favicon.ico" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="<%=cp %>/css/mainpage.css" rel="stylesheet" />
+<link href="<%=cp %>/css/myPage1.css" rel="stylesheet" />
 
-<script type="text/javascript">
-	$(function()
+
+<!-- 부트스트랩 css -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> --> 
+
+<!-- 제이쿼리 script -->
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+	
+<!-- 부트스트랩 script -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+<!-- 부트스트랩 script -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<%-- <script type="text/javascript" src="<%=cp%>/js/simple-datatables.js"></script> --%>
+<script src="js/simple-datatables.js""></script>
+<script src="js/datatables-simple-demo.js"></script>
+
+<style type="text/css">
+	
+	table
 	{
-		$("#category").on('change', function()
-		{
-			
-			if(this.value==0) // 만약 [분류별로 모아보기] 를 선택했을 경우 전체 리스트를 보여주고
-			{
-				
-				
-				$(location).attr('href','noticeboardlist.action');  
-				
-			}
-			else //[안내][서비스점검] 등 특정 분류를 선택했다면 그 분류의 목록들만 보여준다. 
-			{
-				$(location).attr('href','noticecategrizedlist.action?ntc_cat_code='+this.value);
-				
-			}
-		})
-	})
+		margin-left: auto;
+		margin-right: auto;
+	}
 
-</script>
+</style>
 
-<body class="d-flex flex-column h-100">
-	<main class="flex-shrink-0">
-	
-	
-            <!-- 맨 위 상단 바 -->
+</head>
+<body>
+
+			<!-- 맨 위 상단 바 -->
             <c:choose>
             	<c:when test="${mynickName eq null}">
 		            <nav class="navbar navbar-expand-lg navbar-dark">
@@ -178,102 +177,57 @@
             	</c:otherwise>
             </c:choose>
             
-			<br>
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-6">
-						<div class="text-center text-xl-start">
-							<select name="category" id="category" class="form-control" style="width: 40%;">
-								<option value="" selected disabled hidden class="text-center">==분류로 모아보세요==</option> <!-- 맨 처음 값을 가지지 않도록 하고 0(전체),1,2,3,4,5 를 선택할 시 분류대로 리스트보여지도록-->
-								<option value="0">전체</option>
-								<c:forEach var="list" items="${noticeCat }">
-								<option value="${list.ntc_cat_code }">${list.ntc_cat_name }</option>
-								</c:forEach>
-							</select>
-						</div>
-					</div>
-					<div class="col-lg-6 mb-3">	
-						<div class="text-center text-xl-start ">
-							<form action="noticekeywordsearch.action" method="post" >
-								<div class="pull-right">
-									<div class="input-group" style="float: right; width: 300px;">
-										<!--
-										<input class="form-control" type="text" placeholder="통합 검색"  aria-describedby="btnNavbarSearch" />
-		                    			<button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button> 
-										 -->
-										<input type="text" class="form-control" placeholder="검색"  name="searchKeyword">
-											<button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
-											<!-- <button class="btn btn-default" type="submit">검색</button> -->
-									</div>	
-								</div>
-							</form>
-						</div>
-						
-						<c:choose>
-							<c:when test="${adminStr eq null}">
-							<div>
-							</div>
-							</c:when>
-							<c:otherwise>						
-									<div>
-										<a href="noticeboardinsertform.action" class="btn btn-outline-light1 px-4 me-sm-3" >공지사항 작성하기</a>
-									</div>
-							</c:otherwise>
-						</c:choose>
-							
-					</div>
-					
-					<table class="table table-hover" style="text-align: center; border: 1px solid #f3ecfd; padding-top: 30px;">
-						<thead>
-							<tr>
-								<th style="background-color: #f3ecfd; text-align: center;">번호</th>
-								<th style="background-color: #f3ecfd; text-align: center;">분류</th>
-								<th style="background-color: #f3ecfd; text-align: center;">제목</th>
-								<th style="background-color: #f3ecfd; text-align: center;">조회수</th>
-								<th style="background-color: #f3ecfd; text-align: center;">작성일</th>
-							</tr>
-						</thead>
-		
-						<tbody>
-						
-							<c:forEach var="notice"  items="${list }">	
-							<tr>
-								<td>${notice.rownum }</td>
-								<td>${notice.ntc_cat_name }</td>
-								<td><a href="noticeselect.action?ntc_num=${notice.ntc_num}">${notice.ntc_title }</a></td> <!-- 지금 여기서 제목을 넘기면 요청url 과 함께 btc_num 넘겨줘야 하는데 그게 안된다... -->
-								<td>${notice.ntc_hit }</td>
-								<td>${notice.ntc_wrt_date }</td>
-							</tr>
-							</c:forEach>			
-						</tbody>
-					</table>
-									<!-- 
-										<nav class="text-center">			
-										  <ul class="pagination" style="text-align: center;">
-										    <li>
-										      <a href="#" aria-label="Previous">
-										        <span aria-hidden="true">&laquo;</span>
-										      </a>
-										    </li>
-										    <li><a href="#">1</a></li>
-										    <li><a href="#">2</a></li>
-										    <li><a href="#">3</a></li>
-										    <li><a href="#">4</a></li>
-										    <li><a href="#">5</a></li>
-										    <li>
-										      <a href="#" aria-label="Next">
-										        <span aria-hidden="true">&raquo;</span>
-										      </a>
-										    </li>
-										  </ul>
-										</nav>
-									-->
-				</div>
-			</div>
-		</main>
-		<!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-	</body>
+<br><br>
+<div>
+	<div>
+		<div class="container">
+			<h2>전체 1:1 문의내역</h2>
+			<hr>
+		</div>
+		<div class="container">
+		    <button type="button" class="btn btn-default btn-sm"
+		    style="float: right"><span class="badge">${count }</span>
+			</button>
+	    </div>
+	</div>
+
+	<div class="row">
+	    <div class="col-md-2"></div>                                               
+	    <div class="card-body ms-4 col-md-8 container">
+			<table id="datatablesSimple">
+		        <thead>
+		            <tr>
+		                <th class="text-center" >글번호</th>
+		                <th class="text-center" >분류</th>	
+		                <th class="text-center" >제목</th>
+		                <th class="text-center" >작성자</th>
+		                <th class="text-center" >작성일자</th>
+		                <th class="text-center" >처리상태</th>
+		            </tr>
+		        </thead>
+		         
+		         <!-- dataTable-pagination -->
+		         
+		        <tbody class="text-center">
+		         
+					<c:forEach var="content" items="${list }">
+						<tr>
+							<td>${content.rn }</td>
+							<td>${content.qna_cat_name }</td>				
+							<td><a href="qnaboardreadadmin.action?qna_num=${content.qna_num}">${content.qna_title }</a></td>				
+							<td>${content.user_nickname }</td>				
+							<td>${content.qna_wrt_date }</td>				
+							<td>${content.qna_proc }</td>				
+						</tr>
+					</c:forEach>
+		             
+		         </tbody>
+			</table>
+		</div>
+		<div class="col-md-2"></div>
+    </div>
+</div>
+<!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

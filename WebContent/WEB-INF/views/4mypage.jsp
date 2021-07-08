@@ -11,11 +11,6 @@
 	{
 		adminStr = (String)session.getAttribute("adminStr");
 	}
-	else
-	{	
-		// 로그인 정보가 없을 때 메인 페이지로 이동!
-		out.println("<script>location.href=" + "'main.action'" + ";</script>");
-	}
 
 	String uniqueId = null;
 	
@@ -29,6 +24,12 @@
 	if(session.getAttribute("mynickName")!=null)
 	{
 		mynickName = (String)session.getAttribute("mynickName");
+	}
+	
+	else
+	{	
+		// 로그인 정보가 없을 때 메인 페이지로 이동!
+		out.println("<script>location.href=" + "'main.action'" + ";</script>");
 	}
 %>
 <!DOCTYPE html>
@@ -62,17 +63,24 @@
 		                	</div>
 		                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 		                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-		                        	<li class="nav-item "><a class="nav-link" href="SampleTest.jsp" >ONEDAY클래스&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-		                        	<li class="nav-item "><a class="nav-link" href="noticeboardlist.action">공지사항&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-		                        	<li class="nav-item dropdown ">
+		                        	<li class="nav-item "><a class="nav-link me-3" href="SampleTest.jsp" >ONEDAY클래스</a></li>		                        	
+		                        	<li class="nav-item dropdown me-3">
+		                                <a class="nav-link dropdown-toggle " id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">서비스</a>
+		                                <ul class="dropdown-menu dropdown-menu-end">
+		                                	<li><a class="dropdown-item" href="noticeboardlist.action">공지사항</a></li>
+		                                    <li><a class="dropdown-item" href="qnaboard.action">1:1 문의내역</a></li>
+		                                </ul>
+		                            </li>
+		                        	
+		                        	<li class="nav-item dropdown me-3">
 		                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>
 		                                <ul class="dropdown-menu dropdown-menu-end">
 		                                	<li><a class="dropdown-item " href="#">Q&A 게시판 </a></li>
 		                                    <li><a class="dropdown-item " href="#">자유게시판</a></li>
 		                                </ul>
 		                            </li>
-		                            <li class="nav-item"><a class="nav-link" href="loginform.action" >&nbsp;&nbsp;&nbsp;&nbsp;로그인&nbsp;&nbsp;&nbsp;&nbsp;</a></li>	
-		                            <li class="nav-item"><a class="nav-link" href="registerform.action" >회원가입&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+		                            <li class="nav-item"><a class="nav-link me-3" href="loginform.action" >로그인</a></li>	
+		                            <li class="nav-item"><a class="nav-link me-3" href="registerform.action" >회원가입</a></li>
 		                        </ul>
 		                    </div>
 		                </div>
@@ -92,17 +100,35 @@
 		                	</div>
 		                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 		                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-		                        	<li class="nav-item "><a class="nav-link" href="SampleTest.jsp" >ONEDAY클래스&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-		                        	<li class="nav-item "><a class="nav-link" href="noticeboardlist.action">공지사항&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-		                        	<li class="nav-item dropdown ">
+		                        	<li class="nav-item me-3"><a class="nav-link" href="SampleTest.jsp" >ONEDAY클래스</a></li>
+		                        	<!-- <li class="nav-item "><a class="nav-link" href="noticeboardlist.action">공지사항&nbsp;&nbsp;&nbsp;&nbsp;</a></li> -->
+		                        	
+		                        	<li class="nav-item dropdown me-3">
+		                                <a class="nav-link dropdown-toggle " id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">서비스</a>
+		                                <ul class="dropdown-menu dropdown-menu-end">
+		                                	<li><a class="dropdown-item " href="noticeboardlist.action">공지사항</a></li>
+											
+												<!-- 관리자가 아니라면 -->
+												<c:if test="${adminStr eq null}">
+													<li><a class="dropdown-item " href="qnaboard.action">1대1 문의</a></li>	
+												</c:if>
+												
+												<!-- 관리자라면 -->
+												<c:if test="${adminStr ne null}">
+													<li><a class="dropdown-item " href="qnaboardadmin.action">관리자 1:1 문의</a></li>
+												</c:if>
+		                                </ul>
+		                            </li>
+		                        	
+		                        	<li class="nav-item dropdown me-3">
 		                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>
 		                                <ul class="dropdown-menu dropdown-menu-end">
 		                                	<li><a class="dropdown-item " href="#">Q&A 게시판 </a></li>
 		                                    <li><a class="dropdown-item " href="#">자유게시판</a></li>
 		                                </ul>
 		                            </li>
-		                            <li class="nav-item dropdown">
-		                                <a class="nav-link dropdown-toggle " id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp; <%out.print(mynickName); %> 님</a>
+		                            <li class="nav-item dropdown me-3">
+		                                <a class="nav-link dropdown-toggle " id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><%out.print(mynickName); %> 님</a>
 		                                <ul class="dropdown-menu dropdown-menu-end">
 		                                    <li><a class="dropdown-item " href="mypage.action">마이페이지</a></li>
 		                                    <li><a class="dropdown-item " href="#">정보 수정</a></li>
@@ -110,7 +136,7 @@
 		                                    <li><a class="dropdown-item " href="logoutAction.action">로그아웃</a></li>
 		                                </ul>
 		                            </li>
-		                            <li class="nav-item "><a class="nav-link " href="SampleTest.jsp" >&nbsp;&nbsp;&nbsp;&nbsp;알림&nbsp;<i class="bi bi-bell-fill bold"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+		                            <li class="nav-item me-3"><a class="nav-link " href="SampleTest.jsp" >알림&nbsp;<i class="bi bi-bell-fill bold"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
 		                        </ul>
 		                    </div>
 		                </div>

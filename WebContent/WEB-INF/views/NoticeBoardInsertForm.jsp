@@ -4,6 +4,34 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
+
+<%  
+	String adminStr = null;
+
+	if(session.getAttribute("adminStr")!=null)
+	{
+		adminStr = (String)session.getAttribute("adminStr");
+		System.out.println(adminStr + "관리자확인");
+	}
+
+	String uniqueId = null;
+	
+	if(session.getAttribute("uniqueId")!=null)
+	{
+		uniqueId = (String)session.getAttribute("uniqueId");
+		
+		System.out.println(uniqueId + "고유식별번호");
+	}
+
+	String mynickName = null;
+
+	if(session.getAttribute("mynickName")!=null)
+	{
+		mynickName = (String)session.getAttribute("mynickName");
+		System.out.println(mynickName + "닉네임");
+	}
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +54,7 @@
 	<div class="container">
 		<div class="row">
 		<form method="post" action="noticeinsert.action">
-			<input type="hidden" name="uniq_id_num" value="-1"><!-- 나중에 세션에서 관리자번호값 받아와야한다. -->
+			<input type="hidden" id="uniq_id_num" name="uniq_id_num" value="<%=uniqueId %>">	<!-- 수정 완료 -->
 			<table class="table" style=" border: 1px solid #f3ecfd">
 				<thead>
 					<tr>
@@ -58,6 +86,7 @@
 		</form>
 		</div>
 	</div>
-
+	<!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
