@@ -15,11 +15,41 @@
         <meta name="author" content="" />
         <title>뮤하비 - 타성에 젖은 당신의 변화</title>
 
+		<link rel="stylesheet" href="./css/bootstrap-material-datetimepicker.css" />
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+		<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/ripples.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/material.min.js"></script>
+		<script type="text/javascript" src="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/js/material.min.js"></script>
+		<script type="text/javascript" src="js/npm2.js"></script>
+		<script type="text/javascript" src="./js/bootstrap-material-datetimepicker.js"></script>
+
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <link rel="stylesheet" href="css/mainpage0.css" />
         <link rel="stylesheet" href="css/register0.css" />
         <link rel="stylesheet" href="css/myPage0.css" />
+        
+        <script>
+			(function(i, s, o, g, r, a, m) {
+				i['GoogleAnalyticsObject'] = r;
+				i[r] = i[r] || function() {
+					(i[r].q = i[r].q || []).push(arguments)
+				}, i[r].l = 1 * new Date();
+				a = s.createElement(o),
+					m = s.getElementsByTagName(o)[0];
+				a.async = 1;
+				a.src = g;
+				m.parentNode.insertBefore(a, m)
+			})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+			ga('create', 'UA-60343429-1', 'auto');
+			ga('send', 'pageview');
+		</script>
+        
     </head>
     <body class="sb-nav-fixed">
         <nav class="navbar navbar-expand-lg navbar-dark">
@@ -64,7 +94,6 @@
 			  padding-bottom: 0.625rem;
 			}
              -->
-            
         	<div id="layoutSidenav" style="position:relative;">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -73,12 +102,9 @@
                         	<br><br><br>
                         	<div class="sb-sidenav-menu-heading fs-5 text-center bold"><h2><span class="text-muhobby">
             			    클래스 개설</span></h2><hr></div>
-                        	
                             <div class="sb-sidenav-menu-heading fs-5 text-center bold"><h4><a class="nav-link" href="#"><i class="bi bi-book"></i>&nbsp;강사 소개</h4></a></div>                            
 							<div class="sb-sidenav-menu-heading fs-5 text-center bold"><h4><a class="nav-link" href="#"><i class="bi bi-book"></i>&nbsp;클래스 소개</h4></a></div>                            
 							<div class="sb-sidenav-menu-heading fs-5 text-center bold"><h4><a class="nav-link" href="#"><i class="bi bi-book"></i>&nbsp;클래스 관리</h4></a></div>                            
-							
-                                                    
                         </div>
                     </div> 
                 </nav>
@@ -88,86 +114,73 @@
 	                            <div class="col-lg-8">
 	                                <div class="card shadow-lg border-0 rounded-lg mt-5">
 	                                    <div class="card-header">
-	                                    	<h2 class="text-center font-weight-light my-4 text-muhobby fw-bold">강사님 기본 정보 입력</h2>
+	                                    	<h2 class="text-center font-weight-light my-4 text-muhobby fw-bold">클래스 개설 정보</h2>
 	                                    </div>
 	                                    <div class="card-body">
 	                                        <form action="sign.do" method="post">
 	                                        	<br>
-	                                            <div class="row mb-3">
-	                                            <span class="mb-2 fw-bold normal">강사명</span>
-	                                                <div class="col-md-9">
-	                                                    <div class="form-floating mb-3 mb-md-0">
-	                                                        <input class="form-control" id="userId" name="userId"type="text"/>
-	                                                    </div>
-	                                                </div>
-	                                                <div class="col-md-3 d-grid mb-2">
-	                                                	<button type="button" class="text-center btn1 btn-primary btn-block"> 정보 변경 </button>
-	                                                </div>
-	                                            </div>
-	                                            <br>
-	                                            <div class="row mb-3">
-	                                            <span class="mb-2 fw-bold normal">계정 ID</span>
-	                                                <div class="col-md-9">
-	                                                    <div class="form-floating mb-3 mb-md-0">
-	                                                        <input class="form-control" id="userId" name="userId"type="text"/>
-	                                                    </div>
-	                                                </div>
-	                                                <div class="col-md-3 d-grid mb-2">
-	                                                	<button type="button" class="text-center btn1 btn-primary btn-block"> 정보 변경 </button>
-	                                                </div>
-	                                            </div>
-	                                            <br>
 	                                            
 	                                            <div class="row mb-3">
-	                                            <span class="mb-2 fw-bold normal">전화번호</span>
-	                                                <div class="col-md-9">
-	                                                    <div class="form-floating mb-3 mb-md-0">
-	                                                        <input class="form-control" id="userId" name="userId"type="text"/>
-	                                                    </div>
-	                                                </div>
-	                                                <div class="col-md-3 d-grid mb-2">
-	                                                	<button type="button" class="text-center btn1 btn-primary btn-block"> 정보 변경 </button>
-	                                                </div>
-	                                            </div>
-	                                        	<br>
-	                                            <div class="row mb-3">
-	                                            <span class="mb-2 fw-bold normal">계좌번호</span>
-	                                                <div class="col-md-9">
-	                                                    <div class="form-floating mb-3 mb-md-0">
-	                                                        <input class="form-control" id="userId" name="userId"type="text"/>
-	                                                    </div>
-	                                                </div>
-	                                                <div class="col-md-3 d-grid mb-2">
-	                                                	<button type="button" class="text-center btn1 btn-primary btn-block"> 정보 변경 </button>
-	                                                </div>
-	                                            </div>
-	
-	                                        	<br>
-	                                            <hr>
-	                                            <br>                                            
+													<span class="mb-2 fw-bold normal">9) 클래스 일정 추가 (필수) </span>
+														<span class="mb-2 fw-bold">수업 진행 날짜</span>
+														<div class="col-md-5">
+															<div class="form-floating mb-3 mb-md-0">
+																<input type="text" id="min-date" class="form-control floating-label">
+															</div>
+														</div>
+														<div class="col-md-3 d-grid">
+	                                                		<input class="form-control text-center" id="userId" name="userId" type="text" placeholder="수업 소요 시간"/>
+	                                                	</div>
+	                                                	
+	                                                	<div class="col-md-2 d-grid">
+	                                                		<input class="form-control text-center" id="userId" name="userId" type="text" placeholder="최소 모집 인원"/>
+	                                                	</div>
+	                                                	
+	                                                	<div class="col-md-2 d-grid">
+	                                                		<input class="form-control text-center" id="userId" name="userId" type="text" placeholder="최대 모집 인원"/>
+	                                                	</div>
+												</div>
+													
+	                                            <br>
+	                                            
+	                                           		<div class="row mb-3">
+														<span class="mb-2 fw-bold normal">10) 클래스 수강료 </span>
+															<div class="col-md-5">
+																<div class="form-floating mb-3 mb-md-0">
+																	<input type="text" id="min-date" class="form-control floating-label" placeholder="Start Date">
+																</div>
+															</div>
+														
+														<div class="col-md-2 d-grid mb-2">
+	                                                		<input class="form-control" id="userId" name="userId" type="text" placeholder="수업 소요 시간"/>
+	                                                	</div>
+	                                                	
+	                                                	<div class="col-md-2 d-grid mb-2">
+	                                                		<input class="form-control" id="userId" name="userId" type="text" placeholder="최소 모집 인원"/>
+	                                                	</div>
+	                                                	
+	                                                	<div class="col-md-2 d-grid mb-2">
+	                                                		<input class="form-control" id="userId" name="userId" type="text" placeholder="최대 모집 인원"/>
+	                                                	</div>
+	                                                	
+	                                                	<div class="col-md-3 d-grid mb-2">
+	                                                		<button type="button" class="text-center btn1 btn-primary btn-block"> 일정 추가 </button>
+	                                                	</div>
+													</div>
+												
+												<br />
 	                                            
 	                                            <div class="row mb-3">
-	                                            <span class="mb-2 fw-bold normal">강사 소개</span>
-	                                                <div class="col-md-12">
-	                                                    <div class="form-floating mb-3 mb-md-0">
-	                                                       <section>	
-	                                                       	   <textarea class="form-control" style= "height:300px" rows="3" placeholder="&#13;&#10; - 경력 &#13;&#10; - 재능 및 경험담 
-	                                                       	   &#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;"></textarea>
-	                                                       </section>
-	                                                    </div>
+	                                            	<div class="col-md-2">
 	                                                </div>
-	                                            </div>
-	                                            <br>
-	                                            <div class="row mb-3">
-	                                            	<div class="col-md-4">
+	                                                <div class="col-md-4 col-md-3 d-grid">
+	                                                	<a class="text-center btn1 btn-primary btn-block">이전 페이지</a>
 	                                                </div>
 	                                                <div class="col-md-4 d-grid">
+	                                                	<!-- <a class="text-center btn1 btn-primary btn-block" href="/sign.do">회원 가입</a> -->
 	                                                	<input class="text-center btn1 btn-primary btn-block" type="submit" id="loadBtn" value="다음 페이지" id="signup">
 	                                                </div>
-	                                                <div class="col-md-4">
-	                                                </div>
-	                                            </div>
-	                                            
+                                            	</div>
 	                                        </form>
 				                        </div>
 	                                </div>
@@ -180,9 +193,14 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>  <!-- 폰트 -->
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"></script>
-        <script src="js/simple-datatables.js""></script>
+        <script src="js/simple-datatables.js"></script>
         <script src="js/datatables-simple-demo.js"></script>
         <script src="js/scripts.js"></script>
-          
+        <script type="text/javascript">
+			$(document).ready(function()
+			{
+				$('#min-date').bootstrapMaterialDatePicker({ format : 'YYYY/MM/DD HH:mm', minDate : new Date() });
+			});
+		</script>  
     </body>
 </html>

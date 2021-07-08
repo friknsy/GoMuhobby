@@ -577,7 +577,7 @@
                                             <span class="mb-2 fw-bold">닉네임</span>
                                                 <div class="col-md-12 mb-2">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="userName" name="user_nickname" onkeyup="NickNameCheckFuntion();" type="text" placeholder="닉네임" maxlength="10"/>
+                                                        <input class="form-control" id="userName" name="user_nickname" onkeyup="NickNameCheckFuntion();" type="text" placeholder="닉네임" maxlength="15"/>
                                                         <label for="inputFirstName">닉네임 입력</label>
                                                     </div>
                                                 </div>

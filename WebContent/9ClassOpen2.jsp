@@ -229,7 +229,9 @@
 														</div>
 													</div>
 	                                            </div>
+	                                            
 	                                            <br>
+	                                            
 	                                            <div class="row mb-3">
 	                                            	<div class="col-md-2">
 	                                                </div>
@@ -241,7 +243,7 @@
 	                                                	<input class="text-center btn1 btn-primary btn-block" type="submit" id="loadBtn" value="다음 페이지" id="signup">
 	                                                </div>
                                             	</div>
-	                                            
+                                            	
 	                                        </form>
 				                        </div>
 	                                </div>
@@ -250,7 +252,7 @@
 	                            </div>
 	                        </div>
 	                    </div>
-        </div>
+        			</div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>  <!-- 폰트 -->
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"></script>
