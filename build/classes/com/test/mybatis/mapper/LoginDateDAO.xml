@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="com.test.register.LoginDateDAO"> 
+	
+	<!-- 로그인 시 로그인 내역을 추가하는 쿼리문 -->
+  	<insert id="loginhit">
+ 		INSERT INTO LOGIN VALUES(#{login_num}, systimestamp, #{uniq_id_num});
+ 	</insert>
+
+ </mapper>
