@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center mt-7">
-                        	<a class="btn btn-outline-light btn-lg px-4 me-sm-3" href="index.jsp">메인페이지로 가기</a>
+                        	<a class="btn btn-outline-light btn-lg px-4 me-sm-3" href="mainpage.action">메인페이지로 가기</a>
                         </div>
                     </div>
                 </div>

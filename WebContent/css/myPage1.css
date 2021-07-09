@@ -748,7 +748,7 @@ progress {
 }
 
 .first {
-	/* border: 1px solid blue; */ 
+	border: 1px solid blue;
     float: left;
     text-align: center;
     width:20%;
@@ -756,7 +756,7 @@ progress {
 }
 
 .second{
-	/* border: 1px solid blue; */ 
+	border: 1px solid blue; 
     float: left;
     margin-left: 5%;
     width:30%;
@@ -764,7 +764,7 @@ progress {
 }
 
 .third{
-	/* border: 1px solid blue; */
+	border: 1px solid blue;
     float: right;
     width:30%;
     box-sizing: border-box;

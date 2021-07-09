@@ -13,10 +13,4 @@ public class MypageConroller
 	{
 		return "WEB-INF/views/4mypage.jsp";
 	}
-	
-	@RequestMapping(value="/mypage.action",method=RequestMethod.GET)
-	public String hello(Model model)
-	{
-		return "WEB-INF/views/4mypage.jsp";
-	}
 }

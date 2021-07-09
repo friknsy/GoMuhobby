@@ -1,5 +1,8 @@
 package com.test.professor;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,15 +31,17 @@ public class ProfessorController
 	
 	// insertform 이동
 	@RequestMapping(value = "/professorinsertform.action", method = RequestMethod.GET)
-	public String ProfessorInsertForm(Model model)
+	public String ProfessorInsertForm(Model model, HttpServletRequest request)
 	{
 		// insertform 으로 이동할 때 셀렉트 박스 값 가져가야함 
-		// 나중에 추가
+		HttpSession session = request.getSession();
+
+		String uniqidnum = (String)session.getAttribute("uniqueId");
 		
 		// 이름값 미리 추가되어 있어야 해서 메소드로 값 넘김
 		// uniq_id_num 은 session 에서 받아온 값으로 수정해야한다. 
 		// 일단 고정값으로 넣어놨다.
-		String uniq_id_num = "123123140";
+		String uniq_id_num = uniqidnum;
 		
 		IProfessorDAO dao = sqlSession.getMapper(IProfessorDAO.class);
 		model.addAttribute("name", dao.searchName(uniq_id_num));
@@ -57,10 +62,13 @@ public class ProfessorController
 	
 	// updateform 이동
 	@RequestMapping(value = "/professorupdateform.action", method = RequestMethod.GET)
-	public String ProfessorUpdateForm(Model model)
+	public String ProfessorUpdateForm(Model model, HttpServletRequest request)
 	{
-		// 얘도 일단 고정값으로 넘겼다.
-		String uniq_id_num = "123123140";
+		HttpSession session = request.getSession();
+
+		String uniqidnum = (String)session.getAttribute("uniqueId");
+		
+		String uniq_id_num = uniqidnum;
 		
 		IProfessorDAO dao = sqlSession.getMapper(IProfessorDAO.class);
 		model.addAttribute("read", dao.read());

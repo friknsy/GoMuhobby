@@ -19,9 +19,6 @@ public class QA_answerController
 	@Autowired
 	private SqlSession sqlSession;
 	
-		
-	
-	
 	// insertform
 	@RequestMapping(value = "/qa_answerinsertform.action", method = RequestMethod.GET)
 	public String QA_answerInsertForm(HttpServletRequest request, Model model)
@@ -45,24 +42,15 @@ public class QA_answerController
 	}
 	
 	
-		// delete action
-		@RequestMapping (value = "qa_answerdelete.action", method = RequestMethod.GET)
-		public String QA_answerDelete(QA_answerDTO a)
-		{
-			
-			IQA_answerDAO dao = sqlSession.getMapper(IQA_answerDAO.class);
-			
-			dao.remove(a);
-			
-			return "redirect:qa_forum.action";
-			
-		}
+	// delete action
+	@RequestMapping (value = "qa_answerdelete.action", method = RequestMethod.GET)
+	public String QA_answerDelete(QA_answerDTO a)
+	{
+		IQA_answerDAO dao = sqlSession.getMapper(IQA_answerDAO.class);
 		
+		dao.remove(a);
 		
-		
-	
-	
-	
-	
+		return "redirect:qa_forum.action";
+	}
 	
 }

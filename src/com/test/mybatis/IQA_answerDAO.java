@@ -8,6 +8,5 @@ public interface IQA_answerDAO
 	public int add(QA_answerDTO a);
 	public int remove(QA_answerDTO a);
 	public int count(int qa_forum_code);
-	
-	
+	public String answercheck(String qa_answ_code);
 }

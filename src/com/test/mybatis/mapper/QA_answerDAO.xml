@@ -23,12 +23,10 @@
  	<!-- 게시물 작성 -->
  	<insert id="add" >
     INSERT INTO QA_FORUM_ANSWER(QA_ANSW_CODE,QA_FORUM_CODE, UNIQ_ID_NUM,QA_ANSW_CONTENT)
-	VALUES(QA_FORUM_ANSW_SEQ.NEXTVAL,#{qa_forum_code},20152172, #{qa_answ_content})
+	VALUES(QA_FORUM_ANSW_SEQ.NEXTVAL,#{qa_forum_code},#{uniq_id_num}, #{qa_answ_content})
     </insert>
     
- 	
- 	
- 	<!-- 게시물 삭제 -->
+ 	<!-- 게시물 삭제 --> 
  	<delete id="remove">
  		DELETE
 		FROM QA_FORUM_ANSWER
@@ -40,8 +38,14 @@
  		SELECT COUNT(QA_ANSW_CODE)
 		FROM QA_ANSWERVIEW
 		WHERE QA_FORUM_CODE=#{qa_forum_code}
-		
  	</select>
- 	
+	
+	<!-- 자신이 답변한 게시글 확인 -->
+ 	<select id="answercheck" resultType="String">
+ 		SELECT UNIQ_ID_NUM
+		FROM QA_FORUM_ANSWER
+		WHERE QA_ANSW_CODE = #{qa_answ_code}
+	<!-- qa_answ_code 가 하나가 아님.. -->
+ 	</select>
  	
  </mapper>

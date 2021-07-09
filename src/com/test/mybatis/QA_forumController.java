@@ -1,6 +1,7 @@
 package com.test.mybatis;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-
-
-
 
 @Controller
 public class QA_forumController
@@ -26,11 +23,8 @@ public class QA_forumController
 	{
 		String result = "";
 		
-		
-		
 		IQA_forumDAO dao = sqlSession.getMapper(IQA_forumDAO.class);
 			
-		
 		model.addAttribute("qlist", dao.qlist());
 		
 		result = "/WEB-INF/views/QA_forumList.jsp";
@@ -43,6 +37,9 @@ public class QA_forumController
 	public String QA_forumRead(HttpServletRequest request, Model model)
 	{
 		String qa_forum_code = request.getParameter("qa_forum_code");
+				
+		
+		HttpSession session = request.getSession();
 		
 		IQA_forumDAO dao1 = sqlSession.getMapper(IQA_forumDAO.class);
 		IQA_answerDAO dao2 = sqlSession.getMapper(IQA_answerDAO.class);
@@ -51,10 +48,18 @@ public class QA_forumController
 		/* 주의 */ int Test = Integer.parseInt(qa_forum_code);
 		
 		dao1.updateHit(qa_forum_code);
+		/* dao2.answercheck(qa_answ_code); */
 		
 		model.addAttribute("qread", dao1.qread(qa_forum_code));
 		model.addAttribute("read", dao2.read(qa_forum_code));
 		
+
+		String result = dao1.forumcheck(qa_forum_code);		
+		
+		if(result != null)
+		{
+			session.setAttribute("forumcheck", result + "");
+		}
 		
 		// 채택된 답변이 있는 지 확인 -> count(selectcode>0)인 것을 받아온다. 
 		model.addAttribute("select",dao3.select(Test));

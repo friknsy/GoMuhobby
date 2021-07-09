@@ -29,7 +29,7 @@ public class LoginController
 		return "/WEB-INF/views/2login.jsp";
 	}
 	
-	// 로그인 클릭 시 로그인 폼 반환
+	// 로그인 클릭 시 홈페이지 폼 반환
 	@RequestMapping(value = "/mainpage.action", method = RequestMethod.GET)
 	public String tomain()
 	{	

@@ -14,5 +14,5 @@ public interface IQA_forumDAO
 	public int updateHit(String qa_forum_code);
 	public int qcount();
 	public int qbkm(QA_forumDTO q);
-	
+	public String forumcheck(String qa_forum_code);
 }

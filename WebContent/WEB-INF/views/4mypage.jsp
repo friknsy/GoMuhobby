@@ -29,7 +29,7 @@
 	else
 	{	
 		// 로그인 정보가 없을 때 메인 페이지로 이동!
-		out.println("<script>location.href=" + "'main.action'" + ";</script>");
+		out.println("<script>location.href=" + "'mainpage.action'" + ";</script>");
 	}
 %>
 <!DOCTYPE html>
@@ -210,6 +210,9 @@
 								        	<img class="rounded-circle mt-4" src="images/default.png" width="200px" height="200px">
 								        </div>
 								        <div class="second sb-sidenav-menu-heading fs-5 h4 ms-12 mt-3 bold" style="width:60%; height: 100%">
+								        <div class="col-md-4 col-md-3 d-grid">
+                                        	<a class="text-center btn1 btn-primary btn-block" href="professorinsertform.action">이전 페이지</a>
+                                        </div>
 								        	<%out.print(mynickName); %> ( jeongjun96 ) 🥇 <br><br>
 								        	<div class="h6 bold" style="width:100%" >나의 관심사</div>
 								        	<div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">

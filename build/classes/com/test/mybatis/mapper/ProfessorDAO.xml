@@ -18,7 +18,7 @@
  	SELECT P_INFO_NUM, UNIQ_ID_NUM, MUSIC_CAT_CODE, P_ACCOUNT, P_SCHOOL, P_MAJOR, P_CAREER, P_DOC, P_DATE
 	, U_NAME, MUSIC_CAT_LARGE, MUSIC_CAT_MEDIUM, MUSIC_CAT_SMALL
 	FROM PROFVIEW
-	WHERE UNIQ_ID_NUM=123123140
+	WHERE UNIQ_ID_NUM = #{uniq_id_num}
 	<!-- Session getAttribute 하기 -->
 	
  </select>
@@ -55,7 +55,7 @@
  <delete id="remove">
  	DELETE
 	FROM PROF_INFO
-	WHERE UNIQ_ID_NUM=9495
+	WHERE UNIQ_ID_NUM = #{uniq_id_num}
  	<!-- Session getAttribute 하기 -->
  	
  </delete>

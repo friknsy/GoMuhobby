@@ -2,12 +2,20 @@ package com.test.mybatis;
 
 public class QA_forumDTO
 {
+	// 주요 속성 구성
 	private String rn, qa_forum_code, qa_forum_title, qa_forum_content, qa_forum_wrt_date;
-	private String user_nickname;
+	private String user_nickname, uniq_id_num;
+	
+	// getter / setter
+	public String getUniq_id_num()
+	{
+		return uniq_id_num;
+	}
+	public void setUniq_id_num(String uniq_id_num)
+	{
+		this.uniq_id_num = uniq_id_num;
+	}
 	private int qa_forum_hit, bkm_count;
-	
-	
-	
 	
 	public String getRn()
 	{

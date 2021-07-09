@@ -24,7 +24,7 @@
  	<!-- 게시물 작성 -->
  	<insert id="qadd" >
     INSERT INTO QA_FORUM(QA_FORUM_CODE, UNIQ_ID_NUM, QA_FORUM_TITLE, QA_FORUM_CONTENT)
-    VALUES(QA_FORUM_SEQ.NEXTVAL, 20152172, #{qa_forum_title}, #{qa_forum_content})
+    VALUES(QA_FORUM_SEQ.NEXTVAL, #{uniq_id_num}, #{qa_forum_title}, #{qa_forum_content})
     </insert>
     
  	<!-- 게시물 수정 -->
@@ -60,4 +60,12 @@
     INSERT INTO QA_BOOKMARK(QA_BKM_CODE, UNIQ_ID_NUM,QA_FORUM_CODE)
 	VALUES(QA_BOOKMARK_SEQ.NEXTVAL, 20152172, #{qa_forum_code})
     </insert>
+    
+    
+    <select id="forumcheck" resultType="String">
+ 		SELECT UNIQ_ID_NUM
+		FROM QA_FORUM
+		WHERE QA_FORUM_CODE = #{qa_forum_code}
+ 	</select>
+ 	
  </mapper>

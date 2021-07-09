@@ -8,6 +8,34 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath(); 	
 %>
+
+<%  
+	String adminStr = null;
+
+	if(session.getAttribute("adminStr")!=null)
+	{
+		adminStr = (String)session.getAttribute("adminStr");
+		System.out.println(adminStr + "관리자확인");
+	}
+
+	String uniqueId = null;
+	
+	if(session.getAttribute("uniqueId")!=null)
+	{
+		uniqueId = (String)session.getAttribute("uniqueId");
+		
+		System.out.println(uniqueId + "고유식별번호");
+	}
+
+	String mynickName = null;
+
+	if(session.getAttribute("mynickName")!=null)
+	{
+		mynickName = (String)session.getAttribute("mynickName");
+		System.out.println(mynickName + "닉네임");
+	}
+%>
+
 <%
 	
 	// 아래 두개는 같은 코드다.
@@ -126,43 +154,100 @@
 
 
 <!-- 맨 위 상단 바 -->
-<nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container px-5 mt-2 mb-2">
-        <div style="text-align: left;">
-			<a href="SampleTest.jsp"><img src="images/muhobbytext3.png" width="200px" height="40px"></a>
-		</div>
-		<!-- <a class="navbar-brand" href="SampleTest.jsp">M U H O B B Y</a> -->
-		<div class="input-group ms-4">
-        	<input class="form-control" type="text" placeholder="통합 검색"  aria-describedby="btnNavbarSearch" />
-        	<button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="bi bi-search"></i></button>
-    	</div>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">	
-            	<li class="nav-item"><a class="nav-link" href="SampleTest.jsp" >ONEDAY클래스&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-            	<li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                    	<li><a class="dropdown-item" href="#">Q&A 게시판</a></li>
-                        <li><a class="dropdown-item" href="#">자유게시판</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp;박정준 님</a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">마이페이지</a></li>
-                        <li><a class="dropdown-item" href="#">정보 수정</a></li>
-                        <li><hr></li>
-                        <li><a class="dropdown-item" href="#">로그아웃</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="SampleTest.jsp" >&nbsp;&nbsp;&nbsp;&nbsp;알림&nbsp;<i class="bi bi-bell-fill"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                <!-- <li class="nav-item"><a class="nav-link" href="SampleTest.jsp" >&nbsp;&nbsp;&nbsp;&nbsp;로그인&nbsp;&nbsp;&nbsp;&nbsp;</a></li> -->
-                <!-- <li class="nav-item"><a class="nav-link" href="SampleTest.jsp" >로그아웃</a></li> -->
-                <!-- <li class="nav-item"><a class="nav-link" href="SampleTest.jsp" >마이페이지&nbsp;&nbsp;&nbsp;&nbsp;</a></li> -->
-            </ul>
-        </div>
-    </div>
-</nav>
+            <c:choose>
+            	<c:when test="${mynickName eq null}">
+		            <nav class="navbar navbar-expand-lg navbar-dark">
+		                <div class="container px-5 mt-2">
+		                    <div>
+								<a href="mainpage.action"><img src="images/muhobbytext3.png" width="200px" height="40px"></a>
+							</div>
+							<!-- <a class="navbar-brand" href="SampleTest.jsp">M U H O B B Y</a> -->
+							<div class="input-group ms-4">
+		                    	<input class="form-control" type="text" placeholder="통합 검색"  aria-describedby="btnNavbarSearch" />
+		                    	<button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="bi bi-search"></i></button>
+		                	</div>
+		                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+		                        	<li class="nav-item "><a class="nav-link me-3" href="SampleTest.jsp" >ONEDAY클래스</a></li>		                        	
+		                        	<li class="nav-item dropdown me-3">
+		                                <a class="nav-link dropdown-toggle " id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">서비스</a>
+		                                <ul class="dropdown-menu dropdown-menu-end">
+		                                	<li><a class="dropdown-item" href="noticeboardlist.action">공지사항</a></li>
+		                                    <li><a class="dropdown-item" href="qnaboard.action">1:1 문의내역</a></li>
+		                                </ul>
+		                            </li>
+		                        	
+		                        	<li class="nav-item dropdown me-3">
+		                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>
+		                                <ul class="dropdown-menu dropdown-menu-end">
+		                                	<li><a class="dropdown-item " href="#">Q&A 게시판 </a></li>
+		                                    <li><a class="dropdown-item " href="#">자유게시판</a></li>
+		                                </ul>
+		                            </li>
+		                            <li class="nav-item"><a class="nav-link me-3" href="loginform.action" >로그인</a></li>	
+		                            <li class="nav-item"><a class="nav-link me-3" href="registerform.action" >회원가입</a></li>
+		                        </ul>
+		                    </div>
+		                </div>
+		            </nav>
+	            </c:when>
+	            
+	            <c:otherwise>
+		            <nav class="navbar navbar-expand-lg navbar-dark">
+		                <div class="container px-5 mt-2">
+		                    <div>
+								<a href="mainpage.action"><img src="images/muhobbytext3.png" width="200px" height="40px"></a>
+							</div>
+							<!-- <a class="navbar-brand" href="SampleTest.jsp">M U H O B B Y</a> -->
+							<div class="input-group ms-4">
+		                    	<input class="form-control" type="text" placeholder="통합 검색"  aria-describedby="btnNavbarSearch" />
+		                    	<button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="bi bi-search"></i></button>
+		                	</div>
+		                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+		                        	<li class="nav-item me-3"><a class="nav-link" href="SampleTest.jsp" >ONEDAY클래스</a></li>
+		                        	<!-- <li class="nav-item "><a class="nav-link" href="noticeboardlist.action">공지사항&nbsp;&nbsp;&nbsp;&nbsp;</a></li> -->
+		                        	
+		                        	<li class="nav-item dropdown me-3">
+		                                <a class="nav-link dropdown-toggle " id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">서비스</a>
+		                                <ul class="dropdown-menu dropdown-menu-end">
+		                                	<li><a class="dropdown-item " href="noticeboardlist.action">공지사항</a></li>
+											
+												<!-- 관리자가 아니라면 -->
+												<c:if test="${adminStr eq null}">
+													<li><a class="dropdown-item " href="qnaboard.action">1대1 문의</a></li>	
+												</c:if>
+												
+												<!-- 관리자라면 -->
+												<c:if test="${adminStr ne null}">
+													<li><a class="dropdown-item " href="qnaboardadmin.action">관리자 1:1 문의</a></li>
+												</c:if>
+		                                </ul>
+		                            </li>
+		                        	
+		                        	<li class="nav-item dropdown me-3">
+		                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>
+		                                <ul class="dropdown-menu dropdown-menu-end">
+		                                	<li><a class="dropdown-item " href="#">Q&A 게시판 </a></li>
+		                                    <li><a class="dropdown-item " href="#">자유게시판</a></li>
+		                                </ul>
+		                            </li>
+		                            <li class="nav-item dropdown me-3">
+		                                <a class="nav-link dropdown-toggle " id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><%out.print(mynickName); %> 님</a>
+		                                <ul class="dropdown-menu dropdown-menu-end">
+		                                    <li><a class="dropdown-item " href="mypage.action">마이페이지</a></li>
+		                                    <li><a class="dropdown-item " href="#">정보 수정</a></li>
+		                                    <li><hr></li>
+		                                    <li><a class="dropdown-item " href="logoutAction.action">로그아웃</a></li>
+		                                </ul>
+		                            </li>
+		                            <li class="nav-item me-3"><a class="nav-link " href="SampleTest.jsp" >알림&nbsp;<i class="bi bi-bell-fill bold"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+		                        </ul>
+		                    </div>
+		                </div>
+		            </nav>
+            	</c:otherwise>
+            </c:choose>
 
 <div class="container">
 	<br><br>
@@ -175,8 +260,8 @@
 		<form action="professorinsert.action" method="post" enctype="multipart/form-data">
 		
 		<!-- 일단 고정값으로 넣어놨다. -->
-		<input type="hidden" id="uniq_id_num" name="uniq_id_num" value="123123140">
-		
+			<input type="hidden" id="uniq_id_num" name="uniq_id_num" value="<%=uniqueId %>">
+			
 			<table class="table">
 				<tr>
 					<th>강사 이름</th>
@@ -240,9 +325,7 @@
 				<tr>
 					<th>경력</th>
 					<td>
-						<textarea rows="5" cols="" id="p_career" name="p_career"
-						style="width: 70%; text-align: left;">
-						</textarea>
+						<textarea rows="5" cols="" id="p_career" name="p_career" style="width: 70%;"></textarea>
 					</td>
 				</tr>	
 				<tr>
