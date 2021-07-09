@@ -4,30 +4,6 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath(); 	
 %>
-
-<%  
-	String adminStr = null;
-
-	if(session.getAttribute("adminStr")!=null)
-	{
-		adminStr = (String)session.getAttribute("adminStr");
-	}
-
-	String uniqueId = null;
-	
-	if(session.getAttribute("uniqueId")!=null)
-	{
-		uniqueId = (String)session.getAttribute("uniqueId");	
-	}
-
-	String mynickName = null;
-
-	if(session.getAttribute("mynickName")!=null)
-	{
-		mynickName = (String)session.getAttribute("mynickName");
-	}
-%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,104 +41,94 @@
 	
 </style>
 
+<script type="text/javascript">
+	
+	$(function()
+	{
+		//alert($("#music_cat_small").val());
+		
+		
+		// 음악 카테고리 소분류가 null 이라면 표시Ⅹ
+		if ( $("#music_cat_small").val()=="")
+		{
+			$("#small").css("display","none");
+			
+		}
+		
+		// 등록된 강사 정보가 없을 때
+		if ( $("#u_name").val()=="" )
+		{
+			$("#table").empty();
+			$("#none").html("<br><br><b>등록된 강사 정보가 없습니다.</b>");
+			$("#button").html('등록하기');
+		}
+		
+		// 등록/수정 버튼을 클릭했을 때
+		$("#button").click(function()
+		{
+			//alert("테스트");
+			//alert($("#u_name").val())
+			
+			// 등록된 강사 정보가 없을 때
+			if ( $("#u_name").val()=="" )
+			{
+				// 등록
+				$(location).attr("href", "professorinsertform.action");
+			}
+			else 
+			{	
+				// 수정
+				$(location).attr("href", "professorupdateform.action");	
+			}
+			
+		});
+		
+		
+	});
+
+</script>
+
 </head>
 <body>
 
 <!-- 맨 위 상단 바 -->
-            <c:choose>
-            	<c:when test="${mynickName eq null}">
-		            <nav class="navbar navbar-expand-lg navbar-dark">
-		                <div class="container px-5 mt-2">
-		                    <div>
-								<a href="mainpage.action"><img src="images/muhobbytext3.png" width="200px" height="40px"></a>
-							</div>
-							<!-- <a class="navbar-brand" href="SampleTest.jsp">M U H O B B Y</a> -->
-							<div class="input-group ms-4">
-		                    	<input class="form-control" type="text" placeholder="통합 검색"  aria-describedby="btnNavbarSearch" />
-		                    	<button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="bi bi-search"></i></button>
-		                	</div>
-		                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-		                        	<li class="nav-item "><a class="nav-link me-3" href="SampleTest.jsp" >ONEDAY클래스</a></li>		                        	
-		                        	<li class="nav-item dropdown me-3">
-		                                <a class="nav-link dropdown-toggle " id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">서비스</a>
-		                                <ul class="dropdown-menu dropdown-menu-end">
-		                                	<li><a class="dropdown-item" href="noticeboardlist.action">공지사항</a></li>
-		                                    <li><a class="dropdown-item" href="qnaboard.action">1:1 문의내역</a></li>
-		                                </ul>
-		                            </li>
-		                        	
-		                        	<li class="nav-item dropdown me-3">
-		                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>
-		                                <ul class="dropdown-menu dropdown-menu-end">
-		                                	<li><a class="dropdown-item " href="#">Q&A 게시판 </a></li>
-		                                    <li><a class="dropdown-item " href="#">자유게시판</a></li>
-		                                </ul>
-		                            </li>
-		                            <li class="nav-item"><a class="nav-link me-3" href="loginform.action" >로그인</a></li>	
-		                            <li class="nav-item"><a class="nav-link me-3" href="registerform.action" >회원가입</a></li>
-		                        </ul>
-		                    </div>
-		                </div>
-		            </nav>
-	            </c:when>
-	            
-	            <c:otherwise>
-		            <nav class="navbar navbar-expand-lg navbar-dark">
-		                <div class="container px-5 mt-2">
-		                    <div>
-								<a href="mainpage.action"><img src="images/muhobbytext3.png" width="200px" height="40px"></a>
-							</div>
-							<!-- <a class="navbar-brand" href="SampleTest.jsp">M U H O B B Y</a> -->
-							<div class="input-group ms-4">
-		                    	<input class="form-control" type="text" placeholder="통합 검색"  aria-describedby="btnNavbarSearch" />
-		                    	<button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="bi bi-search"></i></button>
-		                	</div>
-		                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-		                        	<li class="nav-item me-3"><a class="nav-link" href="SampleTest.jsp" >ONEDAY클래스</a></li>
-		                        	<!-- <li class="nav-item "><a class="nav-link" href="noticeboardlist.action">공지사항&nbsp;&nbsp;&nbsp;&nbsp;</a></li> -->
-		                        	
-		                        	<li class="nav-item dropdown me-3">
-		                                <a class="nav-link dropdown-toggle " id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">서비스</a>
-		                                <ul class="dropdown-menu dropdown-menu-end">
-		                                	<li><a class="dropdown-item " href="noticeboardlist.action">공지사항</a></li>
-											
-												<!-- 관리자가 아니라면 -->
-												<c:if test="${adminStr eq null}">
-													<li><a class="dropdown-item " href="qnaboard.action">1대1 문의</a></li>	
-												</c:if>
-												
-												<!-- 관리자라면 -->
-												<c:if test="${adminStr ne null}">
-													<li><a class="dropdown-item " href="qnaboardadmin.action">관리자 1:1 문의</a></li>
-												</c:if>
-		                                </ul>
-		                            </li>
-		                        	
-		                        	<li class="nav-item dropdown me-3">
-		                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>
-		                                <ul class="dropdown-menu dropdown-menu-end">
-		                                	<li><a class="dropdown-item " href="#">Q&A 게시판 </a></li>
-		                                    <li><a class="dropdown-item " href="#">자유게시판</a></li>
-		                                </ul>
-		                            </li>
-		                            <li class="nav-item dropdown me-3">
-		                                <a class="nav-link dropdown-toggle " id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><%out.print(mynickName); %> 님</a>
-		                                <ul class="dropdown-menu dropdown-menu-end">
-		                                    <li><a class="dropdown-item " href="mypage.action">마이페이지</a></li>
-		                                    <li><a class="dropdown-item " href="#">정보 수정</a></li>
-		                                    <li><hr></li>
-		                                    <li><a class="dropdown-item " href="logoutAction.action">로그아웃</a></li>
-		                                </ul>
-		                            </li>
-		                            <li class="nav-item me-3"><a class="nav-link " href="SampleTest.jsp" >알림&nbsp;<i class="bi bi-bell-fill bold"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-		                        </ul>
-		                    </div>
-		                </div>
-		            </nav>
-            	</c:otherwise>
-            </c:choose>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container px-5 mt-2 mb-2">
+        <div style="text-align: left;">
+			<a href="SampleTest.jsp"><img src="images/muhobbytext3.png" width="200px" height="40px"></a>
+		</div>
+		<!-- <a class="navbar-brand" href="SampleTest.jsp">M U H O B B Y</a> -->
+		<div class="input-group ms-4">
+        	<input class="form-control" type="text" placeholder="통합 검색"  aria-describedby="btnNavbarSearch" />
+        	<button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="bi bi-search"></i></button>
+    	</div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">	
+            	<li class="nav-item"><a class="nav-link" href="SampleTest.jsp" >ONEDAY클래스&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+            	<li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                    	<li><a class="dropdown-item" href="#">Q&A 게시판</a></li>
+                        <li><a class="dropdown-item" href="#">자유게시판</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp;박정준 님</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">마이페이지</a></li>
+                        <li><a class="dropdown-item" href="#">정보 수정</a></li>
+                        <li><hr></li>
+                        <li><a class="dropdown-item" href="#">로그아웃</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="SampleTest.jsp" >&nbsp;&nbsp;&nbsp;&nbsp;알림&nbsp;<i class="bi bi-bell-fill"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                <!-- <li class="nav-item"><a class="nav-link" href="SampleTest.jsp" >&nbsp;&nbsp;&nbsp;&nbsp;로그인&nbsp;&nbsp;&nbsp;&nbsp;</a></li> -->
+                <!-- <li class="nav-item"><a class="nav-link" href="SampleTest.jsp" >로그아웃</a></li> -->
+                <!-- <li class="nav-item"><a class="nav-link" href="SampleTest.jsp" >마이페이지&nbsp;&nbsp;&nbsp;&nbsp;</a></li> -->
+            </ul>
+        </div>
+    </div>
+</nav>
 
 
 <div class="container">
@@ -171,55 +137,58 @@
 		<h2>강사 정보</h2>
 		<hr>
 	</div>
-	
+	<div id="none" class="continer" style="text-align: center;"></div>
 	<div class="container">
-		<table class="table">
+		<!-- 음악 카테고리 소분류 값을 제이쿼리에서 받을 수 있게 hidden 으로 숨김 -->
+		<input type="hidden" id="music_cat_small" value="${read.music_cat_small}">
+		<!-- 강사 이름값을 제이쿼리에서 받을 수 있게 hidden 으로 숨김 -->
+		<input type="hidden" id="u_name" value="${read.u_name }">
+		<table class="table" id="table">
 			<tr>
 				<th>강사 이름</th>
 				<td>
-					한혜림
+					${read.u_name }
 				</td>
 			</tr>
 			<tr>
 				<th>음악 카테고리</th>
-				<td>악기 > 피아노/건반</td>
+				<td>${read.music_cat_large } > ${read.music_cat_medium } <span id="small"> > ${read.music_cat_small }</span> </td>
 			</tr>
 			<tr>
 				<th>계좌번호</th>
-				<td>81024524295807</td>
+				<td>${read.p_account }</td>
 			</tr>	
 			<tr>
 				<th>학교명</th>
-				<td>동덕여자대학교</td>
+				<td>${read.p_school }</td>
 			</tr>	
 			<tr>
 				<th>전공</th>
-				<td>실용음악과</td>
+				<td>${read.p_major }</td>
 			</tr>	
 			<tr>
 				<th>경력</th>
-				<td>개인레슨 / 피아노 학원 레슨 경력 4년차
-					<br> 2017 홍대 롤링홀 공연
-					<br> 2018 ~ 2021 마크 실용음악학원 출강
+				<td><pre>${read.p_career }</pre>
 				</td>
 			</tr>	
 			<tr>
 				<th>자격증빙서류 첨부파일</th>
-				<td><span style="color: gray;"><i>미제출</i></span></td>
+				<td>${read.p_doc }</td>
 			</tr>	
 			<tr>
 				<th>등록일자</th>
-				<td>2021-07-06</td>
+				<td>${read.p_date }</td>
 			</tr>	
 		
 		</table>	
 		
 	</div>
 	<div style="float: right">
-		<button type="button" class="btn btn-outline-light btn-sm1">수정하기</button>
+		<button type="button" id="button" class="btn btn-outline-light btn-sm1">수정하기</button>
 	</div>
 
 </div>
+<br><br>
 
 
 </body>

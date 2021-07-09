@@ -15,6 +15,8 @@
 	<context:component-scan base-package="com.test.notice"/>
 	<context:component-scan base-package="com.test.qnaBoard"/>
 	<context:component-scan base-package="com.test.admin"/>
+	<context:component-scan base-package="com.test.professor"/>
+	<context:component-scan base-package="com.test.classmain"/>
 	
 	<bean id="localDataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver"></property>
