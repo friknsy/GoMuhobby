@@ -1,7 +1,7 @@
 //IMemberDAO.java
 // - 인터페이스
 
-package com.test.mybatis;
+package com.test.mybatis1;
 
 import java.util.ArrayList;
 

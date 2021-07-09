@@ -2,7 +2,7 @@
 //MemberDTO.java
 // - 데이터 저장 및 전송 전용 객체
 
-package com.test.mybatis;
+package com.test.mybatis1;
 
 public class MemberDTO
 {

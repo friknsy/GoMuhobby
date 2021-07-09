@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="com.test.mybatis.IQA_answerSelectDAO">
+    
+	
+ 	<!-- 게시물 작성 -->
+ 	<insert id="add" >
+    INSERT INTO QA_ANSWER_SELECTED(QA_SEL_CODE,QA_ANSW_CODE)
+	VALUES(QA_SEL_CODE_SEQ.NEXTVAL,#{qa_answ_code})
+    </insert>
+    
+ 	
+ 	
+ 	<!-- 게시물 삭제 -->
+ 	<delete id="remove">
+ 		DELETE
+		FROM QA_ANSWER_SELECTED
+		WHERE QA_SEL_CODE= #{qa_sel_code}
+ 	</delete>
+ 	
+ 	<!-- 채택된 여부 확인 0 or 1 -->
+ 	<select id="select"  resultType="java.lang.Integer">
+ 		SELECT COUNT(*)
+		FROM QA_ANSW_SELECTVIEW
+		WHERE QA_FORUM_CODE= #{qa_forum_code} AND QA_SEL_CODE > 0
+ 	</select>
+ 	
+ </mapper>

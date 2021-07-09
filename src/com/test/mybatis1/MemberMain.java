@@ -2,7 +2,7 @@
 // - 컨트롤러
 
 
-package com.test.mybatis;
+package com.test.mybatis1;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;

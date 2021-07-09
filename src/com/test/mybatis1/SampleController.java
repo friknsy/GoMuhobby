@@ -5,7 +5,7 @@
  * ---------------*/
 
 
-package com.test.mybatis;
+package com.test.mybatis1;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
