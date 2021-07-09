@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="com.test.professor.IProfessorDAO">
+
+ <!-- 강사 정보 전체 출력 -->	
+ <select id="list" resultType="com.test.professor.ProfessorDTO">
+ 	SELECT P_INFO_NUM, UNIQ_ID_NUM, MUSIC_CAT_CODE, P_ACCOUNT, P_SCHOOL, P_MAJOR, P_CAREER, P_DOC, P_DATE
+	, U_NAME, MUSIC_CAT_LARGE, MUSIC_CAT_MEDIUM, MUSIC_CAT_SMALL, USER_NICKNAME
+	FROM PROFVIEW
+ </select>
+ 
+ <!-- 해당 강사 정보 출력 -->
+ <select id="read" resultType="com.test.professor.ProfessorDTO">
+ 	SELECT P_INFO_NUM, UNIQ_ID_NUM, MUSIC_CAT_CODE, P_ACCOUNT, P_SCHOOL, P_MAJOR, P_CAREER, P_DOC, P_DATE
+	, U_NAME, MUSIC_CAT_LARGE, MUSIC_CAT_MEDIUM, MUSIC_CAT_SMALL
+	FROM PROFVIEW
+	WHERE UNIQ_ID_NUM=123123140
+	<!-- Session getAttribute 하기 -->
+	
+ </select>
+ 
+ <!-- 강사 이름 검색 -->
+ <select id="searchName" resultType="java.lang.String">
+ 	SELECT U_NAME
+	FROM MEMBER
+	WHERE UNIQ_ID_NUM=#{uniq_id_num}
+ 	<!-- Session getAttribute 하기 -->
+ 	
+ </select>
+ 
+ <!-- 강사 정보 입력 -->
+ <insert id="add">
+ 	INSERT INTO PROF_INFO(P_INFO_NUM, UNIQ_ID_NUM, MUSIC_CAT_CODE
+ 	, P_ACCOUNT, P_SCHOOL, P_MAJOR, P_CAREER, P_DOC)
+	VALUES(PROF_INFO_SEQ.NEXTVAL, #{uniq_id_num}, #{music_cat_code}
+	, #{p_account}, #{p_school}
+	, #{p_major}, #{p_career}, #{p_doc})
+ </insert>
+ 
+ <!-- 강사 정보 수정 -->
+ <update id="modify">
+ 	UPDATE PROF_INFO
+	SET MUSIC_CAT_CODE=#{music_cat_code}, P_ACCOUNT=#{p_account}
+	, P_SCHOOL=#{p_school}, P_MAJOR=#{p_major}, P_CAREER=#{p_career}, P_DOC=#{p_doc} 
+	WHERE UNIQ_ID_NUM=#{uniq_id_num}
+	<!-- Session getAttribute 하기 -->
+	
+ </update>
+ 
+ <!-- 강사 정보 삭제 -->
+ <delete id="remove">
+ 	DELETE
+	FROM PROF_INFO
+	WHERE UNIQ_ID_NUM=9495
+ 	<!-- Session getAttribute 하기 -->
+ 	
+ </delete>
+ 
+ <!-- 강사 카운트 -->
+ <select id="count">
+ 	SELECT COUNT(*)
+	FROM PROF_INFO
+ </select>
+ 
+ 
+ </mapper>
