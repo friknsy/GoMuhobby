@@ -101,7 +101,7 @@
 	<div>
 		<div style="float: left;"><h1>원데이 클래스</h1></div>
 		<div style="float: right;"">
-			<button type="button" class="btn btn-outline-light btn-sm1">클래스 개설하기</button></div>
+			<a type="button" class="btn btn-outline-light btn-sm1" href="classopen1.action">클래스 개설하기</a></div>
 		<div style="clear: both;"></div>
 		<hr>
 	</div>
@@ -172,7 +172,7 @@
   			<div class="card-body">
 	   			<div class="card-text">
 	   				<p style="text-align: right"><i class="bi bi-geo-alt-fill"></i> ${content.town_name }</p>
-	   				<a href="#"><p style="font-weight: bold; text-align: left">${content.c_title }</p></a>
+	   				<a href="onedayclassinfo.action"><p style="font-weight: bold; text-align: left">${content.c_title }</p></a>
 	   				<div>
 	   					<p style="font-weight: bold; color: red; text-align: left;">￦ ${content.c_price }
 	   					<small style="color: black; font-weight: normal;">/시간</small></p>

@@ -45,12 +45,6 @@
 	
 %>
 
-<% 
-	
-	
-	
-%>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -209,7 +203,7 @@
 					</ul>
 				</div>
 
-				<!-- 수정/삭제 버튼 -->
+				<!-- 수정/삭제 버튼  未完-->
 				<c:choose>
 					<c:when test="${forumcheck eq null }">
 						<div class="col-md-2 offset-md-4">
@@ -329,10 +323,6 @@
 					</c:choose>
 				</c:forEach>
 			
-				
-
-
-
 				<!-- 대댓글 -->
 				<%-- 
 				<c:forEach var="reply" items="${list_Reply}">

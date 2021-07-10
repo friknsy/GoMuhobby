@@ -67,7 +67,7 @@
 		                	</div>
 		                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 		                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-		                        	<li class="nav-item "><a class="nav-link me-3" href="SampleTest.jsp" >ONEDAY클래스</a></li>		                        	
+		                        	<li class="nav-item "><a class="nav-link me-3" href="classmain.action" >ONEDAY클래스</a></li>		                        	
 		                        	<li class="nav-item dropdown me-3">
 		                                <a class="nav-link dropdown-toggle " id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">서비스</a>
 		                                <ul class="dropdown-menu dropdown-menu-end">
@@ -106,7 +106,7 @@
 		                	</div>
 		                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 		                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-		                        	<li class="nav-item me-3"><a class="nav-link" href="SampleTest.jsp" >ONEDAY클래스</a></li>
+		                        	<li class="nav-item me-3"><a class="nav-link" href="classmain.action" >ONEDAY클래스</a></li>
 		                        	<!-- <li class="nav-item "><a class="nav-link" href="noticeboardlist.action">공지사항&nbsp;&nbsp;&nbsp;&nbsp;</a></li> -->
 		                        	
 		                        	<li class="nav-item dropdown me-3">

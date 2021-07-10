@@ -150,22 +150,6 @@
 																	<input type="text" id="min-date" class="form-control floating-label" placeholder="Start Date">
 																</div>
 															</div>
-														
-														<div class="col-md-2 d-grid mb-2">
-	                                                		<input class="form-control" id="userId" name="userId" type="text" placeholder="수업 소요 시간"/>
-	                                                	</div>
-	                                                	
-	                                                	<div class="col-md-2 d-grid mb-2">
-	                                                		<input class="form-control" id="userId" name="userId" type="text" placeholder="최소 모집 인원"/>
-	                                                	</div>
-	                                                	
-	                                                	<div class="col-md-2 d-grid mb-2">
-	                                                		<input class="form-control" id="userId" name="userId" type="text" placeholder="최대 모집 인원"/>
-	                                                	</div>
-	                                                	
-	                                                	<div class="col-md-3 d-grid mb-2">
-	                                                		<button type="button" class="text-center btn1 btn-primary btn-block"> 일정 추가 </button>
-	                                                	</div>
 													</div>
 												
 												<br />

@@ -211,7 +211,10 @@
 								        </div>
 								        <div class="second sb-sidenav-menu-heading fs-5 h4 ms-12 mt-3 bold" style="width:60%; height: 100%">
 								        <div class="col-lg-4 d-grid third">
-                                        	<a class="text-center btn1 btn-primary btn-block" href="professorinsertform.action">강사 정보 확인</a>
+								        	<form action="professor.action" method="GET">
+								        		<input type="hidden" id="uniq_id_num" name="uniq_id_num" value="<%=uniqueId %>">
+                                        		<button type="submit" class="text-center btn1 btn-primary btn-block">강사 정보 확인</button>
+                                        	</form>
                                         </div>
                                         	<br />
 								        	<%out.print(mynickName); %> ( jeongjun96 ) 🥇 <br><br>

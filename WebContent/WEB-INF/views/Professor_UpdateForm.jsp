@@ -4,6 +4,34 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath(); 	
 %>
+
+<%  
+	String adminStr = null;
+
+	if(session.getAttribute("adminStr")!=null)
+	{
+		adminStr = (String)session.getAttribute("adminStr");
+		System.out.println(adminStr + "관리자확인");
+	}
+
+	String uniqueId = null;
+	
+	if(session.getAttribute("uniqueId")!=null)
+	{
+		uniqueId = (String)session.getAttribute("uniqueId");
+		
+		System.out.println(uniqueId + "고유식별번호");
+	}
+
+	String mynickName = null;
+
+	if(session.getAttribute("mynickName")!=null)
+	{
+		mynickName = (String)session.getAttribute("mynickName");
+		System.out.println(mynickName + "닉네임");
+	}
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -119,7 +147,7 @@
 	<div class="container">
 		<form action="professorupdate.action" method="post">
 		<!-- 일단 고정값으로 넣어놨다. -->
-		<input type="hidden" id="uniq_id_num" name="uniq_id_num" value="123123140">
+		<input type="hidden" id="uniq_id_num" name="uniq_id_num" value="<%=uniqueId %>">
 		<!-- 선택된 음악 카테고리 music_cat_code 의 value 값 -->
 		<input type="hidden" id="music_cat_code_value" value="${read.music_cat_code }">
 		

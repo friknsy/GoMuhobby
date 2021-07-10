@@ -19,12 +19,16 @@ public class ProfessorController
 	
 	// 강사 정보 확인
 	@RequestMapping(value = "/professor.action", method = RequestMethod.GET)
-	public String ProfessorInfo(Model model)
+	public String ProfessorInfo(Model model, HttpServletRequest request)
 	{
 		// 일단 DAO.xml에 임의로 uniq_id_num 값을 넣어놨음
 		IProfessorDAO dao = sqlSession.getMapper(IProfessorDAO.class);
-		  
-		model.addAttribute("read", dao.read());
+		
+		HttpSession session = request.getSession();
+		
+		String uniqidnum = (String)session.getAttribute("uniqueId");
+		
+		model.addAttribute("read", dao.read(uniqidnum));
 		
 		return "/WEB-INF/views/Professor_Read.jsp";
 	}
@@ -71,7 +75,7 @@ public class ProfessorController
 		String uniq_id_num = uniqidnum;
 		
 		IProfessorDAO dao = sqlSession.getMapper(IProfessorDAO.class);
-		model.addAttribute("read", dao.read());
+		model.addAttribute("read", dao.read(uniq_id_num));
 		model.addAttribute("name", dao.searchName(uniq_id_num));
 		
 		return "/WEB-INF/views/Professor_UpdateForm.jsp";
