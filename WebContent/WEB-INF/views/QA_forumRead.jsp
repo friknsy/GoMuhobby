@@ -269,17 +269,20 @@
             	</c:otherwise>
             </c:choose>
             
+	<br><br>
 
 <div class="container">
-	<br><br>
-	<h1>Q&A</h1>
-	<article style="text-align: right;">
-	<a style=""  href="qa_forum.action" class="btn btn-outline-gray btn-sm1 pull-right">목록으로</a>
-	</article>
+
+	<div class="row">
+	<div class="col-lg-3">
+		<h1>Q&A</h1>
+	</div>
+	<div class="col-lg-6"></div>
+	<div class="col-lg-3 text-end">
+		<a style="text-align: right;"  href="qa_forum.action" class="btn btn-outline-light btn-sm1">목록으로</a>
+	</div>	
 	<hr>
 </div>
-
-<div class="container">
 		
 			<!-- 채택된 게 있나 받아온다. (1 or 0)  -->
 			<input type="hidden" value="${select}" id="select">
@@ -341,6 +344,7 @@
 	</div>
 </div>
 
+<br /><br />
 
 <div class="container">
 	<h2>답변</h2>

@@ -240,7 +240,7 @@
 							<tr>
 								<td>${notice.rownum }</td>
 								<td>${notice.ntc_cat_name }</td>
-								<td><a href="noticeselect.action?ntc_num=${notice.ntc_num}">${notice.ntc_title }</a></td> <!-- 지금 여기서 제목을 넘기면 요청url 과 함께 btc_num 넘겨줘야 하는데 그게 안된다... -->
+								<td><a href="noticeselect.action?ntc_num=${notice.ntc_num}" style="text-decoration: none;">${notice.ntc_title }</a></td> <!-- 지금 여기서 제목을 넘기면 요청url 과 함께 btc_num 넘겨줘야 하는데 그게 안된다... -->
 								<td>${notice.ntc_hit }</td>
 								<td>${notice.ntc_wrt_date }</td>
 							</tr>

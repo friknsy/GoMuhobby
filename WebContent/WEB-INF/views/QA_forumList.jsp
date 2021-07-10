@@ -80,7 +80,7 @@
 </head>
 <body>
 
-<!-- 맨 위 상단 바 -->
+			<!-- 맨 위 상단 바 -->
             <c:choose>
             	<c:when test="${mynickName eq null}">
 		            <nav class="navbar navbar-expand-lg navbar-dark">
@@ -177,20 +177,13 @@
 		            </nav>
             	</c:otherwise>
             </c:choose>
-<nav>            
+	<br><br>            
 <div>
 	<div>
 		<div class="container px-5 mt-2 mb-2" >
-			<br><br>
 			<h2>Q&A 게시판</h2>
 			<hr>
 		</div>
-		<div class="container px-5 mt-2 mb-2">
-		    <button type="button" style="float: right;"  
-			class="btn btn-outline-light btn-sm1" 
-			onclick="location.href='qa_foruminsertform.action'">
-			글쓰기</button>
-	    </div>
 	</div>
 <%-- <div class="container">
 	<table class="table table-bordered table-hover" style="text-align: center;">
@@ -224,7 +217,7 @@
 		
 	</table> --%>
 
-<div class="container px-5 mt-6 mb-2">  
+<div class="container px-5 mb-2">  
 	<div class="col-md-2 " ></div>                                       
 	    <div class="card-body ms-90 col-md-10 container">
 			<table id="datatablesSimple">
@@ -247,7 +240,7 @@
 					<c:forEach var="content" items="${qlist}">
 						<tr>
 							<td>${content.rn}</td>			
-							<td><a href="qa_forumread.action?qa_forum_code=${content.qa_forum_code}">${content.qa_forum_title }</a></td>				
+							<td><a href="qa_forumread.action?qa_forum_code=${content.qa_forum_code}" style="text-decoration: none;">${content.qa_forum_title }</a></td>				
 							<td>${content.user_nickname }</td>				
 							<td>${content.qa_forum_wrt_date }</td>				
 							<td>${content.qa_forum_hit }</td>
@@ -258,11 +251,15 @@
 		             
 		         </tbody>
 			</table>
-		</div>
-		<div class="col-md-2"></div>
+			<div class="container px-5 mt-2 mb-2">
+		    <button type="button" style="float: right;"  
+			class="btn btn-outline-light btn-sm1" 
+			onclick="location.href='qa_foruminsertform.action'">
+			글쓰기</button>
+	    </div>
+		</div>		
     </div>
 </div>
-</nav>
 <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

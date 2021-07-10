@@ -82,7 +82,7 @@
 		                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>
 		                                <ul class="dropdown-menu dropdown-menu-end">
 		                                	<li><a class="dropdown-item" href="qa_forum.action">Q&A 게시판 </a></li>
-		                                    <li><a class="dropdown-item" href="qa_forum.action">자유게시판</a></li>
+		                                    <li><a class="dropdown-item" href="fflist.action">자유게시판</a></li>
 		                                </ul>
 		                            </li>
 		                            <li class="nav-item"><a class="nav-link me-3" href="loginform.action" >로그인</a></li>	
@@ -129,8 +129,8 @@
 		                        	<li class="nav-item dropdown me-3">
 		                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>
 		                                <ul class="dropdown-menu dropdown-menu-end">
-		                                	<li><a class="dropdown-item " href="#">Q&A 게시판 </a></li>
-		                                    <li><a class="dropdown-item " href="#">자유게시판</a></li>
+		                                	<li><a class="dropdown-item " href="qa_forum.action">Q&A 게시판 </a></li>
+		                                    <li><a class="dropdown-item " href="fflist.action">자유게시판</a></li>
 		                                </ul>
 		                            </li>
 		                            <li class="nav-item dropdown me-3">

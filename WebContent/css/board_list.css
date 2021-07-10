@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+
+@font-face 
+{
+  font-family: muhobbyfont;	
+  src: url("../fonts/muhobby.ttf") format("truetype");
+}
+
+.container
+{
+   min-width: 1024px;
+   padding-top: 1rem;
+   border-color: #dee2e6;
+   padding-left: 50px
+}
+
+.ffHeader
+{
+	border-top: 3px solid black;
+	border-bottom: 1px solid black;
+}
+
+.header
+{
+	font-weight: bold;
+}
+
+.no, .title, .writer, .writer, .date, .viewCount, .recomm
+{
+	display: inline-block;
+	height: 35px;
+	line-height: 35px;
+	text-align: center;
+}
+
+.no
+{
+	width: 8%;
+}
+
+.title
+{
+	width: 50%;
+}
+
+.writer
+{
+	width: 10%;
+}
+
+.date
+{
+	width: 10%;
+}
+
+.viewCount
+{
+	width: 10%;
+}
+
+.recomm
+{
+	width: 10%;
+}
+
+.content
+{
+	overflow: hidden;
+}
+
+.contentTitle
+{
+	display: inline-block;
+	padding-left: 10px;
+	text-align: left;
+	max-width: 80%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.titleLeft
+{
+	text-align: left;
+}
+
+.ffContents
+{
+	border-bottom: 1px solid black;
+	line-height: 35px;
+	height: 35px;
+}
+
+.page-item.active .page-link 
+{
+	z-index: 1;
+	color: #fff;
+	background-color: #c7c9d7 ;
+	border-color: #c7c9d7 ;
+}
+
+#title
+{
+	margin: 25px;
+}
+
+h2 {
+	font-weight: bold;
+	letter-spacing: 5px;
+	margin-top:20px;
+}
+
+.header-title
+{
+	padding-top: 1rem;
+	border-color: #ddd;
+	border-bottom: solid 1px #000000e0;
+}
+
+
+
+ul
+{
+	padding-inline-start: 0px;
+}
+
+#cmtCount
+{
+	padding-left: 5px;
+}

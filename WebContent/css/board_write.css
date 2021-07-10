@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+@font-face {
+  /* font-family가 지정된 속성에 ttf 파일이 모두 적용됨. */
+  font-family: muhobbyfont;	
+  /* 나는 WebContent에 fonts 폴더 만들고 파일 넣어뒀음. */
+  src: url("../fonts/muhobby.ttf") format("truetype");
+}
+#footer 
+{
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   padding: 15px 0;
+   text-align: center;
+}
+.container
+{
+   min-width: 1024px;
+   padding-top: 1rem;
+   border-color: #dee2e6;
+   padding-left: 50px
+}
+
+.header-title
+{
+	border-color: #dee2e6;
+	border-bottom: solid 1px #000000e0;
+}
+
+.required
+{
+   color: red;
+   vertical-align: super;
+   font-size: 18px;
+}
+.resize
+{
+   resize: none;
+}
+
+.category
+{
+   width: 120px;
+}
+
+
+.err1, .err2
+{
+   color: red;
+   display: none;
+   font-weight: bold;
+}

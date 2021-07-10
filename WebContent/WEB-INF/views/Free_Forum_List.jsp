@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
-	String cp = request.getContextPath(); 	
+	String cp = request.getContextPath();
 %>
 
 <%  
@@ -11,18 +11,16 @@
 	if(session.getAttribute("adminStr")!=null)
 	{
 		adminStr = (String)session.getAttribute("adminStr");
-	}
-	else
-	{	
-		// 로그인 정보가 없을 때 메인 페이지로 이동!
-		out.println("<script>location.href=" + "'main.action'" + ";</script>");
+		System.out.println(adminStr + "관리자확인");
 	}
 
 	String uniqueId = null;
 	
 	if(session.getAttribute("uniqueId")!=null)
 	{
-		uniqueId = (String)session.getAttribute("uniqueId");	
+		uniqueId = (String)session.getAttribute("uniqueId");
+		
+		System.out.println(uniqueId + "고유식별번호");
 	}
 
 	String mynickName = null;
@@ -30,57 +28,41 @@
 	if(session.getAttribute("mynickName")!=null)
 	{
 		mynickName = (String)session.getAttribute("mynickName");
+		System.out.println(mynickName + "닉네임");
 	}
 %>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>QnABoard_List_Admin.jsp</title>
-
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>Blog Post - Start Bootstrap Template</title>
+
 <!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="<%=cp %>/assets/favicon.ico" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+	rel="stylesheet" />
+
 <!-- Core theme CSS (includes Bootstrap)-->
-<link href="<%=cp %>/css/mainpage.css" rel="stylesheet" />
-<link href="<%=cp %>/css/myPage1.css" rel="stylesheet" />
+<link href="css/mainpage.css" rel="stylesheet" />
+
+<!-- 자유게시판  -->
+<link rel="stylesheet" href="<%=cp%>/css/board_list.css">
+
+<!-- Font Awesome 5 -->
+<link rel='stylesheet'
+	href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-<!-- 부트스트랩 css -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> --> 
-
-<!-- 제이쿼리 script -->
-<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-	
-<!-- 부트스트랩 script -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-
-<!-- 부트스트랩 script -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<%-- <script type="text/javascript" src="<%=cp%>/js/simple-datatables.js"></script> --%>
-<script src="js/simple-datatables.js""></script>
-<script src="js/datatables-simple-demo.js"></script>
-
-<style type="text/css">
-	
-	table
-	{
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-</style>
-
-</head>
-<body>
-
+			</head>
+			<body>
 			<!-- 맨 위 상단 바 -->
             <c:choose>
             	<c:when test="${mynickName eq null}">
@@ -101,15 +83,17 @@
 		                                <a class="nav-link dropdown-toggle " id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">서비스</a>
 		                                <ul class="dropdown-menu dropdown-menu-end">
 		                                	<li><a class="dropdown-item" href="noticeboardlist.action">공지사항</a></li>
-		                                    <li><a class="dropdown-item" href="qnaboard.action">1:1 문의내역</a></li>
+		                                	<c:if test="${uniqueId ne null}">
+												<li><a class="dropdown-item" href="qnaboard.action">1:1 문의내역</a></li>	
+											</c:if>
 		                                </ul>
 		                            </li>
 		                        	
 		                        	<li class="nav-item dropdown me-3">
 		                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>
 		                                <ul class="dropdown-menu dropdown-menu-end">
-		                                	<li><a class="dropdown-item " href="#">Q&A 게시판 </a></li>
-		                                    <li><a class="dropdown-item " href="#">자유게시판</a></li>
+		                                	<li><a class="dropdown-item" href="qa_forum.action">Q&A 게시판 </a></li>
+		                                    <li><a class="dropdown-item" href="fflist.action">자유게시판</a></li>
 		                                </ul>
 		                            </li>
 		                            <li class="nav-item"><a class="nav-link me-3" href="loginform.action" >로그인</a></li>	
@@ -156,14 +140,14 @@
 		                        	<li class="nav-item dropdown me-3">
 		                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>
 		                                <ul class="dropdown-menu dropdown-menu-end">
-		                                	<li><a class="dropdown-item " href="#">Q&A 게시판 </a></li>
-		                                    <li><a class="dropdown-item " href="#">자유게시판</a></li>
+		                                	<li><a class="dropdown-item " href="qa_forum.action">Q&A 게시판 </a></li>
+		                                    <li><a class="dropdown-item " href="fflist.action">자유게시판</a></li>
 		                                </ul>
 		                            </li>
 		                            <li class="nav-item dropdown me-3">
 		                                <a class="nav-link dropdown-toggle " id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><%out.print(mynickName); %> 님</a>
 		                                <ul class="dropdown-menu dropdown-menu-end">
-		                                    <li><a class="dropdown-item " href="mypage.action">마이페이지</a></li>
+		                                    <li><a class="dropdown-item " href="mypageform.action">마이페이지</a></li>
 		                                    <li><a class="dropdown-item " href="#">정보 수정</a></li>
 		                                    <li><hr></li>
 		                                    <li><a class="dropdown-item " href="logoutAction.action">로그아웃</a></li>
@@ -176,58 +160,78 @@
 		            </nav>
             	</c:otherwise>
             </c:choose>
-            
-<br><br>
-<div>
-	<div>
-		<div class="container">
-			<h2>전체 1:1 문의내역</h2>
-			<hr>
-		</div>
-		<div class="container">
-		    <button type="button" class="btn btn-default btn-sm"
-		    style="float: right"><span class="badge">${count }</span>
-			</button>
-	    </div>
-	</div>
 
-	<div class="row">
-	    <div class="col-md-2"></div>                                               
-	    <div class="card-body ms-4 col-md-8 container">
-			<table id="datatablesSimple">
-		        <thead>
-		            <tr>
-		                <th class="text-center" >글번호</th>
-		                <th class="text-center" >분류</th>	
-		                <th class="text-center" >제목</th>
-		                <th class="text-center" >작성자</th>
-		                <th class="text-center" >작성일자</th>
-		                <th class="text-center" >처리상태</th>
-		            </tr>
-		        </thead>
-		         
-		         <!-- dataTable-pagination -->
-		         
-		        <tbody class="text-center">
-		         
-					<c:forEach var="content" items="${list }">
-						<tr>
-							<td>${content.rn }</td>
-							<td>${content.qna_cat_name }</td>				
-							<td><a href="qnaboardreadadmin.action?qna_num=${content.qna_num} " style="text-decoration: none;">${content.qna_title }</a></td>				
-							<td>${content.user_nickname }</td>				
-							<td>${content.qna_wrt_date }</td>				
-							<td>${content.qna_proc }</td>				
-						</tr>
-					</c:forEach>
-		             
-		         </tbody>
-			</table>
+	<div class="container">
+		<div class="header header-title">
+			<h2 style="width: 100%" class="h2 bold">자유게시판</h2>
 		</div>
-		<div class="col-md-2"></div>
-    </div>
-</div>
-<!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+		<br>
+		<br>
+
+
+
+		<!-- 게시판 헤더 시작 -->
+		<div class="ffHeader">
+			<div class="header no">No</div>
+			<div class="header title">제목</div>
+			<div class="header writer">작성자</div>
+			<div class="header date">작성일</div>
+			<div class="header viewCount">조회수</div>
+			<div class="header recomm">북마크수</div>
+		</div>
+
+	
+		<!-- 게시판 게시물 리스트 시작 -->
+		<c:forEach var="list" items="${list}">
+			<div class="ffContents">
+				<div class="content no">${list.f_forum_code}</div>
+				<div class="content title titleLeft">
+					<div class="contentTitle">
+						<a class="contentLink" href="ffread.action?f_forum_code=${list.f_forum_code}" style="text-decoration: none;">${list.f_forum_title }</a>
+					</div>
+				</div>
+				<div class="content writer">${list.user_nickname}</div>
+				<div class="content date">${list.f_forum_wrt_date}</div>
+				<div class="content viewCount">${list.f_forum_hit}</div>
+				<div class="content recomm">${list.f_forum_state}</div>
+			</div>
+		</c:forEach>
+		<br>
+		<br>
+
+	
+	   <!-- 페이지네이션 시작 -->
+		<ul class="pagination pagination-sm justify-content-center">
+			<li class="page-item disabled"><a class="page-link text-dark"
+				href="#">Previous</a></li>
+			<c:forEach begin="1" end="9" step="1" var="pageNum">
+				<li
+					${page eq pageNum ? "class='page-item active'" : "class='page-item'" }
+					class="page-item active"><a class="page-link text-dark"
+					href="${pagenation }${pageNum }">${pageNum }</a></li>
+			</c:forEach>
+
+			<li class="page-item"><a class="page-link text-dark" href="#">Next</a></li>
+		</ul>
+
+		<!-- 글쓰기 버튼 -->
+		<div id="rightHeader" class="row align-items-end justify-content-end">
+			<button class="btn btn-secondary right"
+				onclick="javascript:location.href='<%=cp%>/ffinsertform.action'">
+				<span class="fa fa-pencil-square-o"></span>글쓰기
+			</button>
+		</div>
+		<br>
+	</div>
+	<!-- close div class="container" -->
+
+
+	<!-- Bootstrap core JS-->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Core theme JS-->
+	<script src="js/scripts.js"></script>
+
+
 </body>
 </html>

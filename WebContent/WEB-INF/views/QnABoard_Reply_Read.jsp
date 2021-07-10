@@ -300,8 +300,8 @@
 	<div style="text-align: center">	
 		<a href="qnaboardadmin.action" class="btn btn-outline-gray btn-sm1"
 		 style="float: left">목록으로</a>
-		<button type="button" class="btn deleteBtn btn-outline-light btn-sm1"
-		style="float: right" value="${reply.qna_answ_num }" >삭제</button>
+		<button type="button" class="ms-2 btn deleteBtn btn-outline-light btn-sm1"
+		style="float: right" value="${reply.qna_answ_num }">삭제</button>
 		&nbsp;&nbsp;
 		<button type="button" class="btn updateBtn btn-outline-light btn-sm1"
 		style="float: right" value="${reply.qna_answ_num }">수정</button>

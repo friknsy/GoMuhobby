@@ -245,7 +245,7 @@
 						<tr>
 							<td>${content.rn }</td>
 							<td>${content.qna_cat_name }</td>				
-							<td><a href="qnaboardread.action?qna_num=${content.qna_num}">${content.qna_title }</a></td>				
+							<td><a href="qnaboardread.action?qna_num=${content.qna_num}" style="text-decoration: none;">${content.qna_title }</a></td>				
 							<td>${content.user_nickname }</td>				
 							<td>${content.qna_wrt_date }</td>				
 							<td>${content.qna_proc }</td>				

@@ -1,0 +1,290 @@
+@charset "UTF-8";
+
+	@font-face 
+	{
+	  font-family: muhobbyfont;	
+	  src: url("../fonts/muhobby.ttf") format("truetype");
+	}
+			
+	.container
+	{
+	   min-width: 1024px;
+	   padding-top: 1rem;
+	   border-color: #dee2e6;
+	   padding-left: 50px
+	}
+	
+	.header
+	{
+		margin-bottom: 20px;
+	}
+	
+	.header-title
+	{
+		padding-top: 1rem;
+		border-color: #ddd;
+		border-bottom: solid 1px #000000e0;
+	}
+	
+	span.sub-title
+	{
+		font-size: medium;
+		letter-spacing: 0px;
+	}
+	
+	h2 
+	{
+		font-weight: bold;
+		letter-spacing: 5px;
+		margin-top:40px;
+	}
+
+/************** (본문 영역) **************/
+	
+	/* 제목 부분 */
+	.post-view
+	{
+		width: 100%;
+	    padding-right: 15px;
+	    padding-left: 15px;
+	    margin-right: auto;
+	    margin-left: auto;
+	}
+	
+	.post-head
+	{
+		padding-bottom: 10px;
+	}
+	.post-title
+	{
+		padding-bottom: 10px;
+	}
+	
+	.post-title-hr
+	{
+		border-top: 1px solid rgba(0,0,0,.2);
+		box-sizing: content-box;
+		height: 0;
+		overflow: visible;
+	}
+	
+	#modify-btn
+	{
+		margin-left: 10px;
+	}
+	
+	
+	/* 게시글 정보 */
+	.missing-info
+	{
+		border-style: none;
+	}
+	
+	.missing-info th
+	{
+		width: 19%;	
+		font-size: 18px;
+		font-weight: bold;
+	}
+	
+	.missing-info th, td
+	{
+		height: 50px;
+	}
+	
+	/* 게시글 작성자 정보 */
+	.writer-info
+	{
+		background-color: #dae4ed;
+		padding-left: 20px; 
+		width: 100%;
+		padding-bottom: 20px;
+	}
+	
+	.writer-info.row
+	{
+		margin-left: 0px;
+	}
+	.writer-info-title
+	{
+		font-weight: bold;
+		font-size: 18px;
+		padding-top: 15px;
+		padding-bottom: 15px;
+		
+	}
+
+	
+	
+/************* (글아래 신고/공유/추천 버튼) **********/
+	.post-footer
+	{
+		margin-top: 50px;
+		margin-bottom: 50px;
+		border-color: #ddd;
+		border-color: #ddd;
+		
+	}
+	
+	.post-footer .btn_report
+	{
+		border: 1px solid #D7625E;
+  		background-color: #D7625E;
+  		color: #fff;
+   	 	padding: 9px 10px;
+    	margin: 0 1px;
+    	border-radius: 2px;
+    	outline: none;
+    	overflow: visible;
+    	display: inline-block;
+	}
+	
+	.post-footer .post_share .share 
+	{
+	    width: 90px;
+	    left: 1px;
+	    margin: 1px 0 0 0;
+	}
+	
+	.fa 
+	{
+    	position: relative;
+	}
+
+	
+	.post-footer .btn_like
+	{
+		border: 1px solid #78AEBD;
+  		background-color: #78AEBD;
+  		color: #fff;
+   	 	padding: 9px 10px;
+    	margin: 0 1px;
+    	border-radius: 2px;
+    	outline: none;
+    	overflow: visible;
+    	border-color: #ddd;
+	}
+	
+	
+
+	.post_footer .btn_like .text 
+	{
+    	margin: 0 0 0 5px;
+	}
+
+/******************* (댓글 영역) *****************/
+		
+	#comment-form
+	{
+		margin-top: 70px;
+	}
+	
+	#comment-form textarea
+	{
+		resize: none;
+		border-color: #adb5bd !important;
+		background-color: #fff !important;
+		padding-left: 1.07143rem !important;
+    	padding-right: 1.07143rem !important;
+    	overflow: auto;
+    	display: block;
+	    width: 100%;
+	    padding: .375rem .75rem;
+	    font-size: 1rem;
+	    line-height: 1.5;
+	    color: #495057;
+	    background-color: #adb5bd;
+	    background-clip: padding-box;
+	    border: 1px solid ;
+	    border-radius: .25rem;
+	    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+	}
+	#comment-form textarea:focus 
+	{
+  	   color: #555;
+	}
+
+	.login-notice 
+	{
+		display: inline;
+		font-size: medium;
+	}
+
+	
+	#comment-form .word-num
+	{
+		color: #989898;
+		font-size: 14px;
+		font-weight: 500;
+		line-height: 20px;
+	}
+	
+	#comment-form .word-num #current-word
+	{
+		color: red;
+	}
+	
+	.comment-list-area
+	{
+		padding-top: 1rem !important;
+    	padding-bottom: 1rem !important;
+    	margin-bottom: 0.5rem !important;
+	}
+	
+	
+	
+	.comment-head
+	{
+		margin-bottom: 3rem!important;
+	}
+	
+	.comment
+	{
+		margin-bottom: 2.14286rem ;
+		display: -webkit-box;
+	    display: -ms-flexbox;
+	    display: flex;
+	    -webkit-box-align: start;
+	    -ms-flex-align: start;
+	    align-items: flex-start;
+	}
+	
+	.comment-date
+	{
+		margin-left: 0.71429rem;
+		color: #999;
+		font-size: 0.85714rem;
+		font-weight: 500;
+	}
+	
+	.comment-content
+	{
+		flex:1;
+	}
+	
+	.comment-writer
+	{
+		font-weight: 600 !important;
+		display: block;
+	}
+	
+	.comment-writer-date
+	{
+		display: inline-block;
+		align-items: flex-start;
+	}
+	
+	.comment-hr
+	{
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+		border-top: 1px solid rgba(0,0,0,.2);
+		box-sizing: content-box;
+		height: 0;
+		overflow: visible;
+	}
+	
+	.comment_modify, .comment_delete
+	{
+		height: 25px;
+	}
