@@ -36,50 +36,20 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>뮤하비 - 타성에 젖은 당신의 변화</title>
-
-		<link rel="stylesheet" href="./css/bootstrap-material-datetimepicker.css" />
-		<link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-		<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
-		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/ripples.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/material.min.js"></script>
-		<script type="text/javascript" src="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/js/material.min.js"></script>
-		<script type="text/javascript" src="js/npm2.js"></script>
-		<script type="text/javascript" src="./js/bootstrap-material-datetimepicker.js"></script>
-
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <link rel="stylesheet" href="css/mainpage0.css" />
-        <link rel="stylesheet" href="css/register0.css" />
-        <link rel="stylesheet" href="css/myPage0.css" />
-        
-        <script>
-			(function(i, s, o, g, r, a, m) {
-				i['GoogleAnalyticsObject'] = r;
-				i[r] = i[r] || function() {
-					(i[r].q = i[r].q || []).push(arguments)
-				}, i[r].l = 1 * new Date();
-				a = s.createElement(o),
-					m = s.getElementsByTagName(o)[0];
-				a.async = 1;
-				a.src = g;
-				m.parentNode.insertBefore(a, m)
-			})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-			ga('create', 'UA-60343429-1', 'auto');
-			ga('send', 'pageview');
-		</script>
-        
+        <link href="css/mainpage.css" rel="stylesheet" />
+        <link href="css/myPage1.css" rel="stylesheet" />
     </head>
-    <body class="sb-nav-fixed">
-       		<!-- 맨 위 상단 바 -->
+    <body>
+        	<!-- 맨 위 상단 바 -->
             <c:choose>
             	<c:when test="${mynickName eq null}">
 		            <nav class="navbar navbar-expand-lg navbar-dark">
@@ -177,103 +147,117 @@
             	</c:otherwise>
             </c:choose>
             <br>
-            <!--
-            .form-floating > .form-control:focus, .form-floating > .form-control:not(:placeholder-shown) {
-			  padding-top: 1.625rem;
-			  padding-bottom: 0.625rem;
-			}
-             -->
-        	<div id="layoutSidenav" style="position:relative;">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                        	<br><br><br>
-                        	<div class="sb-sidenav-menu-heading fs-5 text-center bold"><h2><span class="text-muhobby">
-            			    클래스 개설</span></h2><hr></div>
-                            <div class="sb-sidenav-menu-heading fs-5 text-center bold"><h4><a class="nav-link" href="#"><i class="bi bi-book"></i>&nbsp;강사 소개</h4></a></div>                            
-							<div class="sb-sidenav-menu-heading fs-5 text-center bold"><h4><a class="nav-link" href="#"><i class="bi bi-book"></i>&nbsp;클래스 소개</h4></a></div>                            
-							<div class="sb-sidenav-menu-heading fs-5 text-center bold"><h4><a class="nav-link" href="#"><i class="bi bi-book"></i>&nbsp;클래스 관리</h4></a></div>                            
+        <!-- Page content-->
+        <div class="container">
+            <div class="row">
+                <!-- Blog entries-->
+                <div class="col-lg-8">
+                    <!-- Featured blog post-->
+                    <div class="card mb-4">
+                        <a href="#"><img src="images/mic.jpg" style="width: 855px; height: 365px;"></a>
+                        <div class="card-body">
+                            <div class="small text-muted">January 1, 2021</div>
+                            <h2 class="card-title">하루만에 완성하는 폴킴쌤의 보컬연습 <a class="btn btn-outline-light btn-sm1">보컬</a> </h2>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
+                            <a class="btn btn-primary" href="#!">Read more →</a>
                         </div>
-                    </div> 
-                </nav>
+                    </div>
+                    <!-- Nested row for non-featured blog posts-->
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <!-- Blog post-->
+                            <div class="card mb-4">
+                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                                <div class="card-body">
+                                    <div class="small text-muted">January 1, 2021</div>
+                                    <h2 class="card-title h4">Post Title</h2>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
+                                    <a class="btn btn-primary" href="#!">Read more →</a>
+                                </div>
+                            </div>
+                            <!-- Blog post-->
+                            <div class="card mb-4">
+                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                                <div class="card-body">
+                                    <div class="small text-muted">January 1, 2021</div>
+                                    <h2 class="card-title h4">Post Title</h2>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
+                                    <a class="btn btn-primary" href="#!">Read more →</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <!-- Blog post-->
+                            <div class="card mb-4">
+                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                                <div class="card-body">
+                                    <div class="small text-muted">January 1, 2021</div>
+                                    <h2 class="card-title h4">Post Title</h2>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
+                                    <a class="btn btn-primary" href="#!">Read more →</a>
+                                </div>
+                            </div>
+                            <!-- Blog post-->
+                            <div class="card mb-4">
+                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                                <div class="card-body">
+                                    <div class="small text-muted">January 1, 2021</div>
+                                    <h2 class="card-title h4">Post Title</h2>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam.</p>
+                                    <a class="btn btn-primary" href="#!">Read more →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- Side widgets-->
+                <div class="col-lg-4">
+                    <!-- Search widget-->
+                    <div class="card mb-4">
+                        <div class="card-header">Search</div>
+                        <div class="card-body">
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                                <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Categories widget-->
+                    <div class="card mb-4">
+                        <div class="card-header">Categories</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <ul class="list-unstyled mb-0">
+                                        <li><a href="#!">Web Design</a></li>
+                                        <li><a href="#!">HTML</a></li>
+                                        <li><a href="#!">Freebies</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-6">
+                                    <ul class="list-unstyled mb-0">
+                                        <li><a href="#!">JavaScript</a></li>
+                                        <li><a href="#!">CSS</a></li>
+                                        <li><a href="#!">Tutorials</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Side widget-->
+                    <div class="card mb-4">
+                        <div class="card-header">Side Widget</div>
+                        <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+                    </div>
+                </div>
             </div>
-            <div class="container">
-	                        <div class="row justify-content-center">
-	                            <div class="col-lg-8">
-	                                <div class="card shadow-lg border-0 rounded-lg mt-5">
-	                                    <div class="card-header">
-	                                    	<h2 class="text-center font-weight-light my-4 text-muhobby fw-bold">클래스 개설 정보</h2>
-	                                    </div>
-	                                    <div class="card-body">
-	                                        <form action="sign.do" method="post">
-	                                        	<br>
-	                                            
-	                                            <div class="row mb-3">
-													<span class="mb-2 fw-bold normal">9) 클래스 일정 추가 (필수) </span>
-														<span class="mb-2 fw-bold">수업 진행 날짜</span>
-														<div class="col-md-5">
-															<div class="form-floating mb-3 mb-md-0">
-																<input type="text" id="min-date" class="form-control floating-label">
-															</div>
-														</div>
-														<div class="col-md-3 d-grid">
-	                                                		<input class="form-control text-center" id="userId" name="userId" type="text" placeholder="수업 소요 시간"/>
-	                                                	</div>
-	                                                	
-	                                                	<div class="col-md-2 d-grid">
-	                                                		<input class="form-control text-center" id="userId" name="userId" type="text" placeholder="최소 모집 인원"/>
-	                                                	</div>
-	                                                	
-	                                                	<div class="col-md-2 d-grid">
-	                                                		<input class="form-control text-center" id="userId" name="userId" type="text" placeholder="최대 모집 인원"/>
-	                                                	</div>
-												</div>
-													
-	                                            <br>
-	                                            
-	                                           		<div class="row mb-3">
-														<span class="mb-2 fw-bold normal">10) 클래스 수강료 </span>
-															<div class="col-md-5">
-																<div class="form-floating mb-3 mb-md-0">
-																	<input type="text" id="min-date" class="form-control floating-label" placeholder="Start Date">
-																</div>
-															</div>
-													</div>
-												
-												<br />
-	                                            
-	                                            <div class="row mb-3">
-	                                            	<div class="col-md-2">
-	                                                </div>
-	                                                <div class="col-md-4 col-md-3 d-grid">
-	                                                	<a class="text-center btn1 btn-primary btn-block" type="submit" id="loadBtn" id="signup" href="classopen2.action">이전 페이지</a>
-	                                                </div>
-	                                                <div class="col-md-4 d-grid">
-	                                                	<!-- <a class="text-center btn1 btn-primary btn-block" href="/sign.do">회원 가입</a> -->
-	                                                	<a class="text-center btn1 btn-primary btn-block" type="submit" id="loadBtn" id="signup" href="mainpage.action">다음 페이지</a>
-	                                                </div>
-                                            	</div>
-	                                        </form>
-				                        </div>
-	                                </div>
-	                                <br><br>
-	                                <br><br>
-	                            </div>
-	                        </div>
-	                    </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>  <!-- 폰트 -->
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"></script>
-        <script src="js/simple-datatables.js"></script>
-        <script src="js/datatables-simple-demo.js"></script>
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-        <script type="text/javascript">
-			$(document).ready(function()
-			{
-				$('#min-date').bootstrapMaterialDatePicker({ format : 'YYYY/MM/DD HH:mm', minDate : new Date() });
-			});
-		</script>  
     </body>
 </html>

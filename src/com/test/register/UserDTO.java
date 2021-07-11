@@ -11,8 +11,7 @@ public class UserDTO
 	, u_email
 	, u_join_date
 	, u_info
-	, u_photo
-	;
+	, u_photo;
 
 	public String getUniq_id_num()
 	{

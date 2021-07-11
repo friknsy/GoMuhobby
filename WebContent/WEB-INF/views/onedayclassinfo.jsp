@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
-String cp = request.getContextPath();
+	String cp = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -9,20 +9,16 @@ String cp = request.getContextPath();
 <meta charset="UTF-8">
 <title>클래스 상세페이지</title>
 
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery.min.js"></script>
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <style type="text/css">
 .effect {
 	position: relative;
 	display: inline;
 	overflow: hidden; /* 불필요한 부분 가리기 */
 	padding: 0px;
-}
+		}
 
 .effect:after {
 	position: absolute;
@@ -154,17 +150,11 @@ String cp = request.getContextPath();
 					});
 	//클립보드 복사
 </script>
+
 </head>
-<body>
-
+	<body>
 	네비바 넣는 위치
-
-
 	<!-- 클릭시 -->
-
-
-
-
 	<h1>원데이클래스</h1>
 
 	<div class="col-lg-2 pull-right">
@@ -174,16 +164,8 @@ String cp = request.getContextPath();
 				<button class="btn btn-default" type="button">Go!</button>
 			</span>
 		</div>
-		<!-- /input-group -->
-
 	</div>
-	<!-- /.col-lg-6 -->
-
-
-
-
 	<hr />
-
 	<h3>
 		하루만에 완성하는 폴킴쌤의 보컬연습<span class="label label-default">보컬</span>
 	</h3>
@@ -616,14 +598,6 @@ String cp = request.getContextPath();
 						href="https://disqus.com/?ref_noscript">comments powered by
 						Disqus.</a>
 				</noscript>
-	</div>
-
-
-
-
-
-
-
-
+		</div>
 </body>
 </html>

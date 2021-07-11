@@ -1,5 +1,0 @@
-이건 기존 실습내용인데 mybatisWork02 
-전반적인 흐름 예시를 위해 남겨두었다
-
-web.xml → dispatcher-servlet.xml → @Controller → @RequestMapping → mapper에 설정된대로 dao.list() 등 실행
-→ return 된 url로 이동

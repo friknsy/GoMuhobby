@@ -47,11 +47,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <link href="css/mainpage.css" rel="stylesheet" />
     </head>
-    
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
-        
-        
             <!-- 맨 위 상단 바 -->
             <c:choose>
             	<c:when test="${mynickName eq null}">
@@ -142,7 +139,7 @@
 		                                    <li><a class="dropdown-item " href="logoutAction.action">로그아웃</a></li>
 		                                </ul>
 		                            </li>
-		                            <li class="nav-item me-3"><a class="nav-link " href="SampleTest.jsp" >알림&nbsp;<i class="bi bi-bell-fill bold"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+		                            <li class="nav-item me-3"><a class="nav-link " href="#" >알림&nbsp;<i class="bi bi-bell-fill bold"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
 		                        </ul>
 		                    </div>
 		                </div>
@@ -196,12 +193,12 @@
                     <div class="row gx-5 align-items-center">
                         <div class="col-lg-6"><img class="img-fluid rounded mb-5 mb-lg-0" src="images/book2.jpg" style="width: 600px; height: 400px;"/></div>
                         <div class="col-lg-6">
-                            <h2 class="fw-bolder"><i class="bi bi-journal"></i> 자동완성형 포트폴리오</h2>
+                            <h2 class="fw-bolder"><i class="bi bi-pencil"></i> 원데이클래스</h2>
                             <br><br>
-                            <p class="lead fw-normal text-muted mb-0 fs-4">
-                            음악관련 분야에서 활동하는 회원들이 제공된 Form에
-							자신의 경력사항, 사진, 영상 등을 입력하면 면접 등
-							여러방면에서 활용할 수 있는 자신의 포트폴리오 페이지를 간편하게 만들 수 있다.</p>
+                            <p class="lead fw-normal text-muted mb-0 fs-4">페이지에서 열심히 활동을 하게 되면 일반계정에서 멘토계정으로(관리자의 승인을 받아) 전환할 수 있게 된다.
+										                             그 후 멘토는 원데이클래스를 개설해서 회원들로부터 신청을 받아 클래스를 운영할 수 있다. 
+																	이제 막 취미를 시작하려는 회원들이 부담없이 신청하고 수강할 수 있는 클래스이다. 
+							</p>
                         </div>
                     </div>
                 </div>
@@ -216,113 +213,14 @@
                     <div class="row gx-5 align-items-center">
                         <div class="col-lg-6 order-first order-lg-last"><img class="img-fluid rounded mb-5 mb-lg-0" src="images/piano.jpg" style="width: 600px; height: 400px;"/></div>
                         <div class="col-lg-6">
-                            <h2 class="fw-bolder"><i class="bi bi-pencil"></i> 취미생 대상 원데이클래스</h2>
-                            <br><br>
-                            <p class="lead fw-normal text-muted mb-0 fs-4">페이지에서 열심히 활동을 하게 되면 일반계정에서 멘토계정으로(관리자의 승인을 받아) 전환할 수 있게 된다.
-										                             그 후 멘토는 원데이클래스를 개설해서 회원들로부터 신청을 받아 클래스를 운영할 수 있다. 
-																	이제 막 취미를 시작하려는 회원들이 부담없이 신청하고 수강할 수 있는 클래스이다. 
-							</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <div class="py-4">
-            </div>
-            
-            <!-- 포트폴리오-->
-            <section class="py-5 bg-light rounded-3" id="scroll-target">
-                <div class="container px-5 my-5">
-                    <div class="row gx-5 align-items-center">
-                        <div class="col-lg-6"><img class="img-fluid rounded mb-5 mb-lg-0" src="images/book5.jpg" style="width: 600px; height: 400px;"/></div>
-                        <div class="col-lg-6">
                             <h2 class="fw-bolder"><i class="bi bi-people"></i> 커뮤니케이션을 위한 게시판</h2>
-                            <br><br>
+                            <br>
                             <p class="lead fw-normal text-muted mb-0">
-                            필요에 따라 자유게시판, 악기중고거래게시판, 영상게시판에서 활동할 수 있다.
-							게시판에서 활동을 활발하게 하게 되면 <옥타브> 라는 페이지 내 계정등급 포인트가 증가하고
-							그에 따라 홈페이지 이용 권한 범위가 넓어진다. (ex. 멘토계정전환)</p>
+                            음악에 관련된 정보를 공유하고 자신의 음악 지식을 나누며
+                            나아가 꾸준한 활동으로 누군가를 가르칠 수 있는 
+                            </p>
                         </div>
                     </div>
-                </div>
-            </section>
-            
-            <!-- 영상 게시판 미리보기 -->
-            <section class="py-5">
-                <div class="container px-5 my-5">
-                    <div class="row gx-5 justify-content-center">
-                        <div class="col-lg-8 col-xl-6">
-                            <div class="text-center">
-                                <h2 class="fw-bolder">인기 회원 영상</h2>
-                                <p class="lead fw-normal text-muted mb-5"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row gx-5 ">
-                        <div class="col-lg-4 mb-5 rounded-3">
-                            <div class="card h-100 shadow border-0">
-                                <video src="images/record1.mp4" style="width: 600; height: 350;" controls muted autoplay loop></video>
-                                <div class="card-body p-4">
-                                    <div class="badge bg-primary bg-gradient rounded-pill mb-2">New</div>
-                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">추억의 레코드 </h5></a>
-                                    <p class="card-text mb-0">추억의 올드 팝송 여행 ~ </p>
-                                </div>
-                                <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                                    <div class="d-flex align-items-end justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <img class="rounded-circle me-3" src="images/muhobbylogo.png" width="40px" height="40px"/>
-                                            <div class="small">
-                                                <div class="fw-bold">이유림</div>
-                                                <div class="text-muted">2021.06.09 · 3시간 전</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 mb-5 rounded-3">
-                            <div class="card h-100 shadow border-0">
-                                <video src="images/production.mp4" style="width: 600; height: 350;" controls muted autoplay loop></video>
-                                <div class="card-body p-4">
-                                    <div class="badge bg-primary bg-gradient rounded-pill mb-2">New</div>
-                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">미디/작곡 수업 받고 왔어요</h5></a>
-                                    <p class="card-text mb-0">한혜림 선생님 없던 재능까지 만들어 주시는 21세기 음악계의 헬렌 켈러..</p>
-                                </div>
-                                <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                                    <div class="d-flex align-items-end justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <img class="rounded-circle me-3" src="images/muhobbylogo.png" width="40px" height="40px"/>
-                                            <div class="small">
-                                                <div class="fw-bold">한혜림</div>
-                                                <div class="text-muted">2021.06.06 · 3일 전</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 mb-5 rounded-3">
-                            <div class="card h-100 shadow border-0">
-                                <video src="images/record2.mp4" style="width: 600; height: 350;" controls muted autoplay loop></video>
-                                <div class="card-body p-4">
-                                    <div class="badge bg-primary bg-gradient rounded-pill mb-2">New</div>
-                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">요즘 요가 하면서 틀어놔요</h5></a>
-                                    <p class="card-text mb-0">요가할 때 듣는 플레이 레코드</p>
-                                </div>
-                                <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                                    <div class="d-flex align-items-end justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <img class="rounded-circle me-3" src="images/muhobbylogo.png" width="40px" height="40px"/>
-                                            <div class="small">
-                                                <div class="fw-bold">이희주</div>
-                                                <div class="text-muted">2021.06.03 · 6일 전</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>    
                 </div>
             </section>
         </main>
@@ -347,6 +245,5 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-        
     </body>
 </html>

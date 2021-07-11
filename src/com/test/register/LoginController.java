@@ -29,7 +29,7 @@ public class LoginController
 		return "/WEB-INF/views/2login.jsp";
 	}
 	
-	// 로그인 클릭 시 홈페이지 폼 반환
+	// 홈페이지 폼 반환
 	@RequestMapping(value = "/mainpage.action", method = RequestMethod.GET)
 	public String tomain()
 	{	
@@ -63,7 +63,7 @@ public class LoginController
 		u.setU_pwd(u_pwd);
 		
 		// System.out.println(dao.idcheck(u_id) + "아이디 확인");		// 아이디가 있는 지 없는 지 0 or 1 반환
-		// System.out.println(dao.pwcheck(u) + "비밀번호 확인");			// 비밀번호가 맞는지 안 맞는지 0 or 1 반환
+		// System.out.println(dao.pwcheck(u) + "비밀번호 확인");		// 비밀번호가 맞는지 안 맞는지 0 or 1 반환
 		// System.out.println(dao.logincheck(u) + "닉네임 확인");		// 문자열 반환
 		
 		int idcheck = dao.idcheck(u_id);

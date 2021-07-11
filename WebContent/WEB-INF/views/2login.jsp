@@ -65,7 +65,7 @@
                     <div class="container">
                     	<br><br>
                     	<div class="text-center">
-							<a href="#"><img src="images/muhobby3.png" width="160px" height="180px"></a>
+							<a href="mainpage.action"><img src="images/muhobby3.png" width="160px" height="180px"></a>
 						</div>
                         <div class="row justify-content-center">
                             <div class="col-lg-7">
