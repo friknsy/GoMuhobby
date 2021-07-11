@@ -155,7 +155,7 @@
                     <div class="card mb-4">
                         <a href="#"><img src="images/mic.jpg" style="width: 855px; height: 365px;"></a>
                         <div class="card-body">
-                            <div class="small text-muted">January 1, 2021</div>
+                            <div class="small text-muted">박정아 강사님</div>
                             <h2 class="card-title">하루만에 완성하는 폴킴쌤의 보컬연습 <a class="ms-2 btn btn-outline-light btn-sm1">보컬</a> </h2>
                             <a class="btn btn-primary me-4" href="#!">상세정보</a>
                             <a class="btn btn-primary me-4" href="#!">후기</a>
@@ -218,11 +218,45 @@
                 <div class="col-lg-4">
                     <!-- Search widget-->
                     <div class="card mb-4">
-                        <div class="card-header">Search</div>
+                        <div class="card-header">강사님 소개</div>
                         <div class="card-body">
                             <div class="input-group">
-                                <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                                <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                                <div class="d-flex align-items-end justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <div class="well">
+				<h3>멘토소개</h3>
+
+				<div class="box"
+					style="background: #BDBDBD; width: 140px; height: 140px; border-radius: 70%; overflow: hidden; float: left; margin: 20px;">
+					<img class="profile" src="images/1.jpg" style="width: 100%; height: 100%; object-fit: cover;">
+				</div>
+				<br>
+
+
+				<!-- 별점 -->
+				<div
+					style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star2.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
+					<p
+						style="WIDTH: 80%; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star.gif) 0px 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 18px;">
+					</p>
+				</div>
+				
+				
+				<div style=" font-size: 30pt;">박정아 강사님</div>
+				<div style="">총 진행 회차 : 30회</div>
+				<div style="">총 후기 개수 : 30개</div>
+				
+				노래는 목으로만 부르지 않습니다. 두성, 흉성 등 다양한 스킬들의 차이를 알고 여러분께 가장 적합한
+				발성법을 가르쳐드리도록 하겠습니다. 노래는 재능의 영역이 아닙니다. 이제 저와 시작하시죠 <br> <span
+					class="glyphicon glyphicon-dashboard" aria-hidden="true">
+					진행시간 : 1시간 30분</span><br> <span class="glyphicon glyphicon-map-marker"
+					aria-hidden="true"> 장소 : 마포구 뮤뮤빌딩 4층</span><br> <span
+					class="glyphicon glyphicon-user" aria-hidden="true"> 모집인원 :
+					최대3명 최소1명</span><br> <span class="glyphicon glyphicon-user"
+					aria-hidden="true"> 수강료 : 40000원</span><br>
+			</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

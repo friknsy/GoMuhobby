@@ -129,7 +129,17 @@
 		                            <li class="nav-item dropdown me-3">
 		                                <a class="nav-link dropdown-toggle " id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><%out.print(mynickName); %> 님</a>
 		                                <ul class="dropdown-menu dropdown-menu-end">
-		                                    <li><a class="dropdown-item " href="mypageform.action">마이페이지</a></li>
+		                                	
+		                                	<!-- 관리자가 아니라면 -->
+											<c:if test="${adminStr eq null}">
+		                                    	<li><a class="dropdown-item " href="mypageform.action">마이페이지</a></li>
+		                                    </c:if>
+		                                    
+		                                    <!-- 관리자라면 -->
+		                                    <c:if test="${adminStr ne null}">
+		                                    	<li><a class="dropdown-item " href="adminpage.action">관리자 페이지</a></li>
+		                                    </c:if>	
+		                                    
 		                                    <li><a class="dropdown-item " href="#">정보 수정</a></li>
 		                                    <li><hr></li>
 		                                    <li><a class="dropdown-item " href="logoutAction.action">로그아웃</a></li>
