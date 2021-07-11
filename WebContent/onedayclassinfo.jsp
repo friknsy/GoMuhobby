@@ -146,8 +146,7 @@
             	</c:otherwise>
             </c:choose>
             <br>
-        <!-- Page content-->
-        <div class="container">
+	        <div class="container">
             <div class="row">
                 <!-- Blog entries-->
                 <div class="col-lg-8">
@@ -155,137 +154,283 @@
                     <div class="card mb-4">
                         <a href="#"><img src="images/mic.jpg" style="width: 855px; height: 365px;"></a>
                         <div class="card-body">
-                            <div class="small text-muted">박정아 강사님</div>
-                            <h2 class="card-title">하루만에 완성하는 폴킴쌤의 보컬연습 <a class="ms-2 btn btn-outline-light btn-sm1">보컬</a> </h2>
-                            <a class="btn btn-primary me-4" href="#!">상세정보</a>
-                            <a class="btn btn-primary me-4" href="#!">후기</a>
-                            <a class="btn btn-primary me-4" href="#!">QNA</a>
-                            <a class="btn btn-primary me-4" href="#!">변경 및 취소</a>
-                            
+                            <div class="small text-muted mt-2 mb-2" style="font-weight: bold;">박정아 강사님</div>
+                            <h2 class="card-title">하루만에 완성하는 정아 쌤의 보컬연습 <a class="ms-2 btn btn-outline-light btn-sm1">보컬</a> </h2>
+                            <a class="btn btn-primary me-4 mt-2" href="#!" style="color: #c79cf5;">상세정보</a>
+                            <a class="btn btn-primary me-4 mt-2" href="#!" style="color: #c79cf5;">후기</a>
+                            <a class="btn btn-primary me-4 mt-2" href="#!" style="color: #c79cf5;">QNA</a>
+                            <a class="btn btn-primary me-4 mt-2" href="#!" style="color: #c79cf5;">변경 및 취소</a>
+                        <br>
+                        <br>
+                        [변경 및 취소]<br>
+						개인 사정으로 인한 결석은 환불되지 않습니다.<br><br>
+						[환불 규정]<br>
+						1. 수업 2일 전 취소 : 100% 환불<br>
+						2. 수업 1일 전 취소 : 50% 환불<br>
+						3. 수업 당일 취소 : 환불불가
+                        
                         </div>
                     </div>
-                    <!-- Nested row for non-featured blog posts-->
+                    
+                    <hr>
+                    
                     <div class="row">
-                        <div class="col-lg-6">
-                            <!-- Blog post-->
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">January 1, 2021</div>
-                                    <h2 class="card-title h4">Post Title</h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                    <a class="btn btn-primary" href="#!">Read more →</a>
-                                </div>
-                            </div>
-                            <!-- Blog post-->
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">January 1, 2021</div>
-                                    <h2 class="card-title h4">Post Title</h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                    <a class="btn btn-primary" href="#!">Read more →</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <!-- Blog post-->
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">January 1, 2021</div>
-                                    <h2 class="card-title h4">Post Title</h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                    <a class="btn btn-primary" href="#!">Read more →</a>
-                                </div>
-                            </div>
-                            <!-- Blog post-->
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">January 1, 2021</div>
-                                    <h2 class="card-title h4">Post Title</h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam.</p>
-                                    <a class="btn btn-primary" href="#!">Read more →</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    	<div class="col-lg-12">
+	                    	<div class="card mb-4">
+	                        	<div class="card-header">클래스 소개글</div>
+	                        	<div class="card-body">
+									<a class="btn btn-primary me-4 mt-2 mb-2" href="#!" style="color: #c79cf5; border-color: #c79cf5; width: 200px;"># 이런점이 좋아요</a><br>                        	
+									1. 본인이 어떻게 노래 부르고 있는지 파악할 수 있어요<br>
+									2. 남들 앞에서 자신있게 노래 할 수 있어요<br>
+									3. 자신만의 목소리를 찾을 수 있어요<br><br>
+									
+									<a class="btn btn-primary me-4 mt-2 mb-2" href="#!" style="color: #c79cf5; border-color: #c79cf5; width: 200px;"># 이런분들께 추천해요</a><br>
+									1. 단기간에 축가를 완성하고 싶으신 분<br>
+									2. 특별한 날 완벽한 노래를 하고싶으신 분<br><br>
+									
+									<a class="btn btn-primary me-4 mt-2 mb-2" href="#!" style="color: #c79cf5; border-color: #c79cf5; width: 200px;">커리큘럼</a><br>
+									1. 노래를 통한 발성습관체크<br>
+									2. 학생 발성상태에 맞는 발음과 툴을 이용한 발성과 발음교정 및 트레이닝<br>
+									3. 노래 적용 으로 진행됩니다.^^<br><br>
+									
+									<a class="btn btn-primary me-4 mt-2 mb-2" href="#!" style="color: #c79cf5; border-color: #c79cf5; width: 200px;">준비물</a><br>
+									열심히 하고자 하는 마음가짐 최고의 목상태!<br><br>
+									
+									<a class="btn btn-primary me-4 mt-2 mb-2" href="#!" style="color: #c79cf5; border-color: #c79cf5; width: 200px;">유의 사항</a><br>
+									공동현관에서 연락주세요<br>
+	                        	</div>
+	                    	</div>
+	                    </div>
+	                    
+                    	<div class="col-lg-12">
+	                    	<div class="card mb-4">
+	                        	<div class="card-header">강사님 영상</div>
+	                        	<div class="card-body">
+	                        		<iframe width="821" height="460"
+										src="https://www.youtube.com/embed/Aq_gsctWHtQ"
+										title="YouTube video player" frameborder="0"
+										allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+										allowfullscreen>
+									</iframe>
+	                        	</div>
+	                    	</div>
+	                    </div>
+	                    
+	                    <div class="col-lg-12">
+	                    	<div class="card mb-4">
+	                        	<div class="card-header">찾아 오시는 길</div>
+	                        	<div class="card-body">
+	                        		<div id="map" style="width: 100%; height: 450px;"></div>
+
+									<script type="text/javascript"
+										src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0e943a4b910a88bd68a627159bd5111b&libraries=services"></script>
+									<script>
+										var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+										mapOption =
+										{
+											center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+											level : 3
+										// 지도의 확대 레벨
+										};
+					
+										// 지도를 생성합니다    
+										var map = new kakao.maps.Map(mapContainer, mapOption);
+					
+										// 주소-좌표 변환 객체를 생성합니다
+										var geocoder = new kakao.maps.services.Geocoder();
+					
+										// 주소로 좌표를 검색합니다
+										geocoder
+												.addressSearch(
+														'서울특별시 종로구 세종로 세종대로 172',
+														function(result, status)
+														{
+					
+															// 정상적으로 검색이 완료됐으면 
+															if (status === kakao.maps.services.Status.OK)
+															{
+					
+																var coords = new kakao.maps.LatLng(
+																		result[0].y, result[0].x);
+					
+																// 결과값으로 받은 위치를 마커로 표시합니다
+																var marker = new kakao.maps.Marker(
+																{
+																	map : map,
+																	position : coords
+																});
+					
+																// 인포윈도우로 장소에 대한 설명을 표시합니다
+																var infowindow = new kakao.maps.InfoWindow(
+																		{
+																			content : '<div style="width:150px;text-align:center;padding:6px 0;">강의진행장소</div>'
+																		});
+																infowindow.open(map, marker);
+					
+																// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+																map.setCenter(coords);
+															}
+														});
+									</script>
+					
+					
+					
+									<script type="text/javascript"
+										src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0e943a4b910a88bd68a627159bd5111b"></script>
+									<script>
+										var container = document.getElementById('map');
+										var options =
+										{
+											center : new kakao.maps.LatLng(33.450701, 126.570667),
+											level : 3
+										};
+					
+										var map = new kakao.maps.Map(container, options);
+									</script>
+									
+									
+									<br>주소: 서울특별시 종로구 세종로 세종대로 172
+	                        	</div>
+	                    	</div>
+	                    </div>
+	                    
+                        <div class="col-lg-12">
+	                    	<div class="card mb-4">
+	                        	<div class="card-header">편의 사항 제공</div>
+	                        	<div class="card-body">
+	                        		<a class="btn btn-primary me-4 mt-2 mb-2" href="#!"> 📳 와이파이 제공</a>
+	                        		<a class="btn btn-primary me-4 mt-2 mb-2" href="#!"> 🌭 간식 제공</a><br>
+	                        	</div>
+	                    	</div>
+	                    </div>
+	                    
+	                    <div class="col-lg-12">
+	                    	<div class="card mb-4">
+	                        	<div class="card-header"> 후기 작성 </div>
+	                        		<div class="card-body">
+	                        			<div class="row">
+											<div class="col-lg-2">
+												<div class="box"
+													style="background: #BDBDBD; width: 100px; height: 100px; border-radius: 70%; overflow: hidden; float: left;">
+													<img class="profile" src="images/1.jpg" style="width: 100%; height: 100%; object-fit: cover;">
+												</div>
+											</div>
+					
+											<div class="col-lg-10">
+												<div
+													style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star2.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
+													<p
+														style="WIDTH: 60%; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star.gif) 0px 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 18px;">
+													</p>
+												</div>
+												<br> <span>이유림</span><span> 2021.02.02</span> <br> <br>
+												너무쉽게 설명해주셔서 따라가기 좋았어요 한번수업받아보고 바로 배우기로했습니다!
+											</div>
+										</div>
+										<br><br>
+										<div class="row">
+											<div class="col-lg-2">
+												<div class="box"
+													style="background: #BDBDBD; width: 100px; height: 100px; border-radius: 70%; overflow: hidden; float: left;">
+													<img class="profile" src="images/1.jpg" style="width: 100%; height: 100%; object-fit: cover;">
+												</div>
+											</div>
+					
+											<div class="col-lg-10">
+												<div
+													style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star2.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
+													<p
+														style="WIDTH: 60%; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star.gif) 0px 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 18px;">
+													</p>
+												</div>
+												<br> <span>이유림</span><span> 2021.02.02</span> <br> <br>
+												거리가 좀 있어서 고민을 하였었는데
+												정말정말 만족합니다
+												첫수업이라 상담이랑 그냥 조금 배우고 오는줄 알았는데 제가 부족한부분, 배우고 싶었던 부분을 잘 알려주셔서
+												비포 에프터가 바로 나왔답니다 ㅎㅎ
+												추천추천드립니다
+												다들 수업 받아보셔요~
+												선생님 짱!
+											</div>
+										</div>
+		                        	</div>
+		                    	</div>
+		                    </div>
+	                    </div>
 
 
                 </div>
-                <!-- Side widgets-->
                 <div class="col-lg-4">
-                    <!-- Search widget-->
-                    <div class="card mb-4">
+                
+                    <!-- 강사님 소개 -->
+                    <div class="card">
                         <div class="card-header">강사님 소개</div>
                         <div class="card-body">
-                            <div class="input-group">
                                 <div class="d-flex align-items-end justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <div class="well">
-				<h3>멘토소개</h3>
-
-				<div class="box"
-					style="background: #BDBDBD; width: 140px; height: 140px; border-radius: 70%; overflow: hidden; float: left; margin: 20px;">
-					<img class="profile" src="images/1.jpg" style="width: 100%; height: 100%; object-fit: cover;">
-				</div>
-				<br>
-
-
-				<!-- 별점 -->
-				<div
-					style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star2.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
-					<p
-						style="WIDTH: 80%; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star.gif) 0px 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 18px;">
-					</p>
-				</div>
-				
-				
-				<div style=" font-size: 30pt;">박정아 강사님</div>
-				<div style="">총 진행 회차 : 30회</div>
-				<div style="">총 후기 개수 : 30개</div>
-				
-				노래는 목으로만 부르지 않습니다. 두성, 흉성 등 다양한 스킬들의 차이를 알고 여러분께 가장 적합한
-				발성법을 가르쳐드리도록 하겠습니다. 노래는 재능의 영역이 아닙니다. 이제 저와 시작하시죠 <br> <span
-					class="glyphicon glyphicon-dashboard" aria-hidden="true">
-					진행시간 : 1시간 30분</span><br> <span class="glyphicon glyphicon-map-marker"
-					aria-hidden="true"> 장소 : 마포구 뮤뮤빌딩 4층</span><br> <span
-					class="glyphicon glyphicon-user" aria-hidden="true"> 모집인원 :
-					최대3명 최소1명</span><br> <span class="glyphicon glyphicon-user"
-					aria-hidden="true"> 수강료 : 40000원</span><br>
-			</div>
+                                        <div>
+	                                        <div class="row mt-2">
+		                                        <div class="col-lg-4 text-center">
+													<div class="ms-3"
+														style="background: #BDBDBD; width: 100px; height: 100px; border-radius: 70%; overflow: hidden; float: left;">
+														<img class="profile" src="images/1.jpg" style="width: 100%; height: 100%; object-fit: cover;">
+													</div>
+													<!-- 별점 -->
+													<div class="mt-2 ms-3"
+														   style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star2.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
+														<p style="WIDTH: 80%; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star.gif) 0px 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 18px;"></p>
+													</div>
+												</div>
+												<div class="col-lg-8 mt-3">
+													<div class="ms-3">박정아 강사님</div>
+													<div class="ms-3">총 진행 회차 : 30회</div>
+													<div class="ms-3">총 후기 개수 : 30개</div>
+												</div>
+											</div>
+											<br><br>
+												노래는 목으로만 부르지 않습니다. 두성, 흉성 등 다양한 스킬들의 차이를 알고 여러분께 가장 적합한
+												발성법을 가르쳐드리도록 하겠습니다. 노래는 재능의 영역이 아닙니다. 이제 저와 시작하시죠. 
+											<br><br>
+												⏰ 진행시간 : 1시간 30분
+											<br>	
+												🚩 장소 : 마포구 뮤뮤빌딩 4층
+											<br>
+												🎤 모집인원 : 최대3명 최소1명
+											<br>
+												💰 수강료 : 40000원
+											<br>
+											<br>
+										</div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Categories widget-->
+	                        </div>
+	                    </div>
+                    
+                    <br>
+                    
+                    <!-- 클래스 회차 일정-->
                     <div class="card mb-4">
-                        <div class="card-header">Categories</div>
+                        <div class="card-header">클래스 회차 일정</div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-6">
-                                    <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">Web Design</a></li>
-                                        <li><a href="#!">HTML</a></li>
-                                        <li><a href="#!">Freebies</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-6">
-                                    <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">JavaScript</a></li>
-                                        <li><a href="#!">CSS</a></li>
-                                        <li><a href="#!">Tutorials</a></li>
-                                    </ul>
-                                </div>
+                                <div class="btn-group-vertical" role="group" aria-label="..."
+									style="width: 100%;">
+									<button type="button" class="btn btn-primary">
+										2021년 5월 2일 14시 30분 - 16시 (3명/5명)
+									</button>
+									<button type="button" class="btn btn-primary">
+										2021년 5월 3일 14시 30분 - 16시 (3명/5명)
+									</button>
+									<button type="button" class="btn btn-primary">
+										2021년 5월 4일 14시 30분 - 16시 (3명/5명)
+									</button>
+									<br><br>
+									<button type="button" class="btn btn-primary">
+										신청하기
+									</button>
+								</div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Side widget-->
-                    <div class="card mb-4">
-                        <div class="card-header">Side Widget</div>
-                        <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
                     </div>
                 </div>
             </div>
