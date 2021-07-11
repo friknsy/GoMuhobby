@@ -72,5 +72,10 @@
 		SELECT MAX(UNIQ_ID_NUM)
 		FROM USER_UNIQUE_ID
 	</select>
+	
+	<!-- 방문이력 남기기 -->
+	<insert id="loginhit">
+		INSERT INTO LOGIN VALUES(LOGIN_SEQ.NEXTVAL,SYSDATE,#{uniqueId})
+	</insert>
  
  </mapper>

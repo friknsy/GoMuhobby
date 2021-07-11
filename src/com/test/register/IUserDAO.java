@@ -13,4 +13,7 @@ public interface IUserDAO
 	public String logincheck(UserDTO u);
 	public String uniqueId(String id);
 	public int admincheck(String ui);
+	
+	// 로그인 시 방문이력 입력
+	public int loginhit(String uniqueId);
 }

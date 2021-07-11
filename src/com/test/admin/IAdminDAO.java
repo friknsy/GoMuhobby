@@ -42,5 +42,9 @@ public interface IAdminDAO
 	//--------------- 신고처리 하기 ------------------------------------------------------
 	public int reportProcessing(AdminDTO dto); //신고처리 테이블에 데이터삽입
 	
+	// -------------- FF 신고접수내역 가져오기 ---------------------------------------------
+	public ArrayList<AdminDTO> ffReportList();	
+
+	
 
 }
