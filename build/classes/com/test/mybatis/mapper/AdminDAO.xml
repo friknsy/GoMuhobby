@@ -71,6 +71,9 @@
  		INSERT INTO QA_REPORT_PROCESSING VALUES(QA_REPORT_PROCESSING_SEQ.NEXTVAL,#{a_num},SYSDATE,#{report_proc_cat_code},#{qa_report_reg_code})
  	</insert>
  	
+ 	<select id="ffReportList" resultType="com.test.admin.AdminDTO">
+ 		SELECT * FROM FF_REPORTS_FOR_ADMIN
+ 	</select>
 
  
  </mapper>
