@@ -175,7 +175,7 @@
         )VALUES(
         	FREE_FORUM_REPLY_SEQ.NEXTVAL,
         	#{f_forum_code, jdbcType=VARCHAR },
-        	20141310 ,
+        	#{uniq_id_num},
         	SYSDATE,
         	#{f_reply_content, jdbcType=VARCHAR },
         	#{f_reply_group, jdbcType=VARCHAR },

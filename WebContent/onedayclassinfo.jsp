@@ -19,7 +19,6 @@
 	if(session.getAttribute("uniqueId")!=null)
 	{
 		uniqueId = (String)session.getAttribute("uniqueId");
-		
 		System.out.println(uniqueId + "고유식별번호");
 	}
 
