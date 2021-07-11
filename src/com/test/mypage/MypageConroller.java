@@ -16,7 +16,8 @@ public class MypageConroller
 	
 	@RequestMapping(value="/mypagemyclass.action",method=RequestMethod.GET)
 	public String mypagemyclass(Model model)
-	{
+	{	
+		// 깃 올리기 용
 		return "WEB-INF/views/6mypagemyclass.jsp";
 	}
 	

@@ -416,13 +416,13 @@
                                 <div class="btn-group-vertical" role="group" aria-label="..."
 									style="width: 100%;">
 									<button type="button" class="btn btn-primary">
-										2021년 5월 2일 14시 30분 - 16시 (3명/5명)
+										2021년 5월 2일 14시 30분 - 16시 (3명 / 5명)
 									</button>
 									<button type="button" class="btn btn-primary">
-										2021년 5월 3일 14시 30분 - 16시 (3명/5명)
+										2021년 5월 3일 14시 30분 - 16시 (3명 / 5명)
 									</button>
 									<button type="button" class="btn btn-primary">
-										2021년 5월 4일 14시 30분 - 16시 (3명/5명)
+										2021년 5월 4일 14시 30분 - 16시 (3명 / 5명)
 									</button>
 									<br><br>
 									<button type="button" class="btn btn-primary">
