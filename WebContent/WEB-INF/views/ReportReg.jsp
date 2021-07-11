@@ -29,7 +29,7 @@
     
     	function goToDetail(qa_forum_code)
 		{
-    		window.open("qa게시판자세히보기링크.action?qa_forum_code="+qa_forum_code, "게시물자세히보기", "width=400, height=300, left=100, top=50"); 
+    		window.open("qa_forumread.action?qa_forum_code="+qa_forum_code, "게시물자세히보기", "width=400, height=300, left=100, top=50"); 
     		/* 요청 url 에서 /namepopup.action 이라고 『/』를 앞에 붙여주면 경로를 찾지 못한다. 요청url 에는  /를 붙여주지 않는다!! 주의!! */
 		}
     	
