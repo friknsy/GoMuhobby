@@ -7,8 +7,8 @@ package com.test.ff;
 public class Free_ForumDTO
 {
 	// ○ 주요 속성 구성
-	private String f_forum_code, uniq_id_num, music_cat_code,music_cat_large, user_nickname;
-	//-- 게시물번호, 회원번호, 음악카테고리 번호
+	private String num, f_forum_code, uniq_id_num, music_cat_code,music_cat_large, user_nickname;
+	//-- ROW_NUM , 게시물번호, 회원번호, 음악카테고리 번호
 	private String f_forum_title, f_forum_content, f_forum_wrt_date, f_forum_photo, f_forum_video;
 	//-- 게시물제목, 게시물내용, 게시물 작성일, 사진업로드, 동영상업로드
 	private String f_forum_state, f_forum_hit;
@@ -208,6 +208,15 @@ public class Free_ForumDTO
 	public void setF_reply_wrt_user(String f_reply_wrt_user){
 		this.f_reply_wrt_user = f_reply_wrt_user;
 	}
+	public String getNum()
+	{
+		return num;
+	}
+	public void setNum(String num)
+	{
+		this.num = num;
+	}
+	
 	
 	@Override
 	public String toString()

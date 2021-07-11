@@ -32,7 +32,8 @@
 	
 	String forumcheck = null;
 	
-	if(uniqueId.equals(forumId))
+	
+	/* if(uniqueId.equals(forumId))
 	{
 		forumcheck = "자신의게시물";
 	}
@@ -41,7 +42,7 @@
 		forumcheck = null;
 	}
 	
-	System.out.println(forumcheck);
+	System.out.println(forumcheck); */
 	
 %>
 
@@ -79,7 +80,7 @@
 
 </head>
 <body>
-			<!-- 맨 위 상단 바 -->
+	 <!-- 맨 위 상단 바 -->
             <c:choose>
             	<c:when test="${mynickName eq null}">
 		            <nav class="navbar navbar-expand-lg navbar-dark">
@@ -180,11 +181,13 @@
 	<div class="container">
 		<!-- ★★★★★내용★★★★★ -->
 		<section class="post-view container">
+			<!-- 해당 INPUT 삭제 금지 -->
+			<input type="hidden" id="f_forum_code" name="f_forum_code" value="${read.f_forum_code}">
 			<!-- 제목/작성자/작성일시/조회수 -->
 			<div class="post-head row">
 				<div class="col-lg-12">
 					<!-- 글 제목 -->
-					<h3 class="post-title">${read.f_forum_title }</h3>
+					<h3 class="post-title bold">${read.f_forum_title }</h3>
 					<!-- 제목 밑에 줄 -->
 					<hr class="post-title-hr">
 				</div>
@@ -194,12 +197,14 @@
 				<div class="col-lg-6">
 					<!-- 작성자아이디, 작성일시, 조회수 -->
 					<ul class="list-inline">
+						<img class="rounded-circle me-3" src="images/default.png" width="30px" height="30px" />
 						<li class="list-inline-item g-mx-4">${read.user_nickname }</li>
 						<li class="list-inline-item g-mx-4">|</li>
 						<li id="timestamp" data-timestamp="2021-07-01 16:26:27.0"
 							class="list-inline-item">${read.f_forum_wrt_date }</li>
 						<li class="list-inline-item g-mx-4">|</li>
 						<li class="list-inline-item g-mx-4">${read.f_forum_hit }</li>
+				
 					</ul>
 				</div>
 
@@ -264,7 +269,7 @@
 						<c:when test="${reply.f_reply_step == 0 }">
 							<div style="margin-left: 5px;">
 								<!-- card-footer -->
-								<div class="bg-transparent mt-3 col-lg-3">
+								<div class="bg-transparent mt-3 col-lg-12">
 									<div class="d-flex align-items-end justify-content-between">
 										<div class="d-flex align-items-center">
 											<img class="rounded-circle me-3" src="images/default.png"
@@ -294,7 +299,7 @@
 
 						<c:otherwise>
 							<div style="margin-left: 30px;">
-								<div class="bg-transparent mt-3 col-lg-3">
+								<div class="bg-transparent mt-3 col-lg-12">
 									<div class="d-flex align-items-end justify-content-between">
 										<div class="d-flex align-items-center">
 											<img class="rounded-circle me-3" src="images/default.png"
@@ -307,7 +312,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="card-footer bg-transparent mt-3 col-lg-10">
+								<div class="card-footer bg-transparent mt-3 col-lg-12">
 									<div class="d-flex align-items-end justify-content-between">
 										<div class="d-flex align-items-center">
 											<p>${reply.f_reply_content }</p>
@@ -443,7 +448,8 @@
 				
 				
 				var sendData={
-					f_forum_code:$('#f_forum_code').val(),
+					f_forum_code:$('#f_forum_code').val(), 
+					
 					f_reply_content:$("#comment_input").val()
 				};
 
@@ -452,10 +458,12 @@
 					url:"<c:url value='/replyupdate.action'/>",
 					data:sendData,
 					success:function(data){
-						
-						if(data=="1"){
+						if(data=="SUCCESS"){
+							
 						}else{
+							
 						}
+						location.reload();
 					},
 					complete:function(data){
 						

@@ -33,9 +33,9 @@ public class Free_ForumController
 	public String list(ModelMap model)
 	{
 		IFree_ForumDAO dao = sqlSession.getMapper(IFree_ForumDAO.class);
-
+		
 		model.addAttribute("list", dao.list());
-
+		
 		return "WEB-INF/views/Free_Forum_List.jsp";
 	}
 
@@ -148,6 +148,8 @@ public class Free_ForumController
 		return "WEB-INF/views/Free_Forum_Read.jsp";
 	}
 
+	
+	
 	// bookmark action
 	@RequestMapping(value = "/ffbookmark.action", method = RequestMethod.GET)
 	public String FFBookmark(Free_ForumDTO dto)
@@ -155,46 +157,48 @@ public class Free_ForumController
 		IFree_ForumDAO dao = sqlSession.getMapper(IFree_ForumDAO.class);
 
 		dao.FFBookmark(dto);
-
+		
 		return "redirect:/fflist.action";
 
 	}
 
 	// 신고 버튼 action
 	@RequestMapping(value = "/ffreportreg.action", method = RequestMethod.POST)
+	@ResponseBody
 	public String FFReport_reg(Free_ForumDTO dto)
 	{
 		IFree_ForumDAO dao = sqlSession.getMapper(IFree_ForumDAO.class);
+		
+		/*
+		 * System.out.println("유저번호 : "+dto.getUniq_id_num());
+		 * System.out.println("리포트 카테고리 번호 : "+dto.getReport_cat_num());
+		 * System.out.println("신고 게시글 번호 : "+dto.getF_forum_code());
+		 */
+		
+		
+		//dto.setUniq_id_num("10");
+		System.out.println(dto + " 전송은 되냐 ");
+	
+		Integer result = dao.FFReport_reg(dto); 
 
-		dao.FFReport_reg(dto);
-
-		return "";
+		return result > 0 ? "SUCCESS" : "FAIL"; 
 
 	}
 
 	// 댓글 업데이트
 	@RequestMapping(value = "/replyupdate.action", method = RequestMethod.POST)
-	public Map<String, String> replyUpdate(Free_ForumDTO dto, ModelMap model)
+	@ResponseBody 
+	public String replyUpdate(Free_ForumDTO dto, ModelMap model)
 	{
 		IFree_ForumDAO dao = sqlSession.getMapper(IFree_ForumDAO.class);
 
+		dto.setUniq_id_num("10"); //임의 유저번호
+		dto.setF_reply_group(String.valueOf(dao.selectReplyGroup()));
 		dto.setF_reply_index("1"); // 인덱스
 		dto.setF_reply_step("0"); // 대댓글여부
-		dto.setF_reply_group(String.valueOf(dao.selectReplyGroup()));
 
-		Free_ForumDTO replyDto = dao.selectReply(dto);
-
-		Map<String, String> resultMap = new HashMap<String, String>();
-
-		resultMap.put("f_reply_code", replyDto.getF_reply_code());
-		resultMap.put("f_reply_step", replyDto.getF_reply_step());
-		resultMap.put("f_reply_index", replyDto.getF_reply_index());
-		resultMap.put("f_reply_group", replyDto.getF_reply_group());
-		resultMap.put("f_reply_content", replyDto.getF_reply_content());
-		resultMap.put("f_reply_wrt_date", replyDto.getF_reply_wrt_date());
-		resultMap.put("f_reply_wrt_user", replyDto.getF_reply_wrt_user());
-
-		return resultMap;
+		Integer replyUpdateResult=dao.replyUpdate(dto);
+		return replyUpdateResult>0 ? "SUCCESS" : "FAIL";
 	}
 
 	

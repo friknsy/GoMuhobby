@@ -4,6 +4,34 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
+
+<%  
+	String adminStr = null;
+
+	if(session.getAttribute("adminStr")!=null)
+	{
+		adminStr = (String)session.getAttribute("adminStr");
+		System.out.println(adminStr + "관리자확인");
+	}
+
+	String uniqueId = null;
+	
+	if(session.getAttribute("uniqueId")!=null)
+	{
+		uniqueId = (String)session.getAttribute("uniqueId");
+		
+		System.out.println(uniqueId + "고유식별번호");
+	}
+
+	String mynickName = null;
+
+	if(session.getAttribute("mynickName")!=null)
+	{
+		mynickName = (String)session.getAttribute("mynickName");
+		System.out.println(mynickName + "닉네임");
+	}
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,17 +52,22 @@
 		$("#submit").click(function()
 		{
 			var test = $('input[id=f_forum_code]').val();
-			alert(test);
-
-			$.post("ffreportreg.action",
+			
+			$.post('<c:out value="${cp}"/>ffreportreg.action',
 			{
 				f_forum_code : $("#f_forum_code").val(),
-				report_cat_num : $(
-						'input:radio[name="report_cat_num"]:checked')
-						.val()
-			}, function(data)
+				report_cat_num : $('input:radio[name="report_cat_num"]:checked').val(),
+				uniq_id_num : $("#uniq_id_num").val()
+			},
+			
+			function(data)
 			{
-				window.close();
+				if(data=="SUCCESS")
+				{
+					window.close();	
+				}else{
+					//실패
+				}
 			});
 		});
 	});
@@ -85,6 +118,7 @@
 	
 	<form id="report-form">
 		<div class="container" >
+			<input type="hidden" id="uniq_id_num" name="uniq_id_num" value="<%=uniqueId %>">
 			<input type="hidden" id="f_forum_code" name="f_forum_code" value="${param.f_forum_code}">
 			<label for="report1"><input type="radio" name="report_cat_num" value="1" 
 			>도배성, 무의미성, 무성의한 게시글, 댓글</label>

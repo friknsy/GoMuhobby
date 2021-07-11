@@ -9,11 +9,12 @@
  
  	<!-- 자유게시판 리스트 쿼리문  -->
  	<select id="list" resultType="com.test.ff.Free_ForumDTO">
-		SELECT F_FORUM_CODE, USER_NICKNAME, MUSIC_CAT_CODE, F_FORUM_TITLE, F_FORUM_CONTENT, F_FORUM_WRT_DATE, F_FORUM_PHOTO, F_FORUM_STATE, F_FORUM_VIDEO, F_FORUM_HIT
+		SELECT NUM, F_FORUM_CODE, USER_NICKNAME, MUSIC_CAT_CODE, F_FORUM_TITLE, F_FORUM_CONTENT, F_FORUM_WRT_DATE, F_FORUM_PHOTO, F_FORUM_STATE, F_FORUM_VIDEO, F_FORUM_HIT
 		FROM
 		(
 		    SELECT
-		          FF.F_FORUM_CODE        AS F_FORUM_CODE
+		    	  ROW_NUMBER() OVER(ORDER BY FF.F_FORUM_WRT_DATE) AS NUM
+		        , FF.F_FORUM_CODE        AS F_FORUM_CODE
 		        , UUI.USER_NICKNAME      AS USER_NICKNAME
 		        , MC.MUSIC_CAT_CODE      AS MUSIC_CAT_CODE
 		        , FF.F_FORUM_TITLE       AS F_FORUM_TITLE
@@ -27,7 +28,7 @@
 		    JOIN USER_UNIQUE_ID UUI ON FF.UNIQ_ID_NUM = UUI.UNIQ_ID_NUM
 		    JOIN MUSIC_CAT MC ON MC.MUSIC_CAT_CODE = FF.MUSIC_CAT_CODE
 		)
-		ORDER BY F_FORUM_CODE
+		ORDER BY F_FORUM_WRT_DATE DESC
  	</select>
  
  
@@ -108,7 +109,6 @@
 	  FROM MUSIC_CAT
  	</select>
   
-  
    <!-- 조회수 증가 쿼리문  -->
    <update id="updateHitCount">
 	  UPDATE FREE_FORUM 
@@ -161,8 +161,8 @@
 		ORDER BY F_REPLY_GROUP , F_REPLY_INDEX
     </select>
     
-    <!-- 댓글 등록 출력 쿼리문 -->
-    <insert id= "replyUpdate">
+    <!-- 댓글 등록 쿼리문 -->
+    <insert id="replyUpdate">
         INSERT INTO FREE_FORUM_REPLY(
         	F_REPLY_CODE, 
         	F_FORUM_CODE, 
@@ -175,17 +175,13 @@
         )VALUES(
         	FREE_FORUM_REPLY_SEQ.NEXTVAL,
         	#{f_forum_code, jdbcType=VARCHAR },
-        	#{uniq_id_num},
+        	20141310 ,
         	SYSDATE,
         	#{f_reply_content, jdbcType=VARCHAR },
         	#{f_reply_group, jdbcType=VARCHAR },
         	#{f_reply_index, jdbcType=VARCHAR },
         	#{f_reply_step, jdbcType=VARCHAR }
         )
-        <!-- 위에서 INSERT된 값을 바로 SELECT하여 DTO에 담아줌 -->
-       	<selectKey keyProperty="f_reply_code" resultType="string" order="AFTER">
-       		SELECT TO_CHAR(FREE_FORUM_REPLY_SEQ.CURRVAL) FROM DUAL
-       	</selectKey>
     </insert>
     
     <!--댓글 등록 시 필요한, F_REPLY_GROUP MAX값 가져오기 -->
@@ -218,5 +214,7 @@
 	    FROM FREE_FORUM
 	    WHERE F_FORUM_CODE= #{f_forum_code }
     </select> 
+
+    
     
  </mapper>

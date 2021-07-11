@@ -55,15 +55,13 @@
 <link rel="stylesheet" href="<%=cp%>/css/board_list.css">
 
 <!-- Font Awesome 5 -->
-<link rel='stylesheet'
-	href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 			</head>
 			<body>
-			<!-- 맨 위 상단 바 -->
+			 <!-- 맨 위 상단 바 -->
             <c:choose>
             	<c:when test="${mynickName eq null}">
 		            <nav class="navbar navbar-expand-lg navbar-dark">
@@ -168,8 +166,6 @@
 		<br>
 		<br>
 
-
-
 		<!-- 게시판 헤더 시작 -->
 		<div class="ffHeader">
 			<div class="header no">No</div>
@@ -184,11 +180,11 @@
 		<!-- 게시판 게시물 리스트 시작 -->
 		<c:forEach var="list" items="${list}">
 			<div class="ffContents">
-				<div class="content no">${list.f_forum_code}</div>
+				<div class="content no">${list.num}</div>
 				<div class="content title titleLeft">
 					<div class="contentTitle">
 						<a class="contentLink" href="ffread.action?f_forum_code=${list.f_forum_code}" style="text-decoration: none;">${list.f_forum_title }</a>
-					</div>
+					</div>	
 				</div>
 				<div class="content writer">${list.user_nickname}</div>
 				<div class="content date">${list.f_forum_wrt_date}</div>

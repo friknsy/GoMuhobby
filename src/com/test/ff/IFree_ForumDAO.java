@@ -26,8 +26,6 @@ public interface IFree_ForumDAO
 	// 조회 수 증가 
 	public void updateHitCount(String f_forum_code);
 	
-	// 북마크 수 증가
-	public void updateBookMarkCount(String f_forum_code);
 	
 	// 업데이트
 	public int updateFF(Free_ForumDTO dto);
@@ -58,4 +56,6 @@ public interface IFree_ForumDAO
 	
 	// 게시글 작성자의 고유식별번호
 	public String uniqIdcheck(String f_forum_code);
+	
+	
 }
