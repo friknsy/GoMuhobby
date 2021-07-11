@@ -7,25 +7,26 @@
 
 <%  
 	String adminStr = null;
-
+	
 	if(session.getAttribute("adminStr")!=null)
 	{
 		adminStr = (String)session.getAttribute("adminStr");
 	}
-
+	
 	String uniqueId = null;
 	
 	if(session.getAttribute("uniqueId")!=null)
 	{
 		uniqueId = (String)session.getAttribute("uniqueId");
 	}
-
+	
 	String mynickName = null;
-
+	
 	if(session.getAttribute("mynickName")!=null)
 	{
 		mynickName = (String)session.getAttribute("mynickName");
 	}
+
 	
 	String url = (String)request.getAttribute("url");
 	String forumId = (String)request.getAttribute("uniqId");
@@ -260,6 +261,8 @@
 	                  <span class="fas fa-bookmark"></span> 북마크
 	               </button>
            		</div>
+           		
+           		<input type="hidden" id="uniq_id_num" name="uniq_id_num" value="<%=uniqueId %>">
 	           		
 
 				<!-- ★★★★★ 댓글 ★★★★★★ -->
@@ -428,9 +431,9 @@
 			{
 				if (confirm("게시물을 북마크하시겠습니까?"))
 				{
-					$(location).attr("href","ffbookmark.action?f_forum_code="+ $(this).val());
+					$(location).attr("href","ffbookmark.action?f_forum_code="+$(this).val()+"&uniq_id_num="+$("#uniq_id_num").val());
 				}
-
+				
 			});
 			
 			

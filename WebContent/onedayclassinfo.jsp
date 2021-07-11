@@ -157,9 +157,12 @@
                         <a href="#"><img src="images/mic.jpg" style="width: 855px; height: 365px;"></a>
                         <div class="card-body">
                             <div class="small text-muted">January 1, 2021</div>
-                            <h2 class="card-title">하루만에 완성하는 폴킴쌤의 보컬연습 <a class="btn btn-outline-light btn-sm1">보컬</a> </h2>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                            <a class="btn btn-primary" href="#!">Read more →</a>
+                            <h2 class="card-title">하루만에 완성하는 폴킴쌤의 보컬연습 <a class="ms-2 btn btn-outline-light btn-sm1">보컬</a> </h2>
+                            <a class="btn btn-primary me-4" href="#!">상세정보</a>
+                            <a class="btn btn-primary me-4" href="#!">후기</a>
+                            <a class="btn btn-primary me-4" href="#!">QNA</a>
+                            <a class="btn btn-primary me-4" href="#!">변경 및 취소</a>
+                            
                         </div>
                     </div>
                     <!-- Nested row for non-featured blog posts-->

@@ -6,21 +6,21 @@
 %>
 <%  
 	String adminStr = null;
-
+	
 	if(session.getAttribute("adminStr")!=null)
 	{
 		adminStr = (String)session.getAttribute("adminStr");
 	}
-
+	
 	String uniqueId = null;
 	
 	if(session.getAttribute("uniqueId")!=null)
 	{
-		uniqueId = (String)session.getAttribute("uniqueId");	
+		uniqueId = (String)session.getAttribute("uniqueId");
 	}
-
+	
 	String mynickName = null;
-
+	
 	if(session.getAttribute("mynickName")!=null)
 	{
 		mynickName = (String)session.getAttribute("mynickName");
