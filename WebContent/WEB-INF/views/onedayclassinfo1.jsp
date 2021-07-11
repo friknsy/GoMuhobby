@@ -38,7 +38,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>뮤하비 - 타성에 젖은 당신의 변화</title>
+        <title>뮤하비 - 타성에 젖은 당신의  변화</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
