@@ -112,6 +112,7 @@ public class LoginController
 			{
 				session.setAttribute("uniqueId", uniqueId);
 				session.setAttribute("mynickName", mynickName);
+				dao.loginhit(uniqueId);
 				return message;
 			}
 			
@@ -120,6 +121,7 @@ public class LoginController
 				session.setAttribute("adminStr", adminStr);
 				session.setAttribute("uniqueId", uniqueId);
 				session.setAttribute("mynickName", mynickName);
+				dao.loginhit(uniqueId);
 				return message;
 			}
 		}
