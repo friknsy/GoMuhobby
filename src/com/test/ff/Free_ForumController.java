@@ -192,7 +192,6 @@ public class Free_ForumController
 	{
 		IFree_ForumDAO dao = sqlSession.getMapper(IFree_ForumDAO.class);
 
-		dto.setUniq_id_num("10"); //임의 유저번호
 		dto.setF_reply_group(String.valueOf(dao.selectReplyGroup()));
 		dto.setF_reply_index("1"); // 인덱스
 		dto.setF_reply_step("0"); // 대댓글여부
