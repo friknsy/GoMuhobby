@@ -45,6 +45,7 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <link href="css/myPage1.css" rel="stylesheet" />
+        
     </head>
     <body class="sb-nav-fixed">
     
@@ -208,8 +209,18 @@
                             <div class="col-xl-10 col-md-8">
                                 <div class="shadow card bg-light text-gray mb-5 ms-4">
                                     <div class="parent">
-								        <div class="first col-lg-3">
-								        	<img class="rounded-circle mt-4" src="images/default.png" width="200px" height="200px">
+								        <div class="first col-lg-3">  <!-- "images/default.png" -->
+								        	<img class="rounded-circle mt-4" src="img/증명사진1.jpeg" width="200px" height="200px"> <!-- 오른쪽버튼만추가 --> <button type="button" onclick="profilePop()">사진변경</button>
+								        	<script type="text/javascript">
+								        	
+										        	function profilePop()
+										    		{
+										        		/* window.open("qa_forumread.action?qa_forum_code="+qa_forum_code, "게시물자세히보기", "width=400, height=300, left=100, top=50");  */
+										        		window.open("profilepopup.action?uniqueId="+<%=uniqueId%>, "게시물자세히보기", "width=400, height=300, left=100, top=50"); 
+										        		/* 요청 url 에서 /namepopup.action 이라고 『/』를 앞에 붙여주면 경로를 찾지 못한다. 요청url 에는  /를 붙여주지 않는다!! 주의!! */
+										    		}
+								        	
+								        	</script>
 								        </div>
 								        <div class="second sb-sidenav-menu-heading fs-5 h4 ms-12 mt-3 bold" style="width:60%; height: 100%">
 								        <div class="col-lg-4 d-grid third">

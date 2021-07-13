@@ -16,4 +16,9 @@ public interface IUserDAO
 	
 	// 로그인 시 방문이력 입력
 	public int loginhit(String uniqueId);
+	
+	// 프로필사진 변경
+	public int profileChange(String param1, String param2); //고유식별번호와 파일명 매개변수로 넘겨줌
+	
+	
 }

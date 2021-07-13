@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -126,4 +127,30 @@ public class LoginController
 			}
 		}
 	}
+	
+	
+	// 프로필 사진 변경 팝업
+	@RequestMapping(value = "/profilepopup.action", method = RequestMethod.GET)
+	public String profileChangePopUp(HttpServletRequest request, Model model)
+	{	
+		
+		String uniqueId = request.getParameter("uniqueId");
+		model.addAttribute("uniqueId",uniqueId);
+		return "/ProfilePopUp.jsp";
+	}
+	
+	
+	// 프로필사진 본격 변경
+	@RequestMapping(value = "/profileinput.action", method = RequestMethod.POST)
+	public String profileInput(HttpServletRequest request, Model model)
+	{	
+		String uniqueId = (String) request.getAttribute("uniqueId");
+		String fileName = (String) request.getAttribute("fileName");
+		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
+		dao.profileChange(fileName, uniqueId);
+		
+		
+		return "";
+	}
+	
 }
