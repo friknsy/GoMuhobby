@@ -52,7 +52,7 @@
     </head>
     <body class="sb-nav-fixed">
     
-        	<!-- 맨 위 상단 바 -->
+        	<!-- 맨 위 상 단 바 -->
             <c:choose>
             	<c:when test="${mynickName eq null}">
 		            <nav class="navbar navbar-expand-lg navbar-dark">
