@@ -36,6 +36,8 @@ public class RegisterController
 		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
 		
 		dao.add1(u);
+		u.setUniq_id_num(dao.uniqIdget());
+		
 		dao.add2(u);
 		
 		return "/WEB-INF/views/welcome.jsp";

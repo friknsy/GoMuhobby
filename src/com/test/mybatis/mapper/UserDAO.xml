@@ -8,7 +8,7 @@
 	
 	<!-- 회원가입 시 고유식별테이블에 닉네임과 고유식별번호 입력 -->
   	<insert id="add1">
- 		INSERT INTO USER_UNIQUE_ID (UNIQ_ID_NUM,USER_NICKNAME) VALUES(#{uniq_id_num}, #{user_nickname})
+ 		INSERT INTO USER_UNIQUE_ID (UNIQ_ID_NUM,USER_NICKNAME) VALUES(MEM_UNIQUE_ID_SEQ.NEXTVAL, #{user_nickname})
  	</insert>
  	
  	<!-- 회원가입 시 회원테이블에 고유식별벌호,지역번호,아이디,이름,비밀번호,전화번호,이메일,가입일 입력 -->

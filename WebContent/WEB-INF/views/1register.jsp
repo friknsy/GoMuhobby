@@ -507,9 +507,6 @@
                                     <div class="card-body">
                                         <form action="register.action" method="post">
                                         	<!-- 데이터임의로 넘겨주려고 넣은 인풋태그 -->
-                                        	
-	                                        <input type="hidden" id="uniq_id_num" name="uniq_id_num" placeholder="고유번호입력">
-												                                        
 	                                        <input type="hidden" id="town_code" name="town_code" placeholder="지역번호입력" value="1">
                                             
                                         	<br>
