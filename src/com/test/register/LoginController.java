@@ -152,6 +152,6 @@ public class LoginController
 		
 		session.setAttribute("photo", photo);
 		
-		return "";
+		return "/windowclose.jsp";
 	}
 }

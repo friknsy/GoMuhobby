@@ -28,11 +28,10 @@
 		MultipartRequest req = null;
 		req = new MultipartRequest(request, path, maxFileSize, encType, new DefaultFileRenamePolicy());
 		
-		
 		String fileName = req.getFilesystemName("file"); // 저장되는 파일 이름
 		File file = req.getFile("file");
 		
-/* 		String author = req.getParameter("author");
+   /*   String author = req.getParameter("author");
 		request.setAttribute("author",author); */
 		String uniqueId = req.getParameter("uniqueId");
 		request.setAttribute("uniqueId", uniqueId);
