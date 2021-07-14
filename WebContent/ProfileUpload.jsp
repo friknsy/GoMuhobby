@@ -10,8 +10,6 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 	
-
-	
 	String root = pageContext.getServletContext().getRealPath("/"); /* 여기서 / 는 왜해주는거지 */
 	
 	/* String path = root + "pds" + File.separator + "saveData"; */

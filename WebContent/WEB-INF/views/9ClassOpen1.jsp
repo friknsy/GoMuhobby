@@ -192,7 +192,7 @@
 	                                            </div>
 	                                            <br>
 	                                            <div class="row mb-3">
-	                                            <span class="mb-2 fw-bold normal">계정 ID</span>
+	                                            <span class="mb-2 fw-bold normal">닉네임</span>
 	                                                <div class="col-md-9">
 	                                                    <div class="form-floating mb-3 mb-md-0">
 	                                                        <input class="form-control" id="userId" name="userId"type="text"/>
@@ -217,7 +217,7 @@
 	                                            </div>
 	                                        	<br>
 	                                            <div class="row mb-3">
-	                                            <span class="mb-2 fw-bold normal">계좌번호</span>
+	                                            <span class="mb-2 fw-bold normal">계좌번호(은행 기재)</span>
 	                                                <div class="col-md-9">
 	                                                    <div class="form-floating mb-3 mb-md-0">
 	                                                        <input class="form-control" id="userId" name="userId"type="text"/>

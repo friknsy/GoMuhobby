@@ -22,15 +22,18 @@
 	String mynickName = null;
 	
 	if(session.getAttribute("mynickName")!=null)
-	{
 		mynickName = (String)session.getAttribute("mynickName");
-	}
-	
 	else
-	{	
 		// 로그인 정보가 없을 때 메인 페이지로 이동!
 		out.println("<script>location.href=" + "'mainpage.action'" + ";</script>");
-	}
+	
+	String photo = null;
+	
+	if(session.getAttribute("photo")!=null)
+		photo = (String)session.getAttribute("photo");
+	else
+		photo = "undraw_profile_1.svg";
+	
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -210,7 +213,7 @@
                                 <div class="shadow card bg-light text-gray mb-5 ms-4">
                                     <div class="parent">
 								        <div class="first col-lg-3">  <!-- "images/default.png" -->
-								        	<img class="rounded-circle mt-4" src="img/증명사진1.jpeg" width="200px" height="200px"> <!-- 오른쪽버튼만추가 --> <button type="button" onclick="profilePop()">사진변경</button>
+								        	<img class="rounded-circle mt-4" src="img/<%=photo %>" width="200px" height="200px"> <!-- 오른쪽버튼만추가 -->
 								        	<script type="text/javascript">
 								        	
 										        	function profilePop()
@@ -245,7 +248,7 @@
  											<div class="h6 bold" style="width:100%" >자기 소개</div>
  											<div class="h6" style="width:100%" >코로나 너무 지치는데 어떡하죠코로나너무 너무코로나 너무 지치는데 어떡하죠</div>
 								        </div>
-								        <div class="first bold col-lg-3"> 나의 등급 🎵(뮤비)</div>
+								        <div class="first bold col-lg-3"> <button class="btn btn-outline-light btn-sm1" type="button" onclick="profilePop()">사진변경</button> </div>
 								    </div>
                                 </div>
                                 

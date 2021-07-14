@@ -84,5 +84,12 @@
 		UPDATE MEMBER SET U_PHOTO=#{param1} WHERE UNIQ_ID_NUM=#{param2}
 	</update>
 	
+	<!-- 프로필 사진 가져오기 -->
+	<select id="profileselect" resultType="String">
+		SELECT U_PHOTO
+		FROM MEMBER
+		WHERE UNIQ_ID_NUM = #{uniq_id_num}
+	</select>
+	
  
  </mapper>
