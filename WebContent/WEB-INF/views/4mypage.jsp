@@ -210,7 +210,7 @@
                                 <div class="shadow card bg-light text-gray mb-5 ms-4">
                                     <div class="parent">
 								        <div class="first col-lg-3">  <!-- "images/default.png" -->
-								        	<img class="rounded-circle mt-4" src="img/증명사진1.jpeg" width="200px" height="200px"> <!-- 오른쪽버튼만추가 --> <button type="button" onclick="profilePop()">사진변경</button>
+								        	<img class="rounded-circle mt-4" src="img/프로필사진.jpg" width="200px" height="200px"> <!-- 오른쪽버튼만추가 --> <button type="button" onclick="profilePop()">사진변경</button>
 								        	<script type="text/javascript">
 								        	
 										        	function profilePop()
