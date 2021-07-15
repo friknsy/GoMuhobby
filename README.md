@@ -27,7 +27,7 @@ Muhobby Final Project
 > 커뮤니티 활동과 더불어 커뮤니티에서 활발하게 활동하는 선생님들의 원데이 클래스도 들을 수 있다고?
 > 도움주고 받는 뮤하비들의 선순환!
 
-:pushpin: [발표 PPT](https://docs.google.com/)
+:pushpin: [발표 PPT](https://drive.google.com/file/d/1I3ZJbb3nd91b2AdVhYpxXCl3QTkKxpIe/view?usp=sharing)
 
 ## 바로가기
 1. [제작기간 & 참여 인원](https://github.com/)
