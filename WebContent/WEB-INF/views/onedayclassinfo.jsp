@@ -146,6 +146,10 @@
             	</c:otherwise>
             </c:choose>
             <br>
+            
+            <!-- DTO 로 넘어오는 값 "classinfo.~~" -->
+            <!-- c_info_num,p_info_num, town_code,c_title,c_info_date,c_runtime,min_person,max_person,c_detail_info,c_photo,c_video,c_addr,c_price,u_name -->
+            ${classinfo.c_photo} 등록일자${classinfo.c_info_date}
 	        <div class="container">
             <div class="row">
                 <!-- Blog entries-->
@@ -154,8 +158,8 @@
                     <div class="card mb-4">
                         <a href="#"><img src="images/mic.jpg" style="width: 855px; height: 365px;"></a>
                         <div class="card-body">
-                            <div class="small text-muted mt-2 mb-2" style="font-weight: bold;">박정아 강사님</div>
-                            <h2 class="card-title">하루만에 완성하는 정아 쌤의 보컬연습 <a class="ms-2 btn btn-outline-light btn-sm1">보컬</a> </h2>
+                            <div class="small text-muted mt-2 mb-2" style="font-weight: bold;">${classinfo.u_name}&nbsp강사님</div>
+                            <h2 class="card-title">${classinfo.c_title} <a class="ms-2 btn btn-outline-light btn-sm1">보컬</a> </h2>
                             <a class="btn btn-primary me-4 mt-2" href="#!" style="color: #c79cf5;">상세정보</a>
                             <a class="btn btn-primary me-4 mt-2" href="#!" style="color: #c79cf5;">후기</a>
                             <a class="btn btn-primary me-4 mt-2" href="#!" style="color: #c79cf5;">QNA</a>
@@ -179,6 +183,7 @@
 	                    	<div class="card mb-4">
 	                        	<div class="card-header">클래스 소개글</div>
 	                        	<div class="card-body">
+	                        		${classinfo.c_detail_info}<br>
 									<a class="btn btn-primary me-4 mt-2 mb-2" href="#!" style="color: #c79cf5; border-color: #c79cf5; width: 200px;"># 이런점이 좋아요</a><br>                        	
 									1. 본인이 어떻게 노래 부르고 있는지 파악할 수 있어요<br>
 									2. 남들 앞에서 자신있게 노래 할 수 있어요<br>
@@ -206,12 +211,8 @@
 	                    	<div class="card mb-4">
 	                        	<div class="card-header">강사님 영상</div>
 	                        	<div class="card-body">
-	                        		<iframe width="821" height="460"
-										src="https://www.youtube.com/embed/Aq_gsctWHtQ"
-										title="YouTube video player" frameborder="0"
-										allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-										allowfullscreen>
-									</iframe>
+	                        		<iframe width="560" height="315" src="https://www.youtube.com/embed/3WOwa0lWEz4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+	                        		</iframe>
 	                        	</div>
 	                    	</div>
 	                    </div>
@@ -223,8 +224,10 @@
 	                        		<div id="map" style="width: 100%; height: 450px;"></div>
 
 									<script type="text/javascript"
-										src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0e943a4b910a88bd68a627159bd5111b&libraries=services"></script>
+										src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2b9b2cf7a452418866a021d167da7679&libraries=services"></script>
 									<script>
+									
+										var addr = '${classinfo.c_addr }';  /* 여기서 꼭 '' 따옴표를 붙여줘야 자바스크립트 영역에서 문자열로 인식한다. */
 										var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 										mapOption =
 										{
@@ -242,7 +245,7 @@
 										// 주소로 좌표를 검색합니다
 										geocoder
 												.addressSearch(
-														'서울특별시 종로구 세종로 세종대로 172',
+														addr,
 														function(result, status)
 														{
 					
@@ -289,7 +292,7 @@
 									</script>
 									
 									
-									<br>주소: 서울특별시 종로구 세종로 세종대로 172
+									<br>주소: ${classinfo.c_addr }
 	                        	</div>
 	                    	</div>
 	                    </div>
@@ -382,7 +385,7 @@
 													</div>
 												</div>
 												<div class="col-lg-8 mt-3">
-													<div class="ms-3">박정아 강사님</div>
+													<div class="ms-3">${classinfo.u_name} 강사님</div>
 													<div class="ms-3">총 진행 회차 : 30회</div>
 													<div class="ms-3">총 후기 개수 : 30개</div>
 												</div>
@@ -391,13 +394,13 @@
 												노래는 목으로만 부르지 않습니다. 두성, 흉성 등 다양한 스킬들의 차이를 알고 여러분께 가장 적합한
 												발성법을 가르쳐드리도록 하겠습니다. 노래는 재능의 영역이 아닙니다. 이제 저와 시작하시죠. 
 											<br><br>
-												⏰ 진행시간 : 1시간 30분
+												⏰ 진행시간 : ${classinfo.c_runtime}시간
 											<br>	
-												🚩 장소 : 마포구 뮤뮤빌딩 4층
+												🚩 장소 : ${classinfo.c_addr}
 											<br>
-												🎤 모집인원 : 최대3명 최소1명
+												🎤 모집인원 : 최대${classinfo.max_person}명 최소${classinfo.min_person}명
 											<br>
-												💰 수강료 : 40000원
+												💰 수강료 : ${classinfo.c_price}원
 											<br>
 											<br>
 										</div>

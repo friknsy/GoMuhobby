@@ -1,11 +1,15 @@
 package com.test.classmain;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.test.classDetail.IClassinfoDAO;
 
 
 @Controller
@@ -25,41 +29,18 @@ public class ClassController
 		
 		return "/WEB-INF/views/ClassMain.jsp";
 		
-	}
-	
-	// 클래스 개설 페이지 1
-	@RequestMapping(value = "/classopen1.action", method = RequestMethod.GET)
-	public String ClassOpen1(Model model)
-	{
-		IClassDAO dao = sqlSession.getMapper(IClassDAO.class);
-		
-		return "/WEB-INF/views/9ClassOpen1.jsp";
-	}
-	
-	// 클래스 개설 페이지 2
-	@RequestMapping(value = "/classopen2.action", method = RequestMethod.GET)
-	public String ClassOpen2(Model model)
-	{
-		IClassDAO dao = sqlSession.getMapper(IClassDAO.class);
-		
-		return "/WEB-INF/views/9ClassOpen2.jsp";
-	}
-	
-	// 클래스 개설 페이지 3
-	@RequestMapping(value = "/classopen3.action", method = RequestMethod.GET)
-	public String ClassOpen3(Model model)
-	{
-		IClassDAO dao = sqlSession.getMapper(IClassDAO.class);
-		
-		return "/WEB-INF/views/9ClassOpen3.jsp";
-	}
+	}	
+
 	
 	// 원데이 클래스 상세
 	@RequestMapping(value = "/onedayclassinfo.action", method = RequestMethod.GET)
-	public String Onedayclass(Model model)
+	public String Onedayclass(HttpServletRequest request, Model model)
 	{
-		IClassDAO dao = sqlSession.getMapper(IClassDAO.class);
-		
+		//String c_info_num = request.getParameter("c_info_num");
+		//값을 받는 대신 임의로 넘겨준 번호 6
+		String c_info_num="6";
+		IClassinfoDAO dao = sqlSession.getMapper(IClassinfoDAO.class);
+		model.addAttribute("classinfo",dao.classDetail(c_info_num));
 		return "/WEB-INF/views/onedayclassinfo.jsp";
 	}
 }

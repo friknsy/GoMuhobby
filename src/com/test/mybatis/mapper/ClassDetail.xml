@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="com.test.classDetail.IClassinfoDAO">
+ 
+ 	<select id="classDetail" resultType="com.test.classDetail.ClassinfoDTO">
+ 		select * from classinfo_view where c_info_num=#{c_info_num}
+ 	</select>
+ 	
+ 	<select id="getCatandIntroduction" resultType="com.test.classDetail.IClassinfoDAO"> 
+ 		select * 
+ 		from (select a.c_info_num, b.p_info_num, b.uniq_id_num, b.music_cat_code, c.music_cat_small, d.u_info
+				from class_info a left join prof_info b on a.P_INFO_NUM = b.p_info_num
+				left join music_cat c on b.music_cat_code=c.music_cat_code
+				left join member d on b.uniq_id_num=d.uniq_id_num) where c_info_num=6
+ 	</select>
+ 	
+ 	
+
+
+ 
+ </mapper>
