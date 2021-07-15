@@ -3,9 +3,9 @@ package com.test.professor;
 public class ProfessorDTO
 {
 	// 주요 속성 구성
-	private String p_info_num, uniq_id_num, music_cat_code; //-- 강사정보번호, 고유식별번호, 음악카테고리코드
-	private String p_account, p_school, p_major, p_career, p_doc, p_date; //-- 계좌번호, 학교명, 전공, 경력, 자격증빙서류, 강사등록일자
-	private String u_name, music_cat_large, music_cat_medium, music_cat_small; //-- 이름, 음악카테고리대, 중, 소
+	private String p_info_num, uniq_id_num, music_cat_code; 					//-- 강사정보번호, 고유식별번호, 음악카테고리코드
+	private String p_account, p_school, p_major, p_career, p_doc, p_date; 		//-- 계좌번호, 학교명, 전공, 경력, 자격증빙서류, 강사등록일자
+	private String u_name, music_cat_large, music_cat_medium, music_cat_small; 	//-- 이름, 음악카테고리대, 중, 소
 	
 	// getter / setter
 	public String getP_info_num()
