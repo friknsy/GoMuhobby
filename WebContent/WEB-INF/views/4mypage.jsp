@@ -248,7 +248,7 @@
  											<div class="h6 bold" style="width:100%" >자기 소개</div>
  											<div class="h6" style="width:100%" >코로나 너무 지치는데 어떡하죠코로나너무 너무코로나 너무 지치는데 어떡하죠</div>
 								        </div>
-								        <div class="first bold col-lg-3"> <button class="btn btn-outline-light btn-sm1" type="button" onclick="profilePop()">사진변경</button> </div>
+								        <div class="first bold col-lg-3 mb-3"> <button class="btn btn-outline-light btn-sm1" type="button" onclick="profilePop()">사진변경</button> </div>
 								    </div>
                                 </div>
                                 

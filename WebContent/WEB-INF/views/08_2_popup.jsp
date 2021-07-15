@@ -11,7 +11,6 @@
 	if(session.getAttribute("adminStr")!=null)
 	{
 		adminStr = (String)session.getAttribute("adminStr");
-		System.out.println(adminStr + "관리자확인");
 	}
 
 	String uniqueId = null;
@@ -19,8 +18,6 @@
 	if(session.getAttribute("uniqueId")!=null)
 	{
 		uniqueId = (String)session.getAttribute("uniqueId");
-		
-		System.out.println(uniqueId + "고유식별번호");
 	}
 
 	String mynickName = null;
@@ -28,7 +25,6 @@
 	if(session.getAttribute("mynickName")!=null)
 	{
 		mynickName = (String)session.getAttribute("mynickName");
-		System.out.println(mynickName + "닉네임");
 	}
 %>
 
