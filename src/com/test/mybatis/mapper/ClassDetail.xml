@@ -10,12 +10,32 @@
  		select * from classinfo_view where c_info_num=#{c_info_num}
  	</select>
  	
- 	<select id="getCatandIntroduction" resultType="com.test.classDetail.IClassinfoDAO"> 
+ 	<select id="getCatandIntroduction" resultType="com.test.classDetail.ClassinfoDTO"> 
  		select * 
  		from (select a.c_info_num, b.p_info_num, b.uniq_id_num, b.music_cat_code, c.music_cat_small, d.u_info
 				from class_info a left join prof_info b on a.P_INFO_NUM = b.p_info_num
 				left join music_cat c on b.music_cat_code=c.music_cat_code
-				left join member d on b.uniq_id_num=d.uniq_id_num) where c_info_num=6
+				left join member d on b.uniq_id_num=d.uniq_id_num) where c_info_num=#{c_info_num}
+ 	</select>
+ 	
+ 	<select id="getTotalClasses" resultType="java.lang.Integer">
+ 	<!-- 해당 클래스를 개설한 강사의 총 누적 클래스 진행 횟수를 반환하는 쿼리문 -->
+ 		SELECT COUNT(*) 
+		FROM (SELECT B.C_OPEN_DATE,C.C_TITLE, C.P_INFO_NUM
+				FROM CLASS_CONFIRM A LEFT JOIN CLASS_OPEN B
+				ON A.C_OPEN_NUM = B.C_OPEN_NUM
+				LEFT JOIN CLASS_INFO C
+				ON B.C_INFO_NUM = C.C_INFO_NUM) A
+		WHERE A.P_INFO_NUM=(SELECT P_INFO_NUM
+							FROM CLASS_INFO
+							WHERE C_INFO_NUM =#{c_info_num})
+ 	</select>
+ 	
+ 	<select id="getClassDates" resultType="com.test.classDetail.ClassinfoDTO">
+ 	<!-- 클래스 회차 일정 가져오기(오늘일자 +2가 시작일인 클래스만 신청할 수 있도록 해야함 오늘이 16일이면 17,18일 시작하는 클래스는 신청하지 못함, 19일자 클래스부터 신청가능) -->
+		SELECT C_OPEN_NUM, C_INFO_NUM, C_OPEN_DATE, C_OPEN_TIME
+		,(SELECT COUNT(*) FROM PAYMENT WHERE C_OPEN_NUM=A.C_OPEN_NUM) AS PAYMENTS
+		FROM CLASS_OPEN A WHERE C_OPEN_DATE>SYSDATE+2 AND C_INFO_NUM=#{c_info_num} ORDER BY C_OPEN_DATE
  	</select>
  	
  	

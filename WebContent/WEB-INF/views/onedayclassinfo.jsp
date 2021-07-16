@@ -1,5 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -46,6 +49,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <link href="css/mainpage.css" rel="stylesheet" />
         <link href="css/myPage1.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     </head>
     <body>
         	<!-- 맨 위 상단 바 -->
@@ -159,7 +163,7 @@
                         <a href="#"><img src="images/mic.jpg" style="width: 855px; height: 365px;"></a>
                         <div class="card-body">
                             <div class="small text-muted mt-2 mb-2" style="font-weight: bold;">${classinfo.u_name}&nbsp강사님</div>
-                            <h2 class="card-title">${classinfo.c_title} <a class="ms-2 btn btn-outline-light btn-sm1">보컬</a> </h2>
+                            <h2 class="card-title">${classinfo.c_title} <a class="ms-2 btn btn-outline-light btn-sm1">${catIntro.music_cat_small}</a> </h2>
                             <a class="btn btn-primary me-4 mt-2" href="#!" style="color: #c79cf5;">상세정보</a>
                             <a class="btn btn-primary me-4 mt-2" href="#!" style="color: #c79cf5;">후기</a>
                             <a class="btn btn-primary me-4 mt-2" href="#!" style="color: #c79cf5;">QNA</a>
@@ -386,13 +390,13 @@
 												</div>
 												<div class="col-lg-8 mt-3">
 													<div class="ms-3">${classinfo.u_name} 강사님</div>
-													<div class="ms-3">총 진행 회차 : 30회</div>
+													<div class="ms-3">총 진행 회차 : ${totalClasses }</div>
 													<div class="ms-3">총 후기 개수 : 30개</div>
 												</div>
 											</div>
 											<br><br>
-												노래는 목으로만 부르지 않습니다. 두성, 흉성 등 다양한 스킬들의 차이를 알고 여러분께 가장 적합한
-												발성법을 가르쳐드리도록 하겠습니다. 노래는 재능의 영역이 아닙니다. 이제 저와 시작하시죠. 
+												${catIntro.u_info}
+											
 											<br><br>
 												⏰ 진행시간 : ${classinfo.c_runtime}시간
 											<br>	
@@ -416,19 +420,67 @@
                         <div class="card-header">클래스 회차 일정</div>
                         <div class="card-body">
                             <div class="row">
+                            				              <div class="d-grid gap-3  btn-group mb-2" data-toggle="buttons">
+			                                                	<label class="btn btn-primary">
+			                                                		<input type="radio" name="hobby" autocomplete="off" value="피아노/건반"> 피아노/건반
+			                                                	</label>
+			                                                	<label class="btn btn-primary">
+			                                                		<input type="radio" name="hobby" autocomplete="off" value="보컬"> 보컬
+			                                                	</label>
+			                                                	<label class="btn btn-primary">
+			                                                		<input type="radio" name="hobby" autocomplete="off" value="드럼"> 드럼
+			                                                	</label>
+			                                                	<label class="btn btn-primary">
+			                                                		<input type="radio" name="hobby" autocomplete="off" value="작곡/미디"> 작곡/미디
+			                                                	</label>
+			                                                
+			                                                
+			                                                
+			                                                	<label class="btn btn-primary">
+			                                                		<input type="radio" name="hobby" autocomplete="off" value="기타"> 기타
+			                                                	</label>
+			                                                	<label class="btn btn-primary">
+			                                                		<input type="radio" name="hobby" autocomplete="off" value="베이스"> 베이스
+			                                                	</label>
+			                                                	<label class="btn btn-primary">
+			                                                		<input type="radio" name="hobby" autocomplete="off" value="현악기"> 현악기
+			                                                	</label>
+			                                                	<label class="btn btn-primary">
+			                                                		<input type="radio" name="hobby" autocomplete="off" value="그 외"> 그 외
+			                                                	</label>
+			                                            	</div>
+                            
                                 <div class="btn-group-vertical" role="group" aria-label="..."
 									style="width: 100%;">
-									<button type="button" class="btn btn-primary">
-										2021년 5월 2일 14시 30분 - 16시 (3명 / 5명)
-									</button>
-									<button type="button" class="btn btn-primary">
-										2021년 5월 3일 14시 30분 - 16시 (3명 / 5명)
-									</button>
-									<button type="button" class="btn btn-primary">
-										2021년 5월 4일 14시 30분 - 16시 (3명 / 5명)
-									</button>
+<%-- 									<button type="button" class="btn btn-primary">
+										2021년 5월 2일 14시 30분 - 16시 (3명 / ${classinfo.max_person}명)
+										</button> --%>
+										
+								
+									<c:forEach var="time" items="${classTimes}">
+									<!-- JSTL fmt 사용해서 날짜 형식 맞춤 -->
+										<button type="button" class="btn btn-primary datebutton">
+										<%-- ${time.c_open_num} --%> <fmt:parseDate value="${time.c_open_date}" var="dateValue" pattern="yyyy-MM-dd HH:mm"/>
+																	<fmt:formatDate value="${dateValue}" pattern="yyyy년 MM월 dd일 HH시 mm분"/>  		(${time.payments }명 / ${classinfo.max_person}명)
+							 			
+										</button>	
+									</c:forEach>
+									
+									  <script type="text/javascript">
+										    $(function(){
+										      // .attr()은 속성값(property)을 설정할 수 있다.
+										      $('.datebutton').click(function () {
+										        $('#github').attr("href", "https://www.naver.com");
+										      });
+										
+										      $('#btn5').click(function () {
+										        $('#img').attr("src", "https://i.imgur.com/dquIqqe.jpg");
+										      });
+										    })
+										  </script>
+
 									<br><br>
-									<button type="button" class="btn btn-primary">
+									<button type="button" class="btn btn-primary enrollbutton" onclick="location.href='클래스신청페이지.action?c_open_num=6'">
 										신청하기
 									</button>
 								</div>
@@ -443,5 +495,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        
+        
     </body>
 </html>

@@ -40,7 +40,10 @@ public class ClassController
 		//값을 받는 대신 임의로 넘겨준 번호 6
 		String c_info_num="6";
 		IClassinfoDAO dao = sqlSession.getMapper(IClassinfoDAO.class);
-		model.addAttribute("classinfo",dao.classDetail(c_info_num));
+		model.addAttribute("classinfo",dao.classDetail(c_info_num)); //클래스 상세 정보들
+		model.addAttribute("catIntro", dao.getCatandIntroduction(c_info_num)); //클래스음악카테고리와 강사소개글
+		model.addAttribute("totalClasses", dao.getTotalClasses(c_info_num));
+		model.addAttribute("classTimes", dao.getClassDates(c_info_num));
 		return "/WEB-INF/views/onedayclassinfo.jsp";
 	}
 }

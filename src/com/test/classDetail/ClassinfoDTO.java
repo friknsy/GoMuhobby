@@ -6,6 +6,10 @@ public class ClassinfoDTO
 	private String c_info_num,p_info_num, town_code,c_title,c_info_date,c_runtime,min_person,max_person,c_detail_info,c_photo,c_video,c_addr,c_price,u_name;
 	// 해당 클래스의 카테고리와 프로필자기소개
 	private String music_cat_small, u_info; 
+	
+	// 해당 클래스 회차들 PK번호,시간,신청인원 가져오기
+	private String c_open_num, c_open_date, payments;
+	
 	public String getC_info_num()
 	{
 		return c_info_num;
@@ -154,6 +158,46 @@ public class ClassinfoDTO
 	public void setMusic_cat_small(String music_cat_small)
 	{
 		this.music_cat_small = music_cat_small;
+	}
+
+	public String getU_info()
+	{
+		return u_info;
+	}
+
+	public void setU_info(String u_info)
+	{
+		this.u_info = u_info;
+	}
+
+	public String getC_open_date()
+	{
+		return c_open_date;
+	}
+
+	public void setC_open_date(String c_open_date)
+	{
+		this.c_open_date = c_open_date;
+	}
+
+	public String getPayments()
+	{
+		return payments;
+	}
+
+	public void setPayments(String payments)
+	{
+		this.payments = payments;
+	}
+
+	public String getC_open_num()
+	{
+		return c_open_num;
+	}
+
+	public void setC_open_num(String c_open_num)
+	{
+		this.c_open_num = c_open_num;
 	}
 	
 
