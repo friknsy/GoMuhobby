@@ -39,6 +39,54 @@
  	</select>
  	
  	
+ 	<select id="getTotalReviews" resultType="java.lang.Integer">
+ 		SELECT COUNT(*)
+		FROM (SELECT A.REVIEW_CONTENT, D.P_INFO_NUM
+		FROM CLASS_REVIEW A LEFT JOIN PAYMENT B
+		ON A.PAY_NUM = B.PAY_NUM
+		LEFT JOIN CLASS_OPEN C
+		ON B.C_OPEN_NUM=C.C_OPEN_NUM
+		LEFT JOIN CLASS_INFO D
+		ON C.C_INFO_NUM=D.C_INFO_NUM)
+		WHERE P_INFO_NUM=(SELECT P_INFO_NUM FROM CLASS_INFO WHERE C_INFO_NUM=#{c_info_num})
+ 	</select>
+ 	
+ 	
+ 	<select id="getReviews" resultType="com.test.classDetail.ClassinfoDTO">
+ 		SELECT A.REVIEW_NUM,A.PAY_NUM,A.REVIEW_CONTENT, A.REVIEW_STAR,A.REVIEW_WRT_DATE,B.UNIQ_ID_NUM,D.C_INFO_NUM
+		,(SELECT U_NAME FROM MEMBER WHERE UNIQ_ID_NUM=B.UNIQ_ID_NUM) AS U_NAME
+		,(SELECT U_PHOTO FROM MEMBER WHERE UNIQ_ID_NUM=B.UNIQ_ID_NUM) AS U_PHOTO
+		FROM CLASS_REVIEW A LEFT JOIN PAYMENT B
+		ON A.PAY_NUM = B.PAY_NUM
+		LEFT JOIN CLASS_OPEN C
+		ON B.C_OPEN_NUM=C.C_OPEN_NUM
+		LEFT JOIN CLASS_INFO D
+		ON C.C_INFO_NUM=D.C_INFO_NUM
+		WHERE D.C_INFO_NUM=#{c_info_num}
+		ORDER BY A.REVIEW_NUM
+ 	</select>
+ 	
+ 	
+ 	<select id="getCV" resultType="com.test.classDetail.ClassinfoDTO">
+ 		SELECT CV_NAME FROM CV_SELECTED A LEFT JOIN CV B
+		ON A.CV_CODE=B.CV_CODE WHERE C_INFO_NUM=#{c_info_num}
+ 	</select>
+ 	
+ 	<select id="getProfPhoto" resultType="com.test.classDetail.ClassinfoDTO">
+ 		SELECT C.U_PHOTO
+		FROM CLASS_INFO A LEFT JOIN PROF_INFO B
+		ON A.P_INFO_NUM = B.P_INFO_NUM
+		LEFT JOIN MEMBER C
+		ON B.UNIQ_ID_NUM = C.UNIQ_ID_NUM
+		WHERE C_INFO_NUM=#{c_info_num}
+ 	</select>
+ 	
+ 	<select id="getStarAvg" resultType="java.lang.Integer">
+ 		SELECT (SELECT STARAVG FROM PROF_VIEW WHERE UNIQ_ID_NUM=B.UNIQ_ID_NUM) AS STARAVG
+		FROM CLASS_INFO A LEFT JOIN PROF_INFO B
+		ON A.P_INFO_NUM = B.P_INFO_NUM
+		WHERE A.C_INFO_NUM=#{c_info_num}
+ 	</select>
 
 
  

@@ -153,14 +153,14 @@
             
             <!-- DTO 로 넘어오는 값 "classinfo.~~" -->
             <!-- c_info_num,p_info_num, town_code,c_title,c_info_date,c_runtime,min_person,max_person,c_detail_info,c_photo,c_video,c_addr,c_price,u_name -->
-            ${classinfo.c_photo} 등록일자${classinfo.c_info_date}
+             
 	        <div class="container">
             <div class="row">
                 <!-- Blog entries-->
                 <div class="col-lg-8">
                     <!-- Featured blog post-->
                     <div class="card mb-4">
-                        <a href="#"><img src="images/mic.jpg" style="width: 855px; height: 365px;"></a>
+                        <a href="#"><img src="img/${classinfo.c_photo}" style="width: 855px; height: 365px;"></a>
                         <div class="card-body">
                             <div class="small text-muted mt-2 mb-2" style="font-weight: bold;">${classinfo.u_name}&nbsp강사님</div>
                             <h2 class="card-title">${classinfo.c_title} <a class="ms-2 btn btn-outline-light btn-sm1">${catIntro.music_cat_small}</a> </h2>
@@ -176,6 +176,8 @@
 						1. 수업 2일 전 취소 : 100% 환불<br>
 						2. 수업 1일 전 취소 : 50% 환불<br>
 						3. 수업 당일 취소 : 환불불가
+						<br><br><br>
+						클래스 등록일자 ${classinfo.c_info_date}
                         
                         </div>
                     </div>
@@ -305,8 +307,12 @@
 	                    	<div class="card mb-4">
 	                        	<div class="card-header">편의 사항 제공</div>
 	                        	<div class="card-body">
-	                        		<a class="btn btn-primary me-4 mt-2 mb-2" href="#!"> 📳 와이파이 제공</a>
-	                        		<a class="btn btn-primary me-4 mt-2 mb-2" href="#!"> 🌭 간식 제공</a><br>
+	                        	<c:forEach var="cv" items="${cvs }">
+	                        		<a class="btn btn-primary me-4 mt-2 mb-2" href="#!"> 🎵${cv.cv_name }</a>
+	                        	</c:forEach>
+	                        	
+	                        		
+	                        		<!-- <a class="btn btn-primary me-4 mt-2 mb-2" href="#!"> 🌭 간식 제공</a><br> -->
 	                        	</div>
 	                    	</div>
 	                    </div>
@@ -315,51 +321,82 @@
 	                    	<div class="card mb-4">
 	                        	<div class="card-header"> 후기 작성 </div>
 	                        		<div class="card-body">
-	                        			<div class="row">
-											<div class="col-lg-2">
-												<div class="box"
-													style="background: #BDBDBD; width: 100px; height: 100px; border-radius: 70%; overflow: hidden; float: left;">
-													<img class="profile" src="images/1.jpg" style="width: 100%; height: 100%; object-fit: cover;">
-												</div>
-											</div>
-					
-											<div class="col-lg-10">
-												<div
-													style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star2.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
-													<p
-														style="WIDTH: 60%; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star.gif) 0px 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 18px;">
-													</p>
-												</div>
-												<br> <span>이유림</span><span> 2021.02.02</span> <br> <br>
-												너무쉽게 설명해주셔서 따라가기 좋았어요 한번수업받아보고 바로 배우기로했습니다!
-											</div>
-										</div>
-										<br><br>
-										<div class="row">
-											<div class="col-lg-2">
-												<div class="box"
-													style="background: #BDBDBD; width: 100px; height: 100px; border-radius: 70%; overflow: hidden; float: left;">
-													<img class="profile" src="images/1.jpg" style="width: 100%; height: 100%; object-fit: cover;">
-												</div>
-											</div>
-					
-											<div class="col-lg-10">
-												<div
-													style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star2.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
-													<p
-														style="WIDTH: 60%; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star.gif) 0px 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 18px;">
-													</p>
-												</div>
-												<br> <span>이유림</span><span> 2021.02.02</span> <br> <br>
-												거리가 좀 있어서 고민을 하였었는데
-												정말정말 만족합니다
-												첫수업이라 상담이랑 그냥 조금 배우고 오는줄 알았는데 제가 부족한부분, 배우고 싶었던 부분을 잘 알려주셔서
-												비포 에프터가 바로 나왔답니다 ㅎㅎ
-												추천추천드립니다
-												다들 수업 받아보셔요~
-												선생님 짱!
-											</div>
-										</div>
+
+										
+ 										<c:forEach var="review" items="${reviews}">
+											
+												<div class="row">
+													<div class="col-lg-2">
+														<div class="box"
+															style="background: #BDBDBD; width: 100px; height: 100px; border-radius: 70%; overflow: hidden; float: left;">
+															<img class="profile" src="img/${review.u_photo }" style="width: 100%; height: 100%; object-fit: cover;">
+														</div>
+													</div>
+							
+													<div class="col-lg-10">
+																
+														<c:choose>
+															<c:when test="${review.review_star eq '5'}">
+																																<div
+																	style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star2.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
+																	<p
+																		style="WIDTH:100%; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star.gif) 0px 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 18px;">
+																		
+																		
+																	</p>
+																</div>
+															</c:when>
+															<c:when test="${review.review_star eq '4'}">
+																																<div
+																	style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star2.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
+																	<p
+																		style="WIDTH:80%; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star.gif) 0px 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 18px;">
+																		
+																		
+																	</p>
+																</div>
+															</c:when>
+															<c:when test="${review.review_star eq '3'}">
+																																<div
+																	style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star2.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
+																	<p
+																		style="WIDTH:60%; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star.gif) 0px 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 18px;">
+																		
+																		
+																	</p>
+																</div>
+															</c:when>
+															<c:when test="${review.review_star eq '2'}">
+																																<div
+																	style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star2.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
+																	<p
+																		style="WIDTH:40%; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star.gif) 0px 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 18px;">
+																		
+																		
+																	</p>
+																</div>
+															</c:when>										
+															<c:otherwise>
+																																<div
+																	style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star2.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
+																	<p
+																		style="WIDTH:20%; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star.gif) 0px 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 18px;">
+																		
+																		
+																	</p>
+																</div>
+															</c:otherwise>
+															
+															
+														</c:choose>		
+														<br> <span>${review.u_name}</span><span> ${review.review_wrt_date} </span> <br> <br>
+														${review.review_content }
+													</div>
+												</div><br><br>
+											
+										</c:forEach> 
+										
+										
 		                        	</div>
 		                    	</div>
 		                    </div>
@@ -380,18 +417,15 @@
 		                                        <div class="col-lg-4 text-center">
 													<div class="ms-3"
 														style="background: #BDBDBD; width: 100px; height: 100px; border-radius: 70%; overflow: hidden; float: left;">
-														<img class="profile" src="images/1.jpg" style="width: 100%; height: 100%; object-fit: cover;">
+														<img class="profile" src="img/${profPhoto.u_photo }" style="width: 100%; height: 100%; object-fit: cover;">
 													</div>
-													<!-- 별점 -->
-													<div class="mt-2 ms-3"
-														   style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star2.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
-														<p style="WIDTH: 80%; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(images/icon_star.gif) 0px 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 18px;"></p>
-													</div>
+
 												</div>
 												<div class="col-lg-8 mt-3">
-													<div class="ms-3">${classinfo.u_name} 강사님</div>
-													<div class="ms-3">총 진행 회차 : ${totalClasses }</div>
-													<div class="ms-3">총 후기 개수 : 30개</div>
+													<div class="ms-3" style="font-size: large;">${classinfo.u_name} 강사님</div>
+													<div class="ms-3">🏛  총 진행 회차 : ${totalClasses } 회</div>
+													<div class="ms-3">📝  총 후기 개수 : ${totalReviews } 개</div>
+													<div class="ms-3">⭐  총  별점 평균 : ${starAvg } 점</div>
 												</div>
 											</div>
 											<br><br>
@@ -420,36 +454,7 @@
                         <div class="card-header">클래스 회차 일정</div>
                         <div class="card-body">
                             <div class="row">
-                            				              <div class="d-grid gap-3  btn-group mb-2" data-toggle="buttons">
-			                                                	<label class="btn btn-primary">
-			                                                		<input type="radio" name="hobby" autocomplete="off" value="피아노/건반"> 피아노/건반
-			                                                	</label>
-			                                                	<label class="btn btn-primary">
-			                                                		<input type="radio" name="hobby" autocomplete="off" value="보컬"> 보컬
-			                                                	</label>
-			                                                	<label class="btn btn-primary">
-			                                                		<input type="radio" name="hobby" autocomplete="off" value="드럼"> 드럼
-			                                                	</label>
-			                                                	<label class="btn btn-primary">
-			                                                		<input type="radio" name="hobby" autocomplete="off" value="작곡/미디"> 작곡/미디
-			                                                	</label>
-			                                                
-			                                                
-			                                                
-			                                                	<label class="btn btn-primary">
-			                                                		<input type="radio" name="hobby" autocomplete="off" value="기타"> 기타
-			                                                	</label>
-			                                                	<label class="btn btn-primary">
-			                                                		<input type="radio" name="hobby" autocomplete="off" value="베이스"> 베이스
-			                                                	</label>
-			                                                	<label class="btn btn-primary">
-			                                                		<input type="radio" name="hobby" autocomplete="off" value="현악기"> 현악기
-			                                                	</label>
-			                                                	<label class="btn btn-primary">
-			                                                		<input type="radio" name="hobby" autocomplete="off" value="그 외"> 그 외
-			                                                	</label>
-			                                            	</div>
-                            
+                      
                                 <div class="btn-group-vertical" role="group" aria-label="..."
 									style="width: 100%;">
 <%-- 									<button type="button" class="btn btn-primary">
@@ -459,7 +464,7 @@
 								
 									<c:forEach var="time" items="${classTimes}">
 									<!-- JSTL fmt 사용해서 날짜 형식 맞춤 -->
-										<button type="button" class="btn btn-primary datebutton">
+										<button type="button" class="btn btn-primary datebutton" value="${time.c_open_num}">
 										<%-- ${time.c_open_num} --%> <fmt:parseDate value="${time.c_open_date}" var="dateValue" pattern="yyyy-MM-dd HH:mm"/>
 																	<fmt:formatDate value="${dateValue}" pattern="yyyy년 MM월 dd일 HH시 mm분"/>  		(${time.payments }명 / ${classinfo.max_person}명)
 							 			
@@ -467,20 +472,22 @@
 									</c:forEach>
 									
 									  <script type="text/javascript">
+									  
+									  		
 										    $(function(){
 										      // .attr()은 속성값(property)을 설정할 수 있다.
 										      $('.datebutton').click(function () {
-										        $('#github').attr("href", "https://www.naver.com");
-										      });
-										
-										      $('#btn5').click(function () {
-										        $('#img').attr("src", "https://i.imgur.com/dquIqqe.jpg");
+										    	  
+										    	var str ="location.href='신청페이지?c_open_num="+ $(this).val().toString()+"'";
+										    	/* 여기서 'href='신청페이지주소?c_open_num='22   이런식으로 넘겨줘서 계속 에러가남. 따옴표 한쪽을 바깥쪽으로 빼줌 */
+										    	  
+										       $('.enrollbutton').attr("onclick", str); 
 										      });
 										    })
-										  </script>
+									</script>
 
 									<br><br>
-									<button type="button" class="btn btn-primary enrollbutton" onclick="location.href='클래스신청페이지.action?c_open_num=6'">
+									<button type="button" class="btn btn-primary enrollbutton" onclick="alert('시간을 먼저 선택해 주세요!')">
 										신청하기
 									</button>
 								</div>

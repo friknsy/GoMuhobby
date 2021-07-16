@@ -44,6 +44,11 @@ public class ClassController
 		model.addAttribute("catIntro", dao.getCatandIntroduction(c_info_num)); //클래스음악카테고리와 강사소개글
 		model.addAttribute("totalClasses", dao.getTotalClasses(c_info_num));
 		model.addAttribute("classTimes", dao.getClassDates(c_info_num));
+		model.addAttribute("totalReviews", dao.getTotalReviews(c_info_num));
+		model.addAttribute("reviews",dao.getReviews(c_info_num));
+		model.addAttribute("cvs",dao.getCV(c_info_num));
+		model.addAttribute("profPhoto", dao.getProfPhoto(c_info_num));
+		model.addAttribute("starAvg", dao.getStarAvg(c_info_num));
 		return "/WEB-INF/views/onedayclassinfo.jsp";
 	}
 }

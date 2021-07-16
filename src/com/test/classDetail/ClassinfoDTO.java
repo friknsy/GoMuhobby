@@ -10,6 +10,17 @@ public class ClassinfoDTO
 	// 해당 클래스 회차들 PK번호,시간,신청인원 가져오기
 	private String c_open_num, c_open_date, payments;
 	
+	// 해당 클래스 댓글 가져오기
+	private String review_num,pay_num,review_content, review_star,review_wrt_date,uniq_id_num, u_photo;
+	
+	// 편의사항 가져오기
+	private String cv_name;
+	
+	// 강사의 평균 별점 가져오기
+	private String staravg;
+	
+	
+	
 	public String getC_info_num()
 	{
 		return c_info_num;
@@ -198,6 +209,96 @@ public class ClassinfoDTO
 	public void setC_open_num(String c_open_num)
 	{
 		this.c_open_num = c_open_num;
+	}
+
+	public String getReview_num()
+	{
+		return review_num;
+	}
+
+	public void setReview_num(String review_num)
+	{
+		this.review_num = review_num;
+	}
+
+	public String getPay_num()
+	{
+		return pay_num;
+	}
+
+	public void setPay_num(String pay_num)
+	{
+		this.pay_num = pay_num;
+	}
+
+	public String getReview_content()
+	{
+		return review_content;
+	}
+
+	public void setReview_content(String review_content)
+	{
+		this.review_content = review_content;
+	}
+
+	public String getReview_star()
+	{
+		return review_star;
+	}
+
+	public void setReview_star(String review_star)
+	{
+		this.review_star = review_star;
+	}
+
+	public String getReview_wrt_date()
+	{
+		return review_wrt_date;
+	}
+
+	public void setReview_wrt_date(String review_wrt_date)
+	{
+		this.review_wrt_date = review_wrt_date;
+	}
+
+	public String getUniq_id_num()
+	{
+		return uniq_id_num;
+	}
+
+	public void setUniq_id_num(String uniq_id_num)
+	{
+		this.uniq_id_num = uniq_id_num;
+	}
+
+	public String getU_photo()
+	{
+		return u_photo;
+	}
+
+	public void setU_photo(String u_photo)
+	{
+		this.u_photo = u_photo;
+	}
+
+	public String getCv_name()
+	{
+		return cv_name;
+	}
+
+	public void setCv_name(String cv_name)
+	{
+		this.cv_name = cv_name;
+	}
+
+	public String getStaravg()
+	{
+		return staravg;
+	}
+
+	public void setStaravg(String staravg)
+	{
+		this.staravg = staravg;
 	}
 	
 
