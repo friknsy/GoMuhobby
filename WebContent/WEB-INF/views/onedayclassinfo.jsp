@@ -477,7 +477,8 @@ if (session.getAttribute("mynickName") != null) {
 									<br>
 
 
-
+									<c:if test="${catIntro.uniq_id_num eq uniqueId}">
+									
 									<div class="col-lg-2">
 
 										<c:if test="${empty QnA.p_answ_content }">
@@ -497,6 +498,9 @@ if (session.getAttribute("mynickName") != null) {
 
 										</c:if>
 									</div>
+									 
+									</c:if> 
+
 
 									<br>
 
@@ -529,11 +533,22 @@ if (session.getAttribute("mynickName") != null) {
 									<input type="hidden" name="uniq_id_num" value="<%=uniqueId%>">
 									<input type="hidden" name="c_info_num" value="${classinfo.c_info_num}">
 									<div class="col-lg-10">
-										<textarea rows="5" cols="75" name="c_qa_content"></textarea>
+										<textarea rows="5" cols="75" name="c_qa_content" required="required"></textarea>
 									</div>
-									<div class="col-lg-2" style="padding-top: 40px;">
-										<button type="submit" class="btn btn-primary">질문등록</button>
-									</div>								
+									
+									<!-- 로그인이 되어있지 않다면 -->
+									<c:choose>
+										<c:when test="${mynickName eq null}">
+											로그인 후 질문 등록이 가능합니다.
+										</c:when>
+										<c:otherwise>
+											<div class="col-lg-2" style="padding-top: 40px;">
+												<button type="submit" class="btn btn-primary">질문등록</button>
+											</div>	
+										</c:otherwise>
+									</c:choose>
+									
+							
 								</form>
 							</div>
 
@@ -656,9 +671,7 @@ if (session.getAttribute("mynickName") != null) {
 											function()
 											{
 												// .attr()은 속성값(property)을 설정할 수 있다.
-												$('.datebutton')
-														.click(
-																function()
+												$('.datebutton').click( function()
 																{
 
 																	var str = "location.href='신청페이지?c_open_num="
