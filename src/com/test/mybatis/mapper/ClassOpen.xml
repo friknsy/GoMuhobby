@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.test.classopen.IClassOpenDAO">
+
+	<!-- 강사님 기본 정보 출력 강사명, 닉네임, 전화번호, 계좌번호-->
+ 	<select id="profinfo" resultType="com.test.classmain.ClassDTO">
+ 		SELECT U_NAME, USER_NICKNAME, U_TEL, P_ACCOUNT
+		FROM MEMBER A
+		JOIN USER_UNIQUE_ID B ON A.UNIQ_ID_NUM = B.UNIQ_ID_NUM
+		JOIN PROF_INFO C ON A.UNIQ_ID_NUM = C.UNIQ_ID_NUM
+		WHERE A.UNIQ_ID_NUM = #{uniq_id_num}
+ 	</select>
+ 	
+</mapper>

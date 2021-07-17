@@ -18,6 +18,8 @@
 	<context:component-scan base-package="com.test.admin"/>
 	<context:component-scan base-package="com.test.professor"/>
 	<context:component-scan base-package="com.test.classmain"/>
+	<context:component-scan base-package="com.test.classDetail"/>
+	<context:component-scan base-package="com.test.classopen"/>
 	
 	
 	<bean id="localDataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">

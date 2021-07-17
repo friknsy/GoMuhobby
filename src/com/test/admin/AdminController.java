@@ -50,9 +50,11 @@ public class AdminController
 	public String goToReportReg(Model model) 
 	{
 		//qna 질문글 신고 내역 가져오기
+		// 자유게시판 신고 내역 가져오기
 		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
 		
 		model.addAttribute("qaReportList", dao.qaReportList());
+		model.addAttribute("ffReportList", dao.ffReportList());
 		
 		return "/WEB-INF/views/ReportReg.jsp";
 	}

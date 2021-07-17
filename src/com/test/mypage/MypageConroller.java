@@ -13,4 +13,17 @@ public class MypageConroller
 	{
 		return "WEB-INF/views/4mypage.jsp";
 	}
+	
+	@RequestMapping(value="/mypagemyclass.action",method=RequestMethod.GET)
+	public String mypagemyclass(Model model)
+	{	
+		// 깃  올리기 용
+		return "WEB-INF/views/6mypagemyclass.jsp";
+	}
+	
+	@RequestMapping(value="/mypageyourclass.action",method=RequestMethod.GET)
+	public String mypageyourclass(Model model)
+	{
+		return "WEB-INF/views/7mypageyourclass.jsp";
+	}
 }

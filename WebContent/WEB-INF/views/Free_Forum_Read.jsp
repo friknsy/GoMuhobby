@@ -209,7 +209,7 @@
 					</ul>
 				</div>
 
-				<!-- 수정/삭제 버튼  未完-->
+				<!-- 수정/삭제 버튼 -->
 				<c:choose>
 					<c:when test="${forumcheck eq null }">
 						<div class="col-md-2 offset-md-4">
@@ -447,13 +447,11 @@
 				}
 				
 				var content = $('#comment_input').val();
-
-				
 				
 				var sendData={
-					f_forum_code:$('#f_forum_code').val(), 
-					
-					f_reply_content:$("#comment_input").val()
+					f_forum_code : $('#f_forum_code').val(), 
+					uniq_id_num : $("#uniq_id_num").val(),
+					f_reply_content : $("#comment_input").val()
 				};
 
 				 $.ajax({

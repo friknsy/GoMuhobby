@@ -10,6 +10,8 @@ public class AdminDTO
 	private String /*rnum,*/ uniq_id_num, u_join_date, u_id, u_name, u_email, u_tel, u_drop_date;
 	// 회원 계정 조회 - 번호, 고유식별번호, 가입일, 아이디, 이름, 이메일, 전화번호, 탈퇴일자 (rnum은 기존 변수 사용)
 	private String a_num , report_proc_cat_code;
+	// 자유게시판 게시글 신고목록
+	private String f_report_reg_code, f_report_reg_date, f_forum_code, f_forum_title, processing;
 	
 
 	public String getRnum()
@@ -232,6 +234,56 @@ public class AdminDTO
 	public void setReport_proc_cat_code(String report_proc_cat_code)
 	{
 		this.report_proc_cat_code = report_proc_cat_code;
+	}
+
+	public String getF_report_reg_code()
+	{
+		return f_report_reg_code;
+	}
+
+	public void setF_report_reg_code(String f_report_reg_code)
+	{
+		this.f_report_reg_code = f_report_reg_code;
+	}
+
+	public String getF_report_reg_date()
+	{
+		return f_report_reg_date;
+	}
+
+	public void setF_report_reg_date(String f_report_reg_date)
+	{
+		this.f_report_reg_date = f_report_reg_date;
+	}
+
+	public String getF_forum_code()
+	{
+		return f_forum_code;
+	}
+
+	public void setF_forum_code(String f_forum_code)
+	{
+		this.f_forum_code = f_forum_code;
+	}
+
+	public String getF_forum_title()
+	{
+		return f_forum_title;
+	}
+
+	public void setF_forum_title(String f_forum_title)
+	{
+		this.f_forum_title = f_forum_title;
+	}
+
+	public String getProcessing()
+	{
+		return processing;
+	}
+
+	public void setProcessing(String processing)
+	{
+		this.processing = processing;
 	}
 
 	

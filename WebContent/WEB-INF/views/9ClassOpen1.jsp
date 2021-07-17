@@ -183,7 +183,7 @@
 	                                            <span class="mb-2 fw-bold normal">강사명</span>
 	                                                <div class="col-md-9">
 	                                                    <div class="form-floating mb-3 mb-md-0">
-	                                                        <input class="form-control" id="userId" name="userId"type="text"/>
+	                                                        <input class="form-control" id="userId" name="userId" type="text" value="${profinfo.u_name }"/>
 	                                                    </div>
 	                                                </div>
 	                                                <div class="col-md-3 d-grid mb-2">
@@ -192,10 +192,10 @@
 	                                            </div>
 	                                            <br>
 	                                            <div class="row mb-3">
-	                                            <span class="mb-2 fw-bold normal">계정 ID</span>
+	                                            <span class="mb-2 fw-bold normal">닉네임</span>
 	                                                <div class="col-md-9">
 	                                                    <div class="form-floating mb-3 mb-md-0">
-	                                                        <input class="form-control" id="userId" name="userId"type="text"/>
+	                                                        <input class="form-control" id="userId" name="userId"type="text" value="${profinfo.user_nickname }"/>
 	                                                    </div>
 	                                                </div>
 	                                                <div class="col-md-3 d-grid mb-2">
@@ -208,7 +208,7 @@
 	                                            <span class="mb-2 fw-bold normal">전화번호</span>
 	                                                <div class="col-md-9">
 	                                                    <div class="form-floating mb-3 mb-md-0">
-	                                                        <input class="form-control" id="userId" name="userId"type="text"/>
+	                                                        <input class="form-control" id="userId" name="userId"type="text" value="${profinfo.u_tel }"/>
 	                                                    </div>
 	                                                </div>
 	                                                <div class="col-md-3 d-grid mb-2">
@@ -217,10 +217,10 @@
 	                                            </div>
 	                                        	<br>
 	                                            <div class="row mb-3">
-	                                            <span class="mb-2 fw-bold normal">계좌번호</span>
+	                                            <span class="mb-2 fw-bold normal">계좌번호(은행 기재)</span>
 	                                                <div class="col-md-9">
 	                                                    <div class="form-floating mb-3 mb-md-0">
-	                                                        <input class="form-control" id="userId" name="userId"type="text"/>
+	                                                        <input class="form-control" id="userId" name="userId"type="text" value="${profinfo.p_account }"/>
 	                                                    </div>
 	                                                </div>
 	                                                <div class="col-md-3 d-grid mb-2">

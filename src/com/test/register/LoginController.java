@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -56,18 +57,19 @@ public class LoginController
 		// 서버에 생성된 세션이 있으면 세션을 반환하고 없다면 새 세션을 생성. (인수 default true)
 		// 인수로 false 값을 주면 이미 생성된 세션이 있을 때 그 세션을 반환하고 없다면 
 		HttpSession session = request.getSession();
-		
 		UserDTO u = new UserDTO();
 		
 		u.setU_id(u_id);
 		u.setU_pwd(u_pwd);
 		
+		// System.out.println(u.getU_photo() + " 나오니"); 				// null
 		// System.out.println(dao.idcheck(u_id) + "아이디 확인");		// 아이디가 있는 지 없는 지 0 or 1 반환
 		// System.out.println(dao.pwcheck(u) + "비밀번호 확인");		// 비밀번호가 맞는지 안 맞는지 0 or 1 반환
 		// System.out.println(dao.logincheck(u) + "닉네임 확인");		// 문자열 반환
 		
 		int idcheck = dao.idcheck(u_id);
 		int pwcheck = dao.pwcheck(u);
+		
 		
 		String message = null;
 		String mynickName = dao.logincheck(u);
@@ -85,13 +87,7 @@ public class LoginController
 		int admin = dao.admincheck(uniqueId);
 		String adminStr = admin + "";
 		
-		
-		/* System.out.println(uniqueId); */
-		
-		/* System.out.println(mynickName); */
-		
-		// 존재하지 않는 아이디이거나 탈퇴한 아이디 입니다.
-		
+		String photo = dao.profileselect(uniqueId);
 		
 	    if(idcheck < 1)
 	    {	
@@ -110,18 +106,52 @@ public class LoginController
 		{	
 			if(admin == 0)
 			{
+				session.setAttribute("photo", photo);
 				session.setAttribute("uniqueId", uniqueId);
 				session.setAttribute("mynickName", mynickName);
+				dao.loginhit(uniqueId);
 				return message;
 			}
 			
 			else
 			{	
+				session.setAttribute("photo", photo);
 				session.setAttribute("adminStr", adminStr);
 				session.setAttribute("uniqueId", uniqueId);
 				session.setAttribute("mynickName", mynickName);
+				dao.loginhit(uniqueId);
 				return message;
 			}
 		}
+	}
+	
+	
+	// 프로필 사진 변경 팝업
+	@RequestMapping(value = "/profilepopup.action", method = RequestMethod.GET)
+	public String profileChangePopUp(HttpServletRequest request, Model model)
+	{	
+		String uniqueId = request.getParameter("uniqueId");
+		model.addAttribute("uniqueId",uniqueId);
+		return "/ProfilePopUp.jsp";
+	}
+	
+	
+	// 프로필사진 본격 변경
+	@RequestMapping(value = "/profileinput.action", method = RequestMethod.POST)
+	public String profileInput(HttpServletRequest request, Model model)
+	{	
+		String uniqueId = (String) request.getAttribute("uniqueId");
+		String fileName = (String) request.getAttribute("fileName");
+		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
+		dao.profileChange(fileName, uniqueId);
+		
+		// System.out.println(uniqueId + "확인용"); 얼얼이.jpg 
+		String photo = dao.profileselect(uniqueId);
+		 
+		HttpSession session = request.getSession();
+		
+		session.setAttribute("photo", photo);
+		
+		return "/windowclose.jsp";
 	}
 }

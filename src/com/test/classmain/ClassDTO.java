@@ -11,8 +11,33 @@ public class ClassDTO
 	//-- 상세정보, 대표이미지, 영상URL, 장소
 	private String uniq_id_num, town_name, music_cat_code, u_name;
 	//-- 고유식별번호, 읍면동명, 음악 카테고리 코드
+	private String user_nickname, u_tel, p_account;
 	
 	
+	public String getUser_nickname()
+	{
+		return user_nickname;
+	}
+	public void setUser_nickname(String user_nickname)
+	{
+		this.user_nickname = user_nickname;
+	}
+	public String getU_tel()
+	{
+		return u_tel;
+	}
+	public void setU_tel(String u_tel)
+	{
+		this.u_tel = u_tel;
+	}
+	public String getP_account()
+	{
+		return p_account;
+	}
+	public void setP_account(String p_account)
+	{
+		this.p_account = p_account;
+	}
 	// getter / setter 구성
 	public String getC_info_num()
 	{
