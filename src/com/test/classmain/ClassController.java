@@ -1,5 +1,7 @@
 package com.test.classmain;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,49 @@ public class ClassController
 		System.out.println(dao.listNew());
 		
 		return "/WEB-INF/views/ClassMain.jsp";
+		
+	}
+	
+	// 원데이클래스 전체
+	@RequestMapping(value = "/classall.action", method = RequestMethod.GET)
+	public String ClassAllList(Model model)
+	{
+		IClassDAO dao = sqlSession.getMapper(IClassDAO.class);
+		
+		model.addAttribute("list", dao.listAll());
+		System.out.println(dao.listAll());
+		
+		return "/WEB-INF/views/ClassAll.jsp";
+		
+	}
+	
+	// 원데이클래스 추천 지역
+	@RequestMapping(value = "/classregion.action", method = RequestMethod.GET)
+	public String ClassRegionList(Model model, HttpServletRequest request)
+	{
+		String uniq_id_num = request.getParameter("uniq_id_num");
+		
+		IClassDAO dao = sqlSession.getMapper(IClassDAO.class);
+		
+		model.addAttribute("list", dao.listRegion(uniq_id_num));
+		//System.out.println(dao.listRegion(uniq_id_num));
+		
+		return "/WEB-INF/views/ClassRegion.jsp";
+		
+	}
+	
+	// 원데이클래스 추천 음악
+	@RequestMapping(value = "/classmusic.action", method = RequestMethod.GET)
+	public String ClassMusicList(Model model, HttpServletRequest request)
+	{
+		String uniq_id_num = request.getParameter("uniq_id_num");
+		
+		IClassDAO dao = sqlSession.getMapper(IClassDAO.class);
+		
+		model.addAttribute("list", dao.listMusic(uniq_id_num));
+		//System.out.println(dao.listMusic(uniq_id_num));
+		
+		return "/WEB-INF/views/ClassMusic.jsp";
 		
 	}
 	

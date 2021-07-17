@@ -58,9 +58,11 @@
 <style type="text/css">
 	.carousel 
 	{
-		margin-bottom: 0;
-		padding: 0 100px 30px 100px;
-		height: 300px;
+		margin-top: 0px;
+		margin-bottom: 0px;
+		width: 1200px;
+		height: 200px;
+		/* padding: 0px 100px 30px 100px; */
 	}
 	
 	.carousel-control 
@@ -74,10 +76,10 @@
 	
 	.carousel-indicators 
 	{
-		right: 50%;
-		top: auto;
+		/* right: 50%; */
+		top: 0px;;
 		bottom: 0px;
-		margin-right: -19px;
+		/* margin-right: -19px; */
 	}
 	
 	.carousel-indicators li 
@@ -97,6 +99,12 @@
 		height: 70px;
 		width: 500px;
 	}
+	
+	a 
+	{ 
+		color : black; 
+		text-decoration:none; 
+	}
 		
 </style>
 
@@ -110,7 +118,47 @@
 		//테스트
 		//alert($("#c_photo").val());
 		
+		
+		// 추천 지역 
+		$("#classRegion").click(function()
+		{
+			
+			// 세션에서 받아온 고유식별번호가 null 이라면 (로그인 되어있지 않다면)
+			if(<%= uniqueId %>==null)
+			{
+				alert("로그인 후 이용할 수 있는 서비스입니다.");
+				$(location).attr("href", "loginform.action");
+				
+				
+			}
+			else
+			{
+				$(location).attr("href", "classregion.action?uniq_id_num=" + <%= uniqueId %>);	
+			}
+			
+		
+		});
+		
+		// 추천 음악
+		$("#classMusic").click(function()
+		{
+			
+			// 세션에서 받아온 고유식별번호가 null 이라면 (로그인 되어있지 않다면)
+			if(<%= uniqueId %>==null)
+			{
+				alert("로그인 후 이용할 수 있는 서비스입니다.");
+				$(location).attr("href", "loginform.action");
+				
+			}
+			else
+			{
+				$(location).attr("href", "classmusic.action?uniq_id_num=" + <%= uniqueId %>);	
+			}
+			
+		});
+		
 	});
+	
 	
 	
 	
@@ -228,39 +276,36 @@
 	</div>
 	<div class="container col-sm-12 col-lg-12">
 		<div id="myCarousel" class="carousel slide" data-ride="carousel" >
-         <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>  <!-- 혀니가 찾은 active -->
-            <li data-target="#myCarousel" data-slide-to="1" ></li>
-            <li data-target="#myCarousel" data-slide-to="2" ></li>
-            <li data-target="#myCarousel" data-slide-to="3" ></li>         
-         </ol>
-         <div class="carousel-inner">
-            <div class="item active mt-3" style="height: 280px; ">
-               <img src="https://unsplash.it/1600/900/?random">   
-            </div>
-            <div class="item mt-3" style="height: 280px; ">
-               <img src="https://unsplash.it/1600/900/?random">   
-            </div>
-            <div class="item mt-3" style="height: 280px; ">
-               <img src="https://unsplash.it/1600/900/?random">   
-            </div>
-            <div class="item mt-3" style="height: 280px; ">
-               <img src="https://unsplash.it/1600/900/?random">   
-            </div>
-         </div>
-         <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-         </a>
-         <a class="right carousel-control" href="#myCarousel" data-slide="next">
-         </a>
-      </div>
+	         <ol class="carousel-indicators" >
+	            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>  
+	            <li data-target="#myCarousel" data-slide-to="1" ></li>
+	            <li data-target="#myCarousel" data-slide-to="2" ></li>
+	         </ol> 
+	         <div class="carousel-inner">
+	         	<!-- style="height: 280px;  -->
+	            <div class="item active mt-3" >
+	               <img src="img/배너1.gif" alt="">   
+	            </div>
+	            <div class="item mt-3">
+	               <img src="img/배너2.gif" alt="">   
+	            </div>
+	            <div class="item mt-3">
+	               <img src="img/배너3.gif" alt="">   
+	            </div>
+	         </div>
+	         <!-- <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+	         </a>
+	         <a class="right carousel-control" href="#myCarousel" data-slide="next">
+	         </a> -->
+      	</div>
 	</div>
 	
 	<div style="float: left;">
 	<br><br>
 		<div style="float: left;">
-			<a href="#"><h3>전체 클래스<i class="bi bi-chevron-right"></i></h3></a>
+			<a href="classall.action"><h3>전체 클래스<i class="bi bi-chevron-right"></i></h3></a>
 		</div>
-		<div style="float: left; margin-top: 20px;">
+		<div style="float: left; margin-top: 5px;">
 			<p>뮤하비에 개설되어 있는 전체 클래스 보기</p>
 		</div>
 	</div><div style="clear:both;"></div>
@@ -271,8 +316,10 @@
 		</div><div style="clear:both;"></div>
 		<div style="text-align: center;">
 			<div class="btn-rec" style="float: left;">
-					<button type="button" class="btn btn-outline-light btn-lg1">지역 추천 클래스</button>
-					<button type="button" class="btn btn-outline-light btn-lg1">관심 음악 추천 클래스</button>
+					<button type="button" class="btn btn-outline-light btn-lg1" 
+					id="classRegion">지역 추천 클래스</button>
+					<button type="button" class="btn btn-outline-light btn-lg1" 
+					id="classMusic">관심 음악 추천 클래스</button>
 			</div><div style="clear:both;"></div>
 		</div>
 		<div>
