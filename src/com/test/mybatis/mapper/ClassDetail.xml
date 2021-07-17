@@ -87,6 +87,37 @@
 		ON A.P_INFO_NUM = B.P_INFO_NUM
 		WHERE A.C_INFO_NUM=#{c_info_num}
  	</select>
+ 	
+ 	<select id="getQnA" resultType="com.test.classDetail.ClassinfoDTO">
+ 		SELECT A.C_QA_NUM,A.C_QA_CONTENT,A.C_QA_WRT_DATE,B.P_ANSW_CONTENT,B.P_ANSW_WRT_DATE,B.P_ANSW_NUM,A.UNIQ_ID_NUM
+ 		,(SELECT USER_NICKNAME FROM USER_UNIQUE_ID WHERE UNIQ_ID_NUM=A.UNIQ_ID_NUM )AS USER_NICKNAME
+		,(SELECT U_PHOTO FROM MEMBER WHERE UNIQ_ID_NUM=A.UNIQ_ID_NUM) AS U_PHOTO
+		FROM CLASS_QA A LEFT JOIN PROF_ANSWER B
+		ON A.C_QA_NUM = B.C_QA_NUM
+		WHERE A.C_INFO_NUM=#{c_info_num}
+		ORDER BY A.C_QA_NUM
+ 	</select>
+ 	
+ 	<insert id="classQnaInsert">
+ 		INSERT INTO PROF_ANSWER VALUES(P_ANSWER_NUM_SEQ.NEXTVAL,#{c_qa_num},SYSDATE,#{p_answ_content})
+ 	</insert>
+ 	
+ 	<update id="classQnaUpdate">
+ 		UPDATE PROF_ANSWER
+		SET P_ANSW_CONTENT=#{p_answ_content}
+		WHERE P_ANSW_NUM=#{p_answ_num}
+ 	</update>
+ 	
+ 	<delete id="classQnaDelete">
+		DELETE 
+		FROM PROF_ANSWER
+		WHERE P_ANSW_NUM=#{p_answ_num}
+ 	</delete>
+ 	
+ 	<insert id="classQuestionInsert">
+ 		INSERT INTO CLASS_QA VALUES(CLASS_QA_SEQ.NEXTVAL,#{c_info_num},#{uniq_id_num},SYSDATE,#{c_qa_content})
+ 	
+ 	</insert>
 
 
  

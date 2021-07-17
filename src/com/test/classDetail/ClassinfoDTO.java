@@ -19,6 +19,9 @@ public class ClassinfoDTO
 	// 강사의 평균 별점 가져오기
 	private String staravg;
 	
+	// 해당클래스의 질문과 답변 가져오기
+	private String c_qa_num, c_qa_content, c_qa_wrt_date, p_answ_content, p_answ_wrt_date, user_nickname, p_answ_num;
+	
 	
 	
 	public String getC_info_num()
@@ -299,6 +302,76 @@ public class ClassinfoDTO
 	public void setStaravg(String staravg)
 	{
 		this.staravg = staravg;
+	}
+
+	public String getC_qa_num()
+	{
+		return c_qa_num;
+	}
+
+	public void setC_qa_num(String c_qa_num)
+	{
+		this.c_qa_num = c_qa_num;
+	}
+
+	public String getC_qa_content()
+	{
+		return c_qa_content;
+	}
+
+	public void setC_qa_content(String c_qa_content)
+	{
+		this.c_qa_content = c_qa_content;
+	}
+
+	public String getC_qa_wrt_date()
+	{
+		return c_qa_wrt_date;
+	}
+
+	public void setC_qa_wrt_date(String c_qa_wrt_date)
+	{
+		this.c_qa_wrt_date = c_qa_wrt_date;
+	}
+
+	public String getP_answ_content()
+	{
+		return p_answ_content;
+	}
+
+	public void setP_answ_content(String p_answ_content)
+	{
+		this.p_answ_content = p_answ_content;
+	}
+
+	public String getP_answ_wrt_date()
+	{
+		return p_answ_wrt_date;
+	}
+
+	public void setP_answ_wrt_date(String p_answ_wrt_date)
+	{
+		this.p_answ_wrt_date = p_answ_wrt_date;
+	}
+
+	public String getUser_nickname()
+	{
+		return user_nickname;
+	}
+
+	public void setUser_nickname(String user_nickname)
+	{
+		this.user_nickname = user_nickname;
+	}
+
+	public String getP_answ_num()
+	{
+		return p_answ_num;
+	}
+
+	public void setP_answ_num(String p_answ_num)
+	{
+		this.p_answ_num = p_answ_num;
 	}
 	
 

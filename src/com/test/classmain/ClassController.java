@@ -120,6 +120,7 @@ public class ClassController
 		model.addAttribute("cvs",dao.getCV(c_info_num));
 		model.addAttribute("profPhoto", dao.getProfPhoto(c_info_num));
 		model.addAttribute("starAvg", dao.getStarAvg(c_info_num));
+		model.addAttribute("QnAs",dao.getQnA(c_info_num));
 		return "/WEB-INF/views/onedayclassinfo.jsp";
 	}
 }

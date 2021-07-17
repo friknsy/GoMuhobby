@@ -28,7 +28,22 @@ public interface IClassinfoDAO
 	// 해당 클래스 강사의 프로필사진 가져오기
 	public ClassinfoDTO getProfPhoto(String c_info_num);
 	
-	// 해당 강사의 평균 별점 가져오기
+	// 해당 클래스 강사의 평균 별점 가져오기
 	public int getStarAvg(String c_info_num);
+	
+	// 해당 클래스의 질문과 답변 가져오기
+	public ArrayList<ClassinfoDTO> getQnA(String c_info_num);
+	
+	// 해당 클래스의 질문에 답변하기
+	public int classQnaInsert(ClassinfoDTO dto);
+	
+	// 해당 클래스의 답변을 수정하기
+	public int classQnaUpdate(ClassinfoDTO dto);
+	
+	// 해당 클래스의 답변을 삭제하기
+	public int classQnaDelete(String p_answ_num);
+	
+	// 해당 클래스의 질문 등록하기
+	public int classQuestionInsert(ClassinfoDTO dto);
 	
 }
