@@ -74,6 +74,7 @@ public class ClassController
 		
 	}
 	
+	/*
 	// 클래스 개설 페이지 1
 	@RequestMapping(value = "/classopen1.action", method = RequestMethod.GET)
 	public String ClassOpen1(Model model)
@@ -100,7 +101,7 @@ public class ClassController
 		
 		return "/WEB-INF/views/9ClassOpen3.jsp";
 	}
-
+	*/
 
 	
 	// 원데이 클래스 상세
