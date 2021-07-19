@@ -292,7 +292,7 @@
 			
 	<table class="table table-bordered" style="text-align: center;">
 			<tr>
-				<th>제목</th>
+				<th>제목 테스트</th>
 				<td>${qread.qa_forum_title }</td>
 				<th>작성일자</th>
 				<td colspan="3">${qread.qa_forum_wrt_date }</td>
