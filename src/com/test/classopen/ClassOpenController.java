@@ -1,6 +1,8 @@
 package com.test.classopen;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -27,22 +29,30 @@ public class ClassOpenController
 		IClassOpenDAO dao = sqlSession.getMapper(IClassOpenDAO.class);
 		
 		HttpSession session = request.getSession();
-
-		String uniqidnum = (String)session.getAttribute("uniqueId");
 		
+		String uniqidnum = (String)session.getAttribute("uniqueId");
 		String uniq_id_num = uniqidnum;
 		
-		// System.out.println(uniq_id_num + "왜 안 돼");
-		
-		model.addAttribute("profinfo", dao.profinfo(uniq_id_num));
-		
-		return "/WEB-INF/views/9ClassOpen1.jsp";
+		if(uniq_id_num != null)
+		{
+			model.addAttribute("profinfo", dao.profinfo(uniq_id_num));
+			return "/WEB-INF/views/9ClassOpen1.jsp";
+		}
+		else
+		{
+			return "/WEB-INF/views/3mainpage.jsp";
+		}
 	}
 	
 	// 클래스 개설 페이지 2
 	@RequestMapping(value = "/classopen2.action", method = RequestMethod.GET)
-	public String ClassOpen2(Model model)
-	{
+	public String ClassOpen2(HttpServletResponse response, HttpServletRequest request)
+	{	
+		HttpSession session = request.getSession();
+		
+		String c_prof_info = request.getParameter("c_prof_info");
+		System.out.println(c_prof_info);
+		session.setAttribute("c_prof_info", c_prof_info);
 		
 		return "/WEB-INF/views/9ClassOpen2.jsp";
 	}

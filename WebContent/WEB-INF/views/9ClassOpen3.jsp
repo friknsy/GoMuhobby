@@ -19,6 +19,9 @@
 	{
 		uniqueId = (String)session.getAttribute("uniqueId");
 	}
+	else
+		// 로그인 정보가 없을 때 메인 페이지로 이동!
+		out.println("<script>location.href=" + "'mainpage.action'" + ";</script>");
 	
 	String mynickName = null;
 	

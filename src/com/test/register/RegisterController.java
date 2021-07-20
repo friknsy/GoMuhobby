@@ -25,7 +25,8 @@ public class RegisterController
 	// 회원가입 클릭 시 회원가입폼 반환
 	@RequestMapping(value = "/registerform.action", method = RequestMethod.GET)
 	public String main()
-	{		
+	{	
+		
 		return "/WEB-INF/views/1register.jsp";
 	}
 	

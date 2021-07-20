@@ -487,6 +487,11 @@
         		$('#town_code').val(Number(userCity)+1);
         	}
         	
+        	function musicCat()
+        	{
+        		
+        	}
+        	
         </script>        
     </head>
     <body class="bg-light">

@@ -91,5 +91,6 @@
 		WHERE UNIQ_ID_NUM = #{uniq_id_num}
 	</select>
 	
+	
  
  </mapper>

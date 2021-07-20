@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" import="java.util.*, java.security.*, java.io.*, java.net.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -16,9 +17,9 @@
 	String uniqueId = null;
 	
 	if(session.getAttribute("uniqueId")!=null)
-	{
 		uniqueId = (String)session.getAttribute("uniqueId");
-	}
+	else
+		out.println("<script>location.href=" + "'mainpage.action'" + ";</script>");
 	
 	String mynickName = null;
 	
@@ -26,6 +27,15 @@
 	{
 		mynickName = (String)session.getAttribute("mynickName");
 	}
+	
+	String profinfo = (String)session.getAttribute("c_prof_info");
+	
+	if(profinfo == null)
+	{
+		profinfo = "";
+	}
+	
+	System.out.println(profinfo);
 %>
 
 <!DOCTYPE html>
@@ -177,88 +187,80 @@
 	                                    	<h2 class="text-center font-weight-light my-4 text-muhobby fw-bold">강사님 기본 정보 입력</h2>
 	                                    </div>
 	                                    <div class="card-body">
-	                                        <form action="sign.do" method="post">
+	                                        <form action="classopen2.action" method="get">
 	                                        	<br>
 	                                            <div class="row mb-3">
 	                                            <span class="mb-2 fw-bold normal">강사명</span>
-	                                                <div class="col-md-9">
+	                                                <div class="col-md-12">
 	                                                    <div class="form-floating mb-3 mb-md-0">
-	                                                        <input class="form-control" id="userId" name="userId" type="text" value="${profinfo.u_name }"/>
+	                                                        <input class="form-control" id="prof_name" name="prof_name" type="text" value="${profinfo.u_name }"/>
 	                                                    </div>
-	                                                </div>
-	                                                <div class="col-md-3 d-grid mb-2">
-	                                                	<button type="button" class="text-center btn1 btn-primary btn-block"> 정보 변경 </button>
 	                                                </div>
 	                                            </div>
 	                                            <br>
 	                                            <div class="row mb-3">
 	                                            <span class="mb-2 fw-bold normal">닉네임</span>
-	                                                <div class="col-md-9">
+	                                                <div class="col-md-12">
 	                                                    <div class="form-floating mb-3 mb-md-0">
-	                                                        <input class="form-control" id="userId" name="userId"type="text" value="${profinfo.user_nickname }"/>
+	                                                        <input class="form-control" id="userId" name="2"type="text" value="${profinfo.user_nickname }"/>
 	                                                    </div>
-	                                                </div>
-	                                                <div class="col-md-3 d-grid mb-2">
-	                                                	<button type="button" class="text-center btn1 btn-primary btn-block"> 정보 변경 </button>
 	                                                </div>
 	                                            </div>
 	                                            <br>
 	                                            
 	                                            <div class="row mb-3">
 	                                            <span class="mb-2 fw-bold normal">전화번호</span>
-	                                                <div class="col-md-9">
+	                                                <div class="col-md-12">
 	                                                    <div class="form-floating mb-3 mb-md-0">
-	                                                        <input class="form-control" id="userId" name="userId"type="text" value="${profinfo.u_tel }"/>
+	                                                        <input class="form-control" id="userId" name="3"type="text" value="${profinfo.u_tel }"/>
 	                                                    </div>
-	                                                </div>
-	                                                <div class="col-md-3 d-grid mb-2">
-	                                                	<button type="button" class="text-center btn1 btn-primary btn-block"> 정보 변경 </button>
 	                                                </div>
 	                                            </div>
 	                                        	<br>
 	                                            <div class="row mb-3">
-	                                            <span class="mb-2 fw-bold normal">계좌번호(은행 기재)</span>
-	                                                <div class="col-md-9">
+	                                            <span class="mb-2 fw-bold normal">계좌번호</span>
+	                                                <div class="col-md-12">
 	                                                    <div class="form-floating mb-3 mb-md-0">
-	                                                        <input class="form-control" id="userId" name="userId"type="text" value="${profinfo.p_account }"/>
+	                                                        <input class="form-control" id="userId" name="4"type="text" value="${profinfo.p_account }"/>
 	                                                    </div>
 	                                                </div>
-	                                                <div class="col-md-3 d-grid mb-2">
-	                                                	<button type="button" class="text-center btn1 btn-primary btn-block"> 정보 변경 </button>
+	                                            </div>
+	                                            <br>
+	                                            <div class="row mb-3">
+	                                           	    <div class="col-md-12 d-grid mb-2">
+	                                                    <button type="button" class="text-center btn1 btn-primary btn-block"> 정보 변경 (마이페이지 이동) </button>
 	                                                </div>
 	                                            </div>
 	
 	                                        	<br>
 	                                            <hr>
-	                                            <br>                                            
+	                                            <br>
 	                                            
-	                                            <div class="row mb-3">
+                                           		<div class="row mb-3">
 	                                            <span class="mb-2 fw-bold normal">강사 소개</span>
 	                                                <div class="col-md-12">
 	                                                    <div class="form-floating mb-3 mb-md-0">
 	                                                       <section>	
-	                                                       	   <textarea class="form-control" style= "height:300px" rows="3" placeholder="&#13;&#10; - 경력 &#13;&#10; - 재능 및 경험담 
-	                                                       	   &#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;"></textarea>
+	                                                       	   <textarea class="form-control" name="c_prof_info" style= "height:300px" rows="3" placeholder="&#13;&#10; - 경력 &#13;&#10; - 재능 및 경험담 
+	                                                       	   &#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;"><%out.print(profinfo); %></textarea>
 	                                                       </section>
 	                                                    </div>
 	                                                </div>
 	                                            </div>
-	                                            
-	                                          </form>  
-												                                        
+												
 	                                            <br>
 	                                            <div class="row mb-3">
 	                                            	<div class="col-md-4">
 	                                                </div>
 	                                                <div class="col-md-4 d-grid">
-	                                                	<a class="text-center btn1 btn-primary btn-block" type="submit" id="loadBtn" id="signup" href="classopen2.action">다음 페이지</a>
+	                                                	<input type="submit" class="text-center btn1 btn-primary btn-block" value="다음 페이지">
 	                                                </div>
 	                                                <div class="col-md-4">
 	                                                </div>
 	                                            </div>
 	                                            
-	                                        
-				                        </div>
+	                                           </form> 
+				                       		</div>
 	                                </div>
 	                                <br><br>
 	                                <br><br>
