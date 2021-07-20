@@ -473,7 +473,12 @@ if (session.getAttribute("mynickName") != null) {
 										
 										
 										<c:if test="${QnA.uniq_id_num eq uniqueId}"> <%--작성자만 질문글을 삭제할 수 있도록 처리 --%>
-										<span><a href="classquestiondelete.action?c_qa_num=${QnA.c_qa_num}" onclick="confirm('해당 질문을 정말로 삭제하시겠습니까?')">삭제</a></span>
+										<%-- <span><a href="classquestiondelete.action?c_qa_num=${QnA.c_qa_num}" onclick="confirm('해당 질문을 정말로 삭제하시겠습니까?')">삭제</a></span> --%>
+										<span><a href="javascript:void(0);" onclick="questionDelete(${QnA.c_qa_num})">삭제</a></span>
+										
+
+										
+										
 										<span><a href="javascript:void(0);" value="${QnA.c_qa_num}" onclick="questionUpdatePopup(${QnA.c_qa_num})">수정</a></span>	
 										<!-- yurim/javascript:void(0)을 하면 onclick의 function만 수행하고 href속성에 의해 페이지 이동하지 않는다. /20210720 -->									
 										</c:if>
@@ -484,6 +489,41 @@ if (session.getAttribute("mynickName") != null) {
 														+ c_qa_num, "질문수정",
 														"width=400, height=300, left=100, top=50");
 											}
+
+												
+												
+												function questionDelete(c_qa_num)
+												{
+													
+													if(confirm('해당 질문을 정말로 삭제하시겠습니까?'))
+													{
+														
+														var sendData = {
+																c_qa_num : c_qa_num
+														}
+														$.ajax({
+													 		method: "POST",
+													 		url:"<c:url value='classquestiondelete.action'/>",
+													 		data:sendData,
+													 		success:function(data){
+													 			
+													 			location.reload();
+													 		},
+													 		complete:function(data){
+													 			
+													 		}
+													 	});
+														
+													}
+													
+												}
+
+											
+
+
+										
+
+										
 										</script>
 									</div>
 									<br> <br>
@@ -592,6 +632,7 @@ if (session.getAttribute("mynickName") != null) {
 									 			uniq_id_num : $("#uniq_id_num").val()  // 고유식별번호
 									 			,c_info_num  : $("#c_info_num").val() // 해당 클래스 정보 번호
 									 			,c_qa_content : $("#questionContent").val() // 질문글 내용
+									 			
 									 	};
 									 	
 									 	$.ajax({
@@ -609,35 +650,8 @@ if (session.getAttribute("mynickName") != null) {
 
 									});
 									
+				
 
-						
-									
-
-									
-/* 									var content = $('#comment_input').val();
-									
-									var sendData={
-										f_forum_code : $('#f_forum_code').val(), 
-										uniq_id_num : $("#uniq_id_num").val(),
-										f_reply_content : $("#comment_input").val()
-									};
-
-									 $.ajax({
-										method: "POST",
-										url:"<c:url value='/replyupdate.action'/>",
-										data:sendData,
-										success:function(data){
-											if(data=="SUCCESS"){
-												
-											}else{
-												
-											}
-											location.reload();
-										},
-										complete:function(data){
-											
-										}
-									});  */
 								});
 							
 							</script>
