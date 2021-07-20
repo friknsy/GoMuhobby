@@ -736,23 +736,45 @@ if (session.getAttribute("mynickName") != null) {
 
 							<div class="btn-group-vertical" role="group" aria-label="..."
 								style="width: 100%;">
-								<%-- 									<button type="button" class="btn btn-primary">
-										2021년 5월 2일 14시 30분 - 16시 (3명 / ${classinfo.max_person}명)
-										</button> --%>
+
 
 
 								<c:forEach var="time" items="${classTimes}">
 									<!-- JSTL fmt 사용해서 날짜 형식 맞춤 -->
-									<button type="button" class="btn btn-primary datebutton"
-										value="${time.c_open_num}">
-										<%-- ${time.c_open_num} --%>
-										<fmt:parseDate value="${time.c_open_date}" var="dateValue"
-											pattern="yyyy-MM-dd HH:mm" />
-										<fmt:formatDate value="${dateValue}"
-											pattern="yyyy년 MM월 dd일 HH시 mm분" />
-										(${time.payments }명 / ${classinfo.max_person}명)
+									
+									
+									<c:choose> <%--만약 결제인원이 최대인원과 같다면 , 즉 신청인원이 다 찼으면 버튼비활성화 --%>
+										<c:when test="${time.payments+0 >= classinfo.max_person+0}">
+											<button type="button" class="btn btn-primary datebutton"
+												value="${time.c_open_num}" disabled="disabled">
+												<%-- ${time.c_open_num} --%>
+												<fmt:parseDate value="${time.c_open_date}" var="dateValue"
+													pattern="yyyy-MM-dd HH:mm" />
+												<fmt:formatDate value="${dateValue}"
+													pattern="yyyy년 MM월 dd일 HH시 mm분" />
+												(${time.payments }명 / ${classinfo.max_person}명)
+											</button>										
+										</c:when>
+										<c:otherwise>
+										
+											<button type="button" class="btn btn-primary datebutton"
+												value="${time.c_open_num}">
+												<%-- ${time.c_open_num} --%>
+												<fmt:parseDate value="${time.c_open_date}" var="dateValue"
+													pattern="yyyy-MM-dd HH:mm" />
+												<fmt:formatDate value="${dateValue}"
+													pattern="yyyy년 MM월 dd일 HH시 mm분" />
+												(${time.payments }명 / ${classinfo.max_person}명)
+											</button>	
+										
+										</c:otherwise>
+									</c:choose>
 
-									</button>
+									
+									
+									
+									
+									
 								</c:forEach>
 
 								<script type="text/javascript">
