@@ -1,3 +1,4 @@
+<%@page import="java.io.PrintWriter"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -29,6 +30,19 @@ if (session.getAttribute("mynickName") != null) {
 	mynickName = (String) session.getAttribute("mynickName");
 	System.out.println(mynickName + "닉네임");
 }
+
+/* 만약 로그인 되어 있지 않은 회원이라면 로그인 페이지로 이동  */
+if(uniqueId == null )
+{
+	PrintWriter script = response.getWriter();
+	script.println("<scrpit>");
+	script.println("alert('로그인 후 이용가능합니다 .')");
+	script.println("location.href='login.aci'");
+	script.println("</scrpit>");
+}	
+
+
+
 %>
 
 <!DOCTYPE html>
