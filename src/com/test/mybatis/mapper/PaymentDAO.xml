@@ -24,7 +24,7 @@
 	<!-- 클래스 수강 신청(결제) --> 		
 	<insert id="add">
 		INSERT INTO PAYMENT(PAY_NUM, C_OPEN_NUM, UNIQ_ID_NUM, PAY_PRICE)
-		VALUES(PAYMENT_SEQ.NEXTVAL, 2, 123123134, 40000)
+		VALUES(PAYMENT_SEQ.NEXTVAL, #{c_open_num}, #{uniq_id_num}, #{pay_price})
 	</insert>	
  
  </mapper>

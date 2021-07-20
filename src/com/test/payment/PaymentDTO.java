@@ -8,8 +8,20 @@ public class PaymentDTO
 	//-- 클래스 개설예정번호, 클래스명, 읍면동명, 강사이름, 개설날짜, 개설시간
 	private String uniq_id_num, u_name, u_tel;
 	//-- 고유식별번호, 회원이름, 회원전화번호
+	private int pay_price;
+	//-- 수강료
 	
+
 	// getter / setter 구성
+	public int getPay_price()
+	{
+		return pay_price;
+	}
+	
+	public void setPay_price(int pay_price)
+	{
+		this.pay_price = pay_price;
+	}
 	public String getC_open_num()
 	{
 		return c_open_num;

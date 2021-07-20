@@ -219,14 +219,14 @@ if(uniqueId == null )
 						
 						<div style="display: inline-block;" >		
 							<ul>
-							<li style=" font-weight: bold:"><a> 강남 교대</a></li>
+							<li style=" font-weight: bold:"><a>${classInfo.town_name }</a></li>
 								<li><a> 멘토 / 폴킴</a></li>
 							</ul>
 						</div>
 						<div style="display:inline-block;">
 							<ul>
 								<li><a>2021-06-18 14:00~15:00</a></li>
-								<li><a>클래스명 / 하루만에 완성하는 축가 클래스</a></li>
+								<li><a>클래스명 / ${classInfo.c_title}</a></li>
 							</ul>
 						</div>
 						<!-- <div style="display: inline-block;"><br><br>
