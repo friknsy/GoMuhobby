@@ -304,6 +304,8 @@
 				<th>조회수</th>
 				<td>${qread.qa_forum_hit }</td>
 				
+				
+				
 				<th style="width: 20%">북마크</th>
 				<td>${qread.bkm_count }</td>
 			<tr>
