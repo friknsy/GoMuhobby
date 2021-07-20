@@ -1,4 +1,4 @@
-<%@page import="java.io.PrintWriter"%>
+<%@ page import="java.io.PrintWriter"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -6,7 +6,7 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
-String cp = request.getContextPath();
+	String cp = request.getContextPath();
 %>
 
 <%
@@ -14,21 +14,20 @@ String cp = request.getContextPath();
 
 if (session.getAttribute("adminStr") != null) {
    adminStr = (String) session.getAttribute("adminStr");
-   System.out.println(adminStr + "관리자확인");
+   
 }
 
 String uniqueId = null;
 
 if (session.getAttribute("uniqueId") != null) {
    uniqueId = (String) session.getAttribute("uniqueId");
-   System.out.println(uniqueId + "고유식별번호");
+   
 }
-
 String mynickName = null;
 
 if (session.getAttribute("mynickName") != null) {
    mynickName = (String) session.getAttribute("mynickName");
-   System.out.println(mynickName + "닉네임");
+   
 }
 
 %>
@@ -764,11 +763,15 @@ if (session.getAttribute("mynickName") != null) {
 												$('.datebutton').click(
 												
 														function()
-														{
-															var str = "location.href='payment.action?c_open_num="
-																+ $(this).val().toString()+ "&uniq_id_num=" + ${uniqueId} + "'";
+														{	
+																	
+															
 															//여기서 'href='신청페이지주소?c_open_num='22   이런식으로 넘겨줘서 계속 에러가남. 따옴표 한쪽을 바깥쪽으로 빼줌
-	
+															/* get방식으로 넘겨주는 uniq_id_num 이 null 일 경우 에러가 발생하기 때문에 임의*/
+ 														
+ 																str = "location.href='payment.action?c_open_num="
+ 																	+ $(this).val().toString()+ "&uniq_id_num="  + ${uniqueId} + "'";
+														
 															$('.enrollbutton').attr("onclick",str);
 														});
 
@@ -777,8 +780,23 @@ if (session.getAttribute("mynickName") != null) {
 								</script>
 
 								<br> <br>
-								<button type="button" class="btn btn-primary enrollbutton"
-									onclick="alert('시간을 먼저 선택해 주세요!')">신청하기</button>
+								
+								<c:choose>
+									<c:when test="${!uniqudId eq null }">
+									 	<button type="button" class="btn btn-primary enrollbutton" onclick="alert('시간을 먼저 선택해 주세요!ㄹㅇㄹㅇ')">신청하기</button>
+									</c:when>
+									<c:otherwise>
+										<button type="button" class="btn btn-primary enrollbutton" onclick="isNotMember()">신청하기</button>
+									</c:otherwise>									
+								</c:choose>
+								
+								<script type="text/javascript">
+									function isNotMember()
+									{
+										if(confirm("로그인 후 이용가능한 서비스입니다. 로그인페이지로 이동하시겠습니까?")) { window.location.href = "loginform.action" }
+									}
+								
+								</script>
 							</div>
 						</div>
 					</div>
