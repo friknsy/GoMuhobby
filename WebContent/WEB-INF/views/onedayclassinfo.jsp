@@ -1,3 +1,4 @@
+<%@page import="java.io.PrintWriter"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -9,28 +10,28 @@ String cp = request.getContextPath();
 %>
 
 <%
-	String adminStr = null;
+   String adminStr = null;
 
 if (session.getAttribute("adminStr") != null) {
-	adminStr = (String) session.getAttribute("adminStr");
-	System.out.println(adminStr + "관리자확인");
+   adminStr = (String) session.getAttribute("adminStr");
+   System.out.println(adminStr + "관리자확인");
 }
 
 String uniqueId = null;
 
 if (session.getAttribute("uniqueId") != null) {
-	uniqueId = (String) session.getAttribute("uniqueId");
-	System.out.println(uniqueId + "고유식별번호");
+   uniqueId = (String) session.getAttribute("uniqueId");
+   System.out.println(uniqueId + "고유식별번호");
 }
 
 String mynickName = null;
 
 if (session.getAttribute("mynickName") != null) {
-	mynickName = (String) session.getAttribute("mynickName");
-	System.out.println(mynickName + "닉네임");
+   mynickName = (String) session.getAttribute("mynickName");
+   System.out.println(mynickName + "닉네임");
 }
-%>
 
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -760,18 +761,19 @@ if (session.getAttribute("mynickName") != null) {
 											function()
 											{
 												// .attr()은 속성값(property)을 설정할 수 있다.
-												$('.datebutton')
-														.click(
-																function()
-																{
+												$('.datebutton').click(
+												
+														function()
+														{
+															var str = "location.href='payment.action?c_open_num="
+																+ $(this).val().toString()+ "&uniq_id_num=" + ${uniqueId} + "'";
+															//여기서 'href='신청페이지주소?c_open_num='22   이런식으로 넘겨줘서 계속 에러가남. 따옴표 한쪽을 바깥쪽으로 빼줌
+	
+															$('.enrollbutton').attr("onclick",str);
+														});
 
-																	var str = "location.href='신청페이지?c_open_num="
-																			+ $(this).val().toString()+ "'";
-																	/* 여기서 'href='신청페이지주소?c_open_num='22   이런식으로 넘겨줘서 계속 에러가남. 따옴표 한쪽을 바깥쪽으로 빼줌 */
-
-																	$('.enrollbutton').attr("onclick",str);
-																});
-											})
+													
+											});
 								</script>
 
 								<br> <br>

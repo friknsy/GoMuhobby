@@ -13,20 +13,25 @@
 		FROM
 		(
 		    SELECT
-		    	  ROW_NUMBER() OVER(ORDER BY FF.F_FORUM_WRT_DATE) AS NUM
-		        , FF.F_FORUM_CODE        AS F_FORUM_CODE
-		        , UUI.USER_NICKNAME      AS USER_NICKNAME
-		        , MC.MUSIC_CAT_CODE      AS MUSIC_CAT_CODE
-		        , FF.F_FORUM_TITLE       AS F_FORUM_TITLE
-		        , FF.F_FORUM_CONTENT     AS F_FORUM_CONTENT
-		        , FF.F_FORUM_WRT_DATE    AS F_FORUM_WRT_DATE
-		        , FF.F_FORUM_PHOTO       AS F_FORUM_PHOTO
-		        , FF.F_FORUM_STATE       AS F_FORUM_STATE
-		        , FF.F_FORUM_VIDEO       AS F_FORUM_VIDEO 
-		        , FF.F_FORUM_HIT         AS F_FORUM_HIT
+		          ROW_NUMBER() OVER(ORDER BY FF.F_FORUM_WRT_DATE) AS NUM
+		        , FF.F_FORUM_CODE                AS F_FORUM_CODE
+		        , UUI.USER_NICKNAME              AS USER_NICKNAME
+		        , MC.MUSIC_CAT_CODE              AS MUSIC_CAT_CODE
+		        , FF.F_FORUM_TITLE               AS F_FORUM_TITLE
+		        , FF.F_FORUM_CONTENT             AS F_FORUM_CONTENT
+		        , FF.F_FORUM_WRT_DATE            AS F_FORUM_WRT_DATE
+		        , FF.F_FORUM_PHOTO               AS F_FORUM_PHOTO
+		        , NVL(FF2.F_FORUM_STATE,0)       AS F_FORUM_STATE
+		        , FF.F_FORUM_VIDEO               AS F_FORUM_VIDEO 
+		        , FF.F_FORUM_HIT                 AS F_FORUM_HIT
 		    FROM FREE_FORUM FF
 		    JOIN USER_UNIQUE_ID UUI ON FF.UNIQ_ID_NUM = UUI.UNIQ_ID_NUM
 		    JOIN MUSIC_CAT MC ON MC.MUSIC_CAT_CODE = FF.MUSIC_CAT_CODE
+		    LEFT JOIN (SELECT FB.F_FORUM_CODE, COUNT(*) AS F_FORUM_STATE 
+		               FROM FREE_BOOKMARK FB, FREE_FORUM FF 
+		               WHERE FB.F_FORUM_CODE = FF.F_FORUM_CODE 
+		               GROUP BY FF.F_FORUM_CODE) FF2 
+				    ON FF.F_FORUM_CODE = FF2.F_FORUM_CODE   
 		)
 		ORDER BY F_FORUM_WRT_DATE DESC
  	</select>
@@ -86,13 +91,14 @@
 	 VALUES(FREE_FORUM_SEQ.NEXTVAL, #{uniq_id_num }, #{music_cat_code, jdbcType=VARCHAR}, #{f_forum_title, jdbcType=VARCHAR }, #{f_forum_content, jdbcType=VARCHAR }, SYSDATE, #{f_forum_photo, jdbcType=VARCHAR },0, #{f_forum_video, jdbcType=VARCHAR }, 0)
   </insert>
   
-    <!-- 자유게시판 수정 -->
- 	<update id="updateFF">
- 		UPDATE FREE_FORUM
-		SET F_FORUM_TITLE=#{f_forum_title }
-		  , F_FORUM_CONTENT=#{f_forum_content }
-		WHERE F_FORUM_CODE=#{f_forum_code }
- 	</update>
+  
+   <!-- 자유게시판 수정 -->
+   <update id="updateFF">
+	 UPDATE FREE_FORUM
+	 SET F_FORUM_TITLE=#{f_forum_title }
+	  , F_FORUM_CONTENT=#{f_forum_content }
+	 WHERE F_FORUM_CODE=#{f_forum_code }
+   </update>
   
   
   <!-- 자유게시판 삭제  -->
@@ -123,22 +129,42 @@
 	  VALUES (FREE_BOOKMARK_SEQ.NEXTVAL, #{uniq_id_num}, #{f_forum_code }, SYSDATE)
    </insert>
    
+
+   
    <!-- 신고 쿼리문  -->
    <insert id="FFReport_reg" >
       INSERT INTO F_REPORT_REG(
-      	F_REPORT_REG_CODE,
-      	UNIQ_ID_NUM,
-      	QA_REPORT_REG_DATE,
-      	REPORT_CAT_NUM,
-      	F_FORUM_CODE
+      	F_REPORT_REG_CODE
+      	,UNIQ_ID_NUM
+      	,F_REPORT_REG_DATE
+      	,REPORT_CAT_NUM
+      	,F_FORUM_CODE
       ) VALUES (
-      	F_REPORT_REG_SEQ.NEXTVAL,
-      	#{uniq_id_num},
-      	SYSDATE,
-      	#{report_cat_num},
-      	#{f_forum_code}
+      	F_REPORT_REG_SEQ.NEXTVAL
+      	,#{uniq_id_num}
+      	,SYSDATE
+      	,#{report_cat_num}
+      	,#{f_forum_code}
       )
    </insert>
+   
+   
+   <!-- 댓글신고 쿼리문 -->
+   <insert id="FFReport_reg_reply">
+   	  INSERT INTO F_REPLY_REPORT_REG
+   	  ( F_REPLY_REPORT_REG_CODE
+   	  , UNIQ_ID_NUM
+   	  , F_REPORT_REG_DATE
+   	  , REPORT_CAT_NUM
+   	  , F_REPLY_CODE
+   	  )VALUES (
+   	  F_REPLY_REPORT_REG_SEQ.NEXTVAL
+   	  ,#{uniq_id_num}
+   	  ,SYSDATE
+   	  ,#{report_cat_num}
+   	  ,#{f_reply_code} 
+   	  )
+   </insert>   
    
    <!-- 댓글 리스트 출력 쿼리문 -->
     <select id="list_Reply" resultType="com.test.ff.Free_ForumDTO">

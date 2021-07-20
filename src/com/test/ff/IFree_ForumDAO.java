@@ -7,12 +7,17 @@
 package com.test.ff;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 public interface IFree_ForumDAO
 {
 	// 게시글 출력
 	public ArrayList<Free_ForumDTO> list();
+	
+	// 특정 게시물 출력
+	public List<Map<String, Object>> listBoard(Map<String, Object> map);
 	
 	// 게시글 입력
 	public int insertBoard(Free_ForumDTO dto);
@@ -26,7 +31,6 @@ public interface IFree_ForumDAO
 	// 조회 수 증가 
 	public void updateHitCount(String f_forum_code);
 	
-	
 	// 업데이트
 	public int updateFF(Free_ForumDTO dto);
 	
@@ -39,8 +43,13 @@ public interface IFree_ForumDAO
 	// 북마크
 	public int FFBookmark(Free_ForumDTO dto);
 	
+
+	
 	// 신고 
 	public int FFReport_reg(Free_ForumDTO dto);
+	
+	// 댓글 신고 
+	public int FFReport_reg_reply(Free_ForumDTO dto);
 	
 	// 댓글출력
 	public ArrayList<Free_ForumDTO> list_Reply(String f_forum_code);

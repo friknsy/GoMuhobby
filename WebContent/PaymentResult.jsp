@@ -1,63 +1,81 @@
+<%@page import="java.io.PrintWriter"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
-	String cp = request.getContextPath();
+	String cp = request.getContextPath(); 	
 %>
+<%
+   String adminStr = null;
 
-<%  
-	String adminStr = null;
-	
-	if(session.getAttribute("adminStr")!=null)
-	{
-		adminStr = (String)session.getAttribute("adminStr");
-	}
-	
-	String uniqueId = null;
-	
-	if(session.getAttribute("uniqueId")!=null)
-	{
-		uniqueId = (String)session.getAttribute("uniqueId");
-	}
-	
-	String mynickName = null;
-	
-	if(session.getAttribute("mynickName")!=null)
-	{
-		mynickName = (String)session.getAttribute("mynickName");
-	}
+if (session.getAttribute("adminStr") != null) {
+   adminStr = (String) session.getAttribute("adminStr");
+   System.out.println(adminStr + "관리자확인");
+}
+
+String uniqueId = null;
+
+if (session.getAttribute("uniqueId") != null) {
+   uniqueId = (String) session.getAttribute("uniqueId");
+   System.out.println(uniqueId + "고유식별번호");
+}
+
+String mynickName = null;
+
+if (session.getAttribute("mynickName") != null) {
+   mynickName = (String) session.getAttribute("mynickName");
+   System.out.println(mynickName + "닉네임");
+}
+
+/* 만약 로그인 되어 있지 않은 회원이라면 로그인 페이지로 이동  */
+if(uniqueId == null )
+{
+   PrintWriter script = response.getWriter();
+   script.println("<script>");
+   script.println("alert('로그인 후 이용가능합니다 .')");
+   script.println("location.href='loginform.action'");
+   script.println("</script>");
+}   
+
+
 %>
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+<meta charset="UTF-8">
+<title>PaymentResult.jsp</title>
+
 <meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>Blog Post - Start Bootstrap Template</title>
-
 <!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-	rel="stylesheet" />
-
+<link rel="icon" type="image/x-icon" href="<%=cp %>/assets/favicon.ico" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
-<link href="css/mainpage.css" rel="stylesheet" />
+<link href="<%=cp %>/css/mainpage.css" rel="stylesheet" />
+<link href="<%=cp %>/css/myPage1.css" rel="stylesheet" />
 
-<!-- 자유게시판  -->
-<link rel="stylesheet" href="<%=cp%>/css/board_list.css">
-
-<!-- Font Awesome 5 -->
-<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- 부트스트랩 css -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> --> 
 
 
-			</head>
-			<body>
-			 <!-- 맨 위 상단 바 -->
+<!-- 제이쿼리 script -->
+<script type="text/javascript" src="<%=cp%>/js/jquery-3.6.0.min.js"></script>
+ 	
+<!-- 부트스트랩 script -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="js/simple-datatables.js""></script>
+<script src="js/datatables-simple-demo.js"></script>
+
+
+</head>
+<body>
+
+
+<body class="sb-nav-fixed">
+       		<!-- 맨 위 상단 바 -->
             <c:choose>
             	<c:when test="${mynickName eq null}">
 		            <nav class="navbar navbar-expand-lg navbar-dark">
@@ -155,91 +173,48 @@
             	</c:otherwise>
             </c:choose>
 
-		<div class="container">
-			<div class="header header-title">
-				<h2 style="width: 100%" class="h2 bold">자유게시판</h2>
-			</div>
-			<br>
-			<br>
-		
-		<form id="searchForm" action="board" method="get">
-			<div class="form-group">
-					<div class="input-group-prepend">
-						<select id="searchKey" name="searchKey" class="selectFiled custom-select">
-							<option value="" selected>선택</option>
-							<option value="subject">제목</option>
-							<option value="name">작성자</option>
-							<option value="content">내용</option>
-						</select>
-						<input id="searchValue" type="text" name="searchValue" class="textFiled" class="form-control">
-						<button id="searchBtn" class="btn btn-secondary" type="button" id="button-addon2">검색</button>	
-					</div>
-			</div>
-		</form>
-		
-		<br>
 
-		<!-- 게시판 헤더 시작 -->
-		<div class="ffHeader">
-			<div class="header no">No</div>
-			<div class="header title">제목</div>
-			<div class="header writer">작성자</div>
-			<div class="header date">작성일</div>
-			<div class="header viewCount">조회수</div>
-			<div class="header recomm">북마크수</div>
-		</div>
-
-	
-		<!-- 게시판 게시물 리스트 시작 -->
-		<c:forEach var="list" items="${list}">
-			<div class="ffContents">
-				<div class="content no">${list.num}</div>
-				<div class="content title titleLeft">
-					<div class="contentTitle">
-						<a class="contentLink" href="ffread.action?f_forum_code=${list.f_forum_code}" style="text-decoration: none;">${list.f_forum_title }</a>
-					</div>	
+<div class="container px-5 mt-6 mb-2">
+	<div class="panel-group">
+		<div class="panel-default">
+			<div class="panel-body">
+				<div>
+					<h2><b>클래스 신청완료</b></h2>
+					<hr>
+				
 				</div>
-				<div class="content writer">${list.user_nickname}</div>
-				<div class="content date">${list.f_forum_wrt_date}</div>
-				<div class="content viewCount">${list.f_forum_hit}</div>
-				<div class="content recomm">${list.f_forum_state}</div>
 			</div>
-		</c:forEach>
-		<br>
-		<br>
-
-	
-	   <!-- 페이지네이션 시작 -->
-		<ul class="pagination pagination-sm justify-content-center">
-			<li class="page-item disabled"><a class="page-link text-dark"
-				href="#">Previous</a></li>
-			<c:forEach begin="1" end="9" step="1" var="pageNum">
-				<li
-					${page eq pageNum ? "class='page-item active'" : "class='page-item'" }
-					class="page-item active"><a class="page-link text-dark"
-					href="${pagenation }${pageNum }">${pageNum }</a></li>
-			</c:forEach>
-
-			<li class="page-item"><a class="page-link text-dark" href="#">Next</a></li>
-		</ul>
-
-		<!-- 글쓰기 버튼 -->
-		<div id="rightHeader" class="row align-items-end justify-content-end">
-			<button class="btn btn-secondary right"
-				onclick="javascript:location.href='<%=cp%>/ffinsertform.action'">
-				<span class="fa fa-pencil-square-o"></span>글쓰기
-			</button>
+				<br><br>
+				<div >
+					<h4><b>결제가 완료되었습니다.</b></h4>
+				</div>
+				<hr>
+				<form>	
+					<div class="form-group">
+						<label for="name">
+							이름 
+						</label>
+						<input type="text" class="form-control" id="name" name="name" style="width: 40%;">
+					</div>
+					
+					<div class="form-group">
+						<label for="telephone">
+							전화번호 
+						</label>
+						<input type="text" class="form-control" id="telephone" name="telephone" style="width: 60%;">
+					</div>
+				</form>
+					<hr>
+			
+				<br><br>
+		
 		</div>
-		<br>
-	</div>
-	<!-- close div class="container" -->
+	</div><!-- close .panel-default -->
+</div>
 
 
-	<!-- Bootstrap core JS-->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Core theme JS-->
-	<script src="js/scripts.js"></script>
+
+
 
 
 </body>

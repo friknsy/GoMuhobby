@@ -5,7 +5,11 @@
 
 package com.test.ff;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,8 +23,8 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class Free_ForumController
@@ -31,14 +35,29 @@ public class Free_ForumController
 	// 게시물 읽어오기
 	@RequestMapping(value = "/fflist.action", method = RequestMethod.GET)
 	public String list(ModelMap model)
+	
 	{
 		IFree_ForumDAO dao = sqlSession.getMapper(IFree_ForumDAO.class);
+			
+	
+		/*
+		 * // 검색기준, 검색어를 인수로 넘기기 위해 Map 자료구조 선언 Map<String, Object> searchMap = new
+		 * HashMap<>();
+		 * 
+		 * // 검색기준과 검색어를 Map 자료구조에 넣음 searchMap.put("searchKey", searchKey);
+		 * searchMap.put("searchValue", searchValue);
+		 * 
+		 * List<Map<String, Object>> list = dao.listBoard(searchMap);
+		 */
 		
 		model.addAttribute("list", dao.list());
+		
+		
 		
 		return "WEB-INF/views/Free_Forum_List.jsp";
 	}
 
+	
 	// 특정게시물 클릭시 이동
 	@RequestMapping(value = "/ffread.action", method = RequestMethod.GET)
 	public String read(HttpServletRequest request, ModelMap model)
@@ -52,13 +71,13 @@ public class Free_ForumController
 		
 		IFree_ForumDAO dao = sqlSession.getMapper(IFree_ForumDAO.class);
 		dao.updateHitCount(f_forum_code);
+
 		
 		String uniqId = dao.uniqIdcheck(f_forum_code);
 		
 		request.setAttribute("uniqId", uniqId);
 		
 		model.addAttribute("read", dao.read(f_forum_code));
-
 		model.addAttribute("list_Reply", dao.list_Reply(f_forum_code));
 
 		return "WEB-INF/views/Free_Forum_Read.jsp";
@@ -80,7 +99,6 @@ public class Free_ForumController
 	public String insert(Free_ForumDTO dto, HttpServletRequest request)
 	{
 		IFree_ForumDAO dao = sqlSession.getMapper(IFree_ForumDAO.class);
-		
 		String url = dto.getF_forum_video();
 		
 		String pattern = "(?<=watch\\?v=|/videos/|embed\\/)[^#\\&\\?]*";
@@ -115,6 +133,7 @@ public class Free_ForumController
 		return "redirect:/fflist.action";
 
 	}
+	
 
 	// updateform
 	@RequestMapping(value = "/ffupdateform.action", method = RequestMethod.GET)
@@ -128,6 +147,7 @@ public class Free_ForumController
 
 		return "/WEB-INF/views/Free_Forum_Update.jsp";
 	}
+	
 
 	// update.action
 	@RequestMapping(value = "/ffupdate.action", method = RequestMethod.POST)
@@ -150,17 +170,18 @@ public class Free_ForumController
 
 	
 	
-	// bookmark action
+	// BOOKMARK action
 	@RequestMapping(value = "/ffbookmark.action", method = RequestMethod.GET)
 	public String FFBookmark(Free_ForumDTO dto)
 	{
-		IFree_ForumDAO dao = sqlSession.getMapper(IFree_ForumDAO.class);
 
-		dao.FFBookmark(dto);
-		
+		IFree_ForumDAO dao = sqlSession.getMapper(IFree_ForumDAO.class);
+		dao.FFBookmark(dto);	
+
 		return "redirect:/fflist.action";
 
 	}
+	
 
 	// 신고 버튼 action
 	@RequestMapping(value = "/ffreportreg.action", method = RequestMethod.POST)
@@ -169,21 +190,46 @@ public class Free_ForumController
 	{
 		IFree_ForumDAO dao = sqlSession.getMapper(IFree_ForumDAO.class);
 		
-		/*
-		 * System.out.println("유저번호 : "+dto.getUniq_id_num());
-		 * System.out.println("리포트 카테고리 번호 : "+dto.getReport_cat_num());
-		 * System.out.println("신고 게시글 번호 : "+dto.getF_forum_code());
-		 */
+		
+		  System.out.println("유저번호 : "+dto.getUniq_id_num());
+		  System.out.println("리포트 카테고리 번호 : "+dto.getReport_cat_num());
+		  System.out.println("신고 게시글 번호 : "+dto.getF_forum_code());
+		 
 		
 		
 		//dto.setUniq_id_num("10");
-		System.out.println(dto + " 전송은 되냐 ");
+		//System.out.println(dto + " 전송은 되냐 ");
 	
 		Integer result = dao.FFReport_reg(dto); 
 
 		return result > 0 ? "SUCCESS" : "FAIL"; 
 
 	}
+	
+	
+	// 댓글 신고 버튼 action
+	@RequestMapping(value = "/ffreportregreply.action", method = RequestMethod.POST)
+	@ResponseBody
+	public String FFReport_reg_reply(Free_ForumDTO dto)
+	{
+		IFree_ForumDAO dao = sqlSession.getMapper(IFree_ForumDAO.class);
+		
+		
+		  System.out.println("유저번호 : "+dto.getUniq_id_num());
+		  System.out.println("리포트 카테고리 번호 : "+dto.getReport_cat_num());
+		  System.out.println("신고 댓글 번호 : "+dto.getF_reply_code());
+		 
+		
+		
+		//dto.setUniq_id_num("10");
+		//System.out.println(dto + " 전송은 되냐 ");
+	
+		Integer result = dao.FFReport_reg_reply(dto); 
+
+		return result > 0 ? "SUCCESS" : "FAIL"; 
+
+	}
+
 
 	// 댓글 업데이트
 	@RequestMapping(value = "/replyupdate.action", method = RequestMethod.POST)
@@ -201,10 +247,19 @@ public class Free_ForumController
 	}
 
 	
-	// 신고 팝업 페이지
+	// 게시글 신고 팝업 페이지
 	@RequestMapping(value = "/reportPopup.action", method = RequestMethod.GET)
 	public String pageReportPopup()
 	{
 		return "WEB-INF/views/08_2_popup.jsp";
 	}
+	
+	
+	// 댓글 신고 팝업 페이지
+	@RequestMapping(value = "/replyPopup.action", method = RequestMethod.GET)
+	public String replyReportPopup()
+	{
+		return "WEB-INF/views/08_3_popup.jsp";
+	}
+	
 }

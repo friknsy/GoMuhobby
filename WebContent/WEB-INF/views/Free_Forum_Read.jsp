@@ -251,8 +251,8 @@
 	           		</c:otherwise>
 				</c:choose>
 				
-				<!-- ★★★★★ 신고/공유/추천 버튼 ★★★★★★ -->
 				
+				<!-- ★★★★★ 신고/공유/추천 버튼 ★★★★★★ -->
             	<div class="post-footer justify-content-center">
                		<button class="btn_report" onclick="processing(${read.f_forum_code })">
                   		<span class="fa fa-ban"></span> 신고
@@ -261,12 +261,10 @@
 	                  <span class="fas fa-bookmark"></span> 북마크
 	               </button>
            		</div>
-           		
            		<input type="hidden" id="uniq_id_num" name="uniq_id_num" value="<%=uniqueId %>">
 	           		
-
+	           		
 				<!-- ★★★★★ 댓글 ★★★★★★ -->
-				<!-- 댓글 -->
 				<c:forEach var="reply" items="${list_Reply}">
 					<c:choose>
 						<c:when test="${reply.f_reply_step == 0 }">
@@ -281,19 +279,19 @@
 												<div class="fw-bold">${reply.user_nickname }</div>
 												&nbsp;&nbsp;
 												<div class="text-muted">${reply.f_reply_wrt_date }</div>
-												
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="card-footer bg-transparent mt-3 col-lg-10">
+								<div class="card-footer bg-transparent mt-3 col-lg-12" >
 									<div class="d-flex align-items-end justify-content-between">
 										<div class="d-flex align-items-center">
 											<p>${reply.f_reply_content }</p>
 										</div>
 										<div style="float: right">
-											
-											<button type="button" class="btn btn-default"></button>
+											<button type="button"  class="btn btn-default" id="modify-reply" value="${reply.f_reply_code }">수정</button>
+											<button type="button"  class="btn btn-default" id="delete-reply" value="${reply.f_reply_code }">삭제</button>
+											<button class="button" class="btn btn-default" onclick="processing2(${reply.f_reply_code })">신고</button>
 										</div>
 									</div>
 								</div>
@@ -302,7 +300,7 @@
 
 						<c:otherwise>
 							<div style="margin-left: 30px;">
-								<div class="bg-transparent mt-3 col-lg-12">
+								<div class="bg-transparent mt-3 col-lg-12" >
 									<div class="d-flex align-items-end justify-content-between">
 										<div class="d-flex align-items-center">
 											<img class="rounded-circle me-3" src="images/default.png"
@@ -321,8 +319,9 @@
 											<p>${reply.f_reply_content }</p>
 										</div>
 										<div style="float: right">
-											<button type="button" class="btn btn-default">수정</button>
-											<button type="button" class="btn btn-default">삭제</button>
+											<button type="button" class="btn btn-default" id="modify-reply" value="${reply.f_reply_code }">수정</button>
+											<button type="button" class="btn btn-default" id="delete-reply" value="${reply.f_reply_code }">삭제</button>
+											<button class="button" class="btn btn-default" onclick="processing2(${reply.f_reply_code })">신고</button>
 										</div>
 									</div>
 								</div>
@@ -402,7 +401,18 @@
 	      window.open("reportPopup.action?f_forum_code="+f_forum_code, "신고처리", "width=600, height=500, left=100, top=50"); 
 	      window.close();
 	   }
-	
+	   
+		
+		
+		
+	   // 댓글 신고처리하기 버튼을 클릭했을 시
+	   function processing2(f_reply_code)
+	   {
+	      window.open("replyPopup.action?f_reply_code="+f_reply_code, "신고처리", "width=600, height=500, left=100, top=50"); 
+	      window.close();
+	   }
+	   
+	   
 	
 		$(function()
 		{
@@ -471,7 +481,10 @@
 					}
 				}); 
 		
-			}); 
+			}); //end comment_submit	
+			
+
+			
 		});			
 	
 	</script>

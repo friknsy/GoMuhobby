@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="com.test.payment.IPaymentDAO">
+ 	
+ 	<!-- 클래스 정보 조회 -->
+ 	<select id="classInfo" resultType="com.test.payment.PaymentDTO">
+ 		SELECT C_OPEN_NUM, C_TITLE, TOWN_NAME, PROF_NAME, C_OPEN_DATE
+		FROM CLASS_OPEN_VIEW
+		WHERE C_OPEN_NUM=#{c_open_num}
+ 	</select>
+ 	
+ 	<!-- 신청 회원 정보 조회 -->	
+ 	<select id="memberInfo" resultType="com.test.payment.PaymentDTO">
+ 		SELECT UNIQ_ID_NUM, U_NAME, U_TEL
+		FROM MEMBER
+		WHERE UNIQ_ID_NUM=#{uniq_id_num}
+ 		
+ 	</select>
+
+	<!-- 클래스 수강 신청(결제) --> 		
+	<insert id="add">
+		INSERT INTO PAYMENT(PAY_NUM, C_OPEN_NUM, UNIQ_ID_NUM, PAY_PRICE)
+		VALUES(PAYMENT_SEQ.NEXTVAL, #{c_open_num}, #{uniq_id_num}, #{pay_price})
+	</insert>	
+ 
+ </mapper>
