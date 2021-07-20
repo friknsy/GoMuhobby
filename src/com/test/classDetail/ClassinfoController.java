@@ -65,13 +65,44 @@ public class ClassinfoController
 		return "redirect:onedayclassinfo.action";
 	}
 	
-	//
+	// 클래스에 질문하기
 	@RequestMapping(value = "/classquestioninsert.action", method = RequestMethod.POST)
 	public String classQuestionInsert(ClassinfoDTO dto)
 	{
 		IClassinfoDAO dao = sqlSession.getMapper(IClassinfoDAO.class);
 		dao.classQuestionInsert(dto);
 		return "redirect:onedayclassinfo.action";
+	}
+	
+	// 클래스 질문 삭제하기
+	@RequestMapping(value="/classquestiondelete.action", method = RequestMethod.GET)
+	public String classQuestionDelete(HttpServletRequest request)
+	{
+		String c_qa_num = request.getParameter("c_qa_num");
+		IClassinfoDAO dao = sqlSession.getMapper(IClassinfoDAO.class);
+		dao.classQuestionDelete(c_qa_num);
+		
+		return "redirect:onedayclassinfo.action";
+	}
+	
+	
+	
+	//클래스 질문 수정 팝업 띄우기
+	@RequestMapping(value = "/classquestionupdatepopup.action", method = RequestMethod.GET)
+	public String questionUpdatePopup(HttpServletRequest request, Model model)
+	{
+		model.addAttribute("c_qa_num",request.getParameter("c_qa_num"));
+		return "/WEB-INF/views/ClassQuestionUpdatePopup.jsp";
+		
+	}
+	
+	// 클래스 질문 수정하기
+	@RequestMapping(value = "/classquestionupdate.action", method = RequestMethod.POST)
+	public String classQuestionUpdate(ClassinfoDTO dto)
+	{
+		IClassinfoDAO dao = sqlSession.getMapper(IClassinfoDAO.class);
+		dao.classQuestionUpdate(dto);
+		return "windowclose.jsp";
 	}
 	
 	

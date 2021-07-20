@@ -160,10 +160,9 @@ if (session.getAttribute("mynickName") != null) {
 							<li class="nav-item dropdown me-3"><a
 								class="nav-link dropdown-toggle " id="navbarDropdownPortfolio"
 								href="#" role="button" data-bs-toggle="dropdown"
-								aria-expanded="false">
-									<%
-										out.print(mynickName);
-									%> 님
+								aria-expanded="false"> <%
+ 	out.print(mynickName);
+ %> 님
 							</a>
 								<ul class="dropdown-menu dropdown-menu-end">
 									<li><a class="dropdown-item " href="mypageform.action">마이페이지</a></li>
@@ -206,11 +205,10 @@ if (session.getAttribute("mynickName") != null) {
 							style="color: #c79cf5;">QNA</a> <a
 							class="btn btn-primary me-4 mt-2" href="#!"
 							style="color: #c79cf5;">변경 및 취소</a> <br> <br> [변경 및 취소]<br>
-						개인 사정으로 인한 결석은 환불되지 않습니다.<br>
-						<br> [환불 규정]<br> 1. 수업 2일 전 취소 : 100% 환불<br> 2. 수업
-						1일 전 취소 : 50% 환불<br> 3. 수업 당일 취소 : 환불불가 <br>
-						<br>
-						<br> 클래스 등록일자 ${classinfo.c_info_date}
+						개인 사정으로 인한 결석은 환불되지 않습니다.<br> <br> [환불 규정]<br> 1.
+						수업 2일 전 취소 : 100% 환불<br> 2. 수업 1일 전 취소 : 50% 환불<br> 3.
+						수업 당일 취소 : 환불불가 <br> <br> <br> 클래스 등록일자
+						${classinfo.c_info_date}
 
 					</div>
 				</div>
@@ -226,19 +224,19 @@ if (session.getAttribute("mynickName") != null) {
 									class="btn btn-primary me-4 mt-2 mb-2" href="#!"
 									style="color: #c79cf5; border-color: #c79cf5; width: 200px;">#
 									이런점이 좋아요</a><br> 1. 본인이 어떻게 노래 부르고 있는지 파악할 수 있어요<br> 2.
-								남들 앞에서 자신있게 노래 할 수 있어요<br> 3. 자신만의 목소리를 찾을 수 있어요<br>
-								<br> <a class="btn btn-primary me-4 mt-2 mb-2" href="#!"
+								남들 앞에서 자신있게 노래 할 수 있어요<br> 3. 자신만의 목소리를 찾을 수 있어요<br> <br>
+								<a class="btn btn-primary me-4 mt-2 mb-2" href="#!"
 									style="color: #c79cf5; border-color: #c79cf5; width: 200px;">#
 									이런분들께 추천해요</a><br> 1. 단기간에 축가를 완성하고 싶으신 분<br> 2. 특별한 날
-								완벽한 노래를 하고싶으신 분<br>
-								<br> <a class="btn btn-primary me-4 mt-2 mb-2" href="#!"
+								완벽한 노래를 하고싶으신 분<br> <br> <a
+									class="btn btn-primary me-4 mt-2 mb-2" href="#!"
 									style="color: #c79cf5; border-color: #c79cf5; width: 200px;">커리큘럼</a><br>
 								1. 노래를 통한 발성습관체크<br> 2. 학생 발성상태에 맞는 발음과 툴을 이용한 발성과 발음교정 및
-								트레이닝<br> 3. 노래 적용 으로 진행됩니다.^^<br>
-								<br> <a class="btn btn-primary me-4 mt-2 mb-2" href="#!"
+								트레이닝<br> 3. 노래 적용 으로 진행됩니다.^^<br> <br> <a
+									class="btn btn-primary me-4 mt-2 mb-2" href="#!"
 									style="color: #c79cf5; border-color: #c79cf5; width: 200px;">준비물</a><br>
-								열심히 하고자 하는 마음가짐 최고의 목상태!<br>
-								<br> <a class="btn btn-primary me-4 mt-2 mb-2" href="#!"
+								열심히 하고자 하는 마음가짐 최고의 목상태!<br> <br> <a
+									class="btn btn-primary me-4 mt-2 mb-2" href="#!"
 									style="color: #c79cf5; border-color: #c79cf5; width: 200px;">유의
 									사항</a><br> 공동현관에서 연락주세요<br>
 							</div>
@@ -469,42 +467,66 @@ if (session.getAttribute("mynickName") != null) {
 
 									<div class="col-lg-8">
 										<br> <span>${QnA.user_nickname }${QnA.uniq_id_num }</span>
-										<br>
-										<span>${QnA.c_qa_wrt_date }</span> <br> Q. ${QnA.c_qa_num }
-										${QnA.c_qa_content }
-									</div>
-									<br>
-									<br>
-
-
-									<c:if test="${catIntro.uniq_id_num eq uniqueId}">
-									
-									<div class="col-lg-2">
-
-										<c:if test="${empty QnA.p_answ_content }">
-											<!-- 답변글이 없는 경우만 답변하기 버튼 활성화 -->
-											<button type="button" class="btn btn-primary"
-												value="<c:out value='${QnA.c_qa_num}'/>"
-												onclick="answerInsertPopup(this.value)">답변하기</button>
-
+										<br> <span>${QnA.c_qa_wrt_date }</span> <br> Q.
+										${QnA.c_qa_num } ${QnA.c_qa_content }<br>
+										
+										
+										
+										<c:if test="${QnA.uniq_id_num eq uniqueId}"> <%--작성자만 질문글을 삭제할 수 있도록 처리 --%>
+										<span><a href="classquestiondelete.action?c_qa_num=${QnA.c_qa_num}" onclick="confirm('해당 질문을 정말로 삭제하시겠습니까?')">삭제</a></span>
+										<span><a href="javascript:void(0);" value="${QnA.c_qa_num}" onclick="questionUpdatePopup(${QnA.c_qa_num})">수정</a></span>	
+										<!-- yurim/javascript:void(0)을 하면 onclick의 function만 수행하고 href속성에 의해 페이지 이동하지 않는다. /20210720 -->									
 										</c:if>
-										<c:if test="${not empty QnA.p_answ_content }">
-											<button type="button" class="btn btn-primary"
-												value="${QnA.p_answ_num}"
-												onclick="answerUpdatePopup(this.value)">답변수정</button>
-											<button type="button" class="btn btn-primary"
-												value="${QnA.p_answ_num}"
-												onclick="answerDeletePopup(this.value)">답변삭제</button>
-
-										</c:if>
+										<script type="text/javascript">
+											function questionUpdatePopup(c_qa_num)
+											{
+												window.open("classquestionupdatepopup.action?c_qa_num="
+														+ c_qa_num, "질문수정",
+														"width=400, height=300, left=100, top=50");
+											}
+										</script>
 									</div>
-									 
-									</c:if> 
+									<br> <br>
 
 
+									<c:if test="${catIntro.uniq_id_num eq uniqueId}">  <%-- 해당 클래스를 개설한 강사의 경우에만 버튼 활성화 --%>
+
+										<div class="col-lg-2">
+
+<%-- 											<c:if test="${empty QnA.p_answ_content }">
+												답변글이 없는 경우만 답변하기 버튼 활성화
+												<button type="button" class="btn btn-primary"
+													value="<c:out value='${QnA.c_qa_num}'/>"
+													onclick="answerInsertPopup(this.value)">답변하기</button>
+											</c:if>
+											<c:if test="${not empty QnA.p_answ_content }">
+												<button type="button" class="btn btn-primary"
+													value="${QnA.p_answ_num}"
+													onclick="answerUpdatePopup(this.value)">답변수정</button>
+												<button type="button" class="btn btn-primary"
+													value="${QnA.p_answ_num}"
+													onclick="answerDeletePopup(this.value)">답변삭제</button>
+											</c:if> --%>
+											
+											<%-- 답변글이 없는 경우만 답변하기 버튼 활성화 --%>
+											<c:choose>
+												<c:when test="${empty QnA.p_answ_content }">
+													<button type="button" class="btn btn-primary"
+														value="<c:out value='${QnA.c_qa_num}'/>"
+														onclick="answerInsertPopup(this.value)">답변하기</button>												
+												</c:when>
+												<c:otherwise>
+													<button type="button" class="btn btn-primary"
+														value="${QnA.p_answ_num}"
+														onclick="answerUpdatePopup(this.value)">답변수정</button>
+													<button type="button" class="btn btn-primary"
+														value="${QnA.p_answ_num}"
+														onclick="answerDeletePopup(this.value)">답변삭제</button>												
+												</c:otherwise>
+											</c:choose>
+										</div>
+									</c:if>
 									<br>
-
-
 								</div>
 								<c:if test="${not empty QnA.p_answ_content}">
 									<!-- 답변이 있는 경우에만 보이도록 처리 -->
@@ -518,24 +540,25 @@ if (session.getAttribute("mynickName") != null) {
 											</div>
 										</div>
 										<div class="col-lg-5" style="padding-left: 70px;">
-											<br> <span>${classinfo.u_name} 강사님</span> <br>
-											<span>${QnA.p_answ_wrt_date }</span> <br> A.
-											${QnA.p_answ_content }
+											<br> <span>${classinfo.u_name} 강사님</span> <br> <span>${QnA.p_answ_wrt_date }</span>
+											<br> A. ${QnA.p_answ_content }
 										</div>
 									</div>
 									<br>
 								</c:if>
-								<br>
-								<br>
+								
+								<hr>
 							</c:forEach>
 							<div class="row">
-								<form action="classquestioninsert.action" method="post">
-									<input type="hidden" name="uniq_id_num" value="<%=uniqueId%>">
-									<input type="hidden" name="c_info_num" value="${classinfo.c_info_num}">
+								<!-- <form action="classquestioninsert.action" method="post"> -->
+								
+									<input type="hidden" name="uniq_id_num" id="uniq_id_num" value="<%=uniqueId%>">
+									<input type="hidden" name="c_info_num" id="c_info_num" value="${classinfo.c_info_num}">
 									<div class="col-lg-10">
-										<textarea rows="5" cols="75" name="c_qa_content" required="required"></textarea>
+										<textarea rows="5" cols="75" name="c_qa_content"
+											 id="questionContent"></textarea>
 									</div>
-									
+
 									<!-- 로그인이 되어있지 않다면 -->
 									<c:choose>
 										<c:when test="${mynickName eq null}">
@@ -543,14 +566,81 @@ if (session.getAttribute("mynickName") != null) {
 										</c:when>
 										<c:otherwise>
 											<div class="col-lg-2" style="padding-top: 40px;">
-												<button type="submit" class="btn btn-primary">질문등록</button>
-											</div>	
+												<button type="submit" class="btn btn-primary" id="submitQuestion">질문등록</button>
+											</div>
 										</c:otherwise>
 									</c:choose>
-									
-							
-								</form>
+								<!-- </form> -->
 							</div>
+							<script type="text/javascript">
+								$(function()
+								{
+
+									
+									$("#submitQuestion").click(function()
+									{
+										
+										if ($("#questionContent").val() == "")
+										{
+											alert("질문을 입력하세요.");
+											return;
+										}
+										
+									 	var content = $("#questionContent").val();
+									 	
+									 	var sendData = {
+									 			uniq_id_num : $("#uniq_id_num").val()  // 고유식별번호
+									 			,c_info_num  : $("#c_info_num").val() // 해당 클래스 정보 번호
+									 			,c_qa_content : $("#questionContent").val() // 질문글 내용
+									 	};
+									 	
+									 	$.ajax({
+									 		method: "POST",
+									 		url:"<c:url value='classquestioninsert.action'/>",
+									 		data:sendData,
+									 		success:function(data){
+									 			
+									 			location.reload();
+									 		},
+									 		complete:function(data){
+									 			
+									 		}
+									 	});
+
+									});
+									
+
+						
+									
+
+									
+/* 									var content = $('#comment_input').val();
+									
+									var sendData={
+										f_forum_code : $('#f_forum_code').val(), 
+										uniq_id_num : $("#uniq_id_num").val(),
+										f_reply_content : $("#comment_input").val()
+									};
+
+									 $.ajax({
+										method: "POST",
+										url:"<c:url value='/replyupdate.action'/>",
+										data:sendData,
+										success:function(data){
+											if(data=="SUCCESS"){
+												
+											}else{
+												
+											}
+											location.reload();
+										},
+										complete:function(data){
+											
+										}
+									});  */
+								});
+							
+							</script>
 
 
 
@@ -625,9 +715,8 @@ if (session.getAttribute("mynickName") != null) {
 											<div class="ms-3">⭐ 총 별점 평균 : ${starAvg } 점</div>
 										</div>
 									</div>
-									<br>
-									<br> ${catIntro.u_info} <br>
-									<br> ⏰ 진행시간 : ${classinfo.c_runtime}시간 <br> 🚩 장소 :
+									<br> <br> ${catIntro.u_info} <br> <br> ⏰
+									진행시간 : ${classinfo.c_runtime}시간 <br> 🚩 장소 :
 									${classinfo.c_addr} <br> 🎤 모집인원 :
 									최대${classinfo.max_person}명 최소${classinfo.min_person}명 <br>
 									💰 수강료 : ${classinfo.c_price}원 <br> <br>
@@ -671,28 +760,21 @@ if (session.getAttribute("mynickName") != null) {
 											function()
 											{
 												// .attr()은 속성값(property)을 설정할 수 있다.
-												$('.datebutton').click( function()
+												$('.datebutton')
+														.click(
+																function()
 																{
 
 																	var str = "location.href='신청페이지?c_open_num="
-																			+ $(
-																					this)
-																					.val()
-																					.toString()
-																			+ "'";
+																			+ $(this).val().toString()+ "'";
 																	/* 여기서 'href='신청페이지주소?c_open_num='22   이런식으로 넘겨줘서 계속 에러가남. 따옴표 한쪽을 바깥쪽으로 빼줌 */
 
-																	$(
-																			'.enrollbutton')
-																			.attr(
-																					"onclick",
-																					str);
+																	$('.enrollbutton').attr("onclick",str);
 																});
 											})
 								</script>
 
-								<br>
-								<br>
+								<br> <br>
 								<button type="button" class="btn btn-primary enrollbutton"
 									onclick="alert('시간을 먼저 선택해 주세요!')">신청하기</button>
 							</div>

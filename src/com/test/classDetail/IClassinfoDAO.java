@@ -46,4 +46,12 @@ public interface IClassinfoDAO
 	// 해당 클래스의 질문 등록하기
 	public int classQuestionInsert(ClassinfoDTO dto);
 	
+	// 해당 클래스의 질문  삭제하기
+	public int classQuestionDelete(String c_qa_num);
+	
+	// 해당 클래스의 질문 수정하기
+	public int classQuestionUpdate(ClassinfoDTO dto);
+	
+	
+	
 }
