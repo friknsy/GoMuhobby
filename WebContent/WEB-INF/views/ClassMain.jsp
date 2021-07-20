@@ -92,13 +92,12 @@
 		background: #333333;
 	}
 	
-	.btn-rec
+ 	.btn-rec
 	{
 		font-size: 20px;
-		margin: 5px;
 		height: 70px;
 		width: 500px;
-	}
+	} 
 	
 	a 
 	{ 
@@ -315,12 +314,13 @@
 			<h3>추천 클래스</h3>
 		</div><div style="clear:both;"></div>
 		<div style="text-align: center;">
-			<div class="btn-rec" style="float: left;">
-					<button type="button" class="btn btn-outline-light btn-lg1" 
+			<div>
+					<button type="button" class="btn btn-outline-light btn-lg1 btn-rec" 
 					id="classRegion">지역 추천 클래스</button>
-					<button type="button" class="btn btn-outline-light btn-lg1" 
+					<button type="button" class="btn btn-outline-light btn-lg1 btn-rec" 
 					id="classMusic">관심 음악 추천 클래스</button>
-			</div><div style="clear:both;"></div>
+			</div>
+		<br><br>
 		</div>
 		<div>
 			<div style="float: left;">
