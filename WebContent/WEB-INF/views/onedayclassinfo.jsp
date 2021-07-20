@@ -786,7 +786,7 @@ if (session.getAttribute("mynickName") != null) {
 									 	<button type="button" class="btn btn-primary enrollbutton" onclick="alert('시간을 먼저 선택해 주세요!ㄹㅇㄹㅇ')">신청하기</button>
 									</c:when>
 									<c:otherwise>
-										<button type="button" class="btn btn-primary enrollbutton" onclick="isNotMember()">신청하기</button>
+										<button type="button" class="btn btn-primary" onclick="isNotMember()">신청하기</button>
 									</c:otherwise>									
 								</c:choose>
 								
