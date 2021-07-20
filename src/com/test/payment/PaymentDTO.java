@@ -4,24 +4,41 @@ public class PaymentDTO
 {
 	
 	//주요 속성 구성
-	private String c_open_num, c_title, town_name, prof_name, c_open_date, c_open,time;
-	//-- 클래스 개설예정번호, 클래스명, 읍면동명, 강사이름, 개설날짜, 개설시간
+	private String c_open_num, c_title, c_addr, prof_name, c_open_date, c_open,time;
+	//-- 클래스 개설예정번호, 클래스명, 상세주소, 강사이름, 개설날짜, 개설시간
 	private String uniq_id_num, u_name, u_tel;
 	//-- 고유식별번호, 회원이름, 회원전화번호
-	private int pay_price;
-	//-- 수강료
+	private int c_price, c_runtime, pay_price;
+	//-- 수강료, 소요시간
 	
 
 	// getter / setter 구성
+
+	public int getC_price()
+	{
+		return c_price;
+	}
+	public int getC_runtime()
+	{
+		return c_runtime;
+	}
 	public int getPay_price()
 	{
 		return pay_price;
 	}
-	
 	public void setPay_price(int pay_price)
 	{
 		this.pay_price = pay_price;
 	}
+	public void setC_runtime(int c_runtime)
+	{
+		this.c_runtime = c_runtime;
+	}
+	public void setC_price(int c_price)
+	{
+		this.c_price = c_price;
+	}
+
 	public String getC_open_num()
 	{
 		return c_open_num;
@@ -42,14 +59,14 @@ public class PaymentDTO
 		this.c_title = c_title;
 	}
 
-	public String getTown_name()
+	public String getC_addr()
 	{
-		return town_name;
+		return c_addr;
 	}
 
-	public void setTown_name(String town_name)
+	public void setC_addr(String c_addr)
 	{
-		this.town_name = town_name;
+		this.c_addr = c_addr;
 	}
 
 	public String getProf_name()

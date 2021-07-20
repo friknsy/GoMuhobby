@@ -34,7 +34,7 @@ if(uniqueId == null )
    PrintWriter script = response.getWriter();
    script.println("<script>");
    script.println("alert('로그인 후 이용가능합니다 .')");
-   script.println("location.href='loginform.action'");
+   script.println("location.href='login.action'");
    script.println("</script>");
 }   
 
@@ -85,7 +85,8 @@ if(uniqueId == null )
 </style>
 
 <script type="text/javascript">
-
+	
+	/*
 	var swiper = new Swiper('.blog-slider', {
     spaceBetween: 30,
     effect: 'fade',
@@ -98,7 +99,26 @@ if(uniqueId == null )
       el: '.blog-slider__pagination',
       clickable: true,
     }
-  });
+  	});
+	*/
+	
+	$(function()
+	{
+		$(".paymentBtn").click(function()
+		{
+			//alert("테스트");
+			
+			if ( $("#check").is(":checked") == false )
+			{
+				alert("결제 및 환불 약관에 동의해주세요.");
+				return false;
+			}
+		
+		});
+		
+		
+	});
+	
 </script>
 
 </head>
@@ -214,28 +234,18 @@ if(uniqueId == null )
 					<h2><b>클래스 신청하기</b></h2>
 					<br>
 					<div style="background-color :#B9E2FA; height: auto; width:50%">
-						<div style="position: relative; padding: 10px;" >
-						<a><img src="images/piano.jpg" width="120px" height="120px" ></a>
-						
-						<div style="display: inline-block;" >		
-							<ul>
-							<li style=" font-weight: bold:"><a>${classInfo.town_name }</a></li>
-								<li><a> 멘토 / 폴킴</a></li>
-							</ul>
+						<div style="text-align: left; padding: 10px;">
+							<a><img src="images/piano.jpg" width="120px" height="120px"></a>
+							<div style="float: right; display: inline-block;">
+								<ul>
+									<li style="font-weight: bold;"><a>${classInfo.c_title}</a></li>
+									<li><a>${classInfo.prof_name }<small> 강사</small></a></li>
+									<li><a>${classInfo.c_addr }</a></li>
+									<li><a>수업날짜 및 시간 / ${classInfo.c_open_date }</a></li>
+									<li><a>소요시간 / ${classInfo.c_runtime }시간</a></li>
+								</ul>
+							</div>
 						</div>
-						<div style="display:inline-block;">
-							<ul>
-								<li><a>2021-06-18 14:00~15:00</a></li>
-								<li><a>클래스명 / ${classInfo.c_title}</a></li>
-							</ul>
-						</div>
-						<!-- <div style="display: inline-block;"><br><br>
-							<span class="count" style="text-align: center;">등록된 답변이 없습니다</span>
-						</div> -->
-						
-					
-														
-					</div>
 					</div>
 				</div>
 				<br><br>
@@ -250,21 +260,23 @@ if(uniqueId == null )
 						<label for="name">
 							이름 
 						</label>
-						<input type="text" class="form-control" id="name" name="name" style="width: 40%;">
+						<input type="text" class="form-control" id="name" name="name" style="width: 40%;"
+						disabled="disabled" value="${memberInfo.u_name }">
 					</div>
 					
 					<div class="form-group">
 						<label for="telephone">
 							전화번호 
 						</label>
-						<input type="text" class="form-control" id="telephone" name="telephone" style="width: 60%;">
+						<input type="text" class="form-control" id="telephone" name="telephone" style="width: 40%;"
+						disabled="disabled" value="${memberInfo.u_tel }">
 					</div>
 				</form>
 					<hr>
 			
 				<div >
 					<h4><b>결제수단 </b></h4>
-					<b>결제 금액 : 40,000원</b>
+					<b>결제 금액 : ${classInfo.c_price }</b>
 					
 					
 				</div>
@@ -280,7 +292,7 @@ if(uniqueId == null )
 			</div>
 			<hr>
 			<div>
-				결제 및 환불에 동의하시겠습니까?    <input type="checkbox"><br>
+				결제 및 환불에 동의하시겠습니까?    <input type="checkbox" id="check" ><br>
 				<p style="font-size: small;"><span style="color: red;">[개인정보 제 3자 제공],[클래스 환불 정책]</span> 적용 동의에 관한 내용을 모두 이해하였으며, 이에 동의합니다.</p> 
 			
 			</div>
@@ -290,7 +302,12 @@ if(uniqueId == null )
 
 
 <div class="col text-center">
-	<button class="btn btn-outline-danger">결제하기</button>
+	<form action="paymentresult.action" method="post">
+		<input type="hidden" id="c_open_num" name="c_open_num" value="${classInfo.c_open_num }">
+		<input type="hidden" id="uniq_id_num" name="uniq_id_num" value="${memberInfo.uniq_id_num }">
+		<input type="hidden" id="pay_price" name="pay_price" value="${classInfo.c_price }">
+		<button type="submit" class="btn btn-outline-danger paymentBtn">결제하기</button>
+	</form>
 </div>
 <br><br><br><br><br><br><br><br><br><br><br><br><br>
 

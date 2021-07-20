@@ -219,7 +219,7 @@
   			<div class="card-body">
 	   			<div class="card-text">
 	   				<p style="text-align: right"><i class="bi bi-geo-alt-fill"></i> ${content.town_name }</p>
-	   				<a href="onedayclassinfo.action"><p style="font-weight: bold; text-align: left">${content.c_title }</p></a>
+	   				<a href="onedayclassinfo.action?c_info_num=${content.c_info_num }"><p style="font-weight: bold; text-align: left">${content.c_title }</p></a>
 	   				<div>
 	   					<p style="font-weight: bold; color: red; text-align: left;">￦ ${content.c_price }
 	   					<small style="color: black; font-weight: normal;">/시간</small></p>
