@@ -155,11 +155,28 @@
             	</c:otherwise>
             </c:choose>
 
-	<div class="container">
-		<div class="header header-title">
-			<h2 style="width: 100%" class="h2 bold">자유게시판</h2>
-		</div>
-		<br>
+		<div class="container">
+			<div class="header header-title">
+				<h2 style="width: 100%" class="h2 bold">자유게시판</h2>
+			</div>
+			<br>
+			<br>
+		
+		<form id="searchForm" action="board" method="get">
+			<div class="form-group">
+					<div class="input-group-prepend">
+						<select id="searchKey" name="searchKey" class="selectFiled custom-select">
+							<option value="" selected>선택</option>
+							<option value="subject">제목</option>
+							<option value="name">작성자</option>
+							<option value="content">내용</option>
+						</select>
+						<input id="searchValue" type="text" name="searchValue" class="textFiled" class="form-control">
+						<button id="searchBtn" class="btn btn-secondary" type="button" id="button-addon2">검색</button>	
+					</div>
+			</div>
+		</form>
+		
 		<br>
 
 		<!-- 게시판 헤더 시작 -->
