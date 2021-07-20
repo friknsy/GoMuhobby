@@ -752,7 +752,7 @@ if (session.getAttribute("mynickName") != null) {
 													pattern="yyyy-MM-dd HH:mm" />
 												<fmt:formatDate value="${dateValue}"
 													pattern="yyyy년 MM월 dd일 HH시 mm분" />
-												(${time.payments }명 / ${classinfo.max_person}명)
+												(${time.payments }명 / ${classinfo.max_person}명) --마감--
 											</button>										
 										</c:when>
 										<c:otherwise>
@@ -804,8 +804,8 @@ if (session.getAttribute("mynickName") != null) {
 								<br> <br>
 								
 								<c:choose>
-									<c:when test="${!uniqudId eq null }">
-									 	<button type="button" class="btn btn-primary enrollbutton" onclick="alert('시간을 먼저 선택해 주세요!ㄹㅇㄹㅇ')">신청하기</button>
+									<c:when test="${not empty uniqueId}">
+									 	<button type="button" class="btn btn-primary enrollbutton" onclick="alert('시간을 먼저 선택해 주세요!')">신청하기</button>
 									</c:when>
 									<c:otherwise>
 										<button type="button" class="btn btn-primary" onclick="isNotMember()">신청하기</button>
