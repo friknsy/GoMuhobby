@@ -80,7 +80,7 @@
 		
 		$(".deleteBtn").click(function()
 		{
-			alert("테스트");
+			//alert("테스트");
 			
 			if(confirm("게시물을 삭제하시겠습니까?"))
 			{	
