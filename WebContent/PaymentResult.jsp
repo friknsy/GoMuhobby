@@ -5,7 +5,6 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath(); 	
 %>
-
 <%
    String adminStr = null;
 
@@ -39,14 +38,12 @@ if(uniqueId == null )
 }   
 
 
-
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Payment.jsp</title>
+<title>PaymentResult.jsp</title>
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -72,37 +69,10 @@ if(uniqueId == null )
 <script src="js/simple-datatables.js""></script>
 <script src="js/datatables-simple-demo.js"></script>
 
-<style type="text/css">
-	
-	table
-	{
-		margin-left: auto;
-		margin-right: auto;
-	}
-	
-	
-
-</style>
-
-<script type="text/javascript">
-
-	var swiper = new Swiper('.blog-slider', {
-    spaceBetween: 30,
-    effect: 'fade',
-    loop: true,
-    mousewheel: {
-      invert: false,
-    },
-    // autoHeight: true,
-    pagination: {
-      el: '.blog-slider__pagination',
-      clickable: true,
-    }
-  });
-</script>
 
 </head>
 <body>
+
 
 <body class="sb-nav-fixed">
        		<!-- 맨 위 상단 바 -->
@@ -204,45 +174,19 @@ if(uniqueId == null )
             </c:choose>
 
 
-
-<br>
 <div class="container px-5 mt-6 mb-2">
 	<div class="panel-group">
 		<div class="panel-default">
 			<div class="panel-body">
 				<div>
-					<h2><b>클래스 신청하기</b></h2>
-					<br>
-					<div style="background-color :#B9E2FA; height: auto; width:50%">
-						<div style="position: relative; padding: 10px;" >
-						<a><img src="images/piano.jpg" width="120px" height="120px" ></a>
-						
-						<div style="display: inline-block;" >		
-							<ul>
-							<li style=" font-weight: bold:"><a> 강남 교대</a></li>
-								<li><a> 멘토 / 폴킴</a></li>
-							</ul>
-						</div>
-						<div style="display:inline-block;">
-							<ul>
-								<li><a>2021-06-18 14:00~15:00</a></li>
-								<li><a>클래스명 / 하루만에 완성하는 축가 클래스</a></li>
-							</ul>
-						</div>
-						<!-- <div style="display: inline-block;"><br><br>
-							<span class="count" style="text-align: center;">등록된 답변이 없습니다</span>
-						</div> -->
-						
-					
-														
-					</div>
-					</div>
+					<h2><b>클래스 신청완료</b></h2>
+					<hr>
+				
 				</div>
+			</div>
 				<br><br>
 				<div >
-					<h4><b>신청자 정보</b></h4>
-					신청자 정보가 일치하는지 확인해주세요.
-					
+					<h4><b>결제가 완료되었습니다.</b></h4>
 				</div>
 				<hr>
 				<form>	
@@ -262,37 +206,16 @@ if(uniqueId == null )
 				</form>
 					<hr>
 			
-				<div >
-					<h4><b>결제수단 </b></h4>
-					<b>결제 금액 : 40,000원</b>
-					
-					
-				</div>
 				<br><br>
-			<form>
-					<div>
-						<button type="button" class="btn btn-outline-secondary">신용카드</button>
-						<button type="button" class="btn btn-outline-secondary">휴대폰 소액결제</button>
-						<button type="button" class="btn btn-outline-secondary">가상계좌</button>
-						<button type="button" class="btn btn-outline-secondary">카카오페이</button>
-					</div>
-			</form>
-			</div>
-			<hr>
-			<div>
-				결제 및 환불에 동의하시겠습니까?    <input type="checkbox"><br>
-				<p style="font-size: small;"><span style="color: red;">[개인정보 제 3자 제공],[클래스 환불 정책]</span> 적용 동의에 관한 내용을 모두 이해하였으며, 이에 동의합니다.</p> 
-			
-			</div>
-		</div><!-- close .panel-default -->
-	</div>
+		
+		</div>
+	</div><!-- close .panel-default -->
 </div>
 
 
-<div class="col text-center">
-	<button class="btn btn-outline-danger">결제하기</button>
-</div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
 
 </body>
 </html>

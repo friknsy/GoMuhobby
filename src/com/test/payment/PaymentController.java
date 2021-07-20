@@ -24,7 +24,8 @@ public class PaymentController
 		String c_open_num = request.getParameter("c_open_num");
 		String uniq_id_num = request.getParameter("uniq_id_num");
 		
-		//System.out.println(c_open_num);
+		System.out.println(c_open_num);
+		System.out.println(uniq_id_num);
 		
 		IPaymentDAO dao = sqlSession.getMapper(IPaymentDAO.class);
 		
@@ -33,6 +34,9 @@ public class PaymentController
 		
 		return "/WEB-INF/views/Payment.jsp";
 	}
+	
+	// 결제
+	//@RequestMapping(value = "/")
 	
 	
 	

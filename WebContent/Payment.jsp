@@ -34,7 +34,7 @@ if(uniqueId == null )
    PrintWriter script = response.getWriter();
    script.println("<script>");
    script.println("alert('로그인 후 이용가능합니다 .')");
-   script.println("location.href='loginform.action'");
+   script.println("location.href='login.action'");
    script.println("</script>");
 }   
 
@@ -241,8 +241,7 @@ if(uniqueId == null )
 				<br><br>
 				<div >
 					<h4><b>신청자 정보</b></h4>
-					신청자 정보가 일치하는지 확인해주세요.
-					
+					원활한 클래스 신청을 위해 정보를 입력해주세요.
 				</div>
 				<hr>
 				<form>	
