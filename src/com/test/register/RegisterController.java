@@ -24,9 +24,11 @@ public class RegisterController
 	
 	// 회원가입 클릭 시 회원가입폼 반환
 	@RequestMapping(value = "/registerform.action", method = RequestMethod.GET)
-	public String main()
+	public String main(ModelMap model)
 	{	
+		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
 		
+		model.addAttribute("musiccat", dao.musiccat());
 		return "/WEB-INF/views/1register.jsp";
 	}
 	
@@ -38,8 +40,9 @@ public class RegisterController
 		
 		dao.add1(u);
 		u.setUniq_id_num(dao.uniqIdget());
-		
 		dao.add2(u);
+		System.out.println(u.getMusic_cat_code());
+		dao.musiccatadd(u);
 		
 		return "/WEB-INF/views/welcome.jsp";
 	}

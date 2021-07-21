@@ -15,4 +15,8 @@
 		WHERE A.UNIQ_ID_NUM = #{uniq_id_num}
  	</select>
  	
+ 	<select id="cvlist" resultType="com.test.classmain.ClassDTO">
+ 		SELECT CV_CODE, CV_NAME
+		FROM CV;
+ 	</select>
 </mapper>

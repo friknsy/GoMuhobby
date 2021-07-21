@@ -489,7 +489,9 @@
         	
         	function musicCat()
         	{
+        		var catcode = $("#catCode option").index($("#catCode option:selected"));
         		
+        		$('#music_cat_code').val(Number(catcode)+1);
         	}
         	
         </script>        
@@ -513,7 +515,7 @@
                                         <form action="register.action" method="post">
                                         	<!-- 데이터임의로 넘겨주려고 넣은 인풋태그 -->
 	                                        <input type="hidden" id="town_code" name="town_code" placeholder="지역번호입력" value="1">
-                                            
+                                            <input type="hidden" id="music_cat_code" name="music_cat_code" value="1">
                                         	<br>
                                             <div class="row mb-3">
                                             <span class="mb-2 text-center text-muhobby"><h4>필수 입력 정보</h4></span>
@@ -671,7 +673,15 @@
                                             
                                             <div class="row mb-3">
                                             	<span class="mb-2 fw-bold">관심사</span>
-                                                
+                                                <div class="col-md-12">
+                                                    <div class="form-floating mb-3 mb-md-0">
+	                                                    <select class="form-select" aria-label="Default select example" id="catCode" onchange="musicCat()">
+															<c:forEach var="group" items="${musiccat }">
+																<option value="${group.music_cat_code}">${group.music_cat_small }</option>
+															</c:forEach> 			
+														</select>
+                                                    </div>
+                                                </div>
 											</div>
 											                                        
                                             <br>

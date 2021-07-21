@@ -1,10 +1,13 @@
 package com.test.register;
 
+import java.util.ArrayList;
+
 public interface IUserDAO
 {
 	// 매개변수 param01 param02  | arg01 arg02 로 넘겨주면 매개변수 값 mybatis에서 인지 함!! 
 	public int add1(UserDTO u);
 	public int add2(UserDTO u);
+	public int musiccatadd(UserDTO u);
 	public int idcheck(String id);
 	public int pwcheck(UserDTO u);
 	public int nickNameCheck(String nick);
@@ -22,4 +25,7 @@ public interface IUserDAO
 	
 	// 프로필 사진 가져오기
 	public String profileselect(String uniqueId);
+	
+	// 음악 카테고리 출력
+	public ArrayList<UserDTO> musiccat();
 }

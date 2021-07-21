@@ -34,8 +34,6 @@
 	{
 		profinfo = "";
 	}
-	
-	System.out.println(profinfo);
 %>
 
 <!DOCTYPE html>

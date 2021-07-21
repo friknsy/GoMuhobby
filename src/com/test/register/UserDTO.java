@@ -11,7 +11,28 @@ public class UserDTO
 	, u_email
 	, u_join_date
 	, u_info
-	, u_photo;
+	, u_photo
+	, music_cat_code, music_cat_small;
+
+	public String getMusic_cat_code()
+	{
+		return music_cat_code;
+	}
+
+	public void setMusic_cat_code(String music_cat_code)
+	{
+		this.music_cat_code = music_cat_code;
+	}
+
+	public String getMusic_cat_small()
+	{
+		return music_cat_small;
+	}
+
+	public void setMusic_cat_small(String music_cat_small)
+	{
+		this.music_cat_small = music_cat_small;
+	}
 
 	public String getUniq_id_num()
 	{
@@ -122,12 +143,4 @@ public class UserDTO
 	{
 		this.u_photo = u_photo;
 	}
-	
-	
-
-
-	
-	
-	
-
 }

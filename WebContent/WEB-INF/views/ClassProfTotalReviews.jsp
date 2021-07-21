@@ -189,36 +189,30 @@ if (session.getAttribute("mynickName") != null) {
 			<!-- Blog entries-->
 			<div class="col-lg-12">
 				<!-- Featured blog post-->
-				
 					
 				
-					<div class="card" >
-					
-					
-					<div class="card-body" >
-						<div class="d-flex align-items-end justify-content-between" >
-							<div class="d-flex align-items-center" >
-									
-										<div class="col-lg-2" >
-											<div class="ms-3"
+							<div class="card" >
+								<div class="card-body" >
+								<div class="d-flex align-items-end justify-content-between" >
+									<div class="d-flex align-items-center" >
+											<div class="ms-3 col-md-2"
 												style="background: #BDBDBD; width: 200px; height: 200px; border-radius: 70%; overflow: hidden; float: left;">
 												<img class="profile" src="img/${profInfos.u_photo }"
 													style="width: 100%; height: 100%; object-fit: cover;">
 											</div>
-
+											
+											<div class="col-md-10">
+												<div class="ms-3" style="font-size: large;"><a href="전체후기" style="text-decoration: none; color: black;">${profInfos.u_name}	강사님</a></div>
+												<div class="ms-3 mt-4">🏛 총 진행 회차 : ${profInfos.total_class_unit } 회</div>
+												<div class="ms-3">📝 총 후기 개수 : ${profInfos.total_review_unit } 개</div>
+												<div class="ms-3">⭐ 총 별점 평균 : ${profInfos.staravg } 점</div>
+												<div class="ms-3 mt-4">${profInfos.u_info} </div>
+											</div>
 										</div>
-										<div class="col-lg-10 mt-3" style="background-color: green;">
-											<div class="ms-3" style="font-size: large;"><a href="전체후기" style="text-decoration: none; color: black;">${profInfos.u_name}	강사님</a></div><br><br>
-											<div class="ms-3">🏛 총 진행 회차 : ${profInfos.total_class_unit } 회</div>
-											<div class="ms-3">📝 총 후기 개수 : ${profInfos.total_review_unit } 개</div>
-											<div class="ms-3">⭐ 총 별점 평균 : ${profInfos.staravg } 점</div>
-										</div>
-									<br> <br>${profInfos.u_info} <br> <br> 
-									
-								</div>
-							</div>
-						</div><!-- end.card-body -->
-					</div><!-- end .card -->
+									</div>
+								</div><!-- end.card-body -->
+								
+							</div><!-- end .card -->
 				</div><!-- end .col-lg-12 -->
 
 				<br>

@@ -29,8 +29,57 @@
 	{
 		mynickName = (String)session.getAttribute("mynickName");
 	}
+%>
 
-	String profinfo = (String)session.getAttribute("c_prof_info");
+<%
+	String c_title = (String)session.getAttribute("c_title");
+	
+	if(c_title == null)
+	{
+		c_title = "";
+	}
+	
+	String music_cat_code = (String)session.getAttribute("music_cat_code");
+	
+	if(music_cat_code == null)
+	{
+		music_cat_code = "";
+	}
+	
+	String c_photo = (String)session.getAttribute("c_photo");
+	
+	if(c_photo == null)
+	{
+		c_photo = "";
+	}
+	
+	String c_detail_info = (String)session.getAttribute("c_detail_info");
+	
+	if(c_detail_info == null)
+	{
+		c_detail_info = "";
+	}
+	
+	String c_video = (String)session.getAttribute("c_video");
+	
+	if(c_video == null)
+	{
+		c_video = "";
+	}
+	
+	String c_addr = (String)session.getAttribute("c_addr");
+	
+	if(c_addr == null)
+	{
+		c_addr = "";
+	}
+	
+	String c_detail_info2 = (String)session.getAttribute("c_detail_info2");
+	
+	if(c_detail_info2 == null)
+	{
+		c_detail_info2 = "🔥 유의사항 입력 🔥&#13;&#13;1. 수업에 늦을 시 미리 연락 주세요.&#13;2. 대중교통 이용이 오시기에 편합니다.&#13;3. 하루 전 취소/당일 취소는 환불규정에 의해 취소 및 환불이 불가합니다.";
+	}
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,7 +106,15 @@
 	    .hAddr {position:absolute;left:10px;top:10px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;}
 	    #centerAddr {display:block;margin-top:2px;font-weight: normal;}
 	    .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-	</style>    
+	</style>
+	<script type="text/javascript">
+		function musicCat()
+		{
+			var catcode = $("#catCode option").index($("#catCode option:selected"));
+			
+			$('#music_cat_code').val(Number(catcode)+1);
+		}
+	</script>
     </head>
     <body class="sb-nav-fixed">
     	
@@ -193,59 +250,37 @@
 	                                    	<h2 class="text-center font-weight-light my-4 text-muhobby fw-bold">클래스 개설 정보</h2>
 	                                    </div>
 	                                    <div class="card-body">
-	                                        <form action="sign.do" method="post">
+	                                        <form action="classopen3.action" method="get">
 	                                        	<br>
 	                                            <div class="row mb-3">
 	                                            <span class="mb-2 fw-bold normal">1) 클래스명 (필수)</span>
 	                                                <div class="col-md-12">
 	                                                    <div class="form-floating mb-3 mb-md-0">
-	                                                        <input class="form-control" id="userId" name="userId"type="text"/>
+	                                                        <input class="form-control" id="c_title" name="c_title" type="text" value="<%out.print(c_title); %>"/>
 	                                                    </div>
 	                                                </div>
 	                                            </div>
 	                                            <br>
 	                                            <div class="row mb-3">
 	                                            <span class="mb-2 fw-bold normal">2) 카테고리 선택 (필수)</span>
-		                                            <div class="col-md-12">
-		                                                <div class="row mb-3">
-			                                                <div class="d-grid gap-3 d-sm-flex btn-group mb-2" data-toggle="buttons">
-			                                                	<label class="btn btn-primary">
-			                                                		<input type="radio" name="hobby" autocomplete="off" value="피아노/건반"> 피아노/건반
-			                                                	</label>
-			                                                	<label class="btn btn-primary">
-			                                                		<input type="radio" name="hobby" autocomplete="off" value="보컬"> 보컬
-			                                                	</label>
-			                                                	<label class="btn btn-primary">
-			                                                		<input type="radio" name="hobby" autocomplete="off" value="드럼"> 드럼
-			                                                	</label>
-			                                                	<label class="btn btn-primary">
-			                                                		<input type="radio" name="hobby" autocomplete="off" value="작곡/미디"> 작곡/미디
-			                                                	</label>
-			                                                
-			                                                
-			                                                
-			                                                	<label class="btn btn-primary">
-			                                                		<input type="radio" name="hobby" autocomplete="off" value="기타"> 기타
-			                                                	</label>
-			                                                	<label class="btn btn-primary">
-			                                                		<input type="radio" name="hobby" autocomplete="off" value="베이스"> 베이스
-			                                                	</label>
-			                                                	<label class="btn btn-primary">
-			                                                		<input type="radio" name="hobby" autocomplete="off" value="현악기"> 현악기
-			                                                	</label>
-			                                                	<label class="btn btn-primary">
-			                                                		<input type="radio" name="hobby" autocomplete="off" value="그 외"> 그 외
-			                                                	</label>
-			                                            	</div>
-														</div>
-													</div>
+	                                                <div class="col-md-12">
+	                                                    <div class="form-floating mb-3 mb-md-0">
+	                                                    	<input type="hidden" id="music_cat_code" name="music_cat_code" value="1">
+		                                                    <select class="form-select" aria-label="Default select example" id="catCode" onchange="musicCat()">
+																<c:forEach var="group" items="${musiccat }">
+																	<option value="${group.music_cat_code}">${group.music_cat_small }</option>
+																</c:forEach>
+															</select>
+	                                                    </div>
+	                                                </div>
 	                                            </div>
 	                                            <br>
 	                                            <div class="row mb-3">
 	                                            <span class="mb-2 fw-bold normal">3) 클래스 대표 이미지 등록</span>
 	                                                <div class="col-md-12">
 	                                                    <div class="form-floating mb-3 mb-md-0">
-	                                                        <input class="form-control" style="padding-left: 40%;" id="userId" name="userId" type="file"/>
+	                                                    	<!-- 보안상의 문제로 value 값은 넣어줄 수 없어서 페이지 새로고침이 되면 다시 파일 선택을 해줘야 함. -->
+	                                                        <input class="form-control" style="padding-left: 40%;" id="c_photo" name="c_photo" type="file"/>
 	                                                    </div>
 	                                                </div>
 	                                            </div>
@@ -257,11 +292,11 @@
 	                                                    <div class="form-floating mb-3 mb-md-0">
 	                                                       <section>
 <!-- placeholder 때문에 TAB 으로 들여쓰기 하면 저>>>>>>쪽으로 날라감.. -->
-	                                                       	   <textarea class="form-control" style= "height:300px" rows="3" placeholder="수업 목표(Key lessons  결과물 중심 1~3가지 ~ 최대 3줄)
+	                                                       	   <textarea class="form-control" id="c_detail_info" name="c_detail_info" style= "height:300px" rows="3" placeholder="수업 목표(Key lessons  결과물 중심 1~3가지 ~ 최대 3줄)
 * 무엇을 배울 수 있나요, 무엇을 얻을 수 있나요
 
 해당 클래스 차별점(1 ~ 3가지) ~ 최대 3줄
- : 해당 카테고리의 다른 클래스들과 어떻게 다른가요"></textarea>
+ : 해당 카테고리의 다른 클래스들과 어떻게 다른가요"><%out.print(c_detail_info); %></textarea>
 	                                                       </section>
 	                                                    </div>
 	                                                </div>
@@ -271,7 +306,7 @@
 	                                            <span class="mb-2 fw-bold normal">5) 동영상 첨부 (선택)</span>
 	                                                <div class="col-md-12">
 	                                                    <div class="form-floating mb-3 mb-md-0">
-	                                                        <input class="form-control" id="userId" name="userId"type="text"/>
+	                                                        <input class="form-control" id="c_video" name="c_video"type="text" value="<%out.print(c_video); %>"/>
 	                                                    </div>
 	                                                </div>
 	                                            </div>
@@ -297,7 +332,7 @@
 	                                                        <span class="mb-4 fw-bold">상세 주소 입력</span>
 	                                                        
 	                                                        <!-- 클릭한 주소가 입력되는 부분. -->
-	                                                        <input class="form-control" id="address" name="address"type="text"/>
+	                                                        <input class="form-control" id="c_addr" name="c_addr" type="text" value="<%out.print(c_addr); %>"/>
 	                                                        
 	                                                    </div>
 	                                                </div>
@@ -309,7 +344,7 @@
 	                                                <div class="col-md-12">
 	                                                    <div class="form-floating mb-3 mb-md-0">
 	                                                       <section>
-	                                                       	   <textarea class="form-control" style= "height:300px" rows="3" placeholder="수업 진행간의 유의 사항을 적어주세요.">&#13;&#10;		🔥 유의사항 입력 🔥&#13;&#10;&#13;&#10;		1. 수업에 늦을 시 미리 연락 주세요.&#13;&#10;		2. 대중교통 이용이 오시기에 편합니다.&#13;&#10;		3. 하루 전 취소/당일 취소는 환불규정에 의해 취소 및 환불이 불가합니다.</textarea>
+	                                                       	   <textarea class="form-control" id="c_detail_info2" name="c_detail_info2" style= "height:300px" rows="3" placeholder="수업 진행간의 유의 사항을 적어주세요."><%out.print(c_detail_info2); %></textarea>
 	                                                       </section>
 	                                                    </div>
 	                                                </div>
@@ -323,16 +358,16 @@
 		                                                <div class="row mb-3">
 			                                                <div class="d-grid gap-3 d-sm-flex btn-group mb-2" data-toggle="buttons">
 			                                                	<label class="btn btn-primary">
-			                                                		<input type="checkbox" name="hobby" autocomplete="off" value="와이파이"> 와이파이
+			                                                		<input type="checkbox" name="cv_name" autocomplete="off" value="와이파이"> 와이파이
 			                                                	</label>
 			                                                	<label class="btn btn-primary">
-			                                                		<input type="checkbox" name="hobby" autocomplete="off" value="주차 가능"> 주차 가능
+			                                                		<input type="checkbox" name="cv_name" autocomplete="off" value="주차 가능"> 주차 가능
 			                                                	</label>
 			                                                	<label class="btn btn-primary">
-			                                                		<input type="checkbox" name="hobby" autocomplete="off" value="대중교통 용이"> 대중교통 용이
+			                                                		<input type="checkbox" name="cv_name" autocomplete="off" value="대중교통 용이"> 대중교통 용이
 			                                                	</label>
 			                                                	<label class="btn btn-primary">
-			                                                		<input type="checkbox" name="hobby" autocomplete="off" value="음료/간식 제공"> 음료/간식 제공
+			                                                		<input type="checkbox" name="cv_name" autocomplete="off" value="음료/간식 제공"> 음료/간식 제공
 			                                                	</label>
 			                                            	</div>
 														</div>
@@ -345,11 +380,11 @@
 	                                            	<div class="col-md-2">
 	                                                </div>
 	                                                <div class="col-md-4 col-md-3 d-grid">
-	                                                	<a class="text-center btn1 btn-primary btn-block" type="submit" id="loadBtn" id="signup" href="classopen1.action">이전 페이지</a>
+	                                                	<a class="text-center btn1 btn-primary btn-block" href="classopen1.action">이전 페이지</a>
 	                                                </div>
 	                                                <div class="col-md-4 d-grid">
 	                                                	<!-- <a class="text-center btn1 btn-primary btn-block" href="/sign.do">회원 가입</a> -->
-	                                                	<a class="text-center btn1 btn-primary btn-block" type="submit" id="loadBtn" id="signup" href="classopen3.action">다음 페이지</a>
+	                                                	<input type="submit" class="text-center btn1 btn-primary btn-block" value="다음 페이지">
 	                                                </div>
                                             	</div>
                                             	
@@ -402,7 +437,7 @@
 		                        '</div>';
 		                        
 		            /* ■■■ ID 값이 address이면 다음과 같이 value 입력 ■■■ 296줄 */            
-					$('#address').val(result[0].address.address_name);
+					$('#c_addr').val(result[0].address.address_name);
 					
 		            // 마커를 클릭한 위치에 표시합니다 
 		            marker.setPosition(mouseEvent.latLng);

@@ -78,7 +78,6 @@
 		INSERT INTO LOGIN VALUES(LOGIN_SEQ.NEXTVAL,SYSDATE,#{uniqueId})
 	</insert>
 	
-	
 	<!-- 프로필사진 변경 -->
 	<update id="profileChange">
 		UPDATE MEMBER SET U_PHOTO=#{param1} WHERE UNIQ_ID_NUM=#{param2}
@@ -91,6 +90,16 @@
 		WHERE UNIQ_ID_NUM = #{uniq_id_num}
 	</select>
 	
-	
- 
+	<!-- 음악 카테고리 선택 -->
+	<select id="musiccat" resultType="com.test.register.UserDTO">
+		SELECT MUSIC_CAT_CODE, MUSIC_CAT_SMALL
+		FROM MUSIC_CAT
+		ORDER BY MUSIC_CAT_CODE
+	</select>
+ 	
+ 	<!-- 음악 카테고리 삽입 -->
+ 	<insert id="musiccatadd">
+ 		INSERT INTO MUSIC_CAT_SELECTED
+		VALUES(MUSIC_CAT_SELECTED_SEQ.NEXTVAL, #{uniq_id_num}, #{music_cat_code})
+ 	</insert>
  </mapper>
