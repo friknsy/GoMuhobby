@@ -72,6 +72,9 @@ if(uniqueId == null )
 <script src="js/simple-datatables.js""></script>
 <script src="js/datatables-simple-demo.js"></script>
 
+<!-- 아임포트 -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 <style type="text/css">
 	
 	table
@@ -86,38 +89,96 @@ if(uniqueId == null )
 
 <script type="text/javascript">
 	
-	/*
-	var swiper = new Swiper('.blog-slider', {
-    spaceBetween: 30,
-    effect: 'fade',
-    loop: true,
-    mousewheel: {
-      invert: false,
-    },
-    // autoHeight: true,
-    pagination: {
-      el: '.blog-slider__pagination',
-      clickable: true,
-    }
-  	});
-	*/
-	
 	$(function()
 	{
-		$(".paymentBtn").click(function()
+		
+		// 결제 버튼 선택시 색상 변경 및 클래스 추가
+		$(".payBtn").focus(function()
+		{
+			$(".payBtn").css('background-color', '');  //-- 색상 초기화
+			$(this).css('background-color', '#D3D3D3');
+			
+			$(".payBtn").removeClass("class"); //-- 클래스 초기화
+			$(this).addClass("class");
+		});
+		
+		// 유효성 체크
+		$(".payment").click(function()
 		{
 			//alert("테스트");
 			
 			if ( $("#check").is(":checked") == false )
 			{
 				alert("결제 및 환불 약관에 동의해주세요.");
-				return false;
+				return;
+			}
+			
+			if ( $(".class").val() == null )
+			{
+				alert("결제수단을 선택해주세요.");
+				return;
+			}
+			
+			if ( $(".class").val() == "kakao" )
+			{
+				kakaopay();
+				
 			}
 		
 		});
 		
 		
+
+		
 	});
+	
+	
+	
+	// 카카오페이 결제
+	function kakaopay()
+	{
+		// 결제시 들어갈 값
+		var c_title = document.getElementById("c_title").value;
+		var pay_price = document.getElementById("pay_price").value;
+		var u_name = document.getElementById("u_name").value;
+		var u_tel = document.getElementById("u_tel").value;
+		
+		
+		/* 결제 */
+		var IMP = window.IMP; // 생략가능
+		IMP.init('imp09580094'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+		
+		IMP.request_pay({
+		    pg : 'kakao', // version 1.1.0부터 지원.
+		    pay_method : 'card',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : c_title ,
+		    amount : pay_price,
+		    //buyer_email : 'iamport@siot.do',
+		    buyer_name : u_name,
+		    buyer_tel : u_tel,
+		    //buyer_addr : '서울특별시 강남구 삼성동',
+		    //buyer_postcode : '123-456',
+		    //m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+		}, function(rsp) {
+		    if ( rsp.success ) {
+		        var msg = '결제가 완료되었습니다.';
+		        msg += '고유ID : ' + rsp.imp_uid;
+		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		        msg += '결제 금액 : ' + rsp.paid_amount;
+		        msg += '카드 승인번호 : ' + rsp.apply_num;
+		        $("form").submit();
+		        
+		    } else {
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		    }
+		    alert(msg);
+		});
+		
+	}
+	
+	
 	
 </script>
 
@@ -283,10 +344,10 @@ if(uniqueId == null )
 				<br><br>
 			<form>
 					<div>
-						<button type="button" class="btn btn-outline-secondary">신용카드</button>
-						<button type="button" class="btn btn-outline-secondary">휴대폰 소액결제</button>
-						<button type="button" class="btn btn-outline-secondary">가상계좌</button>
-						<button type="button" class="btn btn-outline-secondary">카카오페이</button>
+						<button type="button" class="btn btn-outline-secondary payBtn" value="card">신용카드</button>
+						<button type="button" class="btn btn-outline-secondary payBtn" value="telephone">휴대폰 소액결제</button>
+						<button type="button" class="btn btn-outline-secondary payBtn" value="virtual">가상계좌</button>
+						<button type="button" class="btn btn-outline-secondary payBtn" value="kakao">카카오페이</button>
 					</div>
 			</form>
 			</div>
@@ -302,11 +363,16 @@ if(uniqueId == null )
 
 
 <div class="col text-center">
-	<form action="paymentresult.action" method="post">
+	<form id="form" action="paymentresult.action" method="post">
+		<!-- 결제 시 필요한 정보 -->
+		<input type="hidden" id="c_title" name="c_title" value="${classInfo.c_title }">
+		<input type="hidden" id="u_name" name="u_name" value="${memberInfo.u_name }">
+		<input type="hidden" id="u_tel" name="u_tel" value="${memberInfo.u_tel }">
+		
 		<input type="hidden" id="c_open_num" name="c_open_num" value="${classInfo.c_open_num }">
 		<input type="hidden" id="uniq_id_num" name="uniq_id_num" value="${memberInfo.uniq_id_num }">
 		<input type="hidden" id="pay_price" name="pay_price" value="${classInfo.c_price }">
-		<button type="submit" class="btn btn-outline-danger paymentBtn">결제하기</button>
+		<button type="button" class="btn btn-outline-danger payment">결제하기</button>
 	</form>
 </div>
 <br><br><br><br><br><br><br><br><br><br><br><br><br>
