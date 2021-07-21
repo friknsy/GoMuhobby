@@ -1,6 +1,8 @@
 <%@page import="java.io.PrintWriter"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath(); 	
@@ -34,7 +36,7 @@ if(uniqueId == null )
    PrintWriter script = response.getWriter();
    script.println("<script>");
    script.println("alert('로그인 후 이용가능합니다 .')");
-   script.println("location.href='loginform.action'");
+   script.println("location.href='login.action'");
    script.println("</script>");
 }   
 
@@ -72,6 +74,9 @@ if(uniqueId == null )
 <script src="js/simple-datatables.js""></script>
 <script src="js/datatables-simple-demo.js"></script>
 
+<!-- 아임포트 -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 <style type="text/css">
 	
 	table
@@ -85,20 +90,116 @@ if(uniqueId == null )
 </style>
 
 <script type="text/javascript">
+	
+	$(function()
+	{
+		
+		// 결제 버튼 선택시 색상 변경 및 클래스 추가
+		$(".payBtn").focus(function()
+		{
+			$(".payBtn").css('background-color', '');  //-- 색상 초기화
+			$(this).css('background-color', '#D3D3D3');
+			
+			$(".payBtn").removeClass("class"); //-- 클래스 초기화
+			$(this).addClass("class");
+		});
+		
+		// 유효성 체크
+		$(".payment").click(function()
+		{
+			//alert("테스트");
+			
+			if ( $("#check").is(":checked") == false )
+			{
+				alert("결제 및 환불 약관에 동의해주세요.");
+				return;
+			}
+			
+			if ( $(".class").val() == null )
+			{
+				alert("결제수단을 선택해주세요.");
+				return;
+			}
+			
+			if ( $(".class").val() != null)
+			{
+				pay();
+				
+			}
+		
+		});
+		
+		
 
-	var swiper = new Swiper('.blog-slider', {
-    spaceBetween: 30,
-    effect: 'fade',
-    loop: true,
-    mousewheel: {
-      invert: false,
-    },
-    // autoHeight: true,
-    pagination: {
-      el: '.blog-slider__pagination',
-      clickable: true,
-    }
-  });
+		
+	});
+	
+	
+	
+	// 결제
+	function pay()
+	{
+		// 결제시 들어갈 값
+		var c_title = document.getElementById("c_title").value;
+		var pay_price = document.getElementById("pay_price").value;
+		var u_name = document.getElementById("u_name").value;
+		var u_tel = document.getElementById("u_tel").value;
+		var pay = document.getElementsByClassName("class")[0].value;
+		//alert(pay);
+		
+		var method = "";
+		
+		if (pay=="html5_inicis" || pay=="kakao")
+		{
+			var method = "card";
+		}
+		else if(pay=="phone")
+		{
+			pay="danal";
+			var method = "phone";
+		}
+		else if(pay=="payco")
+		{
+			pay="html5_inicis";
+			var method = "payco"
+		}
+		
+		/* 결제 */
+		var IMP = window.IMP; // 생략가능
+		IMP.init('imp09580094'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+		
+		IMP.request_pay({
+		    pg : pay, // version 1.1.0부터 지원.
+		    pay_method : method,
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : c_title ,
+		    amount : pay_price,
+		    //buyer_email : 'iamport@siot.do',
+		    buyer_name : u_name,
+		    buyer_tel : u_tel,
+		    //buyer_addr : '서울특별시 강남구 삼성동',
+		    //buyer_postcode : '123-456',
+		    //m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+		}, function(rsp) {
+		    if ( rsp.success ) {
+		        var msg = '결제가 완료되었습니다.';
+		        msg += '고유ID : ' + rsp.imp_uid;
+		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		        msg += '결제 금액 : ' + rsp.paid_amount;
+		        msg += '카드 승인번호 : ' + rsp.apply_num;
+		        $("form").submit();
+		        
+		    } else {
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		    }
+		    alert(msg);
+		});
+		
+	}
+	
+	
+	
 </script>
 
 </head>
@@ -214,28 +315,21 @@ if(uniqueId == null )
 					<h2><b>클래스 신청하기</b></h2>
 					<br>
 					<div style="background-color :#B9E2FA; height: auto; width:50%">
-						<div style="position: relative; padding: 10px;" >
-						<a><img src="images/piano.jpg" width="120px" height="120px" ></a>
-						
-						<div style="display: inline-block;" >		
-							<ul>
-							<li style=" font-weight: bold:"><a>${classInfo.town_name }</a></li>
-								<li><a> 멘토 / 폴킴</a></li>
-							</ul>
+						<div style="text-align: left; padding: 10px;">
+							<a><img src="images/piano.jpg" width="120px" height="120px"></a>
+							<div style="float: right; display: inline-block;">
+								<ul>
+									<li style="font-weight: bold;"><a>${classInfo.c_title}</a></li>
+									<li><a>${classInfo.prof_name }<small> 강사</small></a></li>
+									<li><a>${classInfo.c_addr }</a></li>
+									<li><a>수업날짜/시간 - 
+									<fmt:parseDate value="${classInfo.c_open_date }" var="dateValue" pattern="yyyy-MM-dd HH:mm" />
+									<fmt:formatDate value="${dateValue}" pattern="yyyy년 MM월 dd일 HH시 mm분" />
+									</a></li>
+									<li><a>소요시간 - ${classInfo.c_runtime }시간</a></li>
+								</ul>
+							</div>
 						</div>
-						<div style="display:inline-block;">
-							<ul>
-								<li><a>2021-06-18 14:00~15:00</a></li>
-								<li><a>클래스명 / ${classInfo.c_title}</a></li>
-							</ul>
-						</div>
-						<!-- <div style="display: inline-block;"><br><br>
-							<span class="count" style="text-align: center;">등록된 답변이 없습니다</span>
-						</div> -->
-						
-					
-														
-					</div>
 					</div>
 				</div>
 				<br><br>
@@ -250,37 +344,39 @@ if(uniqueId == null )
 						<label for="name">
 							이름 
 						</label>
-						<input type="text" class="form-control" id="name" name="name" style="width: 40%;">
+						<input type="text" class="form-control" id="name" name="name" style="width: 40%;"
+						disabled="disabled" value="${memberInfo.u_name }">
 					</div>
 					
 					<div class="form-group">
 						<label for="telephone">
 							전화번호 
 						</label>
-						<input type="text" class="form-control" id="telephone" name="telephone" style="width: 60%;">
+						<input type="text" class="form-control" id="telephone" name="telephone" style="width: 40%;"
+						disabled="disabled" value="${memberInfo.u_tel }">
 					</div>
 				</form>
 					<hr>
 			
 				<div >
 					<h4><b>결제수단 </b></h4>
-					<b>결제 금액 : 40,000원</b>
+					<b>결제 금액 : <fmt:formatNumber value="${classInfo.c_price }" pattern="#,###"/></b>
 					
 					
 				</div>
 				<br><br>
 			<form>
 					<div>
-						<button type="button" class="btn btn-outline-secondary">신용카드</button>
-						<button type="button" class="btn btn-outline-secondary">휴대폰 소액결제</button>
-						<button type="button" class="btn btn-outline-secondary">가상계좌</button>
-						<button type="button" class="btn btn-outline-secondary">카카오페이</button>
+						<button type="button" class="btn btn-outline-secondary payBtn" value="html5_inicis">신용카드</button>
+						<button type="button" class="btn btn-outline-secondary payBtn" value="phone">휴대폰 소액결제</button>
+						<button type="button" class="btn btn-outline-secondary payBtn" value="payco">페이코</button>
+						<button type="button" class="btn btn-outline-secondary payBtn" value="kakao">카카오페이</button>
 					</div>
 			</form>
 			</div>
 			<hr>
 			<div>
-				결제 및 환불에 동의하시겠습니까?    <input type="checkbox"><br>
+				<label>결제 및 환불에 동의하시겠습니까?    <input type="checkbox" id="check" ></label><br>
 				<p style="font-size: small;"><span style="color: red;">[개인정보 제 3자 제공],[클래스 환불 정책]</span> 적용 동의에 관한 내용을 모두 이해하였으며, 이에 동의합니다.</p> 
 			
 			</div>
@@ -290,7 +386,17 @@ if(uniqueId == null )
 
 
 <div class="col text-center">
-	<button class="btn btn-outline-danger">결제하기</button>
+	<form id="form" action="paymentresult.action" method="post">
+		<!-- 결제 시 필요한 정보 -->
+		<input type="hidden" id="c_title" name="c_title" value="${classInfo.c_title }">
+		<input type="hidden" id="u_name" name="u_name" value="${memberInfo.u_name }">
+		<input type="hidden" id="u_tel" name="u_tel" value="${memberInfo.u_tel }">
+		
+		<input type="hidden" id="c_open_num" name="c_open_num" value="${classInfo.c_open_num }">
+		<input type="hidden" id="uniq_id_num" name="uniq_id_num" value="${memberInfo.uniq_id_num }">
+		<input type="hidden" id="pay_price" name="pay_price" value="${classInfo.c_price }">
+		<button type="button" class="btn btn-outline-danger payment">결제하기</button>
+	</form>
 </div>
 <br><br><br><br><br><br><br><br><br><br><br><br><br>
 

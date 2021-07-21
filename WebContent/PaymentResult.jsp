@@ -69,6 +69,31 @@ if(uniqueId == null )
 <script src="js/simple-datatables.js""></script>
 <script src="js/datatables-simple-demo.js"></script>
 
+<script type="text/javascript">
+
+	$(function()
+	{
+		
+		$("#classconfirm").click(function()
+		{
+			//alert("테스트");
+			
+			// 마이페이지 > 클래스 관리로 이동
+			$(location).attr("href","mypagemyclass.action");
+			
+		});
+		
+		$("#list").click(function()
+		{
+			
+			$(location).attr("href","classmain.action");
+			
+		});
+		
+		
+	});
+
+</script>
 
 </head>
 <body>
@@ -181,30 +206,17 @@ if(uniqueId == null )
 				<div>
 					<h2><b>클래스 신청완료</b></h2>
 					<hr>
-				
 				</div>
 			</div>
+			<br><br>
+			<div style="text-align: center;">
+				<h4><b>결제가 완료되었습니다.</b></h4>
 				<br><br>
-				<div >
-					<h4><b>결제가 완료되었습니다.</b></h4>
+				<div>
+					<button type="button" class="btn btn-outline-light btn-lg1" id="classconfirm">클래스 신청내역 확인하기</button>
+					<button type="button" class="btn btn-outline-light btn-lg1" id="list">목록으로</button>
 				</div>
-				<hr>
-				<form>	
-					<div class="form-group">
-						<label for="name">
-							이름 
-						</label>
-						<input type="text" class="form-control" id="name" name="name" style="width: 40%;">
-					</div>
-					
-					<div class="form-group">
-						<label for="telephone">
-							전화번호 
-						</label>
-						<input type="text" class="form-control" id="telephone" name="telephone" style="width: 60%;">
-					</div>
-				</form>
-					<hr>
+			</div>
 			
 				<br><br>
 		

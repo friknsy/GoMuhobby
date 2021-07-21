@@ -1,123 +1,104 @@
+<%@page import="java.io.PrintWriter"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath(); 	
 %>
+<%
+   String adminStr = null;
 
-<%  
-	String adminStr = null;
-	
-	if(session.getAttribute("adminStr")!=null)
-	{
-		adminStr = (String)session.getAttribute("adminStr");
-	}
-	
-	String uniqueId = null;
-	
-	if(session.getAttribute("uniqueId")!=null)
-	{
-		uniqueId = (String)session.getAttribute("uniqueId");
-	}
-	
-	String mynickName = null;
-	
-	if(session.getAttribute("mynickName")!=null)
-	{
-		mynickName = (String)session.getAttribute("mynickName");
-	}
+if (session.getAttribute("adminStr") != null) {
+   adminStr = (String) session.getAttribute("adminStr");
+   System.out.println(adminStr + "관리자확인");
+}
+
+String uniqueId = null;
+
+if (session.getAttribute("uniqueId") != null) {
+   uniqueId = (String) session.getAttribute("uniqueId");
+   System.out.println(uniqueId + "고유식별번호");
+}
+
+String mynickName = null;
+
+if (session.getAttribute("mynickName") != null) {
+   mynickName = (String) session.getAttribute("mynickName");
+   System.out.println(mynickName + "닉네임");
+}
+
+/* 만약 로그인 되어 있지 않은 회원이라면 로그인 페이지로 이동  */
+if(uniqueId == null )
+{
+   PrintWriter script = response.getWriter();
+   script.println("<script>");
+   script.println("alert('로그인 후 이용가능합니다 .')");
+   script.println("location.href='loginform.action'");
+   script.println("</script>");
+}   
+
+
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ClassAll.jsp</title>
+<title>PaymentResult.jsp</title>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>Blog Post - Start Bootstrap Template</title>
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="<%=cp %>/assets/favicon.ico" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="<%=cp %>/css/mainpage.css" rel="stylesheet" />
 <link href="<%=cp %>/css/myPage1.css" rel="stylesheet" />
-<!-- 추가 -->
-<%-- <link href="<%=cp %>/css/bootstrap.css" rel="stylesheet"/> --%>
-
 
 <!-- 부트스트랩 css -->
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> --> 
 
-<!-- 제이쿼리 script -->
-<!-- <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script> -->
-<script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
 
-	
+<!-- 제이쿼리 script -->
+<script type="text/javascript" src="<%=cp%>/js/jquery-3.6.0.min.js"></script>
+ 	
 <!-- 부트스트랩 script -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-
-<style type="text/css">
-	.carousel 
-	{
-		margin-bottom: 0;
-		padding: 0 100px 30px 100px;
-		height: 300px;
-	}
-	
-	.carousel-control 
-	{
-		left: -12px;
-	}
-	.carousel-control.right 
-	{
-		right: -12px;
-	}
-	
-	.carousel-indicators 
-	{
-		right: 50%;
-		top: auto;
-		bottom: 0px;
-		margin-right: -19px;
-	}
-	
-	.carousel-indicators li 
-	{
-		background: #c0c0c0;
-	}
-	
-	.carousel-indicators .active 
-	{
-		background: #333333;
-	}
-	
-	.btn-rec
-	{
-		font-size: 20px;
-		margin: 5px;
-		height: 70px;
-		width: 500px;
-	}
-		
-</style>
-
+<script src="js/simple-datatables.js""></script>
+<script src="js/datatables-simple-demo.js"></script>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		$('#myCarousel').carousel({
-			interval: 10000
+
+	$(function()
+	{
+		
+		$("#classconfirm").click(function()
+		{
+			//alert("테스트");
+			
+			// 마이페이지 > 클래스 관리로 이동
+			$(location).attr("href","mypagemyclass.action");
+			
 		});
 		
-		//테스트
-		//alert($("#c_photo").val());
+		$("#list").click(function()
+		{
+			
+			$(location).attr("href","classmain.action");
+			
+		});
+		
 		
 	});
-	
-	
-	
+
 </script>
 
-
 </head>
+<body>
+
+
 <body class="sb-nav-fixed">
        		<!-- 맨 위 상단 바 -->
             <c:choose>
@@ -217,54 +198,36 @@
             	</c:otherwise>
             </c:choose>
 
-<div class="container" style="text-align: center">
-	<br><br>
-	<div>
-		<div style="float: left;"><h1>원데이 클래스</h1></div>
-		<div style="float: right;"">
-			<a type="button" class="btn btn-outline-light btn-sm1" href="classopen1.action">클래스 개설하기</a></div>
-		<div style="clear: both;"></div>
-		<hr>
-	</div>
-	<br><br>
-	<div>
-		<div>
-			<div style="float: left;">
-				<h3>전체 클래스</h3>
+
+<div class="container px-5 mt-6 mb-2">
+	<div class="panel-group">
+		<div class="panel-default">
+			<div class="panel-body">
+				<div>
+					<h2><b>클래스 신청완료</b></h2>
+					<hr>
+				</div>
 			</div>
-			<div style="float: left; margin-top: 5px;"><p>&nbsp;&nbsp;뮤하비에 개설되어 있는 전체 클래스</p></div>
-		</div><div style="clear:both;"></div>
-	</div>
-	<br>
-	<div class="row row-cols-1 row-cols-md-2 g-4">
-	<c:forEach var="content" items="${list }">
-	<!-- 대표 사진 -->
-	<input type="hidden" id="c_photo"  name="c_photo" value="${content.c_photo }">
-		<div class="card col-xs-3 col-sm-3 col-md-3 mt-3"> <!-- style="width: 18rem;" -->
-  			<img src="images/${content.c_photo }" alt="" class="card-img-top">
-  			<!-- <img alt="" src="file:///C:/Muhobby/GoMuhobby02/WebContent/images/피아노.jpg"> -->
-  			<div class="card-body">
-	   			<div class="card-text">
-	   				<p style="text-align: right"><i class="bi bi-geo-alt-fill"></i> ${content.town_name }</p>
-	   				<a href="onedayclassinfo.action"><p style="font-weight: bold; text-align: left">${content.c_title }</p></a>
-	   				<div>
-	   					<p style="font-weight: bold; color: red; text-align: left;">￦ ${content.c_price }
-	   					<small style="color: black; font-weight: normal;">/시간</small></p>
-	   					<p style="font-weight: bold; text-align: right">${content.u_name }<small> 강사</small></p>
-	   				</div>
-   				
-    			</div>
- 			</div>
-		</div>
-	</c:forEach>
+			<br><br>
+			<div style="text-align: center;">
+				<h4><b>결제가 완료되었습니다.</b></h4>
+				<br><br>
+				<div>
+					<button type="button" class="btn btn-outline-light btn-lg1" id="classconfirm">클래스 신청내역 확인하기</button>
+					<button type="button" class="btn btn-outline-light btn-lg1" id="list">목록으로</button>
+				</div>
+			</div>
+			
+				<br><br>
 		
-	</div>
-	
+		</div>
+	</div><!-- close .panel-default -->
 </div>
-<br><br>
-<!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+
+
+
+
+
+
 </body>
 </html>

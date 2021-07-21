@@ -8,7 +8,7 @@
  	
  	<!-- 클래스 정보 조회 -->
  	<select id="classInfo" resultType="com.test.payment.PaymentDTO">
- 		SELECT C_OPEN_NUM, C_TITLE, TOWN_NAME, PROF_NAME, C_OPEN_DATE
+ 		SELECT C_OPEN_NUM, C_TITLE, C_PRICE, C_ADDR, PROF_NAME, C_OPEN_DATE, C_RUNTIME
 		FROM CLASS_OPEN_VIEW
 		WHERE C_OPEN_NUM=#{c_open_num}
  	</select>

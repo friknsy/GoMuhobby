@@ -92,13 +92,12 @@
 		background: #333333;
 	}
 	
-	.btn-rec
+ 	.btn-rec
 	{
 		font-size: 20px;
-		margin: 5px;
 		height: 70px;
 		width: 500px;
-	}
+	} 
 	
 	a 
 	{ 
@@ -275,22 +274,30 @@
 		<hr>
 	</div>
 	<div class="container col-sm-12 col-lg-12">
-		<div id="myCarousel" class="carousel slide" data-ride="carousel" >
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
 	         <ol class="carousel-indicators" >
 	            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>  
 	            <li data-target="#myCarousel" data-slide-to="1" ></li>
 	            <li data-target="#myCarousel" data-slide-to="2" ></li>
+	            <li data-target="#myCarousel" data-slide-to="3" ></li>
+	            <li data-target="#myCarousel" data-slide-to="4" ></li>
 	         </ol> 
 	         <div class="carousel-inner">
 	         	<!-- style="height: 280px;  -->
 	            <div class="item active mt-3" >
-	               <img src="img/배너1.gif" alt="">   
+	               <img src="img/배너5.gif" alt="">   
+	            </div>
+	            <div class="item mt-3">
+	               <img src="img/배너4.gif" alt="">   
+	            </div>
+	            <div class="item mt-3">
+	               <img src="img/배너3.gif" alt="">   
 	            </div>
 	            <div class="item mt-3">
 	               <img src="img/배너2.gif" alt="">   
 	            </div>
 	            <div class="item mt-3">
-	               <img src="img/배너3.gif" alt="">   
+	               <img src="img/배너1.gif" alt="">   
 	            </div>
 	         </div>
 	         <!-- <a class="left carousel-control" href="#myCarousel" data-slide="prev">
@@ -315,12 +322,13 @@
 			<h3>추천 클래스</h3>
 		</div><div style="clear:both;"></div>
 		<div style="text-align: center;">
-			<div class="btn-rec" style="float: left;">
-					<button type="button" class="btn btn-outline-light btn-lg1" 
+			<div>
+					<button type="button" class="btn btn-outline-light btn-lg1 btn-rec" 
 					id="classRegion">지역 추천 클래스</button>
-					<button type="button" class="btn btn-outline-light btn-lg1" 
+					<button type="button" class="btn btn-outline-light btn-lg1 btn-rec" 
 					id="classMusic">관심 음악 추천 클래스</button>
-			</div><div style="clear:both;"></div>
+			</div>
+		<br><br>
 		</div>
 		<div>
 			<div style="float: left;">
@@ -340,7 +348,7 @@
   			<div class="card-body">
 	   			<div class="card-text">
 	   				<p style="text-align: right"><i class="bi bi-geo-alt-fill"></i> ${content.town_name }</p>
-	   				<a href="onedayclassinfo.action"><p style="font-weight: bold; text-align: left">${content.c_title }</p></a>
+	   				<a href="onedayclassinfo.action?c_info_num=${content.c_info_num }"><p style="font-weight: bold; text-align: left">${content.c_title }</p></a>
 	   				<div>
 	   					<p style="font-weight: bold; color: red; text-align: left;">￦ ${content.c_price }
 	   					<small style="color: black; font-weight: normal;">/시간</small></p>

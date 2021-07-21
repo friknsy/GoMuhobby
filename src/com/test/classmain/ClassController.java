@@ -108,9 +108,9 @@ public class ClassController
 	@RequestMapping(value = "/onedayclassinfo.action", method = RequestMethod.GET)
 	public String Onedayclass(HttpServletRequest request, Model model)
 	{
-		//String c_info_num = request.getParameter("c_info_num");
+		String c_info_num = request.getParameter("c_info_num");
 		//값을 받는 대신 임의로 넘겨준 번호 6
-		String c_info_num="6";
+		//String c_info_num="6";
 		IClassinfoDAO dao = sqlSession.getMapper(IClassinfoDAO.class);
 		model.addAttribute("classinfo",dao.classDetail(c_info_num)); //클래스 상세 정보들
 		model.addAttribute("catIntro", dao.getCatandIntroduction(c_info_num)); //클래스음악카테고리와 강사소개글

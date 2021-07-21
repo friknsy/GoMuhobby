@@ -71,18 +71,19 @@ public class ClassinfoController
 	{
 		IClassinfoDAO dao = sqlSession.getMapper(IClassinfoDAO.class);
 		dao.classQuestionInsert(dto);
-		return "redirect:onedayclassinfo.action";
+		/* return "redirect:onedayclassinfo.action"; */
+		return "";
 	}
 	
 	// 클래스 질문 삭제하기
-	@RequestMapping(value="/classquestiondelete.action", method = RequestMethod.GET)
+	@RequestMapping(value="/classquestiondelete.action", method = RequestMethod.POST)
 	public String classQuestionDelete(HttpServletRequest request)
 	{
 		String c_qa_num = request.getParameter("c_qa_num");
 		IClassinfoDAO dao = sqlSession.getMapper(IClassinfoDAO.class);
 		dao.classQuestionDelete(c_qa_num);
 		
-		return "redirect:onedayclassinfo.action";
+		return "";
 	}
 	
 	
