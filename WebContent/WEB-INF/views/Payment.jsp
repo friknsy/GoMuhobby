@@ -1,6 +1,8 @@
 <%@page import="java.io.PrintWriter"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath(); 	
@@ -119,9 +121,9 @@ if(uniqueId == null )
 				return;
 			}
 			
-			if ( $(".class").val() == "kakao" )
+			if ( $(".class").val() != null)
 			{
-				kakaopay();
+				pay();
 				
 			}
 		
@@ -134,23 +136,41 @@ if(uniqueId == null )
 	
 	
 	
-	// 카카오페이 결제
-	function kakaopay()
+	// 결제
+	function pay()
 	{
 		// 결제시 들어갈 값
 		var c_title = document.getElementById("c_title").value;
 		var pay_price = document.getElementById("pay_price").value;
 		var u_name = document.getElementById("u_name").value;
 		var u_tel = document.getElementById("u_tel").value;
+		var pay = document.getElementsByClassName("class")[0].value;
+		//alert(pay);
 		
+		var method = "";
+		
+		if (pay=="html5_inicis" || pay=="kakao")
+		{
+			var method = "card";
+		}
+		else if(pay=="phone")
+		{
+			pay="danal";
+			var method = "phone";
+		}
+		else if(pay=="payco")
+		{
+			pay="html5_inicis";
+			var method = "payco"
+		}
 		
 		/* 결제 */
 		var IMP = window.IMP; // 생략가능
 		IMP.init('imp09580094'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 		
 		IMP.request_pay({
-		    pg : 'kakao', // version 1.1.0부터 지원.
-		    pay_method : 'card',
+		    pg : pay, // version 1.1.0부터 지원.
+		    pay_method : method,
 		    merchant_uid : 'merchant_' + new Date().getTime(),
 		    name : c_title ,
 		    amount : pay_price,
@@ -302,8 +322,11 @@ if(uniqueId == null )
 									<li style="font-weight: bold;"><a>${classInfo.c_title}</a></li>
 									<li><a>${classInfo.prof_name }<small> 강사</small></a></li>
 									<li><a>${classInfo.c_addr }</a></li>
-									<li><a>수업날짜 및 시간 / ${classInfo.c_open_date }</a></li>
-									<li><a>소요시간 / ${classInfo.c_runtime }시간</a></li>
+									<li><a>수업날짜/시간 - 
+									<fmt:parseDate value="${classInfo.c_open_date }" var="dateValue" pattern="yyyy-MM-dd HH:mm" />
+									<fmt:formatDate value="${dateValue}" pattern="yyyy년 MM월 dd일 HH시 mm분" />
+									</a></li>
+									<li><a>소요시간 - ${classInfo.c_runtime }시간</a></li>
 								</ul>
 							</div>
 						</div>
@@ -337,23 +360,23 @@ if(uniqueId == null )
 			
 				<div >
 					<h4><b>결제수단 </b></h4>
-					<b>결제 금액 : ${classInfo.c_price }</b>
+					<b>결제 금액 : <fmt:formatNumber value="${classInfo.c_price }" pattern="#,###"/></b>
 					
 					
 				</div>
 				<br><br>
 			<form>
 					<div>
-						<button type="button" class="btn btn-outline-secondary payBtn" value="card">신용카드</button>
-						<button type="button" class="btn btn-outline-secondary payBtn" value="telephone">휴대폰 소액결제</button>
-						<button type="button" class="btn btn-outline-secondary payBtn" value="virtual">가상계좌</button>
+						<button type="button" class="btn btn-outline-secondary payBtn" value="html5_inicis">신용카드</button>
+						<button type="button" class="btn btn-outline-secondary payBtn" value="phone">휴대폰 소액결제</button>
+						<button type="button" class="btn btn-outline-secondary payBtn" value="payco">페이코</button>
 						<button type="button" class="btn btn-outline-secondary payBtn" value="kakao">카카오페이</button>
 					</div>
 			</form>
 			</div>
 			<hr>
 			<div>
-				결제 및 환불에 동의하시겠습니까?    <input type="checkbox" id="check" ><br>
+				<label>결제 및 환불에 동의하시겠습니까?    <input type="checkbox" id="check" ></label><br>
 				<p style="font-size: small;"><span style="color: red;">[개인정보 제 3자 제공],[클래스 환불 정책]</span> 적용 동의에 관한 내용을 모두 이해하였으며, 이에 동의합니다.</p> 
 			
 			</div>
