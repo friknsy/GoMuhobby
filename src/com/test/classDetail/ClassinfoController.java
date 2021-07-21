@@ -107,6 +107,21 @@ public class ClassinfoController
 	}
 	
 	
+	// 강사 전체 리뷰 페이지 반환
+	
+	@RequestMapping(value = "/classproftotalreviews.action", method = RequestMethod.GET)
+	public String classProfTotalReviews(HttpServletRequest request, Model model)
+	{
+		String p_info_num = request.getParameter("p_info_num");
+		IClassinfoDAO dao = sqlSession.getMapper(IClassinfoDAO.class);
+		model.addAttribute("profInfos",dao.getProfInfos(p_info_num));
+		model.addAttribute("profReviews", dao.getProfReviews(p_info_num));
+		
+		return "/WEB-INF/views/ClassProfTotalReviews.jsp";
+	}
+	
+	
+	
 	
 	
 }

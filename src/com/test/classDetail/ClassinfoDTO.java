@@ -16,8 +16,8 @@ public class ClassinfoDTO
 	// 편의사항 가져오기
 	private String cv_name;
 	
-	// 강사의 평균 별점 가져오기
-	private String staravg;
+	// 강사의 평균 별점, 총진행회차, 총후기개수 가져오기
+	private String staravg, total_class_unit, total_review_unit;
 	
 	// 해당클래스의 질문과 답변 가져오기
 	private String c_qa_num, c_qa_content, c_qa_wrt_date, p_answ_content, p_answ_wrt_date, user_nickname, p_answ_num;
@@ -372,6 +372,26 @@ public class ClassinfoDTO
 	public void setP_answ_num(String p_answ_num)
 	{
 		this.p_answ_num = p_answ_num;
+	}
+
+	public String getTotal_class_unit()
+	{
+		return total_class_unit;
+	}
+
+	public void setTotal_class_unit(String total_class_unit)
+	{
+		this.total_class_unit = total_class_unit;
+	}
+
+	public String getTotal_review_unit()
+	{
+		return total_review_unit;
+	}
+
+	public void setTotal_review_unit(String total_review_unit)
+	{
+		this.total_review_unit = total_review_unit;
 	}
 	
 

@@ -140,6 +140,24 @@
  		SET C_QA_CONTENT=#{c_qa_content}
  		WHERE C_QA_NUM=#{c_qa_num}
  	</update>
+ 	
+ 	<select id="getProfInfos" resultType="com.test.classDetail.ClassinfoDTO">
+ 		SELECT * FROM TOTAL_REVIEW_VIEW1 WHERE P_INFO_NUM=#{p_info_num}
+ 	</select>
+ 	
+ 	
+ 	<select id="getProfReviews" resultType="com.test.classDetail.ClassinfoDTO">
+ 		SELECT A.REVIEW_CONTENT,A.REVIEW_STAR,A.REVIEW_WRT_DATE,B.UNIQ_ID_NUM,D.P_INFO_NUM,D.C_TITLE
+		,(SELECT U_NAME FROM MEMBER WHERE UNIQ_ID_NUM=B.UNIQ_ID_NUM) AS U_NAME
+		,(SELECT U_PHOTO FROM MEMBER WHERE UNIQ_ID_NUM = B.UNIQ_ID_NUM) AS U_PHOTO
+		FROM CLASS_REVIEW A LEFT JOIN PAYMENT B
+		ON A.PAY_NUM = B.PAY_NUM
+		LEFT JOIN CLASS_OPEN C
+		ON B.C_OPEN_NUM = C.C_OPEN_NUM
+		LEFT JOIN CLASS_INFO D
+		ON C.C_INFO_NUM = D.C_INFO_NUM
+		WHERE P_INFO_NUM=#{p_info_num}
+ 	</select>
 
 
  
