@@ -50,7 +50,9 @@
 					
 		            else
 		            {	
-		            	location.href = 'mainpage.action';
+		            	/* location.href = 'mainpage.action';  */
+		            	history.back();/* 로그인 후 메인페이지가 아니라 이전페이지로 돌아가도록 처리해줌 */ 
+		            	
 		            }
 				});
 			});

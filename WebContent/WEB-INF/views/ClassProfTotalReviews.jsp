@@ -202,7 +202,7 @@ if (session.getAttribute("mynickName") != null) {
 											</div>
 											
 											<div class="col-md-10">
-												<div class="ms-3" style="font-size: large;"><a href="전체후기" style="text-decoration: none; color: black;">${profInfos.u_name}	강사님</a></div>
+												<div class="ms-3" style="font-size: large;">${profInfos.u_name}	강사님</div>
 												<div class="ms-3 mt-4">🏛 총 진행 회차 : ${profInfos.total_class_unit } 회</div>
 												<div class="ms-3">📝 총 후기 개수 : ${profInfos.total_review_unit } 개</div>
 												<div class="ms-3">⭐ 총 별점 평균 : ${profInfos.staravg } 점</div>
