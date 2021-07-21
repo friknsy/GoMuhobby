@@ -19,7 +19,7 @@ public class PaymentController
 	
 	// 결제 페이지 이동
 	@RequestMapping(value = "/payment.action", method = RequestMethod.GET)
-	public String PaymentInfo(Model model, HttpServletRequest request)
+	public String paymentInfo(Model model, HttpServletRequest request)
 	{
 		String c_open_num = request.getParameter("c_open_num");
 		String uniq_id_num = request.getParameter("uniq_id_num");
@@ -37,7 +37,7 @@ public class PaymentController
 	
 	// 결제 완료 페이지
 	@RequestMapping(value = "/paymentresult.action", method = RequestMethod.POST)
-	public String PaymentResult(PaymentDTO p)
+	public String paymentResult(PaymentDTO p)
 	{
 		IPaymentDAO dao = sqlSession.getMapper(IPaymentDAO.class);
 		

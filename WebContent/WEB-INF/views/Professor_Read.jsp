@@ -230,6 +230,7 @@
 		<input type="hidden" id="music_cat_small" value="${read.music_cat_small}">
 		<!-- 강사 이름값을 제이쿼리에서 받을 수 있게 hidden 으로 숨김 -->
 		<input type="hidden" id="u_name" value="${read.u_name }">
+		
 		<table class="table" id="table">
 			<tr>
 				<th>강사 이름</th>

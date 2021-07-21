@@ -66,5 +66,27 @@
 	FROM PROF_INFO
  </select>
  
+ <!-- 해당 회원의 강사 번호를 얻어내는 쿼리문 -->
+ <select id="getNum" resultType="java.lang.String">
+ 	SELECT P_INFO_NUM
+	FROM PROF_INFO
+	WHERE UNIQ_ID_NUM= #{uniq_id_num}
+ </select>
+ 
+ <!-- 해당 강사의 커뮤니티가 존재하는지 체크 -->
+ <select id="check" resultType="java.lang.Integer">
+ 	SELECT COUNT(*) AS COUNT
+	FROM PROF_COMM
+	WHERE P_INFO_NUM = #{p_info_num}
+ </select> 
+ 
+ <!-- 강사 커뮤니티 생성 -->
+ <insert id="create">
+ 	INSERT INTO PROF_COMM(P_COMM_CODE, P_INFO_NUM)
+	VALUES(PROF_COMM_SEQ.NEXTVAL, #{p_info_num})
+ </insert>
+ 
+
+ 
  
  </mapper>
