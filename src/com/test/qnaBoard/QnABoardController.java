@@ -19,7 +19,7 @@ public class QnABoardController
 	
 	// 해당 회원이 작성한 전체 게시물
 	@RequestMapping(value = "/qnaboard.action", method = RequestMethod.GET)
-	public String QnABoardList(Model model, HttpServletRequest request)
+	public String qnABoardList(Model model, HttpServletRequest request)
 	{
 		String result = "";
 		
@@ -41,7 +41,7 @@ public class QnABoardController
 	
 	// 개별 게시물
 	@RequestMapping(value = "/qnaboardread.action", method = RequestMethod.GET)
-	public String QnABoardRead(HttpServletRequest request, Model model)
+	public String qnABoardRead(HttpServletRequest request, Model model)
 	{
 		int qna_num = Integer.parseInt(request.getParameter("qna_num"));
 		IQnABoardDAO dao1 = sqlSession.getMapper(IQnABoardDAO.class);
@@ -56,7 +56,7 @@ public class QnABoardController
 	
 	// insertform 이동
 	@RequestMapping(value = "/qnaboardinsertform.action", method = RequestMethod.GET)
-	public String QnABoardInsertForm(Model model)
+	public String qnABoardInsertForm(Model model)
 	{
 		IQnABoardDAO dao = sqlSession.getMapper(IQnABoardDAO.class);
 		model.addAttribute("grouplist", dao.grouplist());
@@ -66,7 +66,7 @@ public class QnABoardController
 	
 	// insert action
 	@RequestMapping (value = "/qnaboardinsert.action", method = RequestMethod.POST)
-	public String QnABoardInsert(QnaBoardDTO q)
+	public String qnABoardInsert(QnaBoardDTO q)
 	{
 		IQnABoardDAO dao = sqlSession.getMapper(IQnABoardDAO.class);
 		
@@ -77,7 +77,7 @@ public class QnABoardController
 	
 	// updateform 이동
 	@RequestMapping (value = "/qnaboardupdateform.action", method = RequestMethod.GET)
-	public String QnABoardUpdateForm(HttpServletRequest request,  Model model) 
+	public String qnABoardUpdateForm(HttpServletRequest request,  Model model) 
 	{	
 		int qna_num = Integer.parseInt(request.getParameter("qna_num")); 
 		IQnABoardDAO dao = sqlSession.getMapper(IQnABoardDAO.class);
@@ -90,7 +90,7 @@ public class QnABoardController
 	
 	// update action
 	@RequestMapping (value = "/qnaboardupdate.action", method = RequestMethod.POST)
-	public String QnABoardUpdate(QnaBoardDTO q)
+	public String qnABoardUpdate(QnaBoardDTO q)
 	{
 		String result = "";
 				
@@ -106,7 +106,7 @@ public class QnABoardController
 	
 	// delete action
 	@RequestMapping (value = "qnaboarddelete.action", method = RequestMethod.GET)
-	public String QnABoardDelete(QnaBoardDTO q)
+	public String qnABoardDelete(QnaBoardDTO q)
 	{
 		
 		IQnABoardDAO dao = sqlSession.getMapper(IQnABoardDAO.class);

@@ -20,7 +20,7 @@ public class ClassController
 	
 	// 원데이클래스 메인페이지
 	@RequestMapping(value = "/classmain.action", method = RequestMethod.GET)
-	public String ClassMainList(Model model)
+	public String classMainList(Model model)
 	{
 		IClassDAO dao = sqlSession.getMapper(IClassDAO.class);
 		
@@ -33,7 +33,7 @@ public class ClassController
 	
 	// 원데이클래스 전체
 	@RequestMapping(value = "/classall.action", method = RequestMethod.GET)
-	public String ClassAllList(Model model)
+	public String classAllList(Model model)
 	{
 		IClassDAO dao = sqlSession.getMapper(IClassDAO.class);
 		
@@ -46,7 +46,7 @@ public class ClassController
 	
 	// 원데이클래스 추천 지역
 	@RequestMapping(value = "/classregion.action", method = RequestMethod.GET)
-	public String ClassRegionList(Model model, HttpServletRequest request)
+	public String classRegionList(Model model, HttpServletRequest request)
 	{
 		String uniq_id_num = request.getParameter("uniq_id_num");
 		
@@ -61,7 +61,7 @@ public class ClassController
 	
 	// 원데이클래스 추천 음악
 	@RequestMapping(value = "/classmusic.action", method = RequestMethod.GET)
-	public String ClassMusicList(Model model, HttpServletRequest request)
+	public String classMusicList(Model model, HttpServletRequest request)
 	{
 		String uniq_id_num = request.getParameter("uniq_id_num");
 		
@@ -106,7 +106,7 @@ public class ClassController
 	
 	// 원데이 클래스 상세
 	@RequestMapping(value = "/onedayclassinfo.action", method = RequestMethod.GET)
-	public String Onedayclass(HttpServletRequest request, Model model)
+	public String onedayClass(HttpServletRequest request, Model model)
 	{
 		String c_info_num = request.getParameter("c_info_num");
 		//값을 받는 대신 임의로 넘겨준 번호 6

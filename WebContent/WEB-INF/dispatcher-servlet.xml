@@ -21,6 +21,7 @@
 	<context:component-scan base-package="com.test.classDetail"/>
 	<context:component-scan base-package="com.test.classopen"/>
 	<context:component-scan base-package="com.test.payment"/>
+	<context:component-scan base-package="com.test.professor_forum"/>
 	
 	
 	<bean id="localDataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">

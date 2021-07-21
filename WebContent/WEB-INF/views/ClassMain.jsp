@@ -274,22 +274,30 @@
 		<hr>
 	</div>
 	<div class="container col-sm-12 col-lg-12">
-		<div id="myCarousel" class="carousel slide" data-ride="carousel" >
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
 	         <ol class="carousel-indicators" >
 	            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>  
 	            <li data-target="#myCarousel" data-slide-to="1" ></li>
 	            <li data-target="#myCarousel" data-slide-to="2" ></li>
+	            <li data-target="#myCarousel" data-slide-to="3" ></li>
+	            <li data-target="#myCarousel" data-slide-to="4" ></li>
 	         </ol> 
 	         <div class="carousel-inner">
 	         	<!-- style="height: 280px;  -->
 	            <div class="item active mt-3" >
-	               <img src="img/배너1.gif" alt="">   
+	               <img src="img/배너5.gif" alt="">   
+	            </div>
+	            <div class="item mt-3">
+	               <img src="img/배너4.gif" alt="">   
+	            </div>
+	            <div class="item mt-3">
+	               <img src="img/배너3.gif" alt="">   
 	            </div>
 	            <div class="item mt-3">
 	               <img src="img/배너2.gif" alt="">   
 	            </div>
 	            <div class="item mt-3">
-	               <img src="img/배너3.gif" alt="">   
+	               <img src="img/배너1.gif" alt="">   
 	            </div>
 	         </div>
 	         <!-- <a class="left carousel-control" href="#myCarousel" data-slide="prev">
