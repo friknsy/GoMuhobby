@@ -17,7 +17,7 @@ public class QnABoard_Reply_Controller
 	
 	// 전체 게시물 조회
 	@RequestMapping (value = "/qnaboardadmin.action", method = RequestMethod.GET)
-	public String QnABoardList(Model model)
+	public String qnABoardList(Model model)
 	{
 		IQnABoard_Reply_DAO dao = sqlSession.getMapper(IQnABoard_Reply_DAO.class);
 		
@@ -29,7 +29,7 @@ public class QnABoard_Reply_Controller
 	
 	// 개별 게시물
 	@RequestMapping(value = "/qnaboardreadadmin.action", method = RequestMethod.GET)
-	public String QnABoardRead(HttpServletRequest request, Model model)
+	public String qnABoardRead(HttpServletRequest request, Model model)
 	{
 		int qna_num = Integer.parseInt(request.getParameter("qna_num"));
 		IQnABoardDAO dao1 = sqlSession.getMapper(IQnABoardDAO.class);
@@ -43,7 +43,7 @@ public class QnABoard_Reply_Controller
 	
 	// insertform
 	@RequestMapping(value = "/qnaboardreplyinsertform.action", method = RequestMethod.GET)
-	public String QnABoardInsertForm(HttpServletRequest request, Model model)
+	public String qnABoardInsertForm(HttpServletRequest request, Model model)
 	{
 		int qna_num = Integer.parseInt(request.getParameter("qna_num"));
 		
@@ -55,7 +55,7 @@ public class QnABoard_Reply_Controller
 	
 	// insert action
 	@RequestMapping(value = "/qnaboardreplyinsert.action", method = RequestMethod.POST)
-	public String QnABoardInsert(/* HttpServletRequest request, Model model, */QnABoard_Reply_DTO r)
+	public String qnABoardInsert(/* HttpServletRequest request, Model model, */QnABoard_Reply_DTO r)
 	{
 		/* int qna_num = Integer.parseInt(request.getParameter("qna_num")); */
 		
@@ -70,7 +70,7 @@ public class QnABoard_Reply_Controller
 	
 	// updateform
 	@RequestMapping(value = "/qnaboardreplyupdateform.action", method = RequestMethod.GET)
-	public String QnABoardUpdateForm(HttpServletRequest request, Model model)
+	public String qnABoardUpdateForm(HttpServletRequest request, Model model)
 	{
 		int qna_num = Integer.parseInt(request.getParameter("qna_num")); 
 		IQnABoard_Reply_DAO dao = sqlSession.getMapper(IQnABoard_Reply_DAO.class);
@@ -83,7 +83,7 @@ public class QnABoard_Reply_Controller
 	
 	// update action
 	@RequestMapping(value = "/qnaboardreplyupdate.action", method = RequestMethod.POST)
-	public String QnABoardUpdate(QnABoard_Reply_DTO r)
+	public String qnABoardUpdate(QnABoard_Reply_DTO r)
 	{
 		String result = "";
 		
@@ -100,7 +100,7 @@ public class QnABoard_Reply_Controller
 	
 	// delete
 	@RequestMapping(value = "/qnaboardreplydelete.action", method = RequestMethod.GET)
-	public String QnABoardDelete(HttpServletRequest request, Model model, QnABoard_Reply_DTO r)
+	public String qnABoardDelete(HttpServletRequest request, Model model, QnABoard_Reply_DTO r)
 	{
 		/* int qna_num = Integer.parseInt(request.getParameter("qna_num")); */
 		

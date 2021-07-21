@@ -155,7 +155,14 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading fs-5">활동<hr></div>                            
+                            <div class="sb-sidenav-menu-heading fs-5">활동<hr></div>
+								<c:if test="${p_info_num ne null}">
+		                            <a class="nav-link collapsed" href="professorforum.action">
+		                                <div class="sb-nav-link-icon"><i class="bi bi-people-fill"></i></div>
+		                                <div class="">강사 커뮤니티</div>
+		                            </a>
+	                            </c:if>
+                                                     
                             <a class="nav-link collapsed" href="#">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
                                 <div class="">게시물 목록</div>

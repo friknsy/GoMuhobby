@@ -1,59 +1,39 @@
-<%@page import="java.io.PrintWriter"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath(); 	
 %>
 
-<%
-   String adminStr = null;
-
-if (session.getAttribute("adminStr") != null) {
-   adminStr = (String) session.getAttribute("adminStr");
-   System.out.println(adminStr + "관리자확인");
-}
-
-String uniqueId = null;
-
-if (session.getAttribute("uniqueId") != null) {
-   uniqueId = (String) session.getAttribute("uniqueId");
-   System.out.println(uniqueId + "고유식별번호");
-}
-
-String mynickName = null;
-
-if (session.getAttribute("mynickName") != null) {
-   mynickName = (String) session.getAttribute("mynickName");
-   System.out.println(mynickName + "닉네임");
-}
-
-/* 만약 로그인 되어 있지 않은 회원이라면 로그인 페이지로 이동  */
-if(uniqueId == null )
-{
-   PrintWriter script = response.getWriter();
-   script.println("<script>");
-   script.println("alert('로그인 후 이용가능합니다 .')");
-   script.println("location.href='login.action'");
-   script.println("</script>");
-}   
-
-
-
+<%  
+	String adminStr = null;
+	
+	if(session.getAttribute("adminStr")!=null)
+	{
+		adminStr = (String)session.getAttribute("adminStr");
+	}
+	
+	String uniqueId = null;
+	
+	if(session.getAttribute("uniqueId")!=null)
+	{
+		uniqueId = (String)session.getAttribute("uniqueId");
+	}
+	
+	String mynickName = null;
+	
+	if(session.getAttribute("mynickName")!=null)
+	{
+		mynickName = (String)session.getAttribute("mynickName");
+	}
 %>
+
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Payment.jsp</title>
-
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
+<title>Prof_Forum_List.jsp</title>
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="<%=cp %>/assets/favicon.ico" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
@@ -61,149 +41,32 @@ if(uniqueId == null )
 <link href="<%=cp %>/css/mainpage.css" rel="stylesheet" />
 <link href="<%=cp %>/css/myPage1.css" rel="stylesheet" />
 
+
 <!-- 부트스트랩 css -->
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> --> 
 
-
 <!-- 제이쿼리 script -->
-<script type="text/javascript" src="<%=cp%>/js/jquery-3.6.0.min.js"></script>
- 	
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script> -->
+<script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+
+	
 <!-- 부트스트랩 script -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script src="js/simple-datatables.js""></script>
-<script src="js/datatables-simple-demo.js"></script>
-
-<!-- 아임포트 -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <style type="text/css">
 	
-	table
+	#count
 	{
-		margin-left: auto;
-		margin-right: auto;
+		float: left;
+		color: gray;
+		/* border: 1px solid #ccc; */
+		margin-left: 10px; 
+		margin-top: 9px;
 	}
-	
-	
 
 </style>
-
-<script type="text/javascript">
 	
-	$(function()
-	{
-		
-		// 결제 버튼 선택시 색상 변경 및 클래스 추가
-		$(".payBtn").focus(function()
-		{
-			$(".payBtn").css('background-color', '');  //-- 색상 초기화
-			$(this).css('background-color', '#D3D3D3');
-			
-			$(".payBtn").removeClass("class"); //-- 클래스 초기화
-			$(this).addClass("class");
-		});
-		
-		// 유효성 체크
-		$(".payment").click(function()
-		{
-			//alert("테스트");
-			
-			if ( $("#check").is(":checked") == false )
-			{
-				alert("결제 및 환불 약관에 동의해주세요.");
-				return;
-			}
-			
-			if ( $(".class").val() == null )
-			{
-				alert("결제수단을 선택해주세요.");
-				return;
-			}
-			
-			if ( $(".class").val() != null)
-			{
-				pay();
-				
-			}
-		
-		});
-		
-		
-
-		
-	});
-	
-	
-	
-	// 결제
-	function pay()
-	{
-		// 결제시 들어갈 값
-		var c_title = document.getElementById("c_title").value;
-		var pay_price = document.getElementById("pay_price").value;
-		var u_name = document.getElementById("u_name").value;
-		var u_tel = document.getElementById("u_tel").value;
-		var pay = document.getElementsByClassName("class")[0].value;
-		//alert(pay);
-		
-		var method = "";
-		
-		if (pay=="html5_inicis" || pay=="kakao")
-		{
-			var method = "card";
-		}
-		else if(pay=="phone")
-		{
-			pay="danal";
-			var method = "phone";
-		}
-		else if(pay=="payco")
-		{
-			pay="html5_inicis";
-			var method = "payco"
-		}
-		
-		/* 결제 */
-		var IMP = window.IMP; // 생략가능
-		IMP.init('imp09580094'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-		
-		IMP.request_pay({
-		    pg : pay, // version 1.1.0부터 지원.
-		    pay_method : method,
-		    merchant_uid : 'merchant_' + new Date().getTime(),
-		    name : c_title ,
-		    amount : pay_price,
-		    //buyer_email : 'iamport@siot.do',
-		    buyer_name : u_name,
-		    buyer_tel : u_tel,
-		    //buyer_addr : '서울특별시 강남구 삼성동',
-		    //buyer_postcode : '123-456',
-		    //m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-		}, function(rsp) {
-		    if ( rsp.success ) {
-		        var msg = '결제가 완료되었습니다.';
-		        msg += '고유ID : ' + rsp.imp_uid;
-		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-		        msg += '결제 금액 : ' + rsp.paid_amount;
-		        msg += '카드 승인번호 : ' + rsp.apply_num;
-		        $("form").submit();
-		        
-		    } else {
-		        var msg = '결제에 실패하였습니다.';
-		        msg += '에러내용 : ' + rsp.error_msg;
-		    }
-		    alert(msg);
-		});
-		
-	}
-	
-	
-	
-</script>
-
 </head>
-<body>
-
 <body class="sb-nav-fixed">
        		<!-- 맨 위 상단 바 -->
             <c:choose>
@@ -303,101 +166,174 @@ if(uniqueId == null )
             	</c:otherwise>
             </c:choose>
 
-
-
-<br>
-<div class="container px-5 mt-6 mb-2">
-	<div class="panel-group">
-		<div class="panel-default">
-			<div class="panel-body">
-				<div>
-					<h2><b>클래스 신청하기</b></h2>
-					<br>
-					<div style="background-color :#B9E2FA; height: auto; width:50%">
-						<div style="text-align: left; padding: 10px;">
-							<a><img src="images/piano.jpg" width="120px" height="120px"></a>
-							<div style="float: right; display: inline-block;">
-								<ul>
-									<li style="font-weight: bold;"><a>${classInfo.c_title}</a></li>
-									<li><a>${classInfo.prof_name }<small> 강사</small></a></li>
-									<li><a>${classInfo.c_addr }</a></li>
-									<li><a>수업날짜/시간 - 
-									<fmt:parseDate value="${classInfo.c_open_date }" var="dateValue" pattern="yyyy-MM-dd HH:mm" />
-									<fmt:formatDate value="${dateValue}" pattern="yyyy년 MM월 dd일 HH시 mm분" />
-									</a></li>
-									<li><a>소요시간 - ${classInfo.c_runtime }시간</a></li>
-								</ul>
-							</div>
-						</div>
+<div class="container">
+	<br><br>
+	<div>
+		<div style="float: left;"><h2>강사 커뮤니티</h2></div>
+		<div id="count"><span>186개의 글<span></div>
+		<div class="col-lg-3" style="float: right;"><button type="button" class="btn btn-outline-light btn-sm1">글 작성하기</button></div>
+		<div style="clear:both;"></div>
+		<div class="col-lg-10"><hr></div>
+	</div>
+	<!-- 게시글 -->
+	<div>
+		<div> <!-- card-footer -->
+			<div class="bg-transparent mt-5 col-lg-3">
+			    <div class="d-flex align-items-end justify-content-between">
+			        <div class="d-flex align-items-center">
+			            <img class="rounded-circle me-3" src="images/default.png" width="40px" height="40px"/>
+			            <div class="small">
+			                <div class="fw-bold">다람이</div>
+			                <div class="text-muted">2021-07-01</div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+			<div class="card-footer bg-transparent mt-4 col-lg-10">
+				<div class="d-flex align-items-end justify-content-between">
+					<div class="d-flex align-items-center">
+						<p> 안녕하세요! 전 피아노를 처음 배워보거든요! 계이름도 모르는데 괜찮을까요?<br>
+						혹시 이루마 곡도 칠 수 있을까요?</p>
+					</div>
+					<div style="float: right">
+						<button type="button" class="btn btn-default btn-custom">수정</button>
+						<button type="button" class="btn btn-default">삭제</button>
 					</div>
 				</div>
-				<br><br>
-				<div >
-					<h4><b>신청자 정보</b></h4>
-					신청자 정보가 일치하는지 확인해주세요.
-					
+			</div>
+		</div>
+		<!-- 댓글 -->
+		<div style="margin-left: 40px;"> <!-- card-footer -->
+			<div class="bg-transparent mt-3 col-lg-3">
+			    <div class="d-flex align-items-end justify-content-between">
+			        <div class="d-flex align-items-center">
+			            <img class="rounded-circle me-3" src="images/default.png" width="30px" height="30px"/>
+			            <div class="d-flex small">
+			                <div class="fw-bold">뮤푼젤</div>&nbsp;&nbsp;
+			                <div class="text-muted">2021-07-02</div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+			<div class="card-footer bg-transparent mt-3 col-lg-10">
+				<div class="d-flex align-items-end justify-content-between">
+					<div class="d-flex align-items-center">
+						<p> 안녕하세요~ 처음 배우시는 분도 기초부터 꼼꼼히 알려드릴게요<br>
+						커리큘럼과 상세보기를 참고해주세요</p>
+					</div>
+					<div style="float: right">
+						<button type="button" class="btn btn-default">댓글달기</button>
+					</div>
 				</div>
-				<hr>
-				<form>	
-					<div class="form-group">
-						<label for="name">
-							이름 
-						</label>
-						<input type="text" class="form-control" id="name" name="name" style="width: 40%;"
-						disabled="disabled" value="${memberInfo.u_name }">
+			</div>
+			<!-- 대댓글 -->
+			<div style="margin-left: 40px;">
+			<div class="bg-transparent mt-3 col-lg-3">
+			    <div class="d-flex align-items-end justify-content-between">
+			        <div class="d-flex align-items-center">
+			            <img class="rounded-circle me-3" src="images/default.png" width="30px" height="30px"/>
+			            <div class="d-flex small">
+			                <div class="fw-bold">다람이</div>&nbsp;&nbsp;
+			                <div class="text-muted">2021-07-02</div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+			<div class="card-footer bg-transparent mt-3 col-lg-10">
+				<div class="d-flex align-items-end justify-content-between">
+					<div class="d-flex align-items-center">
+						<p>감사합니다! 수업 너무 기대됩니다~</p>
 					</div>
-					
-					<div class="form-group">
-						<label for="telephone">
-							전화번호 
-						</label>
-						<input type="text" class="form-control" id="telephone" name="telephone" style="width: 40%;"
-						disabled="disabled" value="${memberInfo.u_tel }">
+					<div style="float: right">
+						<button type="button" class="btn btn-default">수정</button>
+						<button type="button" class="btn btn-default">삭제</button>
 					</div>
-				</form>
-					<hr>
-			
-				<div >
-					<h4><b>결제수단 </b></h4>
-					<b>결제 금액 : <fmt:formatNumber value="${classInfo.c_price }" pattern="#,###"/></b>
-					
-					
 				</div>
-				<br><br>
-			<form>
-					<div>
-						<button type="button" class="btn btn-outline-secondary payBtn" value="html5_inicis">신용카드</button>
-						<button type="button" class="btn btn-outline-secondary payBtn" value="phone">휴대폰 소액결제</button>
-						<button type="button" class="btn btn-outline-secondary payBtn" value="payco">페이코</button>
-						<button type="button" class="btn btn-outline-secondary payBtn" value="kakao">카카오페이</button>
-					</div>
+			</div>
+			</div>
+		</div>
+		
+		<!-- 댓글 작성 -->
+		<div class="card-footer mt-3 col-lg-10 comment-area justify-content" style="height: 120px;">
+			<form action="">
+				<textarea class="form-control" id="comment" rows="content" 
+				placeholder="댓글을 입력해주세요." maxlength="200" required="required"></textarea>
+				<div style="float: right" class="mt-2">
+					<button type="submit" class="btn btn-outline-light btn-sm1">등록</button>
+				</div>			
 			</form>
+		</div>
+		
+	</div>
+	
+	<!-- 게시글 -->
+	<div>
+		<div> <!-- card-footer -->
+			<div class="bg-transparent mt-5 col-lg-3">
+			    <div class="d-flex align-items-end justify-content-between">
+			        <div class="d-flex align-items-center">
+			            <img class="rounded-circle me-3" src="images/default.png" width="40px" height="40px"/>
+			            <div class="small">
+			                <div class="fw-bold">다람이</div>
+			                <div class="text-muted">2021-07-01</div>
+			            </div>
+			        </div>
+			    </div>
 			</div>
-			<hr>
-			<div>
-				<label>결제 및 환불에 동의하시겠습니까?    <input type="checkbox" id="check" ></label><br>
-				<p style="font-size: small;"><span style="color: red;">[개인정보 제 3자 제공],[클래스 환불 정책]</span> 적용 동의에 관한 내용을 모두 이해하였으며, 이에 동의합니다.</p> 
-			
+			<div class="card-footer bg-transparent mt-4 col-lg-10">
+				<div class="d-flex align-items-end justify-content-between">
+					<div class="d-flex align-items-center">
+						<p> 안녕하세요! 전 피아노를 처음 배워보거든요! 계이름도 모르는데 괜찮을까요?<br>
+						혹시 이루마 곡도 칠 수 있을까요?</p>
+					</div>
+					<div style="float: right">
+						<button type="button" class="btn btn-default btn-custom">수정</button>
+						<button type="button" class="btn btn-default">삭제</button>
+					</div>
+				</div>
 			</div>
-		</div><!-- close .panel-default -->
+		</div>
+		<!-- 댓글 -->
+		<div style="margin-left: 40px;"> <!-- card-footer -->
+			<div class="bg-transparent mt-3 col-lg-3">
+			    <div class="d-flex align-items-end justify-content-between">
+			        <div class="d-flex align-items-center">
+			            <img class="rounded-circle me-3" src="images/default.png" width="30px" height="30px"/>
+			            <div class="d-flex small">
+			                <div class="fw-bold">뮤푼젤</div>&nbsp;&nbsp;
+			                <div class="text-muted">2021-07-02</div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+			<div class="card-footer bg-transparent mt-3 col-lg-10">
+				<div class="d-flex align-items-end justify-content-between">
+					<div class="d-flex align-items-center">
+						<p> 안녕하세요~ 처음 배우시는 분도 기초부터 꼼꼼히 알려드릴게요<br>
+						커리큘럼과 상세보기를 참고해주세요</p>
+					</div>
+					<div style="float: right">
+						<button type="button" class="btn btn-default">답글달기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 댓글 작성 -->
+		<div class="card-footer mt-3 col-lg-10 comment-area justify-content" style="height: 120px;">
+			<form action="">
+				<textarea class="form-control" id="comment" rows="content" 
+				placeholder="댓글을 입력해주세요." maxlength="200" required="required"></textarea>
+				<div style="float: right" class="mt-2">
+					<button type="submit" class="btn btn-outline-light btn-sm1">등록</button>
+				</div>			
+			</form>
+		</div>
+		
 	</div>
 </div>
-
-
-<div class="col text-center">
-	<form id="form" action="paymentresult.action" method="post">
-		<!-- 결제 시 필요한 정보 -->
-		<input type="hidden" id="c_title" name="c_title" value="${classInfo.c_title }">
-		<input type="hidden" id="u_name" name="u_name" value="${memberInfo.u_name }">
-		<input type="hidden" id="u_tel" name="u_tel" value="${memberInfo.u_tel }">
-		
-		<input type="hidden" id="c_open_num" name="c_open_num" value="${classInfo.c_open_num }">
-		<input type="hidden" id="uniq_id_num" name="uniq_id_num" value="${memberInfo.uniq_id_num }">
-		<input type="hidden" id="pay_price" name="pay_price" value="${classInfo.c_price }">
-		<button type="button" class="btn btn-outline-danger payment">결제하기</button>
-	</form>
-</div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
+	
+<br><br>
 
 </body>
 </html>

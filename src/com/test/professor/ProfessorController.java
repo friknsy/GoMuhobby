@@ -19,7 +19,7 @@ public class ProfessorController
 	
 	// 강사 정보 확인
 	@RequestMapping(value = "/professor.action", method = RequestMethod.GET)
-	public String ProfessorInfo(Model model, HttpServletRequest request)
+	public String professorInfo(Model model, HttpServletRequest request)
 	{
 		// 일단 DAO.xml에 임의로 uniq_id_num 값을 넣어놨음
 		IProfessorDAO dao = sqlSession.getMapper(IProfessorDAO.class);
@@ -27,15 +27,27 @@ public class ProfessorController
 		HttpSession session = request.getSession();
 		
 		String uniqidnum = (String)session.getAttribute("uniqueId");
-		
 		model.addAttribute("read", dao.read(uniqidnum));
+		
+		// 강사번호 얻어내기
+		String p_info_num = dao.getNum(uniqidnum);
+		
+		if (p_info_num != null)
+		{
+			if ( dao.check(p_info_num) == 0 )
+			{
+				dao.create(p_info_num);
+			}
+		}
+		
+		
 		
 		return "/WEB-INF/views/Professor_Read.jsp";
 	}
 	
 	// insertform 이동
 	@RequestMapping(value = "/professorinsertform.action", method = RequestMethod.GET)
-	public String ProfessorInsertForm(Model model, HttpServletRequest request)
+	public String professorInsertForm(Model model, HttpServletRequest request)
 	{
 		// insertform 으로 이동할 때 셀렉트 박스 값 가져가야함 
 		HttpSession session = request.getSession();
@@ -55,7 +67,7 @@ public class ProfessorController
 	
 	// insert action
 	@RequestMapping(value = "/professorinsert.action", method = RequestMethod.POST)
-	public String ProfessorInsert(ProfessorDTO p)
+	public String professorInsert(ProfessorDTO p)
 	{
 		IProfessorDAO dao = sqlSession.getMapper(IProfessorDAO.class);
 		
@@ -66,7 +78,7 @@ public class ProfessorController
 	
 	// updateform 이동
 	@RequestMapping(value = "/professorupdateform.action", method = RequestMethod.GET)
-	public String ProfessorUpdateForm(Model model, HttpServletRequest request)
+	public String professorUpdateForm(Model model, HttpServletRequest request)
 	{
 		HttpSession session = request.getSession();
 
@@ -84,7 +96,7 @@ public class ProfessorController
 	
 	// update action
 	@RequestMapping(value = "/professorupdate.action", method = RequestMethod.POST)
-	public String ProfessorUpdate(ProfessorDTO p)
+	public String professorUpdate(ProfessorDTO p)
 	{
 		IProfessorDAO dao = sqlSession.getMapper(IProfessorDAO.class);
 		dao.modify(p);
