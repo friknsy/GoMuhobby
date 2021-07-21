@@ -52,6 +52,12 @@ public interface IClassinfoDAO
 	// 해당 클래스의 질문 수정하기
 	public int classQuestionUpdate(ClassinfoDTO dto);
 	
+	// 강사번호로 이름,사진,총회차, 총후기, 총별점, 강사소개 가져오기
+	public ClassinfoDTO getProfInfos(String p_info_num);
+	
+	// 강사번호로 강사 전체리뷰 가져오기 (리뷰내용,별점,날짜,수업제목,작성자이름,프로필사진)
+	public ArrayList<ClassinfoDTO> getProfReviews(String p_info_num);
+ 	
 	
 	
 }

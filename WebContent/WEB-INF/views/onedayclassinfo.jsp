@@ -197,14 +197,12 @@ if (session.getAttribute("mynickName") != null) {
 						<h2 class="card-title">${classinfo.c_title}
 							<a class="ms-2 btn btn-outline-light btn-sm1">${catIntro.music_cat_small}</a>
 						</h2>
-						<a class="btn btn-primary me-4 mt-2" href="#!"
+						<a class="btn btn-primary me-4 mt-2" href="#classInformation"
 							style="color: #c79cf5;">상세정보</a> <a
-							class="btn btn-primary me-4 mt-2" href="#!"
+							class="btn btn-primary me-4 mt-2" href="#classReview"
 							style="color: #c79cf5;">후기</a> <a
-							class="btn btn-primary me-4 mt-2" href="#!"
-							style="color: #c79cf5;">QNA</a> <a
-							class="btn btn-primary me-4 mt-2" href="#!"
-							style="color: #c79cf5;">변경 및 취소</a> <br> <br> [변경 및 취소]<br>
+							class="btn btn-primary me-4 mt-2" href="#classQna"
+							style="color: #c79cf5;">QNA</a>  <br> <br> [변경 및 취소]<br>
 						개인 사정으로 인한 결석은 환불되지 않습니다.<br> <br> [환불 규정]<br> 1.
 						수업 2일 전 취소 : 100% 환불<br> 2. 수업 1일 전 취소 : 50% 환불<br> 3.
 						수업 당일 취소 : 환불불가 <br> <br> <br> 클래스 등록일자
@@ -218,6 +216,7 @@ if (session.getAttribute("mynickName") != null) {
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="card mb-4">
+						<a name="classInformation"></a>
 							<div class="card-header">클래스 소개글</div>
 							<div class="card-body">
 								${classinfo.c_detail_info}<br> <a
@@ -362,6 +361,8 @@ if (session.getAttribute("mynickName") != null) {
 
 					<div class="col-lg-12">
 						<div class="card mb-4">
+							<!-- 아래 a 태그는 상단에서 후기 바로가기 지정 -->
+							<a name="classReview"></a>
 							<div class="card-header">후기 작성</div>
 							<div class="card-body">
 
@@ -452,6 +453,8 @@ if (session.getAttribute("mynickName") != null) {
 
 				<div class="col-lg-12">
 					<div class="card mb-4">
+						<!--a 태그는 상단에서 QnA 바로가기 지정  -->
+						<a name="classQna"></a>
 						<div class="card-header">클래스 QnA</div>
 						<div class="card-body">
 
@@ -722,8 +725,7 @@ if (session.getAttribute("mynickName") != null) {
 
 										</div>
 										<div class="col-lg-8 mt-3">
-											<div class="ms-3" style="font-size: large;">${classinfo.u_name}
-												강사님</div>
+											<div class="ms-3" style="font-size: large;"><a href="classproftotalreviews.action?p_info_num=${classinfo.p_info_num }" style="text-decoration: none; color: black;">${classinfo.u_name}	강사님</a></div>
 											<div class="ms-3">🏛 총 진행 회차 : ${totalClasses } 회</div>
 											<div class="ms-3">📝 총 후기 개수 : ${totalReviews } 개</div>
 											<div class="ms-3">⭐ 총 별점 평균 : ${starAvg } 점</div>
