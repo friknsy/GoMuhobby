@@ -70,15 +70,15 @@ public class ClassOpenController
 	public String ClassOpen2(HttpServletResponse response, HttpServletRequest request, ModelMap model)
 	{	
 		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
+		IClassOpenDAO dao1 = sqlSession.getMapper(IClassOpenDAO.class);
 		
 		HttpSession session = request.getSession();
 		
 		model.addAttribute("musiccat", dao.musiccat());
+		model.addAttribute("cvlist",dao1.cvlist());
 		
 		String c_prof_info = request.getParameter("c_prof_info");
 		session.setAttribute("c_prof_info", c_prof_info);
-		
-		
 		
 		return "/WEB-INF/views/9ClassOpen2.jsp";
 	}
@@ -88,7 +88,11 @@ public class ClassOpenController
 	public String ClassOpen3(HttpServletRequest request, Model model)
 	{
 		IClassDAO dao = sqlSession.getMapper(IClassDAO.class);
+		IClassOpenDAO dao1 = sqlSession.getMapper(IClassOpenDAO.class);
 		HttpSession session = request.getSession();
+		
+		String uniqidnum = (String)session.getAttribute("uniqueId");
+		String uniq_id_num = uniqidnum;
 		
 		String c_title = request.getParameter("c_title");
 		session.setAttribute("c_title", c_title);
@@ -111,6 +115,38 @@ public class ClassOpenController
 		String c_detail_info2 = request.getParameter("c_detail_info2");
 		session.setAttribute("c_detail_info2", c_detail_info2);
 		
+		String[] city = c_addr.split(" ");
+		
+		// 읍면동 ( 읍면동 코드로 넣어줘야 함 )
+		c_addr = city[1];
+		String town_name = c_addr;
+		
+		String membergrade = dao1.membergrade(uniq_id_num);
+		
+		if(membergrade.equals("브론즈"))
+			request.setAttribute("membergrade", "bronze");
+		
+		else if (membergrade.equals("실버"))
+			request.setAttribute("membergrade", "silver");
+		
+		else
+			request.setAttribute("membergrade", "gold");
+		
+		// 읍면동 코드 출력
+		// System.out.println(dao1.towncode(town_name));
+		
 		return "/WEB-INF/views/9ClassOpen3.jsp";
+	}
+	
+	@RequestMapping(value = "/profgrade.action", method = RequestMethod.GET)
+	public String profgrade(HttpServletRequest request, Model model)
+	{
+		return "/WEB-INF/views/prof_grade.jsp";
+	}
+	
+	@RequestMapping(value = "/ClassOpenComplete.action", method = RequestMethod.GET)
+	public String ClassOpenComplete(HttpServletRequest request, Model model)
+	{
+		return "";
 	}
 }

@@ -71,7 +71,7 @@
 	
 	if(c_addr == null)
 	{
-		c_addr = "";
+		c_addr = "서울 중구 태평로1가 31";
 	}
 	
 	String c_detail_info2 = (String)session.getAttribute("c_detail_info2");
@@ -114,6 +114,12 @@
 			
 			$('#music_cat_code').val(Number(catcode)+1);
 		}
+		
+		function onlyseoul()
+		{
+			
+		}
+		
 	</script>
     </head>
     <body class="sb-nav-fixed">
@@ -332,7 +338,7 @@
 	                                                        <span class="mb-4 fw-bold">상세 주소 입력</span>
 	                                                        
 	                                                        <!-- 클릭한 주소가 입력되는 부분. -->
-	                                                        <input class="form-control" id="c_addr" name="c_addr" type="text" value="<%out.print(c_addr); %>"/>
+	                                                        <input class="form-control" id="c_addr" name="c_addr" type="text" value="<%out.print(c_addr); %>">
 	                                                        
 	                                                    </div>
 	                                                </div>
@@ -357,18 +363,19 @@
 		                                            <div class="col-md-12">
 		                                                <div class="row mb-3">
 			                                                <div class="d-grid gap-3 d-sm-flex btn-group mb-2" data-toggle="buttons">
-			                                                	<label class="btn btn-primary">
-			                                                		<input type="checkbox" name="cv_name" autocomplete="off" value="와이파이"> 와이파이
-			                                                	</label>
-			                                                	<label class="btn btn-primary">
-			                                                		<input type="checkbox" name="cv_name" autocomplete="off" value="주차 가능"> 주차 가능
-			                                                	</label>
-			                                                	<label class="btn btn-primary">
-			                                                		<input type="checkbox" name="cv_name" autocomplete="off" value="대중교통 용이"> 대중교통 용이
-			                                                	</label>
-			                                                	<label class="btn btn-primary">
-			                                                		<input type="checkbox" name="cv_name" autocomplete="off" value="음료/간식 제공"> 음료/간식 제공
-			                                                	</label>
+			                                                	
+			                                                	<!--
+			                                                	<c:forEach var="group" items="${musiccat }">
+																	<option value="${group.music_cat_code}">${group.music_cat_small }</option>
+																</c:forEach> 
+			                                                	 -->
+			                                                	
+			                                                	<c:forEach var="group" items="${cvlist }">
+																	<label class="btn btn-primary">
+			                                                			<input type="checkbox" name="cv_name" autocomplete="off" value="${group.cv_code}"> ${group.cv_name }
+			                                                		</label>
+																</c:forEach>
+																
 			                                            	</div>
 														</div>
 													</div>
@@ -436,8 +443,19 @@
 		                            detailAddr + 
 		                        '</div>';
 		                        
-		            /* ■■■ ID 값이 address이면 다음과 같이 value 입력 ■■■ 296줄 */            
-					$('#c_addr').val(result[0].address.address_name);
+		            var address = result[0].address.address_name;
+		            var city = address.substr(0,2);
+		            
+		            /* ■■■ ID 값이 address이면 다음과 같이 value 입력 ■■■ 296줄 */
+		            $('#c_addr').val(result[0].address.address_name);
+		            
+		            if(city != "서울")
+		            {	
+		            	alert("현재 서울 지역만 선택 가능합니다.");
+		            	$('#c_addr').val("");
+		            }
+		            
+									
 					
 		            // 마커를 클릭한 위치에 표시합니다 
 		            marker.setPosition(mouseEvent.latLng);

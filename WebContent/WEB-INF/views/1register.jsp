@@ -431,7 +431,7 @@
 			{
         		var userNickName = $('input[id=userNickName]').val();
         		var nameCheck = /^[가-힣]+$/;
-        		
+        		"(^[0-9]*$)"
         		if(!nameCheck.test(userNickName))
 				{
         			$('#NickNameCheckMessage1').html("올바른 이름 형식이 아닙니다.");

@@ -15,8 +15,53 @@
 		WHERE A.UNIQ_ID_NUM = #{uniq_id_num}
  	</select>
  	
- 	<select id="cvlist" resultType="com.test.classmain.ClassDTO">
+ 	<!-- 관심사 출력 -->
+ 	<select id="cvlist" resultType="com.test.classopen.ClassOpenDTO">
  		SELECT CV_CODE, CV_NAME
-		FROM CV;
+		FROM CV
  	</select>
+ 	
+ 	<!-- 지역구 번호 가져오기 -->
+ 	<select id="towncode" resultType="String">
+ 		SELECT TOWN_CODE
+		FROM TOWN
+		WHERE TOWN_NAME = #{town_name}
+ 	</select>
+ 	
+ 	<!-- 개설 클래스 별점 평균
+ 	<select id="reviewstar" resultType="String">
+ 		SELECT NVL(AVG(REVIEW_STAR),0) AS RIVIEW_STAR
+		FROM CLASS_REVIEW A
+		JOIN PAYMENT B ON A.PAY_NUM = B.PAY_NUM
+		JOIN CLASS_OPEN C ON B.C_OPEN_NUM = C.C_OPEN_NUM
+		JOIN CLASS_INFO D ON C.C_INFO_NUM = D.C_INFO_NUM
+		JOIN PROF_INFO E ON D.P_INFO_NUM = E.P_INFO_NUM
+		WHERE B.UNIQ_ID_NUM = #{uniq_id_num}
+ 	</select>
+ 	
+ 	클래스 확정 회차 횟수
+ 	<select id="classcount" resultType="String">
+ 		SELECT COUNT(C_COMFIRM_DATE) AS COMFIRMDATECOUNT
+		FROM CLASS_CONFIRM A
+		LEFT JOIN CLASS_OPEN B ON A.C_OPEN_NUM = B.C_OPEN_NUM
+		LEFT JOIN CLASS_INFO C ON B.C_INFO_NUM = C.C_INFO_NUM
+		LEFT JOIN PROF_INFO D ON C.P_INFO_NUM = D.P_INFO_NUM
+		WHERE D.UNIQ_ID_NUM = #{uniq_id_num}
+ 	</select>
+ 	
+ 	최근 한달 간 클래스 확정 회차 횟수
+ 	<select id="latelyclass" resultType="String">
+ 		SELECT COUNT(C_COMFIRM_DATE) AS COMFIRMDATECOUNT
+		FROM CLASS_CONFIRM A
+		LEFT JOIN CLASS_OPEN B ON A.C_OPEN_NUM = B.C_OPEN_NUM
+		LEFT JOIN CLASS_INFO C ON B.C_INFO_NUM = C.C_INFO_NUM
+		LEFT JOIN PROF_INFO D ON C.P_INFO_NUM = D.P_INFO_NUM
+		WHERE D.UNIQ_ID_NUM = #{uniq_id_num} AND A.C_COMFIRM_DATE <![CDATA[<=]]> ADD_MONTHS(SYSDATE,1) AND A.C_COMFIRM_DATE <![CDATA[>=]]> ADD_MONTHS(SYSDATE,-1)
+ 	</select> -->
+ 	
+ 	<select id="membergrade" resultType="String">
+	 	SELECT 강사등급 AS MEMBERGRADE
+		FROM MEMBER_GRADE_VIEW
+		WHERE UNIQ_ID_NUM = #{uniq_id_num}
+	</select>
 </mapper>

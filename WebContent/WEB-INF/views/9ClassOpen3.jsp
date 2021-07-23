@@ -29,6 +29,8 @@
 	{
 		mynickName = (String)session.getAttribute("mynickName");
 	}
+	
+	String membergrade = (String)request.getAttribute("membergrade");
 %>
 
 <!DOCTYPE html>
@@ -48,8 +50,8 @@
 		<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
 		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/ripples.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/material.min.js"></script>
-		<script type="text/javascript" src="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/js/material.min.js"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/material.min.js"></script>
+		<script type="text/javascript" src="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/js/material.min.js"></script> -->
 		<script type="text/javascript" src="js/npm2.js"></script>
 		<script type="text/javascript" src="./js/bootstrap-material-datetimepicker.js"></script>
 
@@ -205,52 +207,131 @@
 	                                    	<h2 class="text-center font-weight-light my-4 text-muhobby fw-bold">클래스 개설 정보</h2>
 	                                    </div>
 	                                    <div class="card-body">
-	                                        <form action="sign.do" method="post">
+	                                        <form action="ClassOpenComplete.action" method="get">
 	                                        	<br>
 	                                            
 	                                            <div class="row mb-3">
 													<span class="mb-2 fw-bold normal">9) 클래스 일정 추가 (필수) </span>
-														<span class="mb-2 fw-bold">수업 진행 날짜</span>
-														<div class="col-md-5">
-															<div class="form-floating mb-3 mb-md-0">
-																<input type="text" id="min-date" class="form-control floating-label">
-															</div>
+														<span class="mb-2 fw-bold">수업 소요 시간</span>
+														<div class="form-floating mb-3 mb-md-0">
+															<input type="hidden" id="min-date" class="form-control floating-label">
 														</div>
-														<div class="col-md-3 d-grid">
-	                                                		<input class="form-control text-center" id="userId" name="userId" type="text" placeholder="수업 소요 시간"/>
-	                                                	</div>
-	                                                	
-	                                                	<div class="col-md-2 d-grid">
-	                                                		<input class="form-control text-center" id="userId" name="userId" type="text" placeholder="최소 모집 인원"/>
-	                                                	</div>
-	                                                	
-	                                                	<div class="col-md-2 d-grid">
-	                                                		<input class="form-control text-center" id="userId" name="userId" type="text" placeholder="최대 모집 인원"/>
-	                                                	</div>
+														
+														<div class="col-md-12">
+		                                                    <div class="form-floating mb-3 mb-md-0">
+		                                                    	<input type="hidden" id="music_cat_code" name="music_cat_code" value="1">
+			                                                    <select class="form-select" aria-label="Default select example" id="c_runtime" name="c_runtime" onchange="finalprice()">
+																	<option value="1">1시간</option>
+																	<option value="2">2시간</option>
+																	<option value="3">3시간</option>
+																	<option value="4">4시간</option>
+																	<option value="5">5시간</option>
+																	<option value="6">6시간</option>
+																</select>
+		                                                    </div>
+		                                                </div>
+												</div>
+												<span class="mb-2 fw-bold">모집 인원</span>
+                                            	<div class="row mb-3 mt-2">
+													<div class="col-md-6">
+														<div class="form-floating mb-3 mb-md-0">
+															<input type="text" id="min_person" name="min_person" class="form-control floating-label" placeholder="최소 모집 인원" style="padding-top: 1.625rem; padding-bottom: 0.625rem;" onkeyup="minperson()" maxlength="1">
+															<label>최소 모집 인원</label>
+														</div>
+													</div>
+													
+                                                	<div class="col-md-6">
+														<div class="form-floating mb-3 mb-md-0">
+															<input type="text" id="max_person" name="max_person" class="form-control floating-label" placeholder="최대 모집 인원" style="padding-top: 1.625rem; padding-bottom: 0.625rem;" onkeyup="finalprice()" maxlength="1">
+															<label>최대 모집 인원</label>
+														</div>
+														<h6 class="mt-2" id="personCheckMessage"></h6>
+													</div>
 												</div>
 													
 	                                            <br>
 	                                            
-	                                           		<div class="row mb-3">
-														<span class="mb-2 fw-bold normal">10) 클래스 수강료 </span>
-															<div class="col-md-5">
-																<div class="form-floating mb-3 mb-md-0">
-																	<input type="text" id="min-date" class="form-control floating-label" placeholder="Start Date">
-																</div>
-															</div>
+                                           		<div class="row mb-3">
+                                           			<div class="col-md-10">
+														<span class="mb-2 fw-bold normal">10) 클래스 수강료</span>
 													</div>
+													<div class="col-md-2">
+														<a class="text-muhobby text-end" style="text-decoration: none;" onclick="window.open('profgrade.action', '등급별 수강료', 'width=450, height=940, left=100, top=50');">등급별 수강료</a>
+													</div>
+													<script type="text/javascript">
+													
+														function minperson()
+														{
+															var minperson = $('input[id=min_person]').val();
+															var maxperson = $('input[id=max_person]').val();
+															
+															if(maxperson == "")
+																maxperson = 0;
+															
+															if(minperson > maxperson)
+																
+														}
+													
+														function finalprice()
+														{	
+															var runtime = $("#c_runtime option:checked").val();
+											        		var maxperson = $('input[id=max_person]').val();
+											        		var personCheck = /^[0-9]*$/;
+											        		
+											        		if(!personCheck.test(maxperson))
+															{
+											        			$('#personCheckMessage').html("숫자만 입력 해 주세요.");
+												            	$('#personCheckMessage').css("color", "#dc3545");
+												            	$('#submit').attr('disabled', true);
+															}
+															else
+															{
+																$('#personCheckMessage').html("");
+																$("#submit").attr("disabled", false);
+															}
+											        		
+											        		
+											        		var membergrade = "<%=membergrade %>";
+											        		
+											        		if(membergrade == "bronze")
+											        			var maxprice = 30000;
+											        		
+											        		else if(membergrade == "silver")
+											        			var maxprice = 40000;
+											        		
+											        		else if(membergrade == "gold")
+											        			var maxprice = 50000;
+											        		
+											        		price = runtime * maxprice * maxperson;
+											        		
+											        		if(isNaN(price))
+											        			return $('#c_price').val(0);
+											        		
+											        		$('#c_price').val(price);
+											        		$('#c_price').attr("max", price);
+														}
+													</script>
+													
+													<div class="col-md-12">
+														<div class="form-floating mb-3 mb-md-0">
+															<input type="number" id="c_price" name="c_price" class="form-control floating-label" placeholder="최종 수강료" style="padding-top: 1.625rem; padding-bottom: 0.625rem;" min="0" max="0">
+															<label>최종 수강료</label>
+														</div>
+														<h6 class="mt-2"> 등급별 최대 수강료가 적용되어 계산됩니다.</h6>
+													</div>
+												</div>
 												
 												<br />
-	                                            
+												
 	                                            <div class="row mb-3">
 	                                            	<div class="col-md-2">
 	                                                </div>
 	                                                <div class="col-md-4 col-md-3 d-grid">
-	                                                	<a class="text-center btn1 btn-primary btn-block" type="submit" id="loadBtn" id="signup" href="classopen2.action">이전 페이지</a>
+	                                                	<a class="text-center btn1 btn-primary btn-block" type="submit" id="loadBtn" href="classopen2.action">이전 페이지</a>
 	                                                </div>
 	                                                <div class="col-md-4 d-grid">
 	                                                	<!-- <a class="text-center btn1 btn-primary btn-block" href="/sign.do">회원 가입</a> -->
-	                                                	<a class="text-center btn1 btn-primary btn-block" type="submit" id="loadBtn" id="signup" href="mainpage.action">다음 페이지</a>
+	                                                	<button class="text-center btn1 btn-primary btn-block" type="submit" id="submit">클래스 개설</button>
 	                                                </div>
                                             	</div>
 	                                        </form>
