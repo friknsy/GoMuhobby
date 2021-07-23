@@ -219,7 +219,7 @@ if (session.getAttribute("mynickName") != null) {
 						<a name="classInformation"></a>
 							<div class="card-header">클래스 소개글</div>
 							<div class="card-body">
-								${classinfo.c_detail_info}<br> <a
+								<div style="white-space: pre;">${classinfo.c_detail_info}</div><br> <!-- <a
 									class="btn btn-primary me-4 mt-2 mb-2" href="#!"
 									style="color: #c79cf5; border-color: #c79cf5; width: 200px;">#
 									이런점이 좋아요</a><br> 1. 본인이 어떻게 노래 부르고 있는지 파악할 수 있어요<br> 2.
@@ -237,7 +237,7 @@ if (session.getAttribute("mynickName") != null) {
 								열심히 하고자 하는 마음가짐 최고의 목상태!<br> <br> <a
 									class="btn btn-primary me-4 mt-2 mb-2" href="#!"
 									style="color: #c79cf5; border-color: #c79cf5; width: 200px;">유의
-									사항</a><br> 공동현관에서 연락주세요<br>
+									사항</a><br> 공동현관에서 연락주세요<br> -->
 							</div>
 						</div>
 					</div>
@@ -363,11 +363,12 @@ if (session.getAttribute("mynickName") != null) {
 						<div class="card mb-4">
 							<!-- 아래 a 태그는 상단에서 후기 바로가기 지정 -->
 							<a name="classReview"></a>
-							<div class="card-header">후기 작성</div>
+							<div class="card-header">후기</div>
 							<div class="card-body">
 
-
+								
 								<c:forEach var="review" items="${reviews}">
+								
 
 									<div class="row">
 										<div class="col-lg-2">

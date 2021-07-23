@@ -110,75 +110,12 @@
                         </div>
                     </div>
 
-                </div>
+
                 <!-- /.container-fluid -->
                 
                 
-                <!-- /.container-fluid -->
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">자유게시판 게시글 신고가 접수되었어요!</h1>
-                    
-                    <p class="mb-4">어떤 뮤하비가 너무 자유스러웠나...신고처리 해주세요 관리자님! <a target="_blank"
-                            href="#">어딘가로 바로가기</a>.</p>
-
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">자유게시판 게시글 신고 접수(신고처리 후 새로고침 해주세요!)</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>번호</th>
-                                            <th>게시물제목</th>
-                                            <th>신고사유</th>
-                                            <th>신고자</th>
-                                            <th>신고일자</th>
-                                            <th>처리상태</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>번호</th>
-                                            <th>게시물제목</th>
-                                            <th>신고사유</th>
-                                            <th>신고자</th>
-                                            <th>신고일자</th>
-                                            <th>처리상태</th>
-                                            <th></th>
-                                        </tr>
-
-                                    </tfoot>
-                                    <tbody>
-                                     	<c:forEach var="ffReport" items="${ffReportList }">
-                                        <tr>
-                                            <th>${ffReport.rnum}</th>   
-                                            <th><a href="#" onclick="goToDetail(${ffReport.f_forum_code})">${ffReport.f_forum_title}</a></th>
-                                            <th>${ffReport.report_cat_content}</th>
-                                            <th>${ffReport.user_nickname}</th>
-                                            <th>${ffReport.f_report_reg_date}</th>
-                                            <th>${ffReport.processing}</th>
-                                            <th><button onclick="processing(${ffReport.f_report_reg_code})">신고처리하기</button></th>
-                                            
-                                        </tr>
-                                        </c:forEach> 
-                                        
-   
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <!-- /.container-fluid -->
-
-            
+ 
+            </div>
             <!-- End of Main Content -->
 </body>
 

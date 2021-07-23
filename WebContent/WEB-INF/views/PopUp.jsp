@@ -23,7 +23,8 @@
 	{
 		$.post("namechangeajax.action", {uniq_id_num : $("#uniq_id_num").val() , u_name : $("#u_name").val()}, function(data)
 		{
-			window.close();
+			opener.document.location.reload();
+		   	window.close();
 		});
 	}
 
