@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
+	<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -207,7 +207,14 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="#">회원 정보 수정</a>
                                 </nav>
-                            </div>                                                        
+                            </div>
+                            
+                            
+                            <a class="nav-link collapsed" href="memberquitform.action">
+                                <div class="sb-nav-link-icon"><i class="bi bi-box-arrow-left"></i></div>
+                                <div class="mss-1">회원탈퇴</div>
+                            </a>
+                                                                                   
                         </div>
                     </div> 
                 </nav>

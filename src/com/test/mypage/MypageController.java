@@ -43,4 +43,26 @@ public class MypageController
 	{
 		return "WEB-INF/views/7mypageyourclass.jsp";
 	}
+	
+	
+	@RequestMapping(value="memberquitform.action")
+	public String memberQuitForm(){
+		
+		return "WEB-INF/views/MemberQuit.jsp";
+	}
+	
+	// 회원탈퇴
+	@RequestMapping(value = "memberquit.action", method = RequestMethod.POST)
+	public String memberQuitAction(MypageDTO dto) {
+		
+		IMypageDAO dao = sqlSession.getMapper(IMypageDAO.class);
+		
+		//탈퇴하고자 하는 회원정보를 탈퇴테이블로 옮기고 회원테이블에서 삭제
+		dao.insertDropMember(dto);
+		dao.deleteMember(dto);
+		
+		return "WEB-INF/views/2logoutAction.jsp";
+	}
+	
+	
 }

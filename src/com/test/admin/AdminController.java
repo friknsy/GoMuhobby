@@ -41,13 +41,14 @@ public class AdminController
 		model.addAttribute("todayVisit",dao.getTodayVisit(todayDate));
 		model.addAttribute("totalVisit",dao.getTotalVisit());
 		model.addAttribute("qnaList", dao.yetQna());
-		return "/WEB-INF/views/Dashboard.jsp";
+		model.addAttribute("clickedContentUrl","/WEB-INF/views/DashboardMain.jsp");
+		return "/WEB-INF/views/DashboardFrame.jsp";
 		
 	}
 	
-	
-	@RequestMapping(value = "/gotoreportreg.action", method = RequestMethod.GET)
-	public String goToReportReg(Model model) 
+	/* =====================================신고처리 ============================================ */
+	@RequestMapping(value = "/qrepreg.action", method = RequestMethod.GET)
+	public String QRepReg(Model model) 
 	{
 		//qna 질문글 신고 내역 가져오기
 		// 자유게시판 신고 내역 가져오기
@@ -55,20 +56,108 @@ public class AdminController
 		
 		model.addAttribute("qaReportList", dao.qaReportList());
 		model.addAttribute("ffReportList", dao.ffReportList());
-		
-		return "/WEB-INF/views/ReportReg.jsp";
+		model.addAttribute("clickedContentUrl","/WEB-INF/views/DashboardQRepReg.jsp");
+		return "/WEB-INF/views/DashboardFrame.jsp";
 	}
 	
+	@RequestMapping(value = "/frepreg.action", method = RequestMethod.GET)
+	public String FRepReg(Model model) 
+	{
+		//qna 질문글 신고 내역 가져오기
+		// 자유게시판 신고 내역 가져오기
+		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
+		
+		model.addAttribute("qaReportList", dao.qaReportList());
+		model.addAttribute("ffReportList", dao.ffReportList());
+		model.addAttribute("clickedContentUrl","/WEB-INF/views/DashboardFRepReg.jsp");
+		
+		return "/WEB-INF/views/DashboardFrame.jsp";
+	}
 	
-	@RequestMapping(value = "/joinandquitlist.action", method = RequestMethod.GET)
-	public String goToJoinQuit(Model model) 
+	@RequestMapping(value = "/qqreg.action", method = RequestMethod.GET)
+	public String QQReg(Model model) 
+	{
+		//qna 질문글 신고 내역 가져오기
+		// 자유게시판 신고 내역 가져오기
+		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
+		
+		model.addAttribute("qaReportList", dao.qaReportList());
+		model.addAttribute("ffReportList", dao.ffReportList());
+		model.addAttribute("clickedContentUrl","/WEB-INF/views/DashboardQQReg.jsp");
+		
+		return "/WEB-INF/views/DashboardFrame.jsp";
+	}
+	
+	@RequestMapping(value = "/qareg.action", method = RequestMethod.GET)
+	public String QAReg(Model model) 
+	{
+		//qna 질문글 신고 내역 가져오기
+		// 자유게시판 신고 내역 가져오기
+		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
+		
+		model.addAttribute("qaReportList", dao.qaReportList());
+		model.addAttribute("ffReportList", dao.ffReportList());
+		model.addAttribute("clickedContentUrl","/WEB-INF/views/DashboardQAReg.jsp");
+		
+		return "/WEB-INF/views/DashboardFrame.jsp";
+	}
+	
+	@RequestMapping(value = "/freg.action", method = RequestMethod.GET)
+	public String FReg(Model model) 
+	{
+		//qna 질문글 신고 내역 가져오기
+		// 자유게시판 신고 내역 가져오기
+		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
+		
+		model.addAttribute("qaReportList", dao.qaReportList());
+		model.addAttribute("ffReportList", dao.ffReportList());
+		model.addAttribute("clickedContentUrl","/WEB-INF/views/DashboardFReg.jsp");
+		
+		return "/WEB-INF/views/DashboardFrame.jsp";
+	}
+	
+	/* =====================================신고처리 end ============================================ */
+	
+	/* =====================================가입/탈퇴/경고/정지 ============================================ */
+	
+	@RequestMapping(value = "/dashboardjoinlist.action", method = RequestMethod.GET)
+	public String joinList(Model model) 
 	{
 		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
 		
 		model.addAttribute("memberList",dao.memberList());
 		model.addAttribute("quitList", dao.quitList());
-		return "/WEB-INF/views/JoinAndQuitList.jsp";
+		model.addAttribute("clickedContentUrl","/WEB-INF/views/DashboardJoinList.jsp");
+		return "/WEB-INF/views/DashboardFrame.jsp";
 	}
+	
+	
+	@RequestMapping(value = "dashboardquitlist.action", method = RequestMethod.GET)
+	public String quitList(Model model) 
+	{
+		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
+		
+		model.addAttribute("memberList",dao.memberList());
+		model.addAttribute("quitList", dao.quitList());
+		model.addAttribute("clickedContentUrl","/WEB-INF/views/DashboardQuitList.jsp");
+		return "/WEB-INF/views/DashboardFrame.jsp";
+	}
+	
+	
+	@RequestMapping(value = "dashboardyellowlist.action", method = RequestMethod.GET)
+	public String yellowList(Model model) 
+	{
+		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
+		
+		model.addAttribute("memberList",dao.memberList());
+		model.addAttribute("quitList", dao.quitList());
+		model.addAttribute("clickedContentUrl","/WEB-INF/views/DashboardYellowList.jsp");
+		return "/WEB-INF/views/DashboardFrame.jsp";
+	}
+	
+	/* =====================================가입/탈퇴/경고/정지 end ============================================ */
+	
+
 	
 	// 계정복구 요청 시
 	@RequestMapping(value = "/memberrecovery.action", method = RequestMethod.GET)
@@ -83,11 +172,12 @@ public class AdminController
 		// 기존에 있던 탈퇴테이블 정보를 삭제한다.
 		dao.dropMemberDelete(uniq_id_num);
 		
-		return "redirect:joinandquitlist.action";
+		return "redirect:dashboardquitlist.action";
 		
 		
 	}
 	
+	// 이름 변경 팝업
 	@RequestMapping(value = "/namepopup.action", method = RequestMethod.GET)
 	public String namePopUp(HttpServletRequest request, Model model) 
 	{
@@ -109,7 +199,7 @@ public class AdminController
 		
 		dao.modifyName(dto);
 			
-		return "redirect:joinandquitlist.action";
+		return "";
 	}
 	
 	
