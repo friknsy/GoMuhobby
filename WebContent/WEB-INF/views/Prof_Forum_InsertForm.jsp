@@ -33,7 +33,7 @@
 	if(session.getAttribute("photo")!=null)
 		photo = (String)session.getAttribute("photo");
 	else
-		photo = "undraw_profile_1.svg"; 
+		photo = "undraw_profile_1.svg";
 	
 %>
 
@@ -62,6 +62,7 @@
 <!-- 부트스트랩 script -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
+
 <script type="text/javascript">
 
 	$(function()
@@ -72,14 +73,6 @@
 		{
 			$(location).attr("href", "professorforum.action");			
 		});
-		
-		// 수정하기
-		$("#update").click(function()
-		{
-			$(location).attr("href", "professorforumupdate.action");
-		
-		});
-		
 	});
 
 	
@@ -257,11 +250,10 @@
                 </nav>
             </div>
       	</div>
-
 <div class="container">
 	<br><br>
 	<div>
-		<div style="float: left;"><h2>게시글 수정</h2></div>
+		<div style="float: left;"><h2>게시글 작성</h2></div>
 		<div style="clear:both;"></div>
 		<hr>
 	</div>
@@ -269,16 +261,13 @@
 	
 	
 	<div class="col-lg-10" style="text-align: center; margin: auto;">
-		<form action="professorforumupdate.action" method="post">
+		<form action="professorforuminsert.action" method="post">
 		
 			<!-- 강사 커뮤니티 번호 -->
 			<input type="hidden" id="p_comm_code" name="p_comm_code" value="${p_comm_code }">
 			
 			<!-- 고유식별번호 -->
 			<input type="hidden" id="uniq_id_num" name="uniq_id_num" value="<%=uniqueId %>">
-			
-			<!-- 게시물 번호 -->
-			<input type="hidden" id="p_forum_num" name="p_forum_num" value="${p_forum_num }">
 			
 			<table class="table">
 				<tr>
@@ -287,15 +276,18 @@
 				<tr>
 					<td>
 						<textarea rows="5" class="form-control" required="required"
-						id="p_forum_content" name="p_forum_content">${read.p_forum_content }</textarea>
+						id="p_forum_content" name="p_forum_content"	placeholder="내용을 입력해주세요."></textarea>
 					</td>
 				</tr>		
 			</table>
-			<button type="button" class="btn btn-default back" id="back">뒤로가기</button>
-			<button type="submit" class="btn btn-outline-light btn-sm1" id="update">수정하기</button>
+			<button type="button" class="btn btn-default" id="back">뒤로가기</button>
+			<button type="submit" class="btn btn-outline-light btn-sm1">작성하기</button>
 			<!-- <button type="reset" class="btn btn-default">취소하기</button> -->
 		</form>
 	</div>
+
+	
 </div>
+
 </body>
 </html>
