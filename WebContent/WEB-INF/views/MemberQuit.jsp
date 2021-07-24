@@ -63,7 +63,9 @@
 		// submit 버튼을 누르면 onsubmit에 의해 beforeCheck() 함수 호출
 		
 		// 만약 탈퇴사유를 선택하지 않았을 시에는 경고창을 띄운다.
-		if(!document.querySelector('input[name="drop_reason_code"]').checked)
+/* 		if(!document.querySelectorAll('input[name="drop_reason_code"]').checked)
+ */		/* if(document.querySelectorAll('input[name="drop_reason_code"]').checked.size()==0) */
+ 		if(document.querySelectorAll('input[name="drop_reason_code"]:checked').length==0)
 		{
 			alert("가더라도 탈퇴사유는 눌러주십시오");
 			return false;
@@ -73,6 +75,7 @@
 		// 탈퇴여부를 마지막으로 묻는다.
 		if (!confirm("진심입니까? 실화입니까?"))
 		{
+			
 			return false; // 폼을 전송하지 않는다.
 		}
 		else
