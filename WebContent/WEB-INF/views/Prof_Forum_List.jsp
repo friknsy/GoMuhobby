@@ -67,6 +67,39 @@
 	}
 
 </style>
+
+<script type="text/javascript">
+
+	$(function()
+	{
+		// 글 작성하기가 클릭되었을 때 Prof_Forum_InsertForm.jsp 이동
+		$("#write").click(function()
+		{
+			$(location).attr("href", "professorforuminsertform.action?p_comm_code="+$("#p_comm_code").val() );
+			//$(location).attr("href", "professorforuminsertform.action");
+			
+		});
+		
+		// 수정
+		$("#update").click(function()
+		{
+			$(location).attr("href", "professorforumupdateform.action?p_forum_num="+$("#p_forum_num").val() );
+		});
+		
+		
+		// 삭제
+		$("#delete").click(function()
+		{
+			if (confirm("게시글을 삭제하시겠습니까?") )
+			{
+				$(location).attr("href", "professorforumdelete.action?p_forum_num="+$("#p_forum_num").val() );
+			}
+			
+		});
+		
+	});
+
+</script>
 	
 </head>
 <body class="sb-nav-fixed">
@@ -234,21 +267,31 @@
 			<div class="row">
 				<div class="col-xl-12 col-md-12">
 					<div style="float: left;"><h2>강사 커뮤니티</h2></div>
-					<div id="count">186개의 글</div>
-					<div class="col-lg-3" style="float: right;"><button type="button" class="btn btn-outline-light btn-sm1">글 작성하기</button></div>
+					<div id="count">${count }개의 글</div>
+					<div class="col-lg-3" style="float: right;"><button type="button" class="btn btn-outline-light btn-sm1" id="write">글 작성하기</button></div>
 					<div style="clear:both;"></div>
 					<div class="col-lg-10"><hr></div>
 					
+					<!-- 강사 커뮤니티 코드 -->
+					<input type="hidden" id="p_comm_code" name="p_comm_code" value="${p_comm_code }"> 
+
+					
+					
 					<!-- 게시글 -->
 					<div>
+						<c:forEach var="content" items="${list }">
+						
+						<!-- 게시물 번호 -->						
+						<input type="hidden" id="p_forum_num" name="p_forum_num" value="${content.p_forum_num }">
+						
 						<div> <!-- card-footer -->
 							<div class="bg-transparent mt-5 col-lg-3">
 							    <div class="d-flex align-items-end justify-content-between">
 							        <div class="d-flex align-items-center">
-							            <img class="rounded-circle me-3" src="images/default.png" width="40px" height="40px"/>
+							            <img class="rounded-circle me-3" src="img/${content.u_photo }" width="40px" height="40px"/>
 							            <div class="small">
-							                <div class="fw-bold">다람이</div>
-							                <div class="text-muted">2021-07-01</div>
+							                <div class="fw-bold">${content.user_nickname }</div>
+							                <div class="text-muted">${content.p_forum_wrt_date }</div>
 							            </div>
 							        </div>
 							    </div>
@@ -256,16 +299,20 @@
 							<div class="card-footer bg-transparent mt-4 col-lg-10">
 								<div class="d-flex align-items-end justify-content-between">
 									<div class="d-flex align-items-center">
-										<p> 안녕하세요! 전 피아노를 처음 배워보거든요! 계이름도 모르는데 괜찮을까요?<br>
-										혹시 이루마 곡도 칠 수 있을까요?</p>
+										<p> ${content.p_forum_content }</p>
 									</div>
+									
+									<c:set var="uniqueId" value="<%=uniqueId %>"/>
+									<c:if test="${content.uniq_id_num eq uniqueId }">
 									<div style="float: right">
-										<button type="button" class="btn btn-default btn-custom">수정</button>
-										<button type="button" class="btn btn-default">삭제</button>
+										<button type="button" class="btn btn-default btn-custom" id="update">수정</button>
+										<button type="button" class="btn btn-default" id="delete">삭제</button>
 									</div>
+									</c:if>
 								</div>
 							</div>
 						</div>
+						</c:forEach>
 						<!-- 댓글 -->
 						<div style="margin-left: 40px;"> <!-- card-footer -->
 							<div class="bg-transparent mt-3 col-lg-3">

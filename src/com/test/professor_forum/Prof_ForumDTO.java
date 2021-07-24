@@ -5,10 +5,18 @@ public class Prof_ForumDTO
 	// 주요 속성 구성
 	private String p_forum_num, p_forum_content, p_forum_wrt_date;
 	//-- 게시물번호, 내용, 작성일
-	private String p_comm_code, uniq_id_num, user_nickname;
+	private String p_comm_code, uniq_id_num, user_nickname, u_photo;
 	//-- 커뮤니티코드, 고유식별번호, 닉네임
 	
 	// getter / setter
+	public String getU_photo()
+	{
+		return u_photo;
+	}
+	public void setU_photo(String u_photo)
+	{
+		this.u_photo = u_photo;
+	}
 	public String getP_forum_num()
 	{
 		return p_forum_num;

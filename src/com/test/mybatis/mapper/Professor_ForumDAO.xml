@@ -6,11 +6,58 @@
     
  <mapper namespace="com.test.professor_forum.IProf_ForumDAO">
 
- <!-- 강사 커뮤니티 생성 -->	
- <select id="create">
-
+ <!-- 강사 커뮤니티 게시글 조회-->	
+ <select id="list" resultType="com.test.professor_forum.Prof_ForumDTO">
+	SELECT P_FORUM_NUM, P_FORUM_CONTENT, P_FORUM_WRT_DATE, P_COMM_CODE
+	, UNIQ_ID_NUM,USER_NICKNAME, U_PHOTO
+	FROM PROF_FORUM_VIEW
+	WHERE P_COMM_CODE=#{p_comm_code}
+	ORDER BY P_FORUM_NUM DESC
+ </select>
+ 
+ <!-- 해당 커뮤니티 개별 게시물 조회 -->
+ <select id="read" parameterType="map" resultType="com.test.professor_forum.Prof_ForumDTO">
+ 	SELECT P_FORUM_NUM, P_FORUM_CONTENT, P_FORUM_WRT_DATE, P_COMM_CODE, UNIQ_ID_NUM
+	FROM PROF_FORUM
+	WHERE P_FORUM_NUM=#{p_forum_num}
  </select>
 
+ <!-- 게시물 카운트 -->
+ <select id="count" resultType="java.lang.Integer">
+ 	SELECT COUNT(*) AS COUNT
+	FROM PROF_FORUM
+	WHERE P_COMM_CODE=#{p_comm_code}
+ </select>
+
+ <!-- 게시물 작성 -->
+ <insert id="add">
+ 	INSERT INTO PROF_FORUM(P_FORUM_NUM, P_FORUM_CONTENT, P_COMM_CODE, UNIQ_ID_NUM)
+	VALUES(PROF_FORUM_SEQ.NEXTVAL, #{p_forum_content}, #{p_comm_code}, #{uniq_id_num})
+ </insert>
  
+ <!-- 게시물 수정 -->
+ <update id="modify">
+ 	UPDATE PROF_FORUM
+	SET P_FORUM_CONTENT=#{p_forum_content}
+	WHERE P_FORUM_NUM=#{p_forum_num}
+ </update>
+
+ <!-- 게시물 삭제 -->
+ <delete id="remove">
+ 	DELETE
+	FROM PROF_FORUM
+	WHERE P_FORUM_NUM=#{p_forum_num}
+ </delete>
+  
+
+ <!-- 고유식별번호 → 커뮤니티코드 --> 
+ <select id="getNum" resultType="java.lang.String">
+ 	SELECT P_COMM_CODE
+	FROM PROF_COMM
+	WHERE P_INFO_NUM = ( SELECT P_INFO_NUM
+    	                 FROM PROF_INFO
+        	             WHERE UNIQ_ID_NUM= #{uniq_id_num} )
+ </select>
  
+  
  </mapper>
