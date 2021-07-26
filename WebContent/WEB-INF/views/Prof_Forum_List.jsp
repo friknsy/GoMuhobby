@@ -281,40 +281,112 @@
 					<div>
 						<c:forEach var="content" items="${list }">
 						
-						<!-- 게시물 번호 -->						
-						<input type="hidden" id="p_forum_num" name="p_forum_num" value="${content.p_forum_num }">
-						
-						<div> <!-- card-footer -->
-							<div class="bg-transparent mt-5 col-lg-3">
+							<!-- 게시물 번호 -->						
+							<input type="hidden" id="p_forum_num" name="p_forum_num" value="${content.p_forum_num }">
+							
+							<div> <!-- card-footer -->
+								<div class="bg-transparent mt-5 col-lg-3">
+								    <div class="d-flex align-items-end justify-content-between">
+								        <div class="d-flex align-items-center">
+								            <img class="rounded-circle me-3" src="img/${content.u_photo }" width="40px" height="40px"/>
+								            <div class="small">
+								                <div class="fw-bold">${content.user_nickname }</div>
+								                <div class="text-muted">${content.p_forum_wrt_date }</div>
+								            </div>
+								        </div>
+								    </div>
+								</div>
+								<div class="card-footer bg-transparent mt-4 col-lg-10">
+									<div class="d-flex align-items-end justify-content-between">
+										<div class="d-flex align-items-center">
+											<p> ${content.p_forum_content }</p>
+										</div>
+										
+										<c:set var="uniqueId" value="<%=uniqueId %>"/>
+										<c:if test="${content.uniq_id_num eq uniqueId }">
+										<div style="float: right">
+											<button type="button" class="btn btn-default btn-custom" id="update">수정</button>
+											<button type="button" class="btn btn-default" id="delete">삭제</button>
+										</div>
+										</c:if>
+									</div>
+								</div>
+							</div>
+							
+							<!-- 댓글 리스트 -->
+							<c:forEach var="comment" items="${commentList }">
+								<c:if test="${comment.p_forum_num eq content.p_forum_num}">
+									<div style="margin-left: 40px;">
+										<div class="bg-transparent mt-3 col-lg-3">
+										    <div class="d-flex align-items-end justify-content-between">
+										        <div class="d-flex align-items-center">
+										            <img class="rounded-circle me-3" src="img/${comment.u_photo }" width="30px" height="30px"/>
+										            <div class="d-flex small">
+										                <div class="fw-bold">${comment.user_nickname }</div>&nbsp;&nbsp;
+										                <div class="text-muted">${comment.p_reply_wrt_date }</div>
+										            </div>
+										        </div>
+										    </div>
+										</div>
+										
+										<div class="card-footer bg-transparent mt-3 col-lg-10">
+											<div class="d-flex align-items-end justify-content-between">
+												<div class="d-flex align-items-center">
+													<p>${comment.p_reply_content } </p>
+												</div>
+												<div style="float: right">
+													<button type="button" class="btn btn-default">댓글달기</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</c:if>
+							</c:forEach> 
+							
+							<!-- 댓글 작성 -->
+							<div class="card-footer mt-3 col-lg-10 comment-area justify-content" style="height: 120px;">
+								<!-- <form action=""> -->
+									<textarea class="form-control" id="comment" rows="content" 
+									placeholder="댓글을 입력해주세요." maxlength="200" required="required"></textarea>
+									<div style="float: right" class="mt-2">
+										<button type="submit" class="btn btn-outline-light btn-sm1" id="addComment">등록</button>
+									</div>			
+								<!-- </form> -->
+							</div>
+							
+							</c:forEach>
+							
+							
+							
+							
+															
+							
+							
+							
+						<!-- 댓글 -->
+						<div style="margin-left: 40px;"> <!-- card-footer -->
+							<!-- <div class="bg-transparent mt-3 col-lg-3">
 							    <div class="d-flex align-items-end justify-content-between">
 							        <div class="d-flex align-items-center">
-							            <img class="rounded-circle me-3" src="img/${content.u_photo }" width="40px" height="40px"/>
-							            <div class="small">
-							                <div class="fw-bold">${content.user_nickname }</div>
-							                <div class="text-muted">${content.p_forum_wrt_date }</div>
+							            <img class="rounded-circle me-3" src="images/default.png" width="30px" height="30px"/>
+							            <div class="d-flex small">
+							                <div class="fw-bold">뮤푼젤</div>&nbsp;&nbsp;
+							                <div class="text-muted">2021-07-02</div>
 							            </div>
 							        </div>
 							    </div>
 							</div>
-							<div class="card-footer bg-transparent mt-4 col-lg-10">
+							<div class="card-footer bg-transparent mt-3 col-lg-10">
 								<div class="d-flex align-items-end justify-content-between">
 									<div class="d-flex align-items-center">
-										<p> ${content.p_forum_content }</p>
+										<p> 안녕하세요~ 처음 배우시는 분도 기초부터 꼼꼼히 알려드릴게요<br>
+										커리큘럼과 상세보기를 참고해주세요</p>
 									</div>
-									
-									<c:set var="uniqueId" value="<%=uniqueId %>"/>
-									<c:if test="${content.uniq_id_num eq uniqueId }">
 									<div style="float: right">
-										<button type="button" class="btn btn-default btn-custom" id="update">수정</button>
-										<button type="button" class="btn btn-default" id="delete">삭제</button>
+										<button type="button" class="btn btn-default">댓글달기</button>
 									</div>
-									</c:if>
 								</div>
-							</div>
-						</div>
-						</c:forEach>
-						<!-- 댓글 -->
-						<div style="margin-left: 40px;"> <!-- card-footer -->
+							</div> -->
 							<div class="bg-transparent mt-3 col-lg-3">
 							    <div class="d-flex align-items-end justify-content-between">
 							        <div class="d-flex align-items-center">
@@ -364,16 +436,7 @@
 							</div>
 						</div>
 						
-						<!-- 댓글 작성 -->
-						<div class="card-footer mt-3 col-lg-10 comment-area justify-content" style="height: 120px;">
-							<form action="">
-								<textarea class="form-control" id="comment" rows="content" 
-								placeholder="댓글을 입력해주세요." maxlength="200" required="required"></textarea>
-								<div style="float: right" class="mt-2">
-									<button type="submit" class="btn btn-outline-light btn-sm1">등록</button>
-								</div>			
-							</form>
-						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -382,6 +445,8 @@
 </div>
 	
 <br><br>
+
+</div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>  <!-- 폰트 -->

@@ -7,13 +7,21 @@ public class Prof_Forum_ReplyDTO
 	//-- 댓글번호, 댓글내용, 댓글작성일
 	private String p_reply_step, p_reply_index, p_reply_group;
 	//-- 계층, 댓글인덱스, 댓글그룹
-	private String p_forum_num, uniq_id_num, user_nickname;
-	//-- 게시물번호, 고유식별번호, 닉네임
+	private String p_forum_num, uniq_id_num, user_nickname, u_photo;
+	//-- 게시물번호, 고유식별번호, 닉네임, 프로필사진
 	
 	// getter / setter
 	public String getP_reply_num()
 	{
 		return p_reply_num;
+	}
+	public String getU_photo()
+	{
+		return u_photo;
+	}
+	public void setU_photo(String u_photo)
+	{
+		this.u_photo = u_photo;
 	}
 	public void setP_reply_num(String p_reply_num)
 	{

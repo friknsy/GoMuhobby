@@ -50,6 +50,7 @@
         <link href="css/myPage1.css" rel="stylesheet" />
         
     </head>
+
     <body class="sb-nav-fixed">
     
         	<!-- 맨 위 상단 바 -->
