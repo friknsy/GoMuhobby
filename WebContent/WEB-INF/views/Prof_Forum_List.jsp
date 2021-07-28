@@ -274,8 +274,8 @@
 					
 					<!-- 강사 커뮤니티 코드 -->
 					<input type="hidden" id="p_comm_code" name="p_comm_code" value="${p_comm_code }"> 
-
-					
+					<!-- 고유식별번호 -->
+					<input type="hidden" id="uniq_id_num" name="uniq_id_num" value="<%=uniqueId %>">
 					
 					<!-- 게시글 -->
 					<div>
@@ -312,7 +312,114 @@
 									</div>
 								</div>
 							</div>
+							<br>
+							<!-- 댓글 -->
+							<div class="card-header container col-xl-10 col-md-10" style="float: left;">댓글 목록</div><div style="clear:both;"></div>
+							<div class="bg-transparent mt-1 col-lg-3">
+							<br>
+								<c:forEach var="reply" items="${replies}">
+									<c:if test="${reply.p_forum_num eq content.p_forum_num}">
+										<c:choose>
+											<c:when test="${reply.p_reply_step==1 }">
+												<div class="d-flex align-items-end justify-content-between">
+													<div class="d-flex align-items-center">
+														<div class="box" style="background: #BDBDBD; width: 40px; height: 40px; border-radius: 40%; overflow: hidden; float: left;">
+															<img class="profile" src="img/${reply.u_photo }" style="width: 100%; height: 100%; object-fit: cover;">
+														</div>&nbsp;&nbsp;
+														<div class="d-flex small">
+												            <div class="fw-bold">${reply.user_nickname }</div>&nbsp;&nbsp;
+												            <div class="text-muted">${reply.p_reply_wrt_date }</div>
+												        </div>
+													</div>
+												</div>
+												<div class="card-footer bg-transparent mt-3 col-lg-10">
+													<div class="d-flex align-items-end justify-content-between">
+														<div class="d-flex align-items-center">
+															<p>${reply.p_reply_content } </p>
+														</div>
+														<div style="float: right">
+															<a href="deletereply.action?p_reply_group=${reply.p_reply_group }" style="font-size: small;" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a><br>
+															<button onclick="addRereplyForm(${reply.p_reply_num},${reply.p_reply_group})" id="addRereplyFormBtnFor${reply.p_reply_num}" class="btn btn-primary">대댓글달기</button>
+														</div>
+													</div>
+												</div>			
+			
+												<%-- <div class="col-lg-11">
+													<br> <span style="font-weight: bold;">${reply.user_nickname } </span><span style="font-size: small;">${reply.p_reply_wrt_date }</span> <br>${reply.p_reply_content }
+													 
+													<a href="deletereply.action?p_reply_group=${reply.p_reply_group }" style="font-size: small;" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a><br>
+													<button onclick="addRereplyForm(${reply.p_reply_num},${reply.p_reply_group})" id="addRereplyFormBtnFor${reply.p_reply_num}" class="btn btn-primary">대댓글달기</button>
+												</div> --%>
+												<script type="text/javascript">
+													function addRereplyForm(p_reply_num,p_reply_group)
+													{
+														/* 대댓글달기 버튼을 보이지 않도록 처리해준다.  */
+														document.getElementById("addRereplyFormBtnFor"+p_reply_num).style.display="none";
+														var p_forum_num = document.getElementById("p_forum_num").value;
+														var uniq_id_num = document.getElementById("uniq_id_num").value;
+														
+														/* 대댓글폼이 보일 div 불러온다 */
+														var rereplyFormDiv = document.getElementById("rereplyFormDivFor"+p_reply_num);
+														/* 대댓글폼 div 안에 들어갈 내용을 str 로 선언하고 innerHTML로 붙여준다.*/
+														var str = '<form action="writechildreply.action" method="post">'
+														+ '<input type="hidden" name="uniq_id_num" value="'+uniq_id_num+'">'
+														+ '<input type="hidden" id="p_forum_num" name="p_forum_num" value="'+p_forum_num+'">'
+														+ '<input type="hidden" name="p_reply_group" value="'+p_reply_group+'">'
+														+ '<textarea rows="1" cols="50" name="p_reply_content" required="required"></textarea><button type="reset" class="btn btn-primary">취소</button>'
+														+ '<button type="submit" class="btn btn-primary">대댓글달기</button></form>';												
+														rereplyFormDiv.innerHTML = str;
+														
+														
+													}
+												</script>
+			
+												<%--대댓글 작성하는 폼이 생성되는 div 영역 --%>
+												<div id="rereplyFormDivFor${reply.p_reply_num}"></div>
+			
+												
+											</c:when>
+											<c:otherwise>
+												<div style="margin-left: 40px;">
+													<div class="d-flex align-items-end justify-content-between" >
+														<div class="d-flex align-items-center">
+															<div class="box" style="background: #BDBDBD; width: 40px; height: 40px; border-radius: 40%; overflow: hidden; float: left;">
+																<img class="profile" src="img/${reply.u_photo }" style="width: 100%; height: 100%; object-fit: cover;">
+															</div>&nbsp;&nbsp;
+															<div class="d-flex small">
+													            <div class="fw-bold">${reply.user_nickname }</div>&nbsp;&nbsp;
+													            <div class="text-muted">${reply.p_reply_wrt_date }</div>
+													        </div>
+														</div>
+													</div>
+													<div class="card-footer bg-transparent mt-3 col-lg-10">
+														<div class="d-flex align-items-end justify-content-between">
+															<div class="d-flex align-items-center">
+																<p>${reply.p_reply_content } </p>
+															</div>
+															<div style="float: right">
+																<a href="deletereply.action?p_reply_group=${reply.p_reply_group }" style="font-size: small;" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a><br>
+															</div>
+														</div>
+													</div>
+												</div>		
+											</c:otherwise>
+										</c:choose>
+									</c:if>
+								</c:forEach>
+							</div>
+							<div class="card-footer mt-3 col-lg-10 comment-area justify-content" style="height: 120px;">
+								<form action="writereply.action" method="post">
+									<input type="hidden" name="p_forum_num" id="p_forum_num" value="${content.p_forum_num }">
+									<input type="hidden" id="uniq_id_num" name="uniq_id_num" value="<%=uniqueId %>">
+									<textarea class="form-control" id="p_reply_content" name="p_reply_content" rows="content" 
+									placeholder="댓글을 입력해주세요." maxlength="200" required="required"></textarea>
+									<div style="float: right" class="mt-2">
+										<button type="submit" class="btn btn-outline-light btn-sm1">등록</button>
+									</div>			
+								</form>
+							</div>
 							
+							<%-- 
 							<!-- 댓글 리스트 -->
 							<c:forEach var="comment" items="${commentList }">
 								<c:if test="${comment.p_forum_num eq content.p_forum_num}">
@@ -342,7 +449,7 @@
 									</div>
 								</c:if>
 							</c:forEach> 
-							
+						
 							<!-- 댓글 작성 -->
 							<div class="card-footer mt-3 col-lg-10 comment-area justify-content" style="height: 120px;">
 								<!-- <form action=""> -->
@@ -352,90 +459,9 @@
 										<button type="submit" class="btn btn-outline-light btn-sm1" id="addComment">등록</button>
 									</div>			
 								<!-- </form> -->
-							</div>
+							</div> --%>
 							
-							</c:forEach>
-							
-							
-							
-							
-															
-							
-							
-							
-						<!-- 댓글 -->
-						<div style="margin-left: 40px;"> <!-- card-footer -->
-							<!-- <div class="bg-transparent mt-3 col-lg-3">
-							    <div class="d-flex align-items-end justify-content-between">
-							        <div class="d-flex align-items-center">
-							            <img class="rounded-circle me-3" src="images/default.png" width="30px" height="30px"/>
-							            <div class="d-flex small">
-							                <div class="fw-bold">뮤푼젤</div>&nbsp;&nbsp;
-							                <div class="text-muted">2021-07-02</div>
-							            </div>
-							        </div>
-							    </div>
-							</div>
-							<div class="card-footer bg-transparent mt-3 col-lg-10">
-								<div class="d-flex align-items-end justify-content-between">
-									<div class="d-flex align-items-center">
-										<p> 안녕하세요~ 처음 배우시는 분도 기초부터 꼼꼼히 알려드릴게요<br>
-										커리큘럼과 상세보기를 참고해주세요</p>
-									</div>
-									<div style="float: right">
-										<button type="button" class="btn btn-default">댓글달기</button>
-									</div>
-								</div>
-							</div> -->
-							<div class="bg-transparent mt-3 col-lg-3">
-							    <div class="d-flex align-items-end justify-content-between">
-							        <div class="d-flex align-items-center">
-							            <img class="rounded-circle me-3" src="images/default.png" width="30px" height="30px"/>
-							            <div class="d-flex small">
-							                <div class="fw-bold">뮤푼젤</div>&nbsp;&nbsp;
-							                <div class="text-muted">2021-07-02</div>
-							            </div>
-							        </div>
-							    </div>
-							</div>
-							<div class="card-footer bg-transparent mt-3 col-lg-10">
-								<div class="d-flex align-items-end justify-content-between">
-									<div class="d-flex align-items-center">
-										<p> 안녕하세요~ 처음 배우시는 분도 기초부터 꼼꼼히 알려드릴게요<br>
-										커리큘럼과 상세보기를 참고해주세요</p>
-									</div>
-									<div style="float: right">
-										<button type="button" class="btn btn-default">댓글달기</button>
-									</div>
-								</div>
-							</div>
-							<!-- 대댓글 -->
-							<div style="margin-left: 40px;">
-							<div class="bg-transparent mt-3 col-lg-3">
-							    <div class="d-flex align-items-end justify-content-between">
-							        <div class="d-flex align-items-center">
-							            <img class="rounded-circle me-3" src="images/default.png" width="30px" height="30px"/>
-							            <div class="d-flex small">
-							                <div class="fw-bold">다람이</div>&nbsp;&nbsp;
-							                <div class="text-muted">2021-07-02</div>
-							            </div>
-							        </div>
-							    </div>
-							</div>
-							<div class="card-footer bg-transparent mt-3 col-lg-10">
-								<div class="d-flex align-items-end justify-content-between">
-									<div class="d-flex align-items-center">
-										<p>감사합니다! 수업 너무 기대됩니다~</p>
-									</div>
-									<div style="float: right">
-										<button type="button" class="btn btn-default">수정</button>
-										<button type="button" class="btn btn-default">삭제</button>
-									</div>
-								</div>
-							</div>
-							</div>
-						</div>
-						
+						</c:forEach>
 						
 					</div>
 				</div>

@@ -10,7 +10,39 @@ public class Prof_Forum_ReplyDTO
 	private String p_forum_num, uniq_id_num, user_nickname, u_photo;
 	//-- 게시물번호, 고유식별번호, 닉네임, 프로필사진
 	
+	String p_info_num;	// 강사 번호
+	
+	// 다음 댓글 그룹 가져오기
+	String next_group;
+	
+	// 자식댓글의 다음 댓글 인덱스 가져오기
+	String next_index;
+	
 	// getter / setter
+	public String getP_info_num()
+	{
+		return p_info_num;
+	}
+	public void setP_info_num(String p_info_num)
+	{
+		this.p_info_num = p_info_num;
+	}
+	public String getNext_group()
+	{
+		return next_group;
+	}
+	public void setNext_group(String next_group)
+	{
+		this.next_group = next_group;
+	}
+	public String getNext_index()
+	{
+		return next_index;
+	}
+	public void setNext_index(String next_index)
+	{
+		this.next_index = next_index;
+	}
 	public String getP_reply_num()
 	{
 		return p_reply_num;

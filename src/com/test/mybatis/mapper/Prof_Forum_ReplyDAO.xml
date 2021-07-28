@@ -6,14 +6,15 @@
     
  <mapper namespace="com.test.professor_forum.IProf_Forum_ReplyDAO">
 
- <!-- 강사 커뮤니티 댓글 조회-->	
+
+ <!-- 강사 커뮤니티 댓글 조회	
  <select id="list" resultType="com.test.professor_forum.Prof_Forum_ReplyDTO">
 	SELECT P_REPLY_NUM, P_FORUM_NUM, UNIQ_ID_NUM, P_REPLY_WRT_DATE
      , P_REPLY_CONTENT, P_REPLY_STEP, P_REPLY_INDEX, P_REPLY_GROUP, USER_NICKNAME, U_PHOTO
 	FROM PROF_FORUM_REPLY_VIEW
  </select>
  
- <!-- 해당 게시글 댓글 조회 -->
+ 해당 게시글 댓글 조회
  <select id="read" resultType="com.test.professor_forum.Prof_Forum_ReplyDTO">
  	SELECT P_REPLY_NUM, P_FORUM_NUM, UNIQ_ID_NUM, P_REPLY_WRT_DATE
      , P_REPLY_CONTENT, P_REPLY_STEP, P_REPLY_INDEX, P_REPLY_GROUP, USER_NICKNAME, U_PHOTO
@@ -21,14 +22,14 @@
 	WHERE P_FORUM_NUM= #{p_forum_num}
  </select>
 
- <!-- 댓글 카운트 -->
+ 댓글 카운트
  <select id="count" resultType="java.lang.Integer">
  	SELECT COUNT(*) AS COUNT
 	FROM PROF_FORUM_REPLY
 	WHERE P_FORUM_NUM= #{p_forum_num}
  </select>
 
- <!-- 댓글 작성 -->
+ 댓글 작성
  <insert id="add">
  	INSERT INTO PROF_FORUM_REPLY(P_REPLY_NUM, P_FORUM_NUM, UNIQ_ID_NUM, P_REPLY_CONTENT
                            , P_REPLY_STEP, P_REPLY_INDEX, P_REPLY_GROUP)
@@ -36,21 +37,53 @@
 			, #{p_reply_step}, #{p_reply_index}, #{p_reply_group});
  </insert>
  
- <!-- 댓글 수정 -->
+ 댓글 수정
  <update id="modify">
  	UPDATE PROF_FORUM_REPLY
 	SET P_REPLY_CONTENT= #{p_reply_content}
 	WHERE P_REPLY_NUM= #{p_reply_num}
  </update>
 
- <!-- 댓글 삭제 -->
+ 댓글 삭제
  <delete id="remove">
  	DELETE
 	FROM PROF_FORUM_REPLY
 	WHERE P_REPLY_NUM= #{p_reply_num}
  </delete>
-  
+  --> 
 
+ <select id="getReplyList" resultType="com.test.professor_forum.Prof_Forum_ReplyDTO">
+ 	SELECT A.*,B.U_PHOTO,C.USER_NICKNAME 
+	FROM PROF_FORUM_REPLY A 
+	LEFT JOIN MEMBER B ON A.UNIQ_ID_NUM=B.UNIQ_ID_NUM 
+	LEFT JOIN USER_UNIQUE_ID C ON A.UNIQ_ID_NUM=C.UNIQ_ID_NUM 
+	<!-- WHERE P_FORUM_NUM=#{p_forum_num} --> 
+	ORDER BY P_REPLY_GROUP,P_REPLY_STEP,P_REPLY_INDEX
+ </select>
+ 
+ <insert id="writeReply">
+ 	INSERT INTO PROF_FORUM_REPLY VALUES(PROF_FORUM_REPLY_SEQ.NEXTVAL,#{p_forum_num},#{uniq_id_num},SYSDATE,#{p_reply_content},1,1,#{next_group})
+ </insert>
+ 
+ <select id="getNextGroup" resultType="String">
+ 	SELECT NVL(MAX(P_REPLY_GROUP)+1, 1) AS NEXT_GROUP FROM PROF_FORUM_REPLY WHERE P_FORUM_NUM=#{p_forum_num}
+ </select>
+ 
+ <select id="getNextIndex" resultType="String">
+ 	SELECT NVL(MAX(P_REPLY_INDEX)+1, 1) AS NEXT_INDEX FROM PROF_FORUM_REPLY WHERE P_FORUM_NUM=#{param1} AND P_REPLY_GROUP=#{param2}
+ </select>
+ 
+ <insert id="writeChildReply">
+ 	INSERT INTO PROF_FORUM_REPLY VALUES(PROF_FORUM_REPLY_SEQ.NEXTVAL,#{p_forum_num},#{uniq_id_num},SYSDATE,#{p_reply_content},2,#{next_index},#{p_reply_group})
+ </insert>
+ 
+ <delete id="deleteReply">
+ 	DELETE FROM PROF_FORUM_REPLY WHERE P_REPLY_GROUP=#{p_reply_group}
+ </delete>
+ 
+ <delete id="deleteChildReply">
+ 	DELETE FROM PROF_FORUM_REPLY WHERE P_REPLY_NUM=#{p_reply_num}
+ </delete>
  
   
  </mapper>
