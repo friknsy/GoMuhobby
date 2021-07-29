@@ -155,6 +155,8 @@ public class AdminController
 		return "/WEB-INF/views/DashboardFrame.jsp";
 	}
 	
+
+	
 	/* =====================================가입/탈퇴/경고/정지 end ============================================ */
 	
 
@@ -225,6 +227,58 @@ public class AdminController
 		dao.reportProcessing(dto);
 		return "";
 	}
+	
+	
+	
+	
+	//================================== 환불신청내역 ==============================================================
+	
+	// 환불신청 리스트 불러오기
+	@RequestMapping(value = "/dashboardrefundrequestlist.action", method = RequestMethod.GET)
+	public String refundRequest(Model model) 
+	{
+		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
+		
+		model.addAttribute("refundRequestList",dao.refundRequestList());
+		model.addAttribute("clickedContentUrl","/WEB-INF/views/DashboardRefundRequestList.jsp");
+		return "/WEB-INF/views/DashboardFrame.jsp";
+	}
+	
+	// 환불신청 처리 페이지 반환
+	@RequestMapping(value = "/refundprocessingpage.action", method = RequestMethod.GET)
+	public String refundProcessiongPage(HttpServletRequest request, Model model) 
+	{
+		// 환불요청번호
+		String refund_req_num=request.getParameter("refund_req_num");
+		// 결제금액
+		int pay_price=Integer.parseInt(request.getParameter("pay_price"));
+		// 남은일수(환불신청일자와 수업일자의 차이)
+		int days_left=Integer.parseInt(request.getParameter("days_left"));
+		
+		/*환불번호와 남은 일수가 넘겨진 상황
+		남은 일수를 기준으로 환불금액이 달라진다. 
+		0이면 환불불가
+		1이면 50% 환불
+		2이면 100% 환불*/
+		double expectedRefund = 0;
+		if (days_left>=2)
+		{
+			expectedRefund = pay_price*1.0;
+		}
+		else if (days_left==1) {
+			expectedRefund = pay_price*0.5;
+		}
+		else
+			expectedRefund = pay_price*0;
+		
+		
+		// 환불예정금액
+		model.addAttribute("refund_req_num",refund_req_num);
+		model.addAttribute("expectedRefund",Math.round(expectedRefund));
+		return "/WEB-INF/views/DashboardRefundProcessing.jsp";
+	}
+	
+	//================================== 환불신청내역 end==============================================================
 	
 	
 

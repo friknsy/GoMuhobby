@@ -121,8 +121,12 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Components:</h6>
+                        <a class="collapse-item" href="dashboardrefundrequestlist.action">클래스 환불 요청 내역</a>
+                        <a class="collapse-item" href="">클래스 결제 내역</a>
+                        <a class="collapse-item" href="">클래스 정산 내역</a>
                         <a class="collapse-item" href="">클래스 개설 현황</a>
-                        <a class="collapse-item" href="">클래스 결제 및 정산 내역</a>
+                        
+                       
                     </div>
                 </div>
             </li>

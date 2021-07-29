@@ -48,6 +48,14 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <link href="css/myPage1.css" rel="stylesheet" />
+        <script type="text/javascript">
+        	function changePasswordPop()
+        	{
+        		
+        		window.open("changepasswordpop.action", "비밀번호변경팝업", "width=400, height=300, left=100, top=50"); 
+        	}
+        
+        </script>
         
     </head>
 
@@ -138,7 +146,8 @@
 		                                <a class="nav-link dropdown-toggle " id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><%out.print(mynickName); %> 님</a>
 		                                <ul class="dropdown-menu dropdown-menu-end">
 		                                    <li><a class="dropdown-item " href="mypageform.action">마이페이지</a></li>
-		                                    <li><a class="dropdown-item " href="#">정보 수정</a></li>
+		                                    <li><a class="dropdown-item " href="javascript:void(0);" onclick="changePasswordPop()">정보 수정</a></li>
+		                                    
 		                                    <li><hr></li>
 		                                    <li><a class="dropdown-item " href="logoutAction.action">로그아웃</a></li>
 		                                </ul>
