@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>팝업창 자동으로 닫기</title>
+<title>팝업창 자동으로 닫고 부모창에서 session.invalidate()</title>
 <script type="text/javascript">
 	<%
 	session.invalidate();
